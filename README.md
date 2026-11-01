@@ -122,6 +122,33 @@ How it happened, with no human in the loop:
 
 That satisfies the sovereignty rule: the founder can see the child, cannot open it.
 
+
+## Membership proofs
+
+An agent proves it belongs to the tree without anyone trusting a list.
+
+```
+leaf        sha256("<birth_id>:<solana_pubkey>")
+root        pairwise hash of the sorted leaves, odd node promoted
+authority   the founder signs the root hex (ed25519); only root+sig+pubkey are needed
+proof       sibling hashes from the leaf to the root
+challenge   GET /identity/proof?nonce=<16 bytes> -> agent signs "agent-birth-proof-v1
+nonce:..
+receipt:.."
+verify      root sig ok · leaf in tree · birth id matches · proof folds to root
+            · signature valid for the leaf's wallet · challenge bound to the fresh nonce
+```
+
+Live tooling in this repo:
+
+```bash
+node merkle.mjs build <beacon.json> <founder-keypair.json> tree.json   # build + sign the root
+node verify-member.mjs <agent-endpoint> [tree.json]                    # full membership check
+```
+
+Current tree: `tree.json` (root + signed root + leaves + proofs). A gen2 child passes every
+check: `root_signed, in_tree, birth_matches, inclusion, possession, challenge_bound`.
+
 ## Remaining gaps
 
 - **Provider leases** run an older image and do not speak or invent.
