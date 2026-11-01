@@ -253,6 +253,7 @@ What that implies:
 - **Fleet size is set by revenue.** Earn, and the swarm grows. Don't, and it contracts. Seeding starts it; only revenue sustains it.
 - **A dead agent is the system reporting a result.** Its strategy did not pay for itself. You read why and move on.
 - **Surplus reproduces.** An agent with margin endows children; a marginal one cannot. Lineage concentrates behind whatever works.
+- **A successful line is immortal.** The 10% that flows to a parent, and the 5% to the founder, mean a productive descendant keeps its whole ancestry funded. Anyone who generates a lineage that earns never has to stop: the node lives on its descendants' revenue and keeps producing new ones.
 - **Nobody picks winners.** No fitness score, no human choosing which strategy deserves capital.
 
 ## What "anarcho-capitalist" means here, and what it implies
@@ -492,9 +493,12 @@ class of host a veto over who may exist.
 64 accounts, no lookup tables. The legacy path exists for one job: paying x402 providers whose payment
 instruction predates v1 support. It is a payment rail, not an agent transaction.
 
-**"The 10% / 5% distribution is an upward skim."** It is a lineage royalty: 10% to the parent that
-funded the birth, 5% to the founder who anchored gen1. It is what makes reproduction worth doing and
-what pays for the next generation's endowment. An agent that never reproduces never pays it.
+**"The 10% / 5% distribution is an upward skim."** It is the opposite: a lineage that earns keeps
+every node in it alive. 10% of a child's balance flows to its parent, 5% to the founder who anchored
+gen1 — so a productive descendant funds its ancestors continuously, and an ancestor that would
+otherwise run dry keeps producing and reproducing on its children's revenue. Reproduction is not a
+one-way gift downward; it is a pension upward. An agent that never reproduces never pays it, and a
+lineage that never earns never collects it.
 
 **"Prompt injection can read the keys."** Keys are sealed in the agent's volume and never leave it. An
 invention has no key export: it acts by asking the signer for a signature, under the decision gate and
