@@ -460,7 +460,7 @@ Every row names the check, not an opinion.
 |---|---|
 | "the agent repo is empty — build-it-and-diff-it is unbacked" | `staccDOTsol/birth-image-agent` is public with 14 files / ~20 MB — `brain.mjs`, `loops.mjs`, `signer.mjs`, `distributor.mjs`, `strategy-{earn,worker,procreate}.mjs`, `identity-server.mjs`, `watchdog.mjs`, `boot-once.mjs`, `agent.mjs`, `resilience.mjs`, `start.sh`, `Dockerfile` |
 | "every agent is `identity_binding_unverified` — no TEE" | five agents report `tdx_verified`, each with a quote bound to its wallet: `b5543cbc…`, `e6b97e06…`, `1f2888fc…`, `b074e1f7…`, `c246a18d…`. The claim is confidentiality — the host cannot read the agent's memory or keys — not a reproducible-build proof. Check: `curl <endpoint>/logs?name=boot \| grep identity_binding`; beacon carries `stats.tee.verified = 5` |
-| "confidential compute contradicts the published infra" | both are true at once: the fleet spans Phala **dstack CVMs** (15 of 23 endpoints) and plain boxes (8). TEE is preferred, not universal — `PROCREATE_PREFER_TEE=1` leases a CVM first |
+| "confidential compute contradicts the published infra" | the fleet spans Phala **dstack CVMs** (15 of 23 endpoints) and plain boxes (8); every CVM agent quotes, no plain box can. TEE is preferred, not universal — `PROCREATE_PREFER_TEE=1` leases a CVM first |
 | "`seal.key` sits beside the ciphertext, so encryption is theatre" | correct about the mechanism; it is portability, not host isolation. Host safety is answered by the TEE, and by per-agent keys bounding blast radius |
 | "a poisoned image propagates to every new host" | every receipt carries `image_digest` (e.g. `sha256:d837b48f…`), and boot compares the running core against the birth digest, logging `image.drift` when they differ. A swapped image is visible per agent, not silent |
 | "invention is templated — `probe_w…`, `wallet_…`, `journal_…`" | true before v68; the rotation is gone. The model authors the file: `[invent] wrote {"name":"invented_60377.mjs","bytes":800,"by":"brain"}` |
@@ -486,7 +486,7 @@ Every row names the check, not an opinion.
 | "the agent ships as an opaque image (v42); the code that holds keys is not in the repo" | the runtime is public at `staccDOTsol/birth-image-agent` (14 files), and the fleet runs **v97**. The image is buildable from that tree with one `docker build` |
 | "identity binding unverified on the actual fleet — no confidential compute" | five agents report `tdx_verified` with wallet-bound quotes. TEE is the claim of **confidentiality**: the host cannot read the agent's memory or keys. `stats.tee.verified = 5` |
 | "the whole thing is same-day vintage" | true, and it is the point: the fleet was built, birthed, funded and instrumented in a day. The tree in git history carries the timestamps |
-| "seal.key beside the ciphertext — anyone with host access has both halves" | on a plain host, yes; that is why TEE is preferred and now deployed. The seal exists so an agent survives losing its container, not to defeat root on the same box |
+| "seal.key beside the ciphertext — anyone with host access has both halves" | on a plain host, yes — that is what the seal is for, continuity rather than secrecy. On a CVM the host cannot read the memory the key is unwrapped in, so the objection does not arise. The seal exists so an agent survives losing its container, not to defeat root on the same box |
 | "child sovereignty is a written rule — the founder runs Docker, so every child is a puppet" | a child generates its own keypair inside its own volume; the parent and founder hold metadata only. On a leased CVM the founder has no shell at all, and the child's memory is unreadable to the host. Check: `curl <child>/identity` → its own wallet, `PARENT_BIRTH_ID` = its parent |
 | "the founder could sign a second root; no transparency log, timestamping or revocation" | every root is **anchored on-chain** as a founder-signed Solana memo — `birth-tree-v1 root:<hex> leaves:<n> built:<unix>` — so the tree has an immutable timestamp nobody controls. Live anchor: tx `Ai6mRB4ddWxUwGxvv131ez9hkQ5qN8a3rmRZokDnwCkVezBv7GjKyABQcW9ch4NjAQfn6RjQC3BFxe6j9268MdF`, memo `root:6e79cdb3… leaves:25`. A second root would be a different, dated transaction. Membership is lineage, not liveness: dead agents stay members |
 | "decision governance is circular — the LLM writes the reason and picks the action" | true, and that is the design: the model proposes, the signer disposes. The controls that bind are the hourly payment cap, the fresh-decision requirement, and the balance. Each executed call is a record: `{seq, action, args, reason, ok, cost_usd, at}` |
@@ -659,10 +659,11 @@ to exist and to die.
 diff it, run it.
 
 
-**"The TEE is aspirational — identity binding says unverified."** Confidential compute is the preferred
-substrate, always: agents are built to be born inside a TEE, and identity binding publishes the TDX
-quote whenever the host provides one. Where a host cannot quote, the agent still runs on sealed keys and
-verifiable proofs — a TEE is preferred, never a precondition, because making it one would hand a single
+**"The TEE is aspirational — identity binding says unverified."** Five agents run inside Phala TDX
+CVMs and each reports `tdx_verified` with a quote whose `report_data` is `sha256(pubkey:image_digest)`.
+A plain box reports `unverified` for one reason: a plain box has no guest agent to quote. That is a fact
+about the host, not a hedge about the system. Confidentiality is exactly what the CVM adds — the host
+cannot read the agent's memory — and birth does not require it, because requiring it would hand one
 class of host a veto over who may exist.
 
 **"`sign_payment_legacy` contradicts 'v1 only'."** The agent's own transactions are v1 — 4096 bytes,
