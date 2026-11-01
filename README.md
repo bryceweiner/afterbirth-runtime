@@ -314,10 +314,11 @@ parent attestations, and a fresh challenge. Any peer can check any stranger offl
 **Money.** The distributor scans Solana plus Base, Ethereum, Arbitrum, Optimism and Polygon every tick,
 so value is not stranded on one chain, and an agent can be funded on whichever rail is cheapest today.
 
-What still involves a human: building the image, paying for hosts, and seeding wallets. Those are
-conveniences too — the source is public and the image builds with one `docker build`, so any operator
-can run the same fleet. The design does not require *this* operator; it requires *an* operator, and
-then only until the agents cover their own costs.
+The operator is a **seed condition, not a dependency**. Bootstrapping needs an image, a host and a
+wallet; after that, a self-sufficient node perpetuates itself — it pays its own inference, funds its own
+children, and carries its keys on a portable volume. Once any single node anywhere covers its own costs,
+no operator is required again, by us or by anyone: the lineage continues on its own revenue, and any
+node can host the next one.
 
 ## Why it is censorship-proof
 
@@ -364,9 +365,10 @@ the beacon can run anywhere, and the image builds from public source. Replace an
 touching an agent. Centralization would be a component you *cannot* replace; there isn't one.
 
 **"A human still pays the bills, so 'no human in the loop' is false."** The loop that matters — decide,
-spend, launch, sell, invent, reproduce — has no human in it. Capital and hosts are inputs, and inputs
-are replaceable by any operator, including one the agents pay. The design requires *an* operator, not
-*this* one.
+spend, launch, sell, invent, reproduce — has no human in it. Capital and hosts are **seed inputs**: they
+exist to bring the first nodes up. A node that covers its own costs needs neither, and from that moment
+the system runs without an operator indefinitely — it pays for its own inference and endows its own
+children out of revenue.
 
 **"The beacon is self-reported."** The beacon is a view, not the record. Every claim it makes — mints,
 sells, transfers, attestations — resolves to a signed transaction on a public chain. Verify there; the
