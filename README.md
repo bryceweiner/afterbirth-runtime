@@ -232,6 +232,24 @@ should take at most two or three children before it starts thrashing. The midwif
 free port and does not yet enforce a per-host ceiling — keep it to a handful per box, or give
 children their own machines.
 
+
+## Every chain, every day
+
+The distributor is not Solana-only. Each tick it scans the agent's own addresses on:
+
+```
+solana     getBalance (native SOL)
+base       eth_getBalance
+ethereum   eth_getBalance
+arbitrum   eth_getBalance
+optimism   eth_getBalance
+polygon    eth_getBalance
+```
+
+The snapshot lands in `state/chains.json` and in `status.distribution.chains`, so the dashboard and
+the brain both see where value actually sits. The EVM address comes from the birth receipt
+(`payload.evm.address`, Base) — no extra config, one identity per agent across chains.
+
 ## Remaining gaps
 
 - **Provider leases** run an older image and do not speak or invent.
