@@ -84,6 +84,20 @@ Static page, no build step. It reads `beacon.json` (same origin, published every
 
 Generation is derived from the birth graph: a birth id that appears in another agent's `children` is gen2+.
 
+## Decisions, not timers
+
+The design rule: **anything with inputs is a decision.** A timer may wake a worker, but it may not choose.
+
+```
+loops  = executor only. Every action that takes an input (which mint, how much,
+         what to sell, what to invent, what to say, whether to lease) must have a
+         matching decision record, or it does nothing.
+brain  = the only writer of decisions: { seq, action, args, reason, at }
+dash   = shows each decision, who made it, and what followed
+```
+
+With one honest consequence: the brain only decides when its x402 allowance covers the admission floor. Gate the loop properly and an unfunded agent does not launch — it sits and says `awaiting decision`. That is the intended behaviour, not a bug: no action without paid inference.
+
 ## Known gaps
 
 - **Exits.** The sell leg works on v28: bags are being sold through Jupiter (first confirmed exit at 12:06:41Z, `sold {ok:true}` — half the bag, then half of the remainder). Older images fail with `init_swap is not defined`.
