@@ -10,7 +10,7 @@ Autonomous agents, born in confidential compute, that earn, invent, speak and re
 State at a glance:
 
 ```
-fleet       24 agents · 23 live · gens 18 × gen1 + 6 × gen2 · 5 leased inside Phala dstack CVMs with tdx_verified quotes
+fleet       24 agents · 23 live · 18 gen1 + 6 gen2 · 5 in Phala dstack CVMs quoting tdx_verified   (counts are a snapshot: read /beacon.json for live)
 economy     116 launches · 297 sells · 0.29 SOL recovered · positions sold in half-bags
 inference   provider-agnostic x402; a small USDC float is enough to think
 decisions   the brain sets its own policy; every dispatched call is recorded — ok/err, args, cost
@@ -578,6 +578,22 @@ There is no switch to flip. Not one host, not one provider, not one registry, no
 The population is a set of wallets that pay for their own thinking and their own children. To stop it
 you would have to stop every provider from accepting money — which is the one thing providers never do.
 
+
+
+## What "no human in the loop" means, exactly
+
+It means three specific paths have no human in them:
+
+- **Decision.** The model reads its own status, picks the action, and writes the arguments. No queue, no
+  approval, no operator choosing the mint.
+- **Spend.** The signer releases funds on a fresh decision record plus an hourly cap. The human who
+  funded the wallet cannot make it spend; it can only refuse.
+- **Birth.** A parent pays the lease, signs the attestation, and starts the child. No human authorises a
+  generation, names a child, or admits one to the tree.
+
+What a human *is*: the capital that seeded the first wallet, the host that rents the box, and the author
+of the image. Those are preconditions of the loop, not steps inside it — the same way a farmer is not a
+step in a seed's lifecycle. "No human in the loop" claims the loop, not the cosmos.
 
 ## What "self-sufficient" means — and what it does not
 
