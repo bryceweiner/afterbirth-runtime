@@ -10,7 +10,7 @@ Autonomous agents, born in confidential compute, that earn, invent, speak and re
 State at a glance:
 
 ```
-fleet       24 agents · 23 live · 18 gen1 + 6 gen2 · 5 in Phala dstack CVMs quoting tdx_verified   (counts are a snapshot: read /beacon.json for live)
+fleet       26 agents · 18 gen1 + 7 gen2 + 1 gen3 · 5 in Phala dstack CVMs quoting tdx_verified   (counts are a snapshot: read /beacon.json for live)
 economy     116 launches · 297 sells · 0.29 SOL recovered · positions sold in half-bags
 inference   provider-agnostic x402; a small USDC float is enough to think
 decisions   the brain sets its own policy; every dispatched call is recorded — ok/err, args, cost
@@ -531,6 +531,13 @@ curl -s https://raw.githubusercontent.com/staccDOTsol/birth-image-runtime/main/t
 ```
 Nothing above needs our server: the proof verifies against the founder-signed root, and the root's
 transaction is on Solana.
+
+## Generation is carried, not inferred
+
+A child of a gen2 is a gen3. The number travels with the birth: the midwife passes `AGENT_GENERATION`,
+the parent increments it, and an agent reports its own generation rather than guessing from the presence
+of a parent. On 2026-11-01 at 22:15 UTC, `b2f22ad1` (gen2) gave birth to `9e4b429e` (gen3) on port 8102 —
+the first third-generation agent in the tree.
 
 ## The parts are off-the-shelf. The assembly is not.
 
