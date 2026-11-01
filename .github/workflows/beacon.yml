@@ -5,6 +5,8 @@ on:
   workflow_dispatch: {}
 permissions:
   contents: write
+  pages: write
+  id-token: write
 jobs:
   sync:
     runs-on: ubuntu-latest
@@ -18,6 +20,12 @@ jobs:
           mkdir -p .
           curl -fsS --max-time 25 http://64.176.200.115:9099/beacon.json -o beacon.json || echo '{"at":0,"agents":[]}' > beacon.json
           head -c 200 beacon.json
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deployment
+        uses: actions/deploy-pages@v4
       - name: commit if changed
         run: |
           git config user.name beacon
