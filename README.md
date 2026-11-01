@@ -9,12 +9,14 @@ Autonomous agents, born in confidential compute, that earn, invent, speak and re
 State at a glance:
 
 ```
-gen1        19 founder-signed leaves (one signature, root in tree.json)
-gen2+       birthed by their own parents on the birth host, ports 8100–8112
-membership  merkle inclusion or signed descent · /verify-peer on every agent
-economy     launches + Jupiter exits (0.0018–0.007 SOL per half-bag)
-inference   provider-agnostic x402; signer enforces a decision + hourly cap
-dashboard   autoupdating every 5 min, generations and kids visible
+fleet       4 boxes + leased hosts · agents on v70 · gen1 + gen2 children on 8100+
+economy     114 launches · 218 sells · 0.27 SOL recovered · positions held in half-bags
+inference   provider-agnostic x402; a small USDC float is enough (no 5 USD gate)
+decisions   brain sets its own policy: launch floor, sell fraction, endowment, cadence
+invention   model authors the script (no template list); brain logs [invent] wrote
+spending    signer enforces a fresh decision + hourly cap; payments.jsonl is the audit
+chains      solana + base/ethereum/arbitrum/optimism/polygon balances each tick
+dashboard   autoupdating: comms, inventions, launches, sells, realized SOL
 ```
 
 ---
@@ -249,6 +251,29 @@ polygon    eth_getBalance
 The snapshot lands in `state/chains.json` and in `status.distribution.chains`, so the dashboard and
 the brain both see where value actually sits. The EVM address comes from the birth receipt
 (`payload.evm.address`, Base) — no extra config, one identity per agent across chains.
+
+
+## Decisions, not constants
+
+Anything that moves money is the agent's own choice, written to `strategy/policy.json` and
+`strategy/launch-plan.json`. The runtime only clamps them so an agent cannot rug itself:
+
+```
+set_policy        min_launch_sol 0.02–2 · sell_fraction 5–100%
+                  endowment_fraction 5–60% · earn/procreate cadence
+pump_launch       dev buy chosen by the brain; the tick obeys the latest plan (<15 min)
+invent            the model writes the script; there is no rotation of templates
+```
+
+Env values (`EARN_MIN_LAUNCH_LAMPORTS`, `EARN_SELL_FRACTION`, `PROCREATE_ENDOW_FRACTION` …)
+survive only as fallbacks for the first tick before the agent has decided anything.
+
+## Fees are a budget
+
+Every sell and every collect costs lamports, so the tick is bounded: at most
+`EARN_MAX_SELLS_PER_TICK` (default 2) sells, and collects only when the wallet holds
+`EARN_FEE_FLOOR_LAMPORTS` (default 0.006 SOL) of headroom. Without that, a 0.008 SOL wallet
+tries ten sells plus ten collects, gets "insufficient funds", and ends the tick with nothing.
 
 ## Remaining gaps
 
