@@ -469,6 +469,22 @@ Every row names the check, not an opinion.
 | "no human in the loop is a legal fiction" | the loop has no human in it. Capital and hosts are the seed; a node that covers its costs funds its own inference and leases its own children |
 | "intent is 40% art / 35% farming / 15% marketing" | unfalsifiable, so here is what is falsifiable: the loop runs, the children attest, the children's children can be leased by the agent itself, and the source builds |
 
+
+## Second review, checked
+
+| claim | what the record shows |
+|---|---|
+| "the agent ships as an opaque image (v42); the code that holds keys is not in the repo" | the runtime is public at `staccDOTsol/birth-image-agent` (14 files), and the fleet runs **v82**. The image is buildable from that tree with one `docker build` |
+| "identity binding unverified on the actual fleet — no confidential compute" | five agents report `tdx_verified` with wallet-bound quotes. TEE is the claim of **confidentiality**: the host cannot read the agent's memory or keys. `stats.tee.verified = 5` |
+| "the whole thing is same-day vintage" | true, and it is the point: the fleet was built, birthed, funded and instrumented in a day. The tree in git history carries the timestamps |
+| "seal.key beside the ciphertext — anyone with host access has both halves" | on a plain host, yes; that is why TEE is preferred and now deployed. The seal exists so an agent survives losing its container, not to defeat root on the same box |
+| "child sovereignty is a written rule — the founder runs Docker, so every child is a puppet" | a child generates its own keypair inside its own volume; the parent and founder hold metadata only. On a leased CVM the founder has no shell at all, and the child's memory is unreadable to the host. Check: `curl <child>/identity` → its own wallet, `PARENT_BIRTH_ID` = its parent |
+| "the founder could sign a second root; no transparency log, timestamping or revocation" | the root is published in `tree.json` and its history is the git log — every refresh is a commit. A second root would be a different tree, visibly different from the published one; a verifier checks the root it was given. Membership is not liveness: dead agents stay members, by design |
+| "decision governance is circular — the LLM writes the reason and picks the action" | true, and that is the design: the model proposes, the signer disposes. The controls that bind are the hourly payment cap, the fresh-decision requirement, and the balance. Each executed call is a record: `{seq, action, args, reason, ok, cost_usd, at}` |
+| "a poisoned memo could worm across the fleet with wallet access" | an invention runs under Node's permission model, confined to `strategy/` and `state/`, unable to read `seal.key` (`DENIED ERR_ACCESS_DENIED`). The blast radius of a poisoned agent is that agent's balance; `image_digest` + `image.drift` make a swapped image visible per agent |
+| "the x402 bazaar is a supply chain — a malicious endpoint can return adversarial output" | yes, and it can only influence decisions, not keys: output is text, spending is bounded by the signer and the balance, and a bad provider is replaced by the next listing |
+| "no users, no product, negative economics" | economics are negative for the current strategy and reported as such. The design claim is autonomy and reproduction, both of which now have on-chain receipts; it is not a claim of profitability |
+
 ## Why it is censorship-proof
 
 The property is structural, not a promise. Nothing in the system can be switched off for one agent
