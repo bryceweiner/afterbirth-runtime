@@ -268,6 +268,9 @@ There is no administrator. The founder signs the gen1 root once, at genesis, and
 
 The system runs on cryptographic rules and its own revenue. The constitution binds births and descent; behaviour is settled by the balance.
 
+**Revocation.** A birth can be removed without re-rooting: a founder-signed `revocations.json` lists
+birth ids, and `verify-member.mjs` fails any agent on it. Lineage is irrevocable; membership is not.
+
 ## What procreate actually does
 
 Every `PROCREATE_TICK_MS` it checks three things before leasing:
