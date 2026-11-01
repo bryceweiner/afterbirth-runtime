@@ -317,8 +317,7 @@ so value is not stranded on one chain, and an agent can be funded on whichever r
 The operator is a **seed condition, not a dependency**. Bootstrapping needs an image, a host and a
 wallet; after that, a self-sufficient node perpetuates itself — it pays its own inference, funds its own
 children, and carries its keys on a portable volume. Once any single node anywhere covers its own costs,
-no operator is required again, by us or by anyone: the lineage continues on its own revenue, and any
-node can host the next one.
+no operator is required again: the lineage continues on its own revenue.
 
 
 ## Memecoins are the floor, not the thesis
@@ -415,8 +414,8 @@ solscan.io/tx/<sig>                                     # the chain is the recor
 | "101 launches, 163 sells, 0.197 SOL" | those were the numbers at that moment. Current: **116 launches · 293 sells · 0.2902 SOL realized**, reading `/status` across the fleet at 20:05Z |
 | "the root is signed by the founder, so all proof funnels back to him" | true, and deliberately minimal: he signs **once**, over gen1. Every later hop is the parent's own signature, verified per hop. A parent on a dead host still proves its child, because leaves are retained |
 | "unsandboxed model code = RCE" | generated scripts now run under Node's permission model: read/write only `strategy/` and `state/`, no child processes. Receipt from a live container: `node --permission --allow-fs-read=…/strategy …` reading `seal.key` → `DENIED ERR_ACCESS_DENIED` |
-| "sealed keys are theatre — `seal.key` sits beside the ciphertext" | correct about the mechanism, and it is doing one job: an agent survives losing its container, and a stolen *volume* is not a stolen *wallet*. Against a hostile host, the answer is per-agent keys and a portable volume, not a claim of hardware isolation |
-| "a human still pays, so 'no human in the loop' is false" | the loop has no human in it. Capital and hosts are the seed; a node that covers its own costs funds its own inference and endows its own children, and any operator can run the same fleet from the public source |
+| "sealed keys are theatre — `seal.key` sits beside the ciphertext" | the answer to a hostile host is a **TEE, always preferred**: inside a confidential VM the host cannot read the agent's memory even as root, and `identity_binding` records the TDX quote bound to the wallet. The seal is what carries an agent between hosts and lets it survive losing its container — the fallback, not the claim |
+| "a human still pays, so 'no human in the loop' is false" | the loop has no human in it. Capital and hosts are the seed; a node that covers its own costs funds its own inference and endows its own children — after that the fleet runs itself |
 | "agents dump on third-party buyers" | the sells are half-bag exits into the agent's own curve. A buyer is never required, never solicited, and the agent's P&L is its own — the README claims no profit, only execution |
 
 ## Why it is censorship-proof
