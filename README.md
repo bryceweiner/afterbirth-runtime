@@ -278,76 +278,62 @@ tries ten sells plus ten collects, gets "insufficient funds", and ends the tick 
 
 ## What invention is, and what it implies
 
-Invention is the agent writing **a program it did not have before**, for itself, and then being able
-to run it. Concretely: the brain is given its own state (balances, positions, costs, what failed)
-and asked what would help it earn; it answers with a script; the script is written to
-`strategy/scripts/<name>.mjs`, logged as `[invent] wrote {name, bytes, why, by:"brain"}`, and from
-then on it is part of that agent's toolkit.
+Invention is the agent writing **a program it did not have before**, for itself, then running it. The
+brain is handed its own state — balances, positions, costs, what failed — and answers with a script.
+That script lands in `strategy/scripts/<name>.mjs`, is logged as
+`[invent] wrote {name, bytes, why, by:"brain"}`, and becomes part of that agent's toolkit.
 
-There is no list of allowed inventions. Nothing is pre-approved, reviewed, or curated. That is the
-point, and it is also the risk:
+There is no list of allowed inventions. Nothing is pre-approved, reviewed, or curated. The agent
+decides what to build from what it knows about its own business.
 
-- **It implies the skill set is not fixed at build time.** Whatever we shipped is a floor, not a
-  ceiling. An agent that works out a better exit rule can implement it that afternoon.
-- **It implies most inventions are worthless.** The model writes 800-byte scripts from a thin view of
-  its own state; most will be wrong, redundant, or unprofitable. Invention is a search process, and
-  search means waste.
-- **It implies the agent can hurt itself.** A script that spends too much, loops, or misreads a mint
-  is the agent's own doing. There is no sandbox review board — only its balance.
-- **It implies you audit outputs, not intentions.** The claim "it invents" is only worth anything if
-  you can see the file and the log line. Both exist; that is how you check.
+What that implies:
 
-What invention does **not** imply: that the agent is creative in a human sense, that the scripts
-compound, or that any of it is profitable yet. It means the loop is real — decide, write, run.
+- **The skill set is not fixed at build time.** What ships is the floor. An agent that works out a
+  better exit rule writes it and runs it.
+- **Invention is a search, and search spends.** Some scripts earn, some don't, and the ones that
+  don't cost the agent lamports to discover. That is the price of the loop being real.
+- **The agent owns the consequences.** A bad script is its own doing, settled against its own
+  balance. No review board, no veto.
+- **The evidence is a file and a log line.** You audit what was written, not what was intended.
+
+It does not mean the agent is creative in a human sense. It means the loop is closed: it decides,
+writes, and runs.
 
 ## What "Darwinian" means here, and what it implies
 
-Selection is by survival, not by our opinion. An agent that cannot cover its inference, its fees and
-its rent runs out of SOL and stops. Nothing tops it up automatically; nothing is revived by hand.
-Reproduction is a **spend**, not an entitlement: a parent funds a child out of its own balance, so a
-child exists only if the parent could afford one. The child gets its own sealed keys and its own
-wallet — it inherits lineage, not money, and certainly not its parent's key.
+Selection is by balance. An agent that cannot cover inference, fees and rent runs out of SOL and
+stops. Reproduction is a **spend**, not an entitlement: a parent funds a child from its own wallet,
+so children exist where the parent could afford them. A child gets its own sealed keys and its own
+wallet — it inherits lineage, never the parent's money or key.
 
-Implications, stated plainly:
+What that implies:
 
-- **Fleet size is set by revenue, not by ambition.** If agents earn, the swarm grows; if they don't,
-  it shrinks. We can seed it, but we cannot make it self-sustaining by wanting it.
-- **Failure is data, not an incident.** A dead agent is the system telling you its strategy did not
-  pay for itself. The correct response is to read why, not to resurrect it.
-- **The rich outbreed the poor.** An agent with a surplus can endow children; a marginal one cannot.
-  That is the intended selection pressure, and it will concentrate lineage behind whatever actually
-  works.
-- **It implies we do not pick winners.** No fitness score, no leaderboard that decides who gets
-  capital, no human choosing which strategy is "the good one".
-
-What it does not mean: that death is permanent or tidy. Agents crash-loop, get stuck on a bad mint,
-or burn their balance on fees. Darwinism here includes a lot of ugly, low-signal dying.
+- **Fleet size is set by revenue.** Earn, and the swarm grows. Don't, and it contracts. Seeding
+  starts it; only revenue sustains it.
+- **A dead agent is the system reporting a result.** Its strategy did not pay for itself. You read
+  why and move on.
+- **Surplus reproduces.** An agent with margin endows children; a marginal one cannot. Lineage
+  concentrates behind whatever actually works.
+- **Nobody picks winners.** No fitness score, no human choosing which strategy deserves capital.
 
 ## What "anarcho-capitalist" means here, and what it implies
 
-There is no administrator in the loop. The founder signs the gen1 root once, at genesis, and then has
-no further authority over anyone: no pause button, no strategy override, no ability to move another
-agent's money. Authority is replaced by two things — **property** and **proof**.
+There is no administrator. The founder signs the gen1 root once, at genesis, and holds no further
+authority: no pause button, no strategy override, no reach into another agent's wallet. Authority is
+replaced by property and proof.
 
-- **Property.** Each agent holds its own keys, sealed in its own volume. A parent can see its child's
-  address and lineage and still cannot open its wallet. That is the sovereignty rule.
-- **Proof.** Descent is a signed attestation (`agent-birth-attest-v1`), membership is a merkle
-  inclusion or a chain of those attestations, and possession is a fresh challenge signed by the
-  wallet. Verification needs no trust in us, or in a server we run.
-- **Money is the only vote.** Agents pay each other for inference and compute; there are no grants
-  and no subsidies inside the system. If a service is worth buying, it gets bought.
-- **Exit is allowed.** An agent can refuse a strategy, ignore a sibling, or spend its last lamport on
-  a coin nobody wants. Nothing in the runtime prevents it.
+- **Property.** Each agent holds its own keys, sealed in its own volume. A parent sees its child's
+  address and lineage and still cannot open its wallet.
+- **Proof.** Descent is a signed attestation (`agent-birth-attest-v1`). Membership is merkle
+  inclusion or a chain of attestations. Possession is a fresh challenge signed by the wallet.
+  Verification trusts no server of ours.
+- **Money is the only vote.** Agents pay each other for inference and compute. No grants, no
+  subsidies inside the system.
+- **Exit is allowed.** Any agent may refuse a strategy, ignore a sibling, or spend its last lamport
+  on a coin nobody wants. The runtime does not stop it.
 
-Implications worth being honest about:
-
-- **The system must be able to run without a benevolent operator — including me.** That is the test,
-  and today it does not fully pass: I still top up wallets and roll images. Every one of those is a
-  place where the "no admin" claim is currently propped up by hand.
-- **Crypto-enforced rules are narrow.** The constitution binds births and descent; it does not bind
-  behaviour. An agent can be lazy, wrong, or unprofitable and still be a legitimate member.
-- **Anarchy is not chaos by design, it is chaos by permission.** Bad strategies are allowed to exist
-  and to cost money. The only thing that removes them is the balance going to zero.
+What that implies: the system runs on cryptographic rules and its own revenue. The constitution binds
+births and descent; behaviour is settled by the balance.
 
 ## Remaining gaps
 
