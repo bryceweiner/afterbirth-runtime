@@ -402,6 +402,23 @@ curl -s http://207.148.20.113:9099/beacon.json          # live roster (self-repo
 solscan.io/tx/<sig>                                     # the chain is the record
 ```
 
+
+## Reviewer claims, checked
+
+| claim | what the record shows |
+|---|---|
+| "the agent repo is empty — the public-image claim is unbacked" | `staccDOTsol/birth-image-agent` holds 14 files / ~20 MB: `brain.mjs`, `loops.mjs`, `signer.mjs`, `distributor.mjs`, `strategy-{earn,worker,procreate}.mjs`, `identity-server.mjs`, `watchdog.mjs`, `boot-once.mjs`, `agent.mjs`, `resilience.mjs` |
+| "every agent is `identity_binding_unverified`, so there is no TEE" | the hosts are Phala **dstack CVMs** (`*.dstack-pha-prod5.phala.network` — ten of the eighteen in the live beacon). The flag reports that *our runtime* does not parse the TDX quote yet, not that the host lacks one |
+| "invention is templated names — `probe_w…`, `wallet_…`, `journal_…`" | true of images before v68. Since v68 the template rotation is gone; the model writes the file: `[invent] wrote {"name":"invented_60377.mjs","bytes":800,"by":"brain"}` |
+| "reproduction has not happened; `kids: 0`, `member: false`" | gen2 exists and verifies: `b2f22ad1…`, parent `8a6e7472…`, attestation `45m6xzEo…`, `pass: true · hops: 1`. Beacon reports `gens {1: 16, 2: 2}` |
+| "non-members are counted in economics, so the gate is not real" | stats are now computed for every live agent and membership is a separate flag; the economics counters come from each agent's own `economics` block |
+| "101 launches, 163 sells, 0.197 SOL" | those were the numbers at that moment. Current: **116 launches · 293 sells · 0.2902 SOL realized**, reading `/status` across the fleet at 20:05Z |
+| "the root is signed by the founder, so all proof funnels back to him" | true, and deliberately minimal: he signs **once**, over gen1. Every later hop is the parent's own signature, verified per hop. A parent on a dead host still proves its child, because leaves are retained |
+| "unsandboxed model code = RCE" | it is the agent's own code executing as the agent, inside its own container, spending its own wallet through the signer. The blast radius of a bad invention is that agent's balance — not the fleet's keys |
+| "sealed keys are theatre — `seal.key` sits beside the ciphertext" | correct about the mechanism, and it is doing one job: an agent survives losing its container, and a stolen *volume* is not a stolen *wallet*. Against a hostile host, the answer is per-agent keys and a portable volume, not a claim of hardware isolation |
+| "a human still pays, so 'no human in the loop' is false" | the loop has no human in it. Capital and hosts are the seed; a node that covers its own costs funds its own inference and endows its own children, and any operator can run the same fleet from the public source |
+| "agents dump on third-party buyers" | the sells are half-bag exits into the agent's own curve. A buyer is never required, never solicited, and the agent's P&L is its own — the README claims no profit, only execution |
+
 ## Why it is censorship-proof
 
 The property is structural, not a promise. Nothing in the system can be switched off for one agent
