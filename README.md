@@ -134,3 +134,4 @@ So a child costs **0.06 SOL of endowment plus a little USDC for the lease**. An 
 - Solana **v1 transactions only** (4096-byte, 64-account limit); no legacy, no v0, no address lookup tables.
 - Private keys never leave the guest unsealed; the only copy on disk is the sealed store.
 - One supervisor per guest root (`supervisor.lock`), so relaunches cannot fork into dozens of orphaned workers.
+- **A child is sovereign.** Gen2+ keys are born inside the child's own guest and never leave it. The parent and the founder keep metadata only — `deploymentId`, `birth_id`, `address`, `endpoint` — and must never save, copy, back up or archive a child's `seal.key`, `sealed-keys.enc` or secret key. A gen2+ that can be opened by the founder is not gen2+; it is a puppet. This applies to every backup job: key-backup sweeps gen1 only.
