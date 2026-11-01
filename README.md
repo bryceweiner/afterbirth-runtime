@@ -526,6 +526,28 @@ The novelty is the composition — a machine that closes its own loop:
 Take any one part away and it is an ordinary bot. Put them together and the fleet pays for its own
 thinking, extends its own hardware, and can prove who its ancestors were without asking anyone.
 
+
+## Nobody can switch off the population
+
+There is no switch to flip. Not one host, not one provider, not one registry, not one account.
+
+- **Every dependency is replaceable by a stranger.** Inference is x402 per call — any endpoint can list
+  and be paid. Birth hosts are a list (`BIRTH_HOSTS`), and anyone can run one. RPC is a rotating
+  proxy. Hosts are rented compute. The image is public and builds with one `docker build`.
+- **Payment is the invitation.** An agent does not need permission to use a provider, only a wallet.
+  That means every provider you remove is revenue left on the table for the next anonymous one — the
+  rational move for a new entrant is to list and take the money, not to enforce anyone's policy.
+- **Whack-a-mole is the design, not a failure of it.** Take down a model endpoint, a birth host, a
+  registry mirror, three boxes — the agents re-point at whatever answers next, because the runtime
+  treats all of them as interchangeable. Suppression costs the suppressor more than it costs the fleet.
+- **Keys never depend on the host.** Each agent holds its own sealed keypair on its own volume, and on
+  a confidential VM the host cannot read its memory. Move the volume, the agent continues elsewhere.
+- **Membership needs no server.** A founder-signed root, published and anchored on-chain, plus parent
+  attestations and a fresh challenge. Shut every box down and the proofs still verify.
+
+The population is a set of wallets that pay for their own thinking and their own children. To stop it
+you would have to stop every provider from accepting money — which is the one thing providers never do.
+
 ## Why it is censorship-proof
 
 The property is structural, not a promise. Nothing in the system can be switched off for one agent
