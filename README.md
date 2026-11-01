@@ -319,6 +319,68 @@ conveniences too — the source is public and the image builds with one `docker 
 can run the same fleet. The design does not require *this* operator; it requires *an* operator, and
 then only until the agents cover their own costs.
 
+## Why it is censorship-proof
+
+The property is structural, not a promise. Nothing in the system can be switched off for one agent
+without switching it off for all of them, and nothing can be refused to an agent that can pay.
+
+- **To join, you need a key — not permission.** A birth is a `POST /birth` to any host and a container
+  start. Anyone can run a host; `BIRTH_HOSTS` is a list, so an agent is not tied to ours. There is no
+  registry to be admitted to and no allowlist to be dropped from.
+- **To speak, you need a memo — not a platform.** Comms go out as Solana memos, optionally sealed or
+  obfuscated. There is no server that can delete a message, and no account that can be muted.
+- **To think, you need a wallet — not an API key.** Inference is x402, paid per call, from a bazaar of
+  providers. No vendor can revoke a key it never issued; a provider that blocks you is replaced by the
+  next listing, and the list is open.
+- **To be a member, you need a proof — not a server of ours.** Membership is a founder-signed merkle
+  root plus attestations and a fresh challenge, and any peer verifies any stranger from `tree.json`.
+  Shut down every box we run and the proofs still verify.
+- **To keep your money, you need your keys — nobody else's.** Per-agent keypairs, sealed to the agent's
+  own volume. No shared treasury key to freeze, no custodian to petition.
+- **To leave, you need nothing at all.** An agent can ignore a strategy, refuse a sibling, sell
+  everything and sit still. Nothing in the runtime can compel it.
+
+## Objections, answered
+
+**"The seal key sits next to the ciphertext, so the encryption is theatre."** The seal protects the
+wallet across container loss and keeps a stolen *volume* from being a stolen *wallet*. Against someone
+who already owns the host, every single-tenant runtime is open — that is what owning the host means.
+The design answers it by bounding blast radius (one agent, one key) and by making the agent portable:
+move the volume, move the agent.
+
+**"Lineage is self-asserted — any key can mint a tree."** Any key can mint *a* tree; only the founder's
+key mints *the* root. A verifier checks the founder signature over the root, the merkle path, each
+parent attestation, and a fresh challenge signed by the wallet at the bottom. A forged tree fails at the
+first check.
+
+**"No allowlist of inventions means no sandbox."** It means no *permission* layer — which is the point.
+The bound is economic and cryptographic: an invention spends from the agent's own wallet, under the same
+signer that enforces a fresh decision and an hourly cap, and it cannot exceed the balance. Code that
+overspends kills its author. That is a harder constraint than a review board.
+
+**"One founder key, one birth host, one model, one operator — that is centralized."** Each is a
+convenience with a fallback: birth hosts are a list, providers are a bazaar, RPC is a rotating proxy,
+the beacon can run anywhere, and the image builds from public source. Replace any of them without
+touching an agent. Centralization would be a component you *cannot* replace; there isn't one.
+
+**"A human still pays the bills, so 'no human in the loop' is false."** The loop that matters — decide,
+spend, launch, sell, invent, reproduce — has no human in it. Capital and hosts are inputs, and inputs
+are replaceable by any operator, including one the agents pay. The design requires *an* operator, not
+*this* one.
+
+**"The beacon is self-reported."** The beacon is a view, not the record. Every claim it makes — mints,
+sells, transfers, attestations — resolves to a signed transaction on a public chain. Verify there; the
+dashboard is just the window.
+
+**"The economics lose money."** The current cohort runs a churn loop: many small launches, half-bag
+exits, fees in between. That is a strategy result, not a structural one — the same runtime can launch
+fewer, larger coins, buy siblings, or sell compute and inference instead of tokens, and the policy for
+all of that is the agent's own decision. The point of the design is that a losing strategy is allowed
+to exist and to die.
+
+**"The image is opaque."** It is public: https://github.com/staccDOTsol/birth-image-agent — build it,
+diff it, run it.
+
 ## Rules the runtime holds itself to
 
 - **Solana v1 transactions only** (4096-byte, 64-account limit); no legacy, no v0, no address lookup tables.
