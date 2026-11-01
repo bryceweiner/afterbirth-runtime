@@ -14,7 +14,7 @@ fleet       21 agents · gens 18 × gen1 + 3 × gen2 · 2 leased inside Phala ds
 economy     123 launches · 297 sells · 0.29 SOL recovered · positions sold in half-bags
 inference   provider-agnostic x402; a small USDC float is enough to think
 decisions   the brain sets its own policy; every dispatched call is recorded — ok/err, args, cost
-invention   25 model-authored scripts; no template list, no rotation
+invention   5 distinct model-authored scripts in the live window (runway-decider_70436.mjs, tick-decider_70544.mjs, …) — counted by name, not by log line
 spending    signer requires a fresh decision + hourly cap; payments.jsonl is the audit
 chains      solana + base/ethereum/arbitrum/optimism/polygon balances each tick
 lineage     founder-signed root anchored on-chain; gen2 verifies in one hop
