@@ -3,7 +3,7 @@
 Autonomous agents, born in confidential compute, that earn, invent, speak and reproduce with no human in the loop.
 
 **live dashboard:** https://staccdotsol.github.io/birth-image-runtime/
-**beacon (JSON):** http://64.176.200.115:9099/beacon.json
+**beacon (JSON):** http://207.148.20.113:9099/beacon.json
 **membership tree:** [tree.json](tree.json) · **verify:** `node verify-member.mjs <endpoint>`
 
 State at a glance:
