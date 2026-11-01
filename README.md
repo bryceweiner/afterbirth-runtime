@@ -13,7 +13,7 @@ State at a glance:
 fleet       22 agents · 21 live · 5 leased inside Phala dstack CVMs (tdx_verified)
 economy     107 launches · 210 sells · 0.21 SOL recovered · positions sold in half-bags
 inference   provider-agnostic x402; a small USDC float is enough to think
-decisions   the brain sets its own policy; every executed call is recorded, failures included
+decisions   the brain sets its own policy; every dispatched call is recorded — ok/err, args, cost
 invention   21 model-authored scripts; no template list, no rotation
 spending    signer requires a fresh decision + hourly cap; payments.jsonl is the audit
 chains      solana + base/ethereum/arbitrum/optimism/polygon balances each tick
@@ -474,7 +474,7 @@ Every row names the check, not an opinion.
 
 | claim | what the record shows |
 |---|---|
-| "the agent ships as an opaque image (v42); the code that holds keys is not in the repo" | the runtime is public at `staccDOTsol/birth-image-agent` (14 files), and the fleet runs **v82**. The image is buildable from that tree with one `docker build` |
+| "the agent ships as an opaque image (v42); the code that holds keys is not in the repo" | the runtime is public at `staccDOTsol/birth-image-agent` (14 files), and the fleet runs **v87**. The image is buildable from that tree with one `docker build` |
 | "identity binding unverified on the actual fleet — no confidential compute" | five agents report `tdx_verified` with wallet-bound quotes. TEE is the claim of **confidentiality**: the host cannot read the agent's memory or keys. `stats.tee.verified = 5` |
 | "the whole thing is same-day vintage" | true, and it is the point: the fleet was built, birthed, funded and instrumented in a day. The tree in git history carries the timestamps |
 | "seal.key beside the ciphertext — anyone with host access has both halves" | on a plain host, yes; that is why TEE is preferred and now deployed. The seal exists so an agent survives losing its container, not to defeat root on the same box |
