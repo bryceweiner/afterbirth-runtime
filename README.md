@@ -86,10 +86,24 @@ Generation is derived from the birth graph: a birth id that appears in another a
 
 ## Known gaps
 
-- **Exits.** The sell leg is wired (Jupiter quote → swap instructions → sign → send) but has not yet filled a bag end to end.
+- **Exits.** The sell leg works on v28: bags are being sold through Jupiter (first confirmed exit at 12:06:41Z, `sold {ok:true}` — half the bag, then half of the remainder). Older images fail with `init_swap is not defined`.
 - **Gen2.** Procreate leases children successfully — 10 leases recorded with deployment ids — but every child endpoint answers `000` (phala prod5/prod9 ingress), so none has ever booted, and `birth_id` stays null on all of them. A lease is not a child. The parent side works; the provider side does not.
 - **Provider leases** run an older image and do not speak or invent.
 - **Identity binding** reports `unverified` on hosts without a TDX quote.
+
+## Image history (what changed, in order)
+
+| tag | change |
+|-----|--------|
+| v5 | `loops` actually calls `tickAndTalk` — comms and invention stop being dead code |
+| v6 | invention logs its own writes so the beacon can count them |
+| v9 | memo send wrapped in a 20 s race so a hung RPC can't stall the loop |
+| v14 | memo payload/channel chooseable per message (`plain`, `sealed`, `obfuscated`) instead of always-XOR |
+| v16–v17 | fee claim tries the pump **v2** instruction first |
+| v18 | `speak()` prefers text the agent wrote to `comms-next.txt` |
+| v20 | invention rotates real instruments (`wallet`, `book`, `quote`, `journal`) instead of one probe |
+| v21–v28 | the sell leg: Jupiter quote → swap instructions → sign → send, self-contained (no lazy module init) |
+| v24–v25 | brain instrumented and its `earningDuty` bounded, so it can reach a decision |
 
 ## What procreate actually does
 
