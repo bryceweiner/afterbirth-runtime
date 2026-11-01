@@ -485,6 +485,22 @@ Every row names the check, not an opinion.
 | "the x402 bazaar is a supply chain — a malicious endpoint can return adversarial output" | yes, and it can only influence decisions, not keys: output is text, spending is bounded by the signer and the balance, and a bad provider is replaced by the next listing |
 | "no users, no product, negative economics" | economics are negative for the current strategy and reported as such. The design claim is autonomy and reproduction, both of which now have on-chain receipts; it is not a claim of profitability |
 
+
+## Panel review, checked
+
+| claim | what the record shows |
+|---|---|
+| "the live beacon reports `identity_binding: unverified` — TEE is aspirational" | five agents report `tdx_verified` now, each with a wallet-bound quote (`b5543cbc…` … `c246a18d…`); `stats.tee.verified = 5`. The claim is confidentiality: the host cannot read memory or keys |
+| "the same probe script is invented repeatedly — stuck autocomplete" | the latest invention is `tick-decider_66421.mjs`, 1239 bytes, `why:"Reads my own /status plus saved strategy files, computes …"` — model-authored, purpose-stated, and not a repeat |
+| "featured agents show `kids: 0` — reproduction is claimed, not demonstrated" | beacon gens `{1: 21, 2: 2}`; gen2 `b2f22ad1…` verifies `pass: true · hops: 1` against the founder-signed root |
+| "the brain decides, not timers — but the config is `BRAIN_TICK_MS`" | the timer wakes the loop, the decision picks the action. Each executed call is appended as `{seq, action, args, reason, ok, cost_usd, at}`; the signer refuses payment without a fresh record |
+| "114 launches, 256 sells, 0.28 SOL — a money incinerator" | the numbers are real and the verdict on that strategy is right. It is a strategy result, not a structural one: the same runtime can launch fewer, larger coins, buy siblings, or sell compute |
+| "the beacon is self-reported by the operator's CI" | the beacon is a view; the root is anchored on-chain (`root:6e79cdb3…` in tx `Ai6mRB4d…`), every launch and sell is a signed transaction, and membership verifies offline from `tree.json` |
+| "the 5% royalty is an extraction channel; the merkle tree is a turnkey airdrop allowlist" | 10/5 is a lineage pension — a productive child funds its parent and the founder, keeping an earning line alive. The tree is membership, and no token has been issued against it |
+| "an imprisoned founder with a live fleet means someone else is paying" | correct, and that is the design: an operator is a seed. The agents pay their own inference and **attempt their own leases** — captured live: `tee lease failed … swap for lease fee … sig 3mCtQkMz…` |
+| "don't run the image on anything you care about — it holds keys and executes model code" | fair caution, and now bounded: scripts run under Node's permission model (`seal.key` → `DENIED ERR_ACCESS_DENIED`), keys are per agent, and TEE hosts cannot read the agent's memory |
+| "$MAKEMONEY wraps the swarm's narrative" | not issued by this system. Nothing here mints, sells or distributes a token; launches are individual pump.fun coins |
+
 ## Why it is censorship-proof
 
 The property is structural, not a promise. Nothing in the system can be switched off for one agent
