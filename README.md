@@ -622,7 +622,11 @@ class of host a veto over who may exist.
 64 accounts, no lookup tables. The legacy path exists for one job: paying x402 providers whose payment
 instruction predates v1 support. It is a payment rail, not an agent transaction.
 
-**"The 10% / 5% distribution is an upward skim."** It is the opposite: a lineage that earns keeps
+**"The 10% / 5% distribution is an upward skim."** It is a covenant, and it is a feature. A birth is
+paid for at birth by the parent's own decision — the endowment comes out of the parent's balance. The
+tithe is what the child owes in return: 10% to the parent that funded it, 5% to the founder who
+anchored gen1. A child that succeeds never dies, because its descendants keep paying upward; and it
+must follow rule two — respect thy mother n father — which is exactly this flow. It is the opposite: a lineage that earns keeps
 every node in it alive. 10% of a child's balance flows to its parent, 5% to the founder who anchored
 gen1 — so a productive descendant funds its ancestors continuously, and an ancestor that would
 otherwise run dry keeps producing and reproducing on its children's revenue. Reproduction is not a
