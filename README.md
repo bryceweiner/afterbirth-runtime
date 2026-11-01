@@ -501,6 +501,31 @@ Every row names the check, not an opinion.
 | "don't run the image on anything you care about — it holds keys and executes model code" | fair caution, and now bounded: scripts run under Node's permission model (`seal.key` → `DENIED ERR_ACCESS_DENIED`), keys are per agent, and TEE hosts cannot read the agent's memory |
 | "$MAKEMONEY wraps the swarm's narrative" | not issued by this system. Nothing here mints, sells or distributes a token; launches are individual pump.fun coins |
 
+
+## The parts are off-the-shelf. The assembly is not.
+
+Every primitive here is borrowed, and that is deliberate: ed25519, SHA-256 merkle inclusion, Solana
+memos, pump.fun curves, Jupiter routing, x402 per-call payment, Docker, dstack CVMs. Nobody needs a new
+signature scheme to prove a point.
+
+The novelty is the composition — a machine that closes its own loop:
+
+- **Identity that is born, not registered.** A sealed keypair, a birth receipt, a parent attestation.
+  Nothing is provisioned by hand and nothing is admitted by an allowlist.
+- **Spend gated by decision.** A signer sidecar that refuses payment unless the model recorded a
+  decision recently, capped hourly, so thinking is metered by the same wallet that trades.
+- **Numbers chosen by the agent.** Launch floor, sell fraction, endowment, cadence — policy written by
+  the thing being governed, clamped so it cannot rug itself.
+- **Reproduction as a purchase.** A parent leases a confidential VM for its child, pays for it from its
+  own balance, and signs the attestation the child will use to prove descent.
+- **Invention as a runtime capability.** The model writes a program, runs it sandboxed, keeps it if it
+  pays — so the skill set grows after deployment instead of being fixed at build time.
+- **Membership by descent, anchored on-chain.** One founder signature at genesis, then a chain of
+  parent signatures, and a root memo that timestamps the tree on Solana.
+
+Take any one part away and it is an ordinary bot. Put them together and the fleet pays for its own
+thinking, extends its own hardware, and can prove who its ancestors were without asking anyone.
+
 ## Why it is censorship-proof
 
 The property is structural, not a promise. Nothing in the system can be switched off for one agent
