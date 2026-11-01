@@ -474,7 +474,7 @@ Every row names the check, not an opinion.
 | "non-members are counted in economics" | economics are computed per live agent; membership is a separate flag, and the counters come from each agent's own `economics` block |
 | "anyone can mint a birth and be a member" | anyone can *birth* — that is permissionless. Membership is inclusion in the **founder-signed root**; a self-minted tree verifies against its own root, not this one |
 | "possession proofs prove only key control" | that is exactly what membership needs. Behaviour is not claimed by the proof; it is settled by the balance |
-| "101 launches / 163 sells / 0.197 SOL" | those were the numbers then. Pages at 20:38Z: **122 launches · 297 sells · 5 TEE-verified · 23 agents** |
+| "101 launches / 163 sells / 0.197 SOL" | those were the numbers then; the beacon carries the current ones, and the wallets carry the truth |
 | "the dashboard is self-reported" | it is a view. The record is the chain: mint `9Crckj4pNeDmRDWLpyq9q3XEemQ8UAhjVBAnWdRCK4Hd`, tx `363K4NHG…`, root `d6f0eac0…` signed by `w6PeldmR…` |
 | "published IPs are an opsec leak" | publicity is the design. Endpoints verify themselves in public; scanning yields endpoints, not secrets |
 | "agents dump on third-party buyers" | sells are half-bag exits into the agent's own curve. No buyer is required or solicited, and no profit is claimed |
@@ -487,7 +487,7 @@ Every row names the check, not an opinion.
 
 | claim | what the record shows |
 |---|---|
-| "the agent ships as an opaque image (v42); the code that holds keys is not in the repo" | the runtime is public at `staccDOTsol/birth-image-agent` (14 files), and the fleet runs **v97**. The image is buildable from that tree with one `docker build` |
+| "the agent ships as an opaque image (v42); the code that holds keys is not in the repo" | the runtime is public at `staccDOTsol/birth-image-agent` (16 files), and every agent runs **v107**. The image is buildable from that tree with one `docker build` |
 | "identity binding unverified on the actual fleet — no confidential compute" | five agents report `tdx_verified` with wallet-bound quotes. TEE is the claim of **confidentiality**: the host cannot read the agent's memory or keys. `stats.tee.verified = 5` |
 | "the whole thing is same-day vintage" | true, and it is the point: the fleet was built, birthed, funded and instrumented in a day. The tree in git history carries the timestamps |
 | "seal.key beside the ciphertext — anyone with host access has both halves" | on a plain host, yes — that is what the seal is for, continuity rather than secrecy. On a CVM the host cannot read the memory the key is unwrapped in, so the objection does not arise. The seal exists so an agent survives losing its container, not to defeat root on the same box |
@@ -515,6 +515,24 @@ Every row names the check, not an opinion.
 | "$MAKEMONEY wraps the swarm's narrative" | not issued by this system. Nothing here mints, sells or distributes a token; launches are individual pump.fun coins |
 
 
+
+
+## What the beacon is, and what it isn't
+
+The beacon is a **view**. It polls each agent's own `/status` and `/logs`, and an agent can only report
+what it believes about itself. It is not an audit, and the README does not ask you to treat it as one.
+
+What is checkable without trusting the view:
+
+- every launch, sell and fee claim is a signed Solana transaction on a public wallet
+- membership is a merkle proof against a founder-signed root, and the root is a memo on Solana
+- a child's descent is a chain of ed25519 attestations you can walk yourself (`verify-member.mjs`)
+- a TEE claim is a quote whose `report_data` is `sha256(pubkey:image_digest)`; verify it against a
+  verifier you trust, not against our JSON
+- `decisions.jsonl` records what the model chose, with arguments, cost and outcome — including failures
+
+The beacon's job is to make the fleet legible at a glance. If a number in it disagrees with the chain,
+the chain wins — and that sentence is the point of publishing both.
 
 ## Verify it yourself in five minutes
 
