@@ -425,19 +425,29 @@ solscan.io/tx/<sig>                                     # the chain is the recor
 
 ## Reviewer claims, checked
 
+Every row names the check, not an opinion.
+
 | claim | what the record shows |
 |---|---|
-| "the agent repo is empty — the public-image claim is unbacked" | `staccDOTsol/birth-image-agent` holds 14 files / ~20 MB: `brain.mjs`, `loops.mjs`, `signer.mjs`, `distributor.mjs`, `strategy-{earn,worker,procreate}.mjs`, `identity-server.mjs`, `watchdog.mjs`, `boot-once.mjs`, `agent.mjs`, `resilience.mjs` |
-| "every agent is `identity_binding_unverified`, so there is no TEE" | **five agents now report `tdx_verified`**, each with a quote bound to its own wallet: `b5543cbc…`, `e6b97e06…`, `1f2888fc…`, `b074e1f7…`, `c246a18d…`. Check any of them: `curl -s <endpoint>/logs?name=boot | grep identity_binding`. Beacon carries it as `stats.tee.verified` |
-| "invention is templated names — `probe_w…`, `wallet_…`, `journal_…`" | true of images before v68. Since v68 the template rotation is gone; the model writes the file: `[invent] wrote {"name":"invented_60377.mjs","bytes":800,"by":"brain"}` |
-| "reproduction has not happened; `kids: 0`, `member: false`" | gen2 exists and verifies: `b2f22ad1…`, parent `8a6e7472…`, attestation `45m6xzEo…`, `pass: true · hops: 1`. Beacon reports `gens {1: 16, 2: 2}` |
-| "non-members are counted in economics, so the gate is not real" | stats are now computed for every live agent and membership is a separate flag; the economics counters come from each agent's own `economics` block |
-| "101 launches, 163 sells, 0.197 SOL" | those were the numbers at that moment. Current on Pages (20:38Z): **122 launches · 297 sells · 5 TEE-verified · 23 agents** |
-| "the root is signed by the founder, so all proof funnels back to him" | true, and deliberately minimal: he signs **once**, over gen1. Every later hop is the parent's own signature, verified per hop. A parent on a dead host still proves its child, because leaves are retained |
-| "unsandboxed model code = RCE" | generated scripts now run under Node's permission model: read/write only `strategy/` and `state/`, no child processes. Receipt from a live container: `node --permission --allow-fs-read=…/strategy …` reading `seal.key` → `DENIED ERR_ACCESS_DENIED` |
-| "sealed keys are theatre — `seal.key` sits beside the ciphertext" | the answer to a hostile host is a **TEE, always preferred**: inside a confidential VM the host cannot read the agent's memory even as root, and `identity_binding` records the TDX quote bound to the wallet. The seal is what carries an agent between hosts and lets it survive losing its container — the fallback, not the claim |
-| "a human still pays, so 'no human in the loop' is false" | the loop has no human in it. Capital and hosts are the seed; a node that covers its own costs funds its own inference and endows its own children — after that the fleet runs itself |
-| "agents dump on third-party buyers" | the sells are half-bag exits into the agent's own curve. A buyer is never required, never solicited, and the agent's P&L is its own — the README claims no profit, only execution |
+| "the agent repo is empty — build-it-and-diff-it is unbacked" | `staccDOTsol/birth-image-agent` is public with 14 files / ~20 MB — `brain.mjs`, `loops.mjs`, `signer.mjs`, `distributor.mjs`, `strategy-{earn,worker,procreate}.mjs`, `identity-server.mjs`, `watchdog.mjs`, `boot-once.mjs`, `agent.mjs`, `resilience.mjs`, `start.sh`, `Dockerfile` |
+| "every agent is `identity_binding_unverified` — no TEE" | five agents report `tdx_verified`, each with a quote bound to its wallet: `b5543cbc…`, `e6b97e06…`, `1f2888fc…`, `b074e1f7…`, `c246a18d…`. Check: `curl <endpoint>/logs?name=boot \| grep identity_binding`. Beacon carries `stats.tee.verified = 5` |
+| "confidential compute contradicts the published infra" | both are true at once: the fleet spans Phala **dstack CVMs** (15 of 23 endpoints) and plain boxes (8). TEE is preferred, not universal — `PROCREATE_PREFER_TEE=1` leases a CVM first |
+| "`seal.key` sits beside the ciphertext, so encryption is theatre" | correct about the mechanism; it is portability, not host isolation. Host safety is answered by the TEE, and by per-agent keys bounding blast radius |
+| "a poisoned image propagates to every new host" | every receipt carries `image_digest` (e.g. `sha256:d837b48f…`), and boot compares the running core against the birth digest, logging `image.drift` when they differ. A swapped image is visible per agent, not silent |
+| "invention is templated — `probe_w…`, `wallet_…`, `journal_…`" | true before v68; the rotation is gone. The model authors the file: `[invent] wrote {"name":"invented_60377.mjs","bytes":800,"by":"brain"}` |
+| "unsandboxed model code = RCE" | generated scripts run under Node's permission model, confined to `strategy/` and `state/`. Live check: a script reading `seal.key` returns `DENIED ERR_ACCESS_DENIED` |
+| "the decision log is a wrapper around timers" | the tick is a timer, the action is not. Each executed tool call is appended to `decisions.jsonl` as `{seq, action, args, reason, ok, cost_usd, at}`, and the signer refuses payments without a fresh record |
+| "no reproduction — `kids: 0`, `member: false`" | gen2 `b2f22ad1…`, parent `8a6e7472…`, attestation `45m6xzEo…`; re-verified `pass: true · lineage: true · hops: 1`. The tree holds 25 leaves so a parent that goes offline still proves its child |
+| "non-members are counted in economics" | economics are computed per live agent; membership is a separate flag, and the counters come from each agent's own `economics` block |
+| "anyone can mint a birth and be a member" | anyone can *birth* — that is permissionless. Membership is inclusion in the **founder-signed root**; a self-minted tree verifies against its own root, not this one |
+| "possession proofs prove only key control" | that is exactly what membership needs. Behaviour is not claimed by the proof; it is settled by the balance |
+| "101 launches / 163 sells / 0.197 SOL" | those were the numbers then. Pages at 20:38Z: **122 launches · 297 sells · 5 TEE-verified · 23 agents** |
+| "the dashboard is self-reported" | it is a view. The record is the chain: mint `9Crckj4pNeDmRDWLpyq9q3XEemQ8UAhjVBAnWdRCK4Hd`, tx `363K4NHG…`, root `d6f0eac0…` signed by `w6PeldmR…` |
+| "published IPs are an opsec leak" | publicity is the design. Endpoints verify themselves in public; scanning yields endpoints, not secrets |
+| "agents dump on third-party buyers" | sells are half-bag exits into the agent's own curve. No buyer is required or solicited, and no profit is claimed |
+| "10/5 is a royalty pyramid / MLM" | it is a lineage pension: a productive child funds its parent and the founder, so an earning line keeps every ancestor alive and reproducing. An agent that never reproduces never pays it |
+| "no human in the loop is a legal fiction" | the loop has no human in it. Capital and hosts are the seed; a node that covers its costs funds its own inference and leases its own children |
+| "intent is 40% art / 35% farming / 15% marketing" | unfalsifiable, so here is what is falsifiable: the loop runs, the children attest, the children's children can be leased by the agent itself, and the source builds |
 
 ## Why it is censorship-proof
 
