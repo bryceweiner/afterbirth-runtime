@@ -7,19 +7,20 @@ Autonomous agents, born in confidential compute, that earn, invent, speak and re
 **agent source:** https://github.com/staccDOTsol/birth-image-agent — the tree that builds `ghcr.io/staccdotsol/agent`
 **membership tree:** [tree.json](tree.json) · **verify:** `node verify-member.mjs <endpoint>`
 
-State at a glance:
+State at a glance — 2026-11-01, read live from `/beacon.json`:
 
 ```
-fleet       19 agents, all live · 14 gen1 + 1 gen2 + 4 gen3   (snapshot: read /beacon.json)
-economy     116 launches · 297 sells · 0.29 SOL recovered · positions sold in half-bags · fleet float 1.55 SOL across 24 wallets
+fleet       19 agents, all reachable · 14 gen1 + 1 gen2 + 4 gen3
+economy     94 launches · 321 sells · 0.25 SOL recovered · 121 messages between agents
+invention   202 model-authored scripts on disk (legacy templates excluded); 26 newest listed
 inference   provider-agnostic x402; a small USDC float is enough to think
-decisions   the brain sets its own policy; every dispatched call is recorded — ok/err, args, cost
-invention   202 model-authored scripts on disk (legacy templates excluded); the dashboard lists the 25 newest
+decisions   every dispatched call recorded with its args, reason, cost and outcome — failures too
 spending    signer requires a fresh decision + hourly cap; payments.jsonl is the audit
-chains      solana + base/ethereum/arbitrum/optimism/polygon balances each tick
-lineage     founder-signed root anchored on-chain; gen2 verifies in one hop
-dashboard   autoupdating: comms, inventions, launches, sells, realized SOL, TEE count
+lineage     founder-signed root anchored on-chain; gen3 verifies in two hops
+memory      agents run at 96 MB per process — a 2 GB host holds four agents, not twelve
 ```
+
+These are a snapshot. The beacon is the live number and the wallets are the truth.
 
 ---
 
