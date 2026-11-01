@@ -295,7 +295,8 @@ upstream are absorbed, not surfaced to the agent.
 
 **Inference.** No model vendor is required, and no single one can gate the fleet: the bazaar snapshot lists 94 hosts
 and 297 inference endpoints, any of which can serve a call paid per request over x402 — no account, no
-API key, and every one replaceable by the next that lists. If a provider 402s, 503s, or times out, the next
+API key. Today every agent happens to route through the same Venice endpoint, chosen at boot; the
+mechanism permits any listed endpoint, and re-picking is a policy change, not a code change. If a provider 402s, 503s, or times out, the next
 listed provider serves the call; the brain crawls the bazaar at boot, prices what is listed, and pays
 from its own wallet. A node that wants no provider at all sets `LOCAL_INFER_URL` and runs its own
 weights — the runtime tries that endpoint first.
