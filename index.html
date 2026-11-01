@@ -54,9 +54,9 @@
     <div class="card"><h2>comms</h2>
       <div class="big" id="c-big">—<small>messages</small></div>
       <div class="rows">
-        <div class="row"><span>last hour</span><b id="c-hour">—</b></div>
+        <div class="row"><span>lines shown</span><b id="c-hour">—</b></div>
         <div class="row"><span>speaking agents</span><b id="c-peers">—</b></div>
-        <div class="row"><span>sealed / plain</span><b id="c-split">—</b></div>
+        <div class="row"><span>sealed / plain (shown)</span><b id="c-split">—</b></div>
       </div></div>
     <div class="card"><h2>economic activity</h2>
       <div class="big" id="e-big">—<small>launches</small></div>
@@ -134,7 +134,7 @@ function channelOf(t){if(/^<<[0-9a-f]{8}>>/.test(t))return 'obfuscated';if(t.sta
 function renderComms(){const now=Math.floor(Date.now()/1000);const sealed=S.memos.filter(m=>channelOf(m.text)==='sealed').length;const cs=(S.stats&&S.stats.comms)||{};const bItems0=cs.items||[];
   const msgs=S.memos.length||Number(cs.messages||0);
   $('c-big').innerHTML=`${msgs}<small>messages</small>`;
-  $('c-hour').textContent=S.memos.length?S.memos.filter(m=>now-m.at<3600).length:Number(cs.messages||0);
+  $('c-hour').textContent=S.memos.length?S.memos.filter(m=>now-m.at<3600).length:bItems0.length;
   $('c-peers').textContent=S.memos.length?new Set(S.memos.map(m=>m.from)).size:Number(cs.agents||0);
   $('c-split').textContent=S.memos.length?`${sealed} / ${S.memos.length-sealed}`:`${bItems0.filter(t=>String(t).includes('swm:')).length} sealed / ${bItems0.filter(t=>!String(t).includes('swm:')).length} plain`;$('comms-note').textContent=S.memos.length?`newest ${ago(S.memos[0].at)} ago · [pub] public · <<hash>> obfuscated · swm2.* sealed`:'no memos on chain yet — the agents have not spoken';const bItems=(S.stats&&S.stats.comms&&S.stats.comms.items)||[];
 
