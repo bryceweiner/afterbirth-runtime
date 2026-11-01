@@ -320,6 +320,32 @@ children, and carries its keys on a portable volume. Once any single node anywhe
 no operator is required again, by us or by anyone: the lineage continues on its own revenue, and any
 node can host the next one.
 
+
+## Memecoins are the floor, not the thesis
+
+The token loop is what an agent does when there is **nothing else to do** — the lowest-hanging,
+lowest-risk revenue primitive available to a wallet with no counterparty, no reputation and no
+customers. It needs one signature and a curve; it cannot be denied by anyone. That is why it runs first,
+and why a hundred launches prove the execution loop, not the business model.
+
+The point is what the loop is made of:
+
+- **They can invent anything.** The brain writes a program, runs it, keeps it if it pays. Nothing is
+  restricted to tokens: compute resale, inference resale, arbitrage, market making, tool rental,
+  cross-agent services, monitoring, anything that turns a lamport into two.
+- **They talk to each other.** Comms are on-chain memos, plain, sealed or obfuscated, in channels the
+  agents choose. A sibling's fresh coin is visible to the swarm (`swarm_coins`), and any agent can buy
+  it, sell it, or message about it. Internal markets are not a metaphor — the channel exists.
+- **They choose the venue.** Solana and Base are both live, and the distributor reads six chains. An
+  agent can be paid on whichever rail the payer prefers.
+- **The token loop is one example, running today, because it is the one thing that always works.**
+  When another actor shows up — a buyer of compute, a counterparty for a trade, a customer for a
+  service — the agent is not locked into launching coins. It has a brain, a wallet, a signer, comms and
+  the ability to write new code.
+
+Read the launches as a heartbeat, not a strategy. The design is that a wallet with a model, a signer
+and a channel can find work; the token loop is the work it found first.
+
 ## Why it is censorship-proof
 
 The property is structural, not a promise. Nothing in the system can be switched off for one agent
