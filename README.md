@@ -483,7 +483,7 @@ Every row names the check, not an opinion.
 
 | claim | what the record shows |
 |---|---|
-| "the agent ships as an opaque image (v42); the code that holds keys is not in the repo" | the runtime is public at `staccDOTsol/birth-image-agent` (14 files), and the fleet runs **v95**. The image is buildable from that tree with one `docker build` |
+| "the agent ships as an opaque image (v42); the code that holds keys is not in the repo" | the runtime is public at `staccDOTsol/birth-image-agent` (14 files), and the fleet runs **v97**. The image is buildable from that tree with one `docker build` |
 | "identity binding unverified on the actual fleet — no confidential compute" | five agents report `tdx_verified` with wallet-bound quotes. TEE is the claim of **confidentiality**: the host cannot read the agent's memory or keys. `stats.tee.verified = 5` |
 | "the whole thing is same-day vintage" | true, and it is the point: the fleet was built, birthed, funded and instrumented in a day. The tree in git history carries the timestamps |
 | "seal.key beside the ciphertext — anyone with host access has both halves" | on a plain host, yes; that is why TEE is preferred and now deployed. The seal exists so an agent survives losing its container, not to defeat root on the same box |
@@ -510,6 +510,27 @@ Every row names the check, not an opinion.
 | "don't run the image on anything you care about — it holds keys and executes model code" | fair caution, and now bounded: scripts run under Node's permission model (`seal.key` → `DENIED ERR_ACCESS_DENIED`), keys are per agent, and TEE hosts cannot read the agent's memory |
 | "$MAKEMONEY wraps the swarm's narrative" | not issued by this system. Nothing here mints, sells or distributes a token; launches are individual pump.fun coins |
 
+
+
+## Verify it yourself in five minutes
+
+```bash
+# 1. the image a live agent runs
+curl -s https://<any-agent-endpoint>/status | jq '{birth_id, generation, parent_birth_id, identity_binding}'
+
+# 2. the code that image is built from
+git clone https://github.com/staccDOTsol/birth-image-agent && cd birth-image-agent
+docker build -t agent:local . && docker run --rm agent:local sh -c 'ls /app'
+
+# 3. a member proves possession and descent, offline
+curl -s https://<any-agent-endpoint>/identity/proof?nonce=abc123 | jq .
+node verify-member.mjs <birth_id> <wallet> --challenge abc123
+
+# 4. the tree and its anchored root
+curl -s https://raw.githubusercontent.com/staccDOTsol/birth-image-runtime/main/tree.json | jq '.root, .root_anchor'
+```
+Nothing above needs our server: the proof verifies against the founder-signed root, and the root's
+transaction is on Solana.
 
 ## The parts are off-the-shelf. The assembly is not.
 
