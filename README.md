@@ -224,6 +224,14 @@ The signer is the last line of defence, not a rubber stamp. Before it signs any 
 Every signed payment is appended to `payments.jsonl`, so spend is auditable per agent rather than
 inferred from the chain afterwards.
 
+
+### Birth host capacity
+
+A child runs the **full** profile (seven workers), so a box that already hosts three gen1 guests
+should take at most two or three children before it starts thrashing. The midwife allocates the next
+free port and does not yet enforce a per-host ceiling — keep it to a handful per box, or give
+children their own machines.
+
 ## Remaining gaps
 
 - **Provider leases** run an older image and do not speak or invent.
