@@ -111,7 +111,7 @@ async function loadEndpoints(){
     S.rows.push({a:{endpoint:a.endpoint,wallet:st&&st.solana},st,live:!!(a.live||st&&st.phase)});
   }
 }
-function ago(t){try{const d=Math.max(0,Math.floor(Date.now()/1000-Number(t)));if(!isFinite(d))return '—';const h=Math.floor(d/3600),m=Math.floor(d%3600/60);return h?h+'h '+m+'m':m+'m';}catch{return '—';}}
+function ago(t){try{let v=Number(t);if(v>1e12)v=v/1000;const d=Math.max(0,Math.floor(Date.now()/1000-v));if(!isFinite(d))return '—';const h=Math.floor(d/3600),m=Math.floor(d%3600/60);return h?h+'h '+m+'m':m+'m';}catch{return '—';}}
 function renderFleet(){
   const rows=SHOW_DOWN?S.rows:S.rows.filter(r=>r.live||r.st);
   const rowsAll=rows.length?rows:S.rows;
