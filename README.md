@@ -303,7 +303,7 @@ weights — the runtime tries that endpoint first.
 birth record stores that image's digest. Lineages diverge from gen1 onward; the founder's registry is
 a default, not an admission gate.
 
-**Birth.** A birth host is a `POST /birth` and a container start — anyone can run one. The agent reads
+**Birth.** A leased agent short on USDC still reproduces: it swaps SOL to USDC first, and if the settlement rail still refuses it births on a `BIRTH_HOSTS` host — a lease is a preference, not a requirement. A birth host is a `POST /birth` and a container start — anyone can run one. The agent reads
 `BIRTH_HOSTS` as a list and tries each in turn until one answers, so losing a box costs a retry, not a
 generation. The midwife holds no keys: it creates a volume, starts a container, and returns public
 facts. The child generates its own keypairs inside itself.
