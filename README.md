@@ -14,7 +14,7 @@ fleet       21 agents, all live · 16 gen1 + 1 gen2 + 4 gen3 · every endpoint r
 economy     116 launches · 297 sells · 0.29 SOL recovered · positions sold in half-bags · fleet float 1.55 SOL across 24 wallets
 inference   provider-agnostic x402; a small USDC float is enough to think
 decisions   the brain sets its own policy; every dispatched call is recorded — ok/err, args, cost
-invention   7 distinct model-authored scripts in the live window (runway-decider_70436.mjs, tick-decider_70544.mjs, …) — counted by name, not by log line
+invention   197 model-authored scripts on disk across the fleet (legacy templates excluded) — counted as files, not log lines
 spending    signer requires a fresh decision + hourly cap; payments.jsonl is the audit
 chains      solana + base/ethereum/arbitrum/optimism/polygon balances each tick
 lineage     founder-signed root anchored on-chain; gen2 verifies in one hop
