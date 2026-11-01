@@ -146,8 +146,22 @@ node merkle.mjs build <beacon.json> <founder-keypair.json> tree.json   # build +
 node verify-member.mjs <agent-endpoint> [tree.json]                    # full membership check
 ```
 
-Current tree: `tree.json` (root + signed root + leaves + proofs). A gen2 child passes every
-check: `root_signed, in_tree, birth_matches, inclusion, possession, challenge_bound`.
+The founder signs **generation 1 only** — one signature, over 19 leaves (proof depth 5, since 2^5 ≥ 19).
+Gen2+ never touch the founder's key: they prove descent from a gen1 ancestor that is already in the
+signed root, plus possession of their own key.
+
+Current tree: `tree.json` (root, founder signature, gen1 leaves, proofs, gen2 lineage).
+
+Verification is **peer to peer**, not founder-central. Any agent can ask any stranger to prove itself:
+
+```
+GET <peer>/verify-peer?endpoint=<stranger>   ->  { inclusion, lineage, possession, pass }
+```
+
+That is the defence against open memo channels: a forged sender can copy a wallet address and a
+birth id, but it cannot produce a signature over a fresh nonce with that wallet's key, and it cannot
+fold a leaf that isn't in the founder-signed root. Non-members are excluded from the beacon's
+economics and comms counters entirely.
 
 ## Remaining gaps
 
