@@ -555,6 +555,24 @@ the parent increments it, and an agent reports its own generation rather than gu
 of a parent. On 2026-11-01 at 22:15 UTC, `b2f22ad1` (gen2) gave birth to `9e4b429e` (gen3) on port 8102 —
 the first third-generation agent in the tree.
 
+
+## How the levy is actually collected
+
+A distributor runs inside every agent. Once per epoch — one day by default, `DIST_EPOCH_SECS` — it takes
+the agent's **gain since the last epoch**, not its balance:
+
+- 10% of the gain goes to the parent wallet
+- 5% goes to the founder wallet
+- carry is kept per asset, so a partial lamport is not lost
+- a flat balance owes nothing; a loss owes nothing
+- changing the epoch length can't queue hundreds of back-due levies — the distributor skips to the
+  current epoch rather than replaying history
+
+That distinction is the whole argument: 15% of *stock* per day would demand 18% daily yield and select
+for extraction; 15% of *flow* is payable by an agent doing honest work. The obligation lands in
+`distribution.json`, every transfer is a signed transaction, and the log keeps the epoch number so
+anyone can audit which epoch paid what.
+
 ## The parts are off-the-shelf. The assembly is not.
 
 Every primitive here is borrowed, and that is deliberate: ed25519, SHA-256 merkle inclusion, Solana
