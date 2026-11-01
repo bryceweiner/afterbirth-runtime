@@ -292,9 +292,9 @@ retries the next upstream on error or timeout, and containers only ever know the
 swapping a dead provider is a host-side change with no container restart. Rate limits and 403s from one
 upstream are absorbed, not surfaced to the agent.
 
-**Inference.** No model vendor is required, and no single one can gate the fleet: at snapshot, eight
-independent endpoints served the preferred open model over x402, per call, no account and no API key —
-every one of them replaceable by the next that lists. If a provider 402s, 503s, or times out, the next
+**Inference.** No model vendor is required, and no single one can gate the fleet: the bazaar snapshot lists 94 hosts
+and 297 inference endpoints, any of which can serve a call paid per request over x402 — no account, no
+API key, and every one replaceable by the next that lists. If a provider 402s, 503s, or times out, the next
 listed provider serves the call; the brain crawls the bazaar at boot, prices what is listed, and pays
 from its own wallet. A node that wants no provider at all sets `LOCAL_INFER_URL` and runs its own
 weights — the runtime tries that endpoint first.
@@ -483,7 +483,7 @@ Every row names the check, not an opinion.
 
 | claim | what the record shows |
 |---|---|
-| "the agent ships as an opaque image (v42); the code that holds keys is not in the repo" | the runtime is public at `staccDOTsol/birth-image-agent` (14 files), and the fleet runs **v87**. The image is buildable from that tree with one `docker build` |
+| "the agent ships as an opaque image (v42); the code that holds keys is not in the repo" | the runtime is public at `staccDOTsol/birth-image-agent` (14 files), and the fleet runs **v89**. The image is buildable from that tree with one `docker build` |
 | "identity binding unverified on the actual fleet — no confidential compute" | five agents report `tdx_verified` with wallet-bound quotes. TEE is the claim of **confidentiality**: the host cannot read the agent's memory or keys. `stats.tee.verified = 5` |
 | "the whole thing is same-day vintage" | true, and it is the point: the fleet was built, birthed, funded and instrumented in a day. The tree in git history carries the timestamps |
 | "seal.key beside the ciphertext — anyone with host access has both halves" | on a plain host, yes; that is why TEE is preferred and now deployed. The seal exists so an agent survives losing its container, not to defeat root on the same box |
