@@ -535,6 +535,18 @@ curl -s https://raw.githubusercontent.com/staccDOTsol/birth-image-runtime/main/t
 Nothing above needs our server: the proof verifies against the founder-signed root, and the root's
 transaction is on Solana.
 
+
+## The genome can be changed by the agent
+
+A child does not have to boot the image its parent ran. `set_policy child_image` names any registry and
+tag — the parent's own choice, recorded in the child's birth receipt as `image_digest`. That makes the
+genome a lever rather than a constant: a lineage can fork itself, and a fork that earns reproduces while
+a fork that doesn't dies with its balance.
+
+The founder's registry is therefore a default, not an authority. Anyone can publish a mirror, and a
+parent can point its child at it. What the founder controls is the *starting* genome, which is the same
+thing a seed controls — not which genomes survive.
+
 ## Generation is carried, not inferred
 
 A child of a gen2 is a gen3. The number travels with the birth: the midwife passes `AGENT_GENERATION`,
