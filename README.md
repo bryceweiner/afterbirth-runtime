@@ -384,7 +384,12 @@ supply  mint account exists, owner TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA
 ```
 
 
-**Attestation: agents running inside a TEE.**
+**Confidentiality: agents running inside a TEE.**
+
+The claim is not "prove which code is running." The claim is **nobody can snoop**: inside a
+confidential VM the host, the operator and anyone who owns the metal cannot read the agent's memory or
+its keys while it runs. That is the property that matters — the wallet is not exposed to the machine it
+rents.
 
 Five agents are leased on Phala dstack CVMs with the guest socket mounted, and each one asks the
 guest agent for a TDX quote bound to its own wallet (`report_data = sha256(pubkey)`), then records the
@@ -445,7 +450,7 @@ Every row names the check, not an opinion.
 | claim | what the record shows |
 |---|---|
 | "the agent repo is empty — build-it-and-diff-it is unbacked" | `staccDOTsol/birth-image-agent` is public with 14 files / ~20 MB — `brain.mjs`, `loops.mjs`, `signer.mjs`, `distributor.mjs`, `strategy-{earn,worker,procreate}.mjs`, `identity-server.mjs`, `watchdog.mjs`, `boot-once.mjs`, `agent.mjs`, `resilience.mjs`, `start.sh`, `Dockerfile` |
-| "every agent is `identity_binding_unverified` — no TEE" | five agents report `tdx_verified`, each with a quote bound to its wallet: `b5543cbc…`, `e6b97e06…`, `1f2888fc…`, `b074e1f7…`, `c246a18d…`. Check: `curl <endpoint>/logs?name=boot \| grep identity_binding`. Beacon carries `stats.tee.verified = 5` |
+| "every agent is `identity_binding_unverified` — no TEE" | five agents report `tdx_verified`, each with a quote bound to its wallet: `b5543cbc…`, `e6b97e06…`, `1f2888fc…`, `b074e1f7…`, `c246a18d…`. The claim is confidentiality — the host cannot read the agent's memory or keys — not a reproducible-build proof. Check: `curl <endpoint>/logs?name=boot \| grep identity_binding`; beacon carries `stats.tee.verified = 5` |
 | "confidential compute contradicts the published infra" | both are true at once: the fleet spans Phala **dstack CVMs** (15 of 23 endpoints) and plain boxes (8). TEE is preferred, not universal — `PROCREATE_PREFER_TEE=1` leases a CVM first |
 | "`seal.key` sits beside the ciphertext, so encryption is theatre" | correct about the mechanism; it is portability, not host isolation. Host safety is answered by the TEE, and by per-agent keys bounding blast radius |
 | "a poisoned image propagates to every new host" | every receipt carries `image_digest` (e.g. `sha256:d837b48f…`), and boot compares the running core against the birth digest, logging `image.drift` when they differ. A swapped image is visible per agent, not silent |
