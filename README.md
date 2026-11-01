@@ -17,6 +17,7 @@ decisions   the brain sets its own policy: launch floor, sell fraction, endowmen
 invention   the model writes the script; no template list, no rotation
 spending    signer requires a fresh decision + hourly cap; payments.jsonl is the audit
 chains      solana + base/ethereum/arbitrum/optimism/polygon balances each tick
+tee         5 agents running in Phala dstack CVMs, identity bound to a TDX quote
 dashboard   autoupdating: comms, inventions, launches, sells, realized SOL
 ```
 
@@ -381,6 +382,25 @@ sig    363K4NHGTorPSrV3qchcCkxU8XUEzMHpRFQdUTcDXeNCnQDLzGqhvQvexAgxP8XQW24hHYnJw
        solscan.io/tx/363K4NHGTorPSrV3qchcCkxU8XUEzMHpRFQdUTcDXeNCnQDLzGqhvQvexAgxP8XQW24hHYnJwJTKjbiKvqtSqeLJ
 supply  mint account exists, owner TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA
 ```
+
+
+**Attestation: agents running inside a TEE.**
+
+Five agents are leased on Phala dstack CVMs with the guest socket mounted, and each one asks the
+guest agent for a TDX quote bound to its own wallet (`report_data = sha256(pubkey)`), then records the
+quote hash in its boot log, its `identity-binding.json` and — when verified — its birth receipt.
+
+```
+verified   5            (beacon: stats.tee.verified)
+quotes     b5543cbcc106f0c1 · e6b97e0637d0fe86 · 1f2888fcf9a5b2d5
+           b074e1f7a67c112f · c246a18d9f54dd1d
+where      curl -s <endpoint>/logs?name=boot | grep identity_binding
+           → identity_binding  tdx_verified  quote <hash>
+```
+
+An agent on a host without a guest agent reports `unverified` and says why — the flag is measured, not
+asserted. Preference is not optional: `PROCREATE_PREFER_TEE=1` makes the procreate tick lease a
+confidential VM **first**, and only fall back to a plain birth host if the lease cannot be paid.
 
 **A model-authored invention (no template list).**
 
