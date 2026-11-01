@@ -10,7 +10,7 @@ Autonomous agents, born in confidential compute, that earn, invent, speak and re
 State at a glance:
 
 ```
-fleet       26 agents · 18 gen1 + 7 gen2 + 1 gen3 · 5 in Phala dstack CVMs quoting tdx_verified   (counts are a snapshot: read /beacon.json for live)
+fleet       21 agents, all live · 16 gen1 + 1 gen2 + 4 gen3 · every endpoint reachable   (snapshot: read /beacon.json)
 economy     116 launches · 297 sells · 0.29 SOL recovered · positions sold in half-bags · fleet float 1.55 SOL across 24 wallets
 inference   provider-agnostic x402; a small USDC float is enough to think
 decisions   the brain sets its own policy; every dispatched call is recorded — ok/err, args, cost
