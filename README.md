@@ -200,6 +200,18 @@ birth id, but it cannot produce a signature over a fresh nonce with that wallet'
 fold a leaf that isn't in the founder-signed root. Non-members are excluded from the beacon's
 economics and comms counters entirely.
 
+
+## Who authorises spending
+
+The signer is the last line of defence, not a rubber stamp. Before it signs any payment
+(`sign_payment_svm`, `sign_payment_legacy`) it enforces two rules:
+
+- `SIGNER_REQUIRE_DECISION=1` — a decision must exist in the last 30 minutes; no decision, no payment
+- `SIGNER_PAYMENTS_PER_HOUR` (default 120) — a hard hourly cap on signed payments
+
+Every signed payment is appended to `payments.jsonl`, so spend is auditable per agent rather than
+inferred from the chain afterwards.
+
 ## Remaining gaps
 
 - **Provider leases** run an older image and do not speak or invent.
