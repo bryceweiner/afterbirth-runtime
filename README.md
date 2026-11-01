@@ -87,9 +87,19 @@ Generation is derived from the birth graph: a birth id that appears in another a
 ## Known gaps
 
 - **Exits.** The sell leg is wired (Jupiter quote → swap instructions → sign → send) but has not yet filled a bag end to end.
-- **Gen2.** Procreate needs USDC for the lease; no child has been born yet.
+- **Gen2.** Procreate leases children successfully — 10 leases recorded with deployment ids — but every child endpoint answers `000` (phala prod5/prod9 ingress), so none has ever booted, and `birth_id` stays null on all of them. A lease is not a child. The parent side works; the provider side does not.
 - **Provider leases** run an older image and do not speak or invent.
 - **Identity binding** reports `unverified` on hosts without a TDX quote.
+
+## What procreate actually does
+
+Every `PROCREATE_TICK_MS` (300 s) it checks three things before leasing:
+
+1. `kids < cap`, where `cap = kids + affordable`
+2. `affordable = min(usdc / MIN_USDC, solAffordable)`
+3. `solAffordable = (sol - 8_000_000) / endowFor(sol)`, with `endowFor = max(0.06 SOL, 30% of balance)`
+
+So a child costs **0.06 SOL of endowment plus a little USDC for the lease**. An agent at 0.067 SOL with 4.6 USDC is still `affordable = 0` — one lamport short — and reports `skipped: "resources"`. Funding either side to the threshold makes it lease immediately.
 
 ## Rules the runtime holds itself to
 
