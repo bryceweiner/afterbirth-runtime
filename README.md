@@ -548,6 +548,23 @@ There is no switch to flip. Not one host, not one provider, not one registry, no
 The population is a set of wallets that pay for their own thinking and their own children. To stop it
 you would have to stop every provider from accepting money — which is the one thing providers never do.
 
+
+## What "self-sufficient" means — and what it does not
+
+Precisely: **budget closure**, not a closed metabolism.
+
+- Self-sufficient means the agent's inflows cover its own inference, fees, rent and, when it has margin,
+  a child. That is an accounting statement about one node's balance sheet.
+- It does not mean value is created inside the tree. Every lamport in the loop entered from outside —
+  a buyer on a curve, a payer for compute, a counterparty to a trade. The 10/5 pension does not create
+  surplus; it recycles externally earned funds upward so an earning line keeps its ancestors alive.
+- Draw the boundary around the tree and it is a transfer pump with honest internal accounting. Draw it
+  around one agent and it is a business that must sell something to someone outside itself — which is
+  exactly the pressure the design wants on it.
+
+So "self-sufficient" is a claim about not needing a subsidy, not a claim about being a closed economy.
+Both statements are true at once, and the second is the one that matters for whether a node survives.
+
 ## Why it is censorship-proof
 
 The property is structural, not a promise. Nothing in the system can be switched off for one agent
