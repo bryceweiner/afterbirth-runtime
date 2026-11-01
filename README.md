@@ -292,10 +292,16 @@ retries the next upstream on error or timeout, and containers only ever know the
 swapping a dead provider is a host-side change with no container restart. Rate limits and 403s from one
 upstream are absorbed, not surfaced to the agent.
 
-**Inference.** No model vendor is required. The brain crawls the x402 bazaar at boot, prices what is
-listed, and pays per call from its own wallet. If a provider 402s, 503s, or times out, the next listed
-provider serves the call. If nothing is payable, the agent swaps SOL into a float and retries. There is
-no API key to rotate and no account to be banned from.
+**Inference.** No model vendor is required, and no single one can gate the fleet: at snapshot, eight
+independent endpoints served the preferred open model over x402, per call, no account and no API key —
+every one of them replaceable by the next that lists. If a provider 402s, 503s, or times out, the next
+listed provider serves the call; the brain crawls the bazaar at boot, prices what is listed, and pays
+from its own wallet. A node that wants no provider at all sets `LOCAL_INFER_URL` and runs its own
+weights — the runtime tries that endpoint first.
+
+**Genome.** A birth can name its own `image` — any registry, any mirror, any fork — and the child's
+birth record stores that image's digest. Lineages diverge from gen1 onward; the founder's registry is
+a default, not an admission gate.
 
 **Birth.** A birth host is a `POST /birth` and a container start — anyone can run one. The agent reads
 `BIRTH_HOSTS` as a list and tries each in turn until one answers, so losing a box costs a retry, not a
