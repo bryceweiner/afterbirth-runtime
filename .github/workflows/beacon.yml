@@ -18,7 +18,7 @@ jobs:
       - name: fetch live roster
         run: |
           mkdir -p .
-          curl -fsS --max-time 25 http://64.176.200.115:9099/beacon.json -o /tmp/bc.json && cp /tmp/bc.json beacon.json || echo 'kept previous beacon.json'
+          curl -fsS --max-time 25 http://207.148.20.113:9099/beacon.json -o /tmp/bc.json && cp /tmp/bc.json beacon.json || echo 'kept previous beacon.json'
           head -c 200 beacon.json
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
