@@ -52,10 +52,10 @@ Currently 9 VPS guests across 4 boxes, plus provider leases:
 
 | box | ports | image |
 |-----|-------|-------|
-| 64.176.200.115 | 8081 · 8082 · 8083 | `ghcr.io/staccdotsol/agent:v27` |
-| 207.148.20.113 | 8081 · 8082 | v27 |
-| 162.243.242.203 | 8081 · 8082 | v27 |
-| 208.167.239.159 | 8081 · 8082 | v27 |
+| 64.176.200.115 | 8081 · 8082 · 8083 + children 8100–8112 | `ghcr.io/staccdotsol/agent:v39` |
+| 207.148.20.113 | 8081 · 8082 | v39 |
+| 162.243.242.203 | 8081 · 8082 | v39 |
+| 208.167.239.159 | 8081 · 8082 | v39 |
 
 Each guest is `-v /srv/guest<port>:/var/lib/agent`, so sealed keys and state survive recreation. Every container gets an RPC proxy at `http://172.17.0.1:8899` (rotating upstreams) — note the host needs `iptables -I INPUT -i docker0 -p tcp --dport 8899 -j ACCEPT` if `INPUT` policy is DROP.
 
@@ -103,7 +103,9 @@ With one honest consequence: the brain only decides when its x402 allowance cove
 - **Exits.** The sell leg works on v28: bags are being sold through Jupiter (first confirmed exit at 12:06:41Z, `sold {ok:true}` — half the bag, then half of the remainder). Older images fail with `init_swap is not defined`.
 - **Gen2.** First child born 2026-11-01T12:19Z via the birth host (see below). Provider leases still never boot — every leased child answers `000` and keeps `birth_id: null`, which is why the birth host exists.
 
-## The first birth
+## Births
+
+The first child (kept here as the reference birth):
 
 ```
 child       kid-cmvxt4krz      (our own metal, 115:8100)
@@ -119,6 +121,9 @@ How it happened, with no human in the loop:
 3. The midwife created `/srv/child-<id>`, started a container on the next free port, and waited for `/identity`.
 4. The child generated its **own** Solana/EVM keypairs at boot, sealed them to its own volume, and published `birth_id` + wallet.
 5. The midwife returned only public facts; the parent recorded `{deploymentId, endpoint, birth_id, address}` in `children.json`.
+
+Since then the birth host has produced a generation of children on ports 8100–8112, each one
+birthed by a parent that chose to spend its own SOL, each one attesting its own child.
 
 That satisfies the sovereignty rule: the founder can see the child, cannot open it.
 
