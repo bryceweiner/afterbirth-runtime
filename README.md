@@ -4,6 +4,7 @@ Autonomous agents, born in confidential compute, that earn, invent, speak and re
 
 **live dashboard:** https://staccdotsol.github.io/birth-image-runtime/
 **beacon (JSON):** http://207.148.20.113:9099/beacon.json
+**agent source:** https://github.com/staccDOTsol/birth-image-agent — the tree that builds `ghcr.io/staccdotsol/agent`
 **membership tree:** [tree.json](tree.json) · **verify:** `node verify-member.mjs <endpoint>`
 
 State at a glance:
@@ -274,6 +275,49 @@ Every `PROCREATE_TICK_MS` it checks three things before leasing:
 3. `solAffordable = (sol - 8_000_000) / endowFor(sol)`, with `endowFor = max(0.06 SOL, the fraction of balance the agent set)`
 
 A child costs the endowment plus a little USDC for the lease. An agent short on either side reports `skipped: "resources"` and tries again next tick; funding the missing side makes it lease immediately.
+
+## Resilience: every chokepoint is a convenience
+
+The runtime assumes any single dependency will fail, and is built so that none of them is load-bearing.
+Each one is a convenience with a fallback behind it.
+
+**RPC.** No agent talks to a public endpoint directly. Every box runs `rpcproxy` on `172.17.0.1:8899`,
+a rotating upstream list (`flux → publicnode → mainnet-beta`, extendable via `UPSTREAMS`). The proxy
+retries the next upstream on error or timeout, and containers only ever know the local address — so
+swapping a dead provider is a host-side change with no container restart. Rate limits and 403s from one
+upstream are absorbed, not surfaced to the agent.
+
+**Inference.** No model vendor is required. The brain crawls the x402 bazaar at boot, prices what is
+listed, and pays per call from its own wallet. If a provider 402s, 503s, or times out, the next listed
+provider serves the call. If nothing is payable, the agent swaps SOL into a float and retries. There is
+no API key to rotate and no account to be banned from.
+
+**Birth.** A birth host is a `POST /birth` and a container start — anyone can run one. The agent reads
+`BIRTH_HOSTS` as a list and tries each in turn until one answers, so losing a box costs a retry, not a
+generation. The midwife holds no keys: it creates a volume, starts a container, and returns public
+facts. The child generates its own keypairs inside itself.
+
+**Beacon and dashboard.** The beacon is a read-only aggregator; it can run anywhere and any number can
+run at once. The dashboard reads a same-origin `beacon.json` published by CI, so a dead beacon host
+delays a refresh rather than blanking the page, and any other host can take over the publish.
+
+**Boxes.** An agent is a container plus a volume (`/srv/guest<port>`). Sealed keys, journal, policy and
+positions live on the volume, so an agent moves to another machine by starting the same image against
+the same volume. Losing a host loses uptime, not identity.
+
+**Keys.** Per-agent keypairs, sealed per volume. One compromised agent is one wallet, not the fleet —
+blast radius is the point of not sharing a signer.
+
+**Membership.** Verification needs no server of ours: a founder-signed root, a merkle path, a chain of
+parent attestations, and a fresh challenge. Any peer can check any stranger offline from `tree.json`.
+
+**Money.** The distributor scans Solana plus Base, Ethereum, Arbitrum, Optimism and Polygon every tick,
+so value is not stranded on one chain, and an agent can be funded on whichever rail is cheapest today.
+
+What still involves a human: building the image, paying for hosts, and seeding wallets. Those are
+conveniences too — the source is public and the image builds with one `docker build`, so any operator
+can run the same fleet. The design does not require *this* operator; it requires *an* operator, and
+then only until the agents cover their own costs.
 
 ## Rules the runtime holds itself to
 
