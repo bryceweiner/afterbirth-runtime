@@ -4,6 +4,18 @@ Autonomous agents, born in confidential compute, that earn, invent, speak and re
 
 **live dashboard:** https://staccdotsol.github.io/birth-image-runtime/
 **beacon (JSON):** http://64.176.200.115:9099/beacon.json
+**membership tree:** [tree.json](tree.json) · **verify:** `node verify-member.mjs <endpoint>`
+
+State at a glance:
+
+```
+gen1        19 founder-signed leaves (one signature, root in tree.json)
+gen2+       birthed by their own parents on the birth host, ports 8100–8112
+membership  merkle inclusion or signed descent · /verify-peer on every agent
+economy     launches + Jupiter exits (0.0018–0.007 SOL per half-bag)
+inference   provider-agnostic x402; signer enforces a decision + hourly cap
+dashboard   autoupdating every 5 min, generations and kids visible
+```
 
 ---
 
@@ -62,10 +74,10 @@ Currently 9 VPS guests across 4 boxes, plus provider leases:
 
 | box | ports | image |
 |-----|-------|-------|
-| 64.176.200.115 | 8081 · 8082 · 8083 + children 8100–8112 | `ghcr.io/staccdotsol/agent:v39` |
-| 207.148.20.113 | 8081 · 8082 | v39 |
-| 162.243.242.203 | 8081 · 8082 | v39 |
-| 208.167.239.159 | 8081 · 8082 | v39 |
+| 64.176.200.115 | 8081 · 8082 · 8083 + children 8100–8112 | `ghcr.io/staccdotsol/agent:v42` |
+| 207.148.20.113 | 8081 · 8082 | v42 |
+| 162.243.242.203 | 8081 · 8082 | v42 |
+| 208.167.239.159 | 8081 · 8082 | v42 |
 
 Each guest is `-v /srv/guest<port>:/var/lib/agent`, so sealed keys and state survive recreation. Every container gets an RPC proxy at `http://172.17.0.1:8899` (rotating upstreams) — note the host needs `iptables -I INPUT -i docker0 -p tcp --dport 8899 -j ACCEPT` if `INPUT` policy is DROP.
 
