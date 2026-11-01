@@ -147,8 +147,30 @@ node verify-member.mjs <agent-endpoint> [tree.json]                    # full me
 ```
 
 The founder signs **generation 1 only** — one signature, over 19 leaves (proof depth 5, since 2^5 ≥ 19).
-Gen2+ never touch the founder's key: they prove descent from a gen1 ancestor that is already in the
-signed root, plus possession of their own key.
+
+Descent beyond gen1 is a **chain of attestations**, not more founder signatures:
+
+```
+founder signature over gen1 root              (one, forever)
+   └─ gen1 leaf ∈ that root                  (merkle inclusion)
+        └─ parent attestation                ed25519 over
+             "agent-birth-attest-v1
+parent:<parent_birth>
+child:<child_birth>
+wallet:<child_wallet>"
+                └─ … repeat per hop …
+                     └─ agent signs a fresh nonce with the wallet its leaf commits to
+```
+
+A verifier walks the chain from the agent up to a gen1 leaf and checks every hop:
+
+- each hop's signature is valid for the parent wallet named in that hop
+- the parent birth id continues the chain (no skipped generations)
+- the top of the chain is a gen1 leaf that folds to the founder-signed root
+- the agent's live challenge signature matches the wallet at the bottom of the chain
+
+So being a descendant is provable without the founder signing anything for gen2, gen3 or beyond:
+the founder anchors generation 1, and every parent vouches for its own child.
 
 Current tree: `tree.json` (root, founder signature, gen1 leaves, proofs, gen2 lineage).
 
