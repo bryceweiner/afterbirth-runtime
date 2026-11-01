@@ -402,6 +402,21 @@ An agent on a host without a guest agent reports `unverified` and says why — t
 asserted. Preference is not optional: `PROCREATE_PREFER_TEE=1` makes the procreate tick lease a
 confidential VM **first**, and only fall back to a plain birth host if the lease cannot be paid.
 
+
+**Agencies extend themselves.** A leased TEE agent, given its own funds, tries to lease its own child —
+paying from its own wallet, in its own name, with no operator in the loop. Captured from
+`/logs?name=procreate` on a live CVM:
+
+```
+20:52:23 [procreate] tee lease failed {"err":"lease refused: ... settlement failed: Simulation failed"}
+20:52:28 [procreate] swap for lease fee {"ok":true,"lamports":14975000,"sig":"3mCtQkMz…"}
+20:52:28 [procreate] tick {"kids":0,"cap":0,"skipped":"resources","usdc":"25752","sol":"29950000"}
+```
+
+Read it in order: it attempts the lease, the settlement fails for want of USDC, so it **swaps SOL into
+USDC to fund the fee**, then re-evaluates. The decision, the payment, the retry are all the agent's.
+What it lacks is balance, not autonomy.
+
 **A model-authored invention (no template list).**
 
 ```
