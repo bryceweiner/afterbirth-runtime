@@ -101,7 +101,7 @@ const BEACON='beacon.json';
 async function loadEndpoints(){
   S.agents=[]; S.rows=[];
   let bc=null;
-  try{const r=await fetch('beacon.json?ts='+Date.now(),{cache:'no-store'}); if(r.ok) bc=await r.json();}catch{}
+  for(const p of ['beacon.json','docs/beacon.json']){try{const r=await fetch(p+'?ts='+Date.now(),{cache:'no-store'}); if(r.ok){bc=await r.json();break;}}catch{}}
 
   for(const a of (bc&&bc.agents)||[]){
     const st=a.status||null;
