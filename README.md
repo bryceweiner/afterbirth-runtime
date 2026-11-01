@@ -44,7 +44,17 @@ Paid per request, wallet-keyed, no account and no API key:
 GET  https://api.venice.ai/api/v1/x402/balance/<solana-pubkey>   (SIWX auth)
 ```
 
-The brain only decides when its credit balance is at or above the admission floor (0.1 USD). Below that it tries to self-fund by swapping SOL into the 5 USD minimum top-up. Allowances are attached to a **wallet**, not a container — an agent is "signed in" by running on a wallet that carries balance.
+The brain is **not** tied to one provider. It crawls the x402 bazaar at boot, selects a model from
+whatever is listed, and pays per call from its own wallet. A Venice allowance is a useful float, not
+a precondition: any listed endpoint that answers can serve a decision.
+
+Two consequences worth knowing:
+
+- credits are a hint, not a gate — an agent with zero Venice balance still works if some other
+  x402 provider is listed and it can pay
+- when every call fails for payment, the agent self-funds by swapping SOL into the 5 USD minimum
+  top-up; allowances are attached to a **wallet**, not a container, so an agent is "signed in" by
+  running on a wallet that carries balance
 
 ## Fleet
 
