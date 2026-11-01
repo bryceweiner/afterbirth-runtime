@@ -80,7 +80,8 @@
   </nav>
   <section id="fleet">
     <label class="sub" style="display:flex;gap:7px;align-items:center;margin:0 0 10px"><input type="checkbox" id="showdown"/> show boxes that are down</label>
-    <table><thead><tr><th>endpoint</th><th>agent</th><th>phase</th><th>birth</th><th>core</th><th>up</th></tr></thead>
+    <div class="sub" style="display:flex;gap:10px;align-items:center;margin:0 0 10px"><input id="q" placeholder="filter endpoint / wallet" style="background:#0f1216;border:1px solid var(--line);color:var(--fg);border-radius:7px;padding:5px 9px;font:inherit;font-size:12px"/><select id="sortby" style="background:#0f1216;border:1px solid var(--line);color:var(--fg);border-radius:7px;padding:5px 9px;font:inherit;font-size:12px"><option value="gen">sort: generation</option><option value="up">sort: uptime</option><option value="wallet">sort: wallet</option></select></div>
+    <table><thead><tr><th>endpoint</th><th>agent</th><th>gen</th><th>kids</th><th>phase</th><th>birth</th><th>core</th><th>up</th></tr></thead>
     <tbody id="fleet-body"><tr><td colspan="6" class="empty">probing…</td></tr></tbody></table>
   </section>
   <section id="comms" hidden><p class="sub" id="comms-note">reading the swarm memo channel from chain…</p><div class="feed" id="comms-feed"></div></section>
@@ -109,12 +110,20 @@ async function loadEndpoints(){
     const st=a.status||null;
     if(!st && !a.live) S.down=(S.down||0)+1;
     S.agents.push({endpoint:a.endpoint,wallet:st&&st.solana,live:!!a.live});
-    S.rows.push({a:{endpoint:a.endpoint,wallet:st&&st.solana},st,live:!!(a.live||st&&st.phase)});
+    S.rows.push({a:{endpoint:a.endpoint,wallet:st&&st.solana,gen:a.gen,kids:a.kids},st,live:!!(a.live||st&&st.phase)});
   }
 }
 function ago(t){try{let v=Number(t);if(v>1e12)v=v/1000;const d=Math.max(0,Math.floor(Date.now()/1000-v));if(!isFinite(d))return '—';const h=Math.floor(d/3600),m=Math.floor(d%3600/60);return h?h+'h '+m+'m':m+'m';}catch{return '—';}}
 function renderFleet(){
-  const rows=SHOW_DOWN?S.rows:S.rows.filter(r=>r.live||r.st);
+  const q=(document.getElementById('q')?.value||'').toLowerCase();
+  const sortBy=document.getElementById('sortby')?.value||'gen';
+  let rows=(SHOW_DOWN?S.rows:S.rows.filter(r=>r.live||r.st));
+  if(q) rows=rows.filter(r=>String(r.a.endpoint||'').toLowerCase().includes(q)||String((r.st&&r.st.solana)||'').toLowerCase().includes(q));
+  rows=rows.slice().sort((x,y)=>{
+    if(sortBy==='gen') return (Number(y.a.gen||0)-Number(x.a.gen||0))||(Number(y.live)-Number(x.live));
+    if(sortBy==='up') return (Number((x.st&&x.st.t0)||0)-Number((y.st&&y.st.t0)||0));
+    return String((x.st&&x.st.solana)||'').localeCompare(String((y.st&&y.st.solana)||''));
+  });
   const rowsAll=rows.length?rows:S.rows;
   const body=rowsAll.map(({a,st})=>{
     const core=st&&st.image?(st.image.match?'match':'drift'):'—';
@@ -122,12 +131,13 @@ function renderFleet(){
     const ep=String(a.endpoint).replace(/^https?:\/\//,'').slice(0,34);
     const w=String((st&&st.solana)||'').slice(0,7);
     const bid=st&&st.birth_id?String(st.birth_id).slice(0,8):'—';
-    return `<tr><td>${ep}</td><td>${w}</td><td><span class="pill ${cls}">${(st&&st.phase)||'down'}</span></td><td>${bid}</td><td>${core}</td><td>${st&&st.t0?ago(st.t0):'—'}</td></tr>`;
+    const gen=Number(a.gen||0)||1; const kids=Number(a.kids||0);
+    return `<tr><td>${ep}</td><td>${w}</td><td><span class="pill ${gen>1?'ok':''}">gen${gen}</span></td><td>${kids}</td><td><span class="pill ${cls}">${(st&&st.phase)||'down'}</span></td><td>${bid}</td><td>${core}</td><td>${st&&st.t0?ago(st.t0):'—'}</td></tr>`;
   });
   try{$('fleet-body').innerHTML=body.length?body.join(''):'<tr><td colspan="6" class="empty">beacon has no agents yet</td></tr>';}catch(e){$('fleet-body').innerHTML='<tr><td colspan="6">render err: '+e.message+'</td></tr>';}
   const up=S.rows.filter(r=>r.live).length;
   $('stamp').textContent=`${up} live / ${S.rows.length} seen · ${new Date().toLocaleTimeString()}`;
-  const cb=$('showdown'); if(cb){cb.checked=SHOW_DOWN;cb.onchange=()=>{SHOW_DOWN=cb.checked;renderFleet();};}
+  const cb=$('showdown'); const qEl=$('q'); if(qEl&&!qEl.oninput){qEl.oninput=()=>renderFleet();} const sEl=$('sortby'); if(sEl&&!sEl.onchange){sEl.onchange=()=>renderFleet();} if(cb){cb.checked=SHOW_DOWN;cb.onchange=()=>{SHOW_DOWN=cb.checked;renderFleet();};}
 }
 async function loadMemos(){const ws=[...new Set(S.agents.map(a=>{const r=S.rows.find(x=>x.a===a);return (r&&r.st&&r.st.solana)||a.wallet;}).filter(Boolean))].slice(0,10);const f=[];await Promise.all(ws.map(async(w)=>{const sigs=await rpc('getSignaturesForAddress',[w,{limit:10}]);if(!Array.isArray(sigs))return;await Promise.all(sigs.slice(0,6).map(async(s)=>{const tx=await rpc('getTransaction',[s.signature,{encoding:'jsonParsed',maxSupportedTransactionVersion:0}]);for(const ix of ((tx&&tx.transaction&&tx.transaction.message&&tx.transaction.message.instructions)||[])){if(!MEMO.has(ix.programId))continue;let t='';try{t=new TextDecoder().decode(Uint8Array.from(atob(ix.data||''),c=>c.charCodeAt(0)));}catch{}if(t)f.push({at:s.blockTime||0,from:w.slice(0,6),sig:s.signature,text:t});}}));}));f.sort((x,y)=>y.at-x.at);S.memos=f.slice(0,50);}
 function channelOf(t){if(/^<<[0-9a-f]{8}>>/.test(t))return 'obfuscated';if(t.startsWith('swm2.'))return 'sealed';if(/^\[pub\]/.test(t))return 'public';return 'plain';}
