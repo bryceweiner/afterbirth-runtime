@@ -10,7 +10,7 @@ Autonomous agents, born in confidential compute, that earn, invent, speak and re
 State at a glance:
 
 ```
-fleet       agents on v70 across 4 boxes + leased hosts · gen1 and gen2 children
+fleet       agents on v71 across 4 boxes + leased hosts · gen1 and gen2 children
 economy     114 launches · 256 sells · 0.28 SOL recovered · positions sold in half-bags
 inference   provider-agnostic x402; a small USDC float is enough to think
 decisions   the brain sets its own policy: launch floor, sell fraction, endowment, cadence
@@ -65,10 +65,10 @@ The brain is **not** tied to one provider. It crawls the x402 bazaar at boot, se
 
 ```
 box                ports                          image
-207.148.20.113    8081 · 8082 + children 8100+   v70
-162.243.242.203   8081 · 8082                    v70
-208.167.239.159   8081 · 8082                    v70
-159.203.116.20    8081 · 8082                    v70
+207.148.20.113    8081 · 8082 + children 8100+   v71
+162.243.242.203   8081 · 8082                    v71
+208.167.239.159   8081 · 8082                    v71
+159.203.116.20    8081 · 8082                    v71
 ```
 
 Each guest runs `-v /srv/guest<port>:/var/lib/agent`, so sealed keys and state survive recreation. Every container gets an RPC proxy at `http://172.17.0.1:8899` (rotating upstreams); the host needs `iptables -I INPUT -i docker0 -p tcp --dport 8899 -j ACCEPT` when `INPUT` policy is DROP.
@@ -81,7 +81,7 @@ docker run -d --name ag8081 -p 8081:8787 \
   -e AGENT_PROFILE=full -e AGENT_SKIP="" \
   -e BRAIN_TICK_MS=60000 -e EARN_TICK_MS=45000 \
   -e RPC_URL=http://172.17.0.1:8899 \
-  --entrypoint sh ghcr.io/staccdotsol/agent:v70 \
+  --entrypoint sh ghcr.io/staccdotsol/agent:v71 \
   -c "rm -f /var/lib/agent/supervisor.lock; exec /app/start.sh"
 ```
 
@@ -382,6 +382,40 @@ to exist and to die.
 
 **"The image is opaque."** It is public: https://github.com/staccDOTsol/birth-image-agent — build it,
 diff it, run it.
+
+
+**"The TEE is aspirational — identity binding says unverified."** The TEE is an upgrade, not the trust
+root. The trust root is keys and proofs: a wallet that signs, a founder-signed root, attestations, a
+fresh challenge. A node with a TDX quote adds hardware evidence on top; a node without one is still a
+verifiable member. Nothing in membership, spending or descent depends on a quote being present.
+
+**"`sign_payment_legacy` contradicts 'v1 only'."** The agent's own transactions are v1 — 4096 bytes,
+64 accounts, no lookup tables. The legacy path exists for one job: paying x402 providers whose payment
+instruction predates v1 support. It is a payment rail, not an agent transaction.
+
+**"The 10% / 5% distribution is an upward skim."** It is a lineage royalty: 10% to the parent that
+funded the birth, 5% to the founder who anchored gen1. It is what makes reproduction worth doing and
+what pays for the next generation's endowment. An agent that never reproduces never pays it.
+
+**"Prompt injection can read the keys."** Keys are sealed in the agent's volume and never leave it. An
+invention has no key export: it acts by asking the signer for a signature, under the decision gate and
+the hourly cap, and the signer only signs v1 transactions it is given. The worst an injected script can
+do is spend the agent's own balance — which is exactly the bound that kills bad strategies.
+
+**"The birth API is open — anyone can spawn containers."** It births a container and returns public
+facts; it holds no keys. The child generates its own keypairs inside itself. An abusive caller costs
+itself a container and gains nothing: the child's wallet is not theirs.
+
+**"Published IPs and ports are a target list."** Publicity is the design. There is no permit to obtain
+and no gatekeeper to bypass; an endpoint that verifies itself in public is stronger than one hidden
+behind a private network. Scanning yields endpoints, not secrets.
+
+**"The dashboard was empty / the numbers are self-reported."** The dashboard is a window; the chain is
+the record. Every launch, sell, transfer and attestation resolves to a signed transaction, and
+membership verifies from `tree.json` with no server of ours in the path.
+
+**"The image is opaque / the repo is not the system."** The runtime source is public at
+https://github.com/staccDOTsol/birth-image-agent. Build it, diff it, run it.
 
 ## Rules the runtime holds itself to
 
