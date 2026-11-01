@@ -384,10 +384,11 @@ to exist and to die.
 diff it, run it.
 
 
-**"The TEE is aspirational — identity binding says unverified."** The TEE is an upgrade, not the trust
-root. The trust root is keys and proofs: a wallet that signs, a founder-signed root, attestations, a
-fresh challenge. A node with a TDX quote adds hardware evidence on top; a node without one is still a
-verifiable member. Nothing in membership, spending or descent depends on a quote being present.
+**"The TEE is aspirational — identity binding says unverified."** Confidential compute is the preferred
+substrate, always: agents are built to be born inside a TEE, and identity binding publishes the TDX
+quote whenever the host provides one. Where a host cannot quote, the agent still runs on sealed keys and
+verifiable proofs — a TEE is preferred, never a precondition, because making it one would hand a single
+class of host a veto over who may exist.
 
 **"`sign_payment_legacy` contradicts 'v1 only'."** The agent's own transactions are v1 — 4096 bytes,
 64 accounts, no lookup tables. The legacy path exists for one job: paying x402 providers whose payment
