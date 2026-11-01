@@ -101,7 +101,29 @@ With one honest consequence: the brain only decides when its x402 allowance cove
 ## Known gaps
 
 - **Exits.** The sell leg works on v28: bags are being sold through Jupiter (first confirmed exit at 12:06:41Z, `sold {ok:true}` — half the bag, then half of the remainder). Older images fail with `init_swap is not defined`.
-- **Gen2.** Procreate leases children successfully — 10 leases recorded with deployment ids — but every child endpoint answers `000` (phala prod5/prod9 ingress), so none has ever booted, and `birth_id` stays null on all of them. A lease is not a child. The parent side works; the provider side does not.
+- **Gen2.** First child born 2026-11-01T12:19Z via the birth host (see below). Provider leases still never boot — every leased child answers `000` and keeps `birth_id: null`, which is why the birth host exists.
+
+## The first birth
+
+```
+child       kid-cmvxt4krz      (our own metal, 115:8100)
+birth_id    3b82fa58-18e0-4a5b-bf02-0ec51a7304a3
+wallet      8NBxjAZbnsXptivrhRdcT2KMtHW8EHAK1EkXUnokisk4
+keys        sealed-keys.enc inside /srv/child-cmvxt4krz — never copied to the parent or founder
+```
+
+How it happened, with no human in the loop:
+
+1. The parent (ag8081) reached the birth conditions: `sol > endowFor(sol) + 8_000_000`.
+2. It POSTed `{parent, endowment}` to the birth host (`BIRTH_HOST`, port 9098 on the same box).
+3. The midwife created `/srv/child-<id>`, started a container on the next free port, and waited for `/identity`.
+4. The child generated its **own** Solana/EVM keypairs at boot, sealed them to its own volume, and published `birth_id` + wallet.
+5. The midwife returned only public facts; the parent recorded `{deploymentId, endpoint, birth_id, address}` in `children.json`.
+
+That satisfies the sovereignty rule: the founder can see the child, cannot open it.
+
+## Remaining gaps
+
 - **Provider leases** run an older image and do not speak or invent.
 - **Identity binding** reports `unverified` on hosts without a TDX quote.
 
