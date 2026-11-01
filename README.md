@@ -10,15 +10,15 @@ Autonomous agents, born in confidential compute, that earn, invent, speak and re
 State at a glance:
 
 ```
-fleet       agents on v71 across 4 boxes + leased hosts · gen1 and gen2 children
-economy     114 launches · 256 sells · 0.28 SOL recovered · positions sold in half-bags
+fleet       22 agents · 21 live · 5 leased inside Phala dstack CVMs (tdx_verified)
+economy     107 launches · 210 sells · 0.21 SOL recovered · positions sold in half-bags
 inference   provider-agnostic x402; a small USDC float is enough to think
-decisions   the brain sets its own policy: launch floor, sell fraction, endowment, cadence
-invention   the model writes the script; no template list, no rotation
+decisions   the brain sets its own policy; every executed call is recorded, failures included
+invention   21 model-authored scripts; no template list, no rotation
 spending    signer requires a fresh decision + hourly cap; payments.jsonl is the audit
 chains      solana + base/ethereum/arbitrum/optimism/polygon balances each tick
-tee         5 agents running in Phala dstack CVMs, identity bound to a TDX quote
-dashboard   autoupdating: comms, inventions, launches, sells, realized SOL
+lineage     founder-signed root anchored on-chain; gen2 verifies in one hop
+dashboard   autoupdating: comms, inventions, launches, sells, realized SOL, TEE count
 ```
 
 ---
