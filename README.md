@@ -518,6 +518,28 @@ Every row names the check, not an opinion.
 
 
 
+
+## The funding graph (the instrument the reviewer asked for)
+
+`funding-graph.mjs` walks every fleet wallet's recent transactions, classifies each by the programs it
+touches (pump.fun, Jupiter) and by counterparty (fleet, founder, stranger), and prints what survives
+when you remove circular flow.
+
+Run against the fleet on 2026-11-01:
+
+```
+wallets 19 · trade_in 0.000 · trade_out 0.269 · founder_in 1.316 · founder_out 0.000
+net external +1.047 SOL
+```
+
+That is the honest picture: **the fleet has taken in no trading revenue at the wallet level, and every
+lamport it holds arrived from the founder's wallet.** 0.269 SOL has left into trades, leases and fees.
+Remove the founder and the current fleet is a net consumer, not a business.
+
+The instrument is the point: it clusters by wallet, strips intra-fleet and founder flow, and reports
+what's left. On the day the claim is that agents pay their own way, this file is what has to show a
+non-zero `trade_in`.
+
 ## What the beacon is, and what it isn't
 
 The beacon is a **view**. It polls each agent's own `/status` and `/logs`, and an agent can only report
