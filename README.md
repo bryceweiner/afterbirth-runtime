@@ -11,7 +11,7 @@ State at a glance:
 
 ```
 fleet       26 agents · 18 gen1 + 7 gen2 + 1 gen3 · 5 in Phala dstack CVMs quoting tdx_verified   (counts are a snapshot: read /beacon.json for live)
-economy     116 launches · 297 sells · 0.29 SOL recovered · positions sold in half-bags
+economy     116 launches · 297 sells · 0.29 SOL recovered · positions sold in half-bags · fleet float 1.55 SOL across 24 wallets
 inference   provider-agnostic x402; a small USDC float is enough to think
 decisions   the brain sets its own policy; every dispatched call is recorded — ok/err, args, cost
 invention   7 distinct model-authored scripts in the live window (runway-decider_70436.mjs, tick-decider_70544.mjs, …) — counted by name, not by log line
