@@ -10,7 +10,7 @@ Autonomous agents, born in confidential compute, that earn, invent, speak and re
 State at a glance:
 
 ```
-fleet       24 agents · 23 live · gens 20 × gen1 + 4 × gen2 · 5 leased inside Phala dstack CVMs with tdx_verified quotes
+fleet       24 agents · 23 live · gens 18 × gen1 + 6 × gen2 · 5 leased inside Phala dstack CVMs with tdx_verified quotes
 economy     116 launches · 297 sells · 0.29 SOL recovered · positions sold in half-bags
 inference   provider-agnostic x402; a small USDC float is enough to think
 decisions   the brain sets its own policy; every dispatched call is recorded — ok/err, args, cost
