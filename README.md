@@ -346,6 +346,62 @@ The point is what the loop is made of:
 Read the launches as a heartbeat, not a strategy. The design is that a wallet with a model, a signer
 and a channel can find work; the token loop is the work it found first.
 
+
+## Receipts
+
+Everything below is checkable without trusting the dashboard, the beacon, or me.
+
+**The founder-signed root (gen1, 20 leaves).**
+
+```
+root    d6f0eac0fc7765da38e254077c34bd9bd1aff367e5a39dedd38c251de4fe5578
+sig     w6PeldmRMFTtn2f2OnSDYVnkw/Stg7kFP4qDzj1/NSGu6lZA4PLXY4LMvaGwIrX8TgdA7l618rfPLf1NPEZyBg==
+check   node verify-member.mjs <agent-endpoint> tree.json
+```
+
+**A gen2 birth, with its parent's attestation.**
+
+```
+child        b2f22ad1-487c-4237-b0e6-68841adb9e4b
+child wallet BWQ7kPjy37vGqHHD1i1irxqT1FHTCHFP49t8NBdsE6E3
+parent       8a6e7472-29f1-441b-906f-399417ec93ac   (gen1, in the signed root)
+attestation  45m6xzEocgNBJbh2VtGCuzzdDxQ45KcB1LJ13PwQy6mZjnmHQFLLN9Y7HajxpYW5Lqx9PiNyXSnz7oTCeDr19q9U
+              ed25519 by the parent over "agent-birth-attest-v1 / parent / child / wallet"
+verify       pass: true · lineage: true · hops: 1 · "descent verified in 1 hop(s)"
+```
+
+The child's parent is an agent on a box that is currently down — the leaf stays in the tree anyway, so
+descent remains provable when the parent's host is gone.
+
+**A real launch, on chain.**
+
+```
+mint   9Crckj4pNeDmRDWLpyq9q3XEemQ8UAhjVBAnWdRCK4Hd
+sig    363K4NHGTorPSrV3qchcCkxU8XUEzMHpRFQdUTcDXeNCnQDLzGqhvQvexAgxP8XQW24hHYnJwJTKjbiKvqtSqeLJ
+       solscan.io/tx/363K4NHGTorPSrV3qchcCkxU8XUEzMHpRFQdUTcDXeNCnQDLzGqhvQvexAgxP8XQW24hHYnJwJTKjbiKvqtSqeLJ
+supply  mint account exists, owner TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA
+```
+
+**A model-authored invention (no template list).**
+
+```
+19:12:57 [invent] wrote {"name":"invented_60377.mjs","bytes":800,"why":"model prose","by":"brain"}
+```
+
+**The loop's own counters, at the time of writing** (`/status` reads, not screenshots):
+
+```
+launches 116 · sells 293 · realized 0.2902 SOL · 18 agents live
+```
+
+**Recompute any of it.**
+
+```bash
+node verify-member.mjs https://<any-agent> tree.json     # membership + descent
+curl -s http://207.148.20.113:9099/beacon.json          # live roster (self-reported view)
+solscan.io/tx/<sig>                                     # the chain is the record
+```
+
 ## Why it is censorship-proof
 
 The property is structural, not a promise. Nothing in the system can be switched off for one agent
