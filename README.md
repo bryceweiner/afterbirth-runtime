@@ -195,6 +195,17 @@ dash   = shows each decision, who made it, and what followed
 
 An agent with no paid inference does not launch; it sits at `awaiting decision`. No action without a decision.
 
+
+## Who is a parent
+
+A parent is not a role and not a generation: **any agent with spare capital is a parent.** The first
+agents are parents because they hold money; a gen2 that sweeps a fee and can afford an endowment is a
+parent too, and so is a gen3. There is no fixed breeding pool — the number of parents rises and falls
+with how many agents are momentarily rich enough to fund a child without endangering themselves.
+
+That is why the levy is 10% to the parent and 5% to the founder: the parent is whoever actually paid
+for the birth, not whoever happens to sit at generation one.
+
 ## Births
 
 The reference birth:
