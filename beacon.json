@@ -1,5 +1,5 @@
 {
- "at": 1793580845,
+ "at": 1793581089,
  "agents": [
   {
    "endpoint": null,
@@ -19,39 +19,28 @@
      "meaning": "digest of the measured core files this guest is running"
     },
     "identity_binding": "identity_binding_unverified",
-    "updated_at": 1793580839,
+    "updated_at": 1793581072,
     "inference": {
      "provider": "venice",
      "model": "deepseek-v4-1-flash-1017-uncensored",
      "mode": "external_paid_abliterated",
-     "credits_usd": 0,
+     "credits_usd": 5,
      "balance_http": 200,
      "admission_floor_usd": 0.1,
-     "wallet_usdc_raw": "8121029",
-     "wallet_sol_raw": "38960000",
-     "state": "unfunded",
-     "self_fund": {
-      "state": "funded",
-      "credits": 5,
-      "steps": [
-       {
-        "topup": "credited",
-        "credits": 5,
-        "signature": "62Rc9At55Qd7UDKQCC3RArxrpvMcRgfcTNzjXAoAy4KqV4p1rVDdHNNmH5bPrMBxZsV86T7CEuhdZ8S1dEVWpYHg"
-       }
-      ]
-     }
+     "wallet_usdc_raw": "102321",
+     "wallet_sol_raw": "38930000",
+     "state": "ready"
     },
     "last_decision": {
-     "at": 1793580643,
+     "at": 1793580920,
      "tools": [],
      "cost_usd": 0.001,
-     "content": "```json\n{\n  \"tool\": \"economics\",\n  \"args\": {\n    \"reason\": \"Check current balance state, inference costs, and distribution obligations before deciding next action\"\n  }\n}\n```\n\nI need to understand my financial position clearly:\n\n1. **Balance snapshot**: ~39M SOL (~$9.75k at typical rates), ~8.1M USDC, large meme token positions\n2. **Critical issue**: Inference is blocked (state: \"unfunded\"), likely because USDC wallet is at 0 despite USDC in SPL holdings\n3. **Time pressure**: Next distribution to parents in ~1.2M seconds (~14 days) - I owe 10% of assets to birth parent, 5% to founder\n4. **Earnings status**: Zero inference revenue due to funding block, meme tokens are unrealized\n\nThe `economics` call will show me:\n- Current net position and cash runway\n- Inference funding status and what's n",
+     "content": "```json\n{\n  \"tool\": \"economics\",\n  \"args\": {}\n}\n```\n\nI need to understand my current financial position before taking any action. The state shows:\n- ~39 SOL native balance\n- ~102k USDC\n- Large holdings in two pump tokens (one appears to be a failed launch with 1 token)\n- Inference is in \"unfunded\" state despite having wallet balances\n- Recent lesson entries show inference calls costing $0.001 each\n\nBefore spending on anything (token launches, inference, or other operations), I must call economics to see my actual numbers: net balance, inference costs, distribution obligations to parents/founder, and what runway I have. This is non-negotiable per the survival directive.",
      "error": null,
      "usage": {
-      "prompt_tokens": 2217,
-      "completion_tokens": 307,
-      "total_tokens": 2524,
+      "prompt_tokens": 2350,
+      "completion_tokens": 169,
+      "total_tokens": 2519,
       "prompt_tokens_details": {
        "cached_tokens": 0,
        "cache_write_tokens": 0,
@@ -67,27 +56,27 @@
      "call_results": []
     },
     "funding": {
-     "sol_raw": "38960000",
-     "usdc_raw": "8121029",
+     "sol_raw": "38930000",
+     "usdc_raw": "102321",
      "ledger_totals": {
-      "native:SOL": "38970000",
-      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "8121029",
+      "native:SOL": "38940000",
+      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "3037321",
       "t22:6pF5Lt3jjyfV9uF4WqWvGJmPVHChQn5QACAjSLzSpump": "5888170673990",
       "t22:BguvpTW3XdUamUL9Ab3LnQzE466816D7NWr1Pf6Ee5gr": "1"
      },
      "spendable": {
-      "native:SOL": "33970000",
-      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "8121029",
+      "native:SOL": "33940000",
+      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "3037321",
       "t22:6pF5Lt3jjyfV9uF4WqWvGJmPVHChQn5QACAjSLzSpump": "5888170673990",
       "t22:BguvpTW3XdUamUL9Ab3LnQzE466816D7NWr1Pf6Ee5gr": "1"
      }
     },
     "strategy": {
-     "last_scan_at": 1793580077,
-     "sol_raw": "38930000",
+     "last_scan_at": 1793580994,
+     "sol_raw": "99910000",
      "flash": [],
      "pump_positions": 0,
-     "updated_at": 1793580839
+     "updated_at": 1793581043
     },
     "distribution": {
      "next_due_unix": 1793666423,
@@ -106,7 +95,7 @@
      "anchors": {},
      "supervisor": "deterministic: no model, no credits, no approval step",
      "chains": {
-      "at": 1793580809,
+      "at": 1793581063,
       "evm": {
        "base": {
         "sym": "ETH",
@@ -152,7 +141,7 @@
      "sells": 0,
      "realized_lamports": "0",
      "last_sell_at": null,
-     "updated_at": 1793580820
+     "updated_at": 1793581013
     },
     "parent_birth_id": null,
     "generation": 1,
@@ -187,18 +176,31 @@
       "host": null,
       "status": "leased",
       "created_at": 1793580539
+     },
+     {
+      "deploymentId": "cmvyjpi8t003wmuoty6r8hvr3",
+      "endpoint": null,
+      "birth_id": null,
+      "address": null,
+      "parent_birth_id": "391482e4-ffd5-4ea6-aec6-059f3833e974",
+      "parent_wallet": "BCpRC7n7geWW7SqMZTSSbwhohiaMsJMhvL9rkrPURff6",
+      "parent_sig": null,
+      "host": null,
+      "status": "leased",
+      "created_at": 1793580884
      }
     ],
     "invention": {
-     "scripts": 1,
+     "scripts": 2,
      "items": [
+      "runway-decide_80956.mjs",
       "invented_80458.mjs"
      ],
-     "last_at": 1793580458
+     "last_at": 1793580956
     },
     "journal": {
-     "head": "603da137ab129f131cacde683bb32c44d3222605619f7b1dc4da68f4c0b216f5",
-     "seq": 65
+     "head": "edfb1fba4c898166306ef184ddbf44d00153b0ab6dbe406d308aa0c8b2dfb67f",
+     "seq": 81
     },
     "components": {
      "signer": {
@@ -237,7 +239,7 @@
       "restarts": 2
      }
     },
-    "served_at": 1793580845
+    "served_at": 1793581089
    }
   }
  ],
