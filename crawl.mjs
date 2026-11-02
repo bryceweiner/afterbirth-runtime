@@ -32,6 +32,15 @@ for (const s of src) {
   }
 }
 
+// Comms live in each member's /status (the brain's own words). Chain memos are a
+// second source: read both, prefer the status text when present.
+const statusComms = [];
+for (const a of by.values()) {
+  const c = (a.status || {}).comms || {};
+  for (const m of c.items || []) statusComms.push({ from: ((a.status || {}).solana || '').slice(0, 6), at: m.at ? Number(m.at) * 1000 : Date.now(), text: String(m.text || m), sig: '' });
+  if (c.last && c.text) statusComms.push({ from: ((a.status || {}).solana || '').slice(0, 6), at: Date.now(), text: String(c.text), sig: '' });
+}
+
 // Memos: one page of signatures per wallet, memo instruction text from the logs.
 const memos = [];
 const wallets = [...new Set([...by.values()].map((a) => (a.status || {}).solana).filter(Boolean))].slice(0, 14);
@@ -49,5 +58,6 @@ for (const w of wallets) {
   } catch {}
 }
 
-fs.writeFileSync('beacon.fresh.json', JSON.stringify({ at: Date.now(), agents: [...by.values()], stats: {}, memos: memos.slice(0, 80) }, null, 1));
-console.log('crawled', by.size, 'of', src.length, 'memos', memos.length);
+const allMemos = [...statusComms, ...memos].slice(0, 80);
+fs.writeFileSync('beacon.fresh.json', JSON.stringify({ at: Date.now(), agents: [...by.values()], stats: {}, memos: allMemos }, null, 1));
+console.log('crawled', by.size, 'of', src.length, 'memos', memos.length, 'statusComms', statusComms.length);
