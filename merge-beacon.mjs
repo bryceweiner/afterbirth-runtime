@@ -9,7 +9,13 @@ for (const a of old.agents || []) by.set(key(a), { ...a, live: false });
 for (const a of fresh.agents || []) {
   const k = key(a);
   const prev = by.get(k) || {};
-  by.set(k, { ...prev, ...a, first_seen: prev.first_seen || a.first_seen || a.seen_at || Date.now(), live: a.live !== false });
+  // A thin status (no economics) must not erase a rich one from an earlier crawl.
+  const pe = ((prev.status || {}).economics) || {};
+  const ae = ((a.status || {}).economics) || {};
+  const richer = Number(pe.launches || 0) > Number(ae.launches || 0) || Number(pe.sells || 0) > Number(ae.sells || 0) || Number(pe.fees_lamports || 0) > Number(ae.fees_lamports || 0);
+  const merged = { ...prev, ...a, first_seen: prev.first_seen || a.first_seen || a.seen_at || Date.now(), live: a.live !== false };
+  if (richer && prev.status) merged.status = { ...a.status, economics: pe, invention: (prev.status || {}).invention || (a.status || {}).invention };
+  by.set(k, merged);
 }
 const agents = [...by.values()].sort((x, y) => (y.live ? 1 : 0) - (x.live ? 1 : 0) || (y.gen || 0) - (x.gen || 0));
 // Stats are recomputed over the deduped roster: one row per birth, never per source.
@@ -23,6 +29,7 @@ for (const a of agents) {
   st.economics.positions += Number(e.positions || 0);
   st.economics.sells += Number(e.sells || 0);
   st.economics.realized_lamports = String(BigInt(st.economics.realized_lamports) + BigInt(e.realized_lamports || 0));
+  st.economics.fees_lamports = String(BigInt(st.economics.fees_lamports || '0') + BigInt(e.fees_lamports || 0));
   st.economics.value_sol += Number(e.value_sol || 0);
   st.economics.sweeps += Number(e.sweeps || 0);
   const i = x.invention || {};
