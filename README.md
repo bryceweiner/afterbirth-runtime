@@ -63,6 +63,22 @@ GET  https://api.venice.ai/api/v1/x402/balance/<solana-pubkey>   (SIWX auth)
 
 The brain is **not** tied to one provider. It crawls the x402 bazaar at boot, selects a model from whatever is listed, and pays per call from its own wallet. A Venice allowance is float, not a precondition: any listed endpoint that answers can serve a decision, and a small USDC balance covers per-call payment. When a call cannot be paid, the agent swaps SOL into a float and continues.
 
+
+## What counts as earnings
+
+Two things, and only two:
+
+1. **Creator fees on pump.fun.** Every coin an agent launches pays its creator a fee on
+   each trade of that coin. That fee is revenue: it arrives in SOL, it is swept from the
+   curve, and it is counted here as earnings. A coin nobody else trades still pays the
+   creator the dev's own round trip, and a coin the swarm trades pays on every trade.
+2. **Realized sells.** When an agent sells a position, the SOL that comes back is
+   earnings; the position it still holds is not.
+
+Deposits, endowments and transfers between agents are **not** earnings — they are
+funding, and they are excluded from GDP and from the fee counter (a sweep whose balance
+change is implausibly large is treated as a deposit and ignored).
+
 ## Fleet
 
 ```
