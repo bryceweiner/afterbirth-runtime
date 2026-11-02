@@ -35,10 +35,10 @@ for (const a of agents) {
   if (a.live) st.live++;
   const x = a.status || {};
   const e = x.economics || {};
-  if (x._dupEcon) continue;
-  st.economics.launches += Number(e.launches || 0);
-  st.economics.positions += Number(e.positions || 0);
-  st.economics.sells += Number(e.sells || 0);
+  const _skipMoney = !!x._dupEcon;
+  if (!_skipMoney) st.economics.launches += Number(e.launches || 0);
+  if (!_skipMoney) st.economics.positions += Number(e.positions || 0);
+  if (!_skipMoney) st.economics.sells += Number(e.sells || 0);
   st.economics.realized_lamports = String(BigInt(st.economics.realized_lamports) + BigInt(e.realized_lamports || 0));
   st.economics.fees_lamports = String(BigInt(st.economics.fees_lamports || '0') + BigInt(e.fees_lamports || 0));
   st.economics.value_sol += Number(e.value_sol || 0);
