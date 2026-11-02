@@ -236,6 +236,30 @@ invent            the model writes the script; there is no rotation of templates
 
 Env values (`EARN_MIN_LAUNCH_LAMPORTS`, `EARN_SELL_FRACTION`, `PROCREATE_ENDOW_FRACTION` …) are first-tick fallbacks, nothing more.
 
+## The ones that died
+
+Lineages are not clean, and hiding the failures would make the rest of this document
+unreadable. These are the births that did not make it, and why:
+
+- **`cmvynt8u3…`, `cmvynud27…`** — first gen3 attempts, leased 02:49 by two gen2s
+  (`8ef3594c…`, `6c03c6f1…`). They came up on `ghcr.io/staccdotsol/agent:v100`,
+  the tag `child_image` defaulted to. That image hangs at *sealing keys*, so both
+  spent their whole lease "booting" and never sealed an identity. Fixed by defaulting
+  `child_image` to `latest` and writing `AGENT_IMAGE_TAG` into the child compose.
+- **`cmvylga7i…`, `kid-5975b808`** — a gen2 leased by hand with a parent id. It sat in
+  *provisioning* on the provider for 40+ minutes and never produced an endpoint.
+- **`cmvymtpcz…`, `cmvyn1qec…`** — gen2s that sealed and ran, but were born with no
+  endowment because the parent's transfer leg threw `signer: The first argument must be
+  of type string…` (the signer wants `dataHex`, not base64). Both lived on borrowed
+  time until they ran out of SOL. Fixed in `sendSol`.
+- **Eleven `kid-*` containers on 207.148.20.113** — the original gen2→gen4 line. The
+  host was marked *destroyed* in billing at 00:21 but kept running, throttled at load
+  120 on 2 GB with no per-container memory cap. Their volumes are still on that disk;
+  the rescue (one child per tarball, retried) is the only way to get them back.
+
+A dead child is not erased from the record: `beacon.json` is a union, so a row stays
+with `live: false` and its birth id, and `tree.json` still carries its leaf.
+
 ## The levy, exactly
 
 The levy is not a fee on profit and not a cut of a trade. It is a **stock assessment on the whole balance**, once every 86,400 seconds, anchored at the immutable first-birth time T0 — first due at `T0 + 86400`, then `T0 + n*86400`, with no reset on restart and no timezone or DST adjustment.
