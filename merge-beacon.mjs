@@ -21,10 +21,17 @@ const agents = [...by.values()].sort((x, y) => (y.live ? 1 : 0) - (x.live ? 1 : 
 // Stats are recomputed over the deduped roster: one row per birth, never per source.
 const st = { economics: { launches: 0, positions: 0, sells: 0, realized_lamports: '0', value_sol: 0, sweeps: 0 }, invention: { scripts: 0, items: [], last_at: 0 }, comms: { messages: 0, agents: 0, items: [] }, tee: { verified: 0, quotes: [] }, seen: agents.length, live: 0 };
 const inv = new Set();
+const _seenEcon = new Set();
 for (const a of agents) {
+  // A newborn inherits the parent's earnings files, so an identical income triple
+  // on two different wallets is the same money counted twice.
+  const _e0 = (a.status && a.status.economics) || {};
+  const _sig = [String(_e0.fees_lamports||0), String(_e0.realized_lamports||0), String(_e0.sells||0), String(_e0.launches||0)].join('|');
+  if (_sig !== '0|0|0|0' && _seenEcon.has(_sig)) a._dupEcon = true; else _seenEcon.add(_sig);
   if (a.live) st.live++;
   const x = a.status || {};
   const e = x.economics || {};
+  if (x._dupEcon) continue;
   st.economics.launches += Number(e.launches || 0);
   st.economics.positions += Number(e.positions || 0);
   st.economics.sells += Number(e.sells || 0);
