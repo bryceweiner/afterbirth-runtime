@@ -108,8 +108,9 @@ const S={agents:[],rows:[],memos:[],stats:null};
 let SHOW_DOWN=false;
 async function getJson(url,ms=8000){const c=new AbortController();const t=setTimeout(()=>c.abort(),ms);try{const r=await fetch(url,{cache:'no-store',signal:c.signal});if(r.ok)return await r.json();}catch{}finally{clearTimeout(t);}try{const r=await fetch(PROXY(url),{cache:'no-store'});if(r.ok)return await r.json();}catch{}return null;}
 async function rpc(m,p){const b=JSON.stringify({jsonrpc:'2.0',id:1,method:m,params:p});for(const u of ['https://solana-rpc.publicnode.com','https://api.mainnet-beta.solana.com']){try{const r=await fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:b});const j=await r.json();if(j.result)return j.result;}catch{}}return null;}
+function unionAgents(prev,next){const k=a=>(a.status&&(a.status.birth_id||a.status.solana))||a.birth_id||a.endpoint;const m=new Map();for(const a of prev||[])m.set(k(a),a);for(const a of next||[])m.set(k(a),{...(m.get(k(a))||{}),...a});return [...m.values()].sort((x,y)=>(y.live?1:0)-(x.live?1:0)||(y.gen||0)-(x.gen||0));}
 function paintFleet(acc){
-  S.agents=[]; S.rows=[];
+  S.agents=unionAgents(S.agents, acc||[]); S.rows=[];
   for(const a of (acc||[])){
     const st=a.status||null;
     S.agents.push({endpoint:a.endpoint,wallet:st&&st.solana,live:!!a.live});

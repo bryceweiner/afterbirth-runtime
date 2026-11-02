@@ -31,6 +31,9 @@ jobs:
           path: .
       - id: deployment
         uses: actions/deploy-pages@v4
+      - name: merge into the cumulative board
+        run: node merge-beacon.mjs beacon.json
+
       - name: commit if changed
         run: |
           git config user.name beacon
