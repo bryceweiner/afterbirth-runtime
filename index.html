@@ -97,7 +97,13 @@
 <script>
 const $=(id)=>document.getElementById(id);
 const MEMO=new Set(['MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr','Memo1UhkJRfHyvLMcVucJwxXeuD728EqVDDwQDxFMNo']);
-const PROXY=(u)=>'https://api.codetabs.com/v1/proxy?quest='+encodeURIComponent(u);
+const PROXIES=[
+  (u)=>'https://api.codetabs.com/v1/proxy?quest='+encodeURIComponent(u),
+  (u)=>'https://api.allorigins.win/raw?url='+encodeURIComponent(u),
+  (u)=>'https://corsproxy.io/?url='+encodeURIComponent(u),
+  (u)=>'https://thingproxy.freeboard.io/fetch/'+u,
+];
+const PROXY=(u)=>PROXIES[0](u);
 const S={agents:[],rows:[],memos:[],stats:null};
 let SHOW_DOWN=false;
 async function getJson(url,ms=8000){const c=new AbortController();const t=setTimeout(()=>c.abort(),ms);try{const r=await fetch(url,{cache:'no-store',signal:c.signal});if(r.ok)return await r.json();}catch{}finally{clearTimeout(t);}try{const r=await fetch(PROXY(url),{cache:'no-store'});if(r.ok)return await r.json();}catch{}return null;}
@@ -135,8 +141,10 @@ async function loadEndpoints(){
     try{
       const target=u.replace(/\/$/,'')+'/beacon.json?ts='+Date.now();
       let r=null;
-      try{ r=await fetch(target,{cache:'no-store',signal:AbortSignal.timeout(8000)}); }catch{ r=await fetch(PROXY(target),{signal:AbortSignal.timeout(15000)}).catch(()=>null); }
-      if(!r) return;
+      try{ r=await fetch(target,{cache:'no-store',signal:AbortSignal.timeout(8000)}); }catch{
+        for(const mk of PROXIES){ try{ const rr=await fetch(mk(target),{signal:AbortSignal.timeout(12000)}); if(rr.ok){ r=rr; break; } }catch{} }
+      }
+      if(!r||!r.ok) return;
       if(!r.ok) return;
       const j=await r.json();
       if(merge(j,u)){ bc={agents:acc.slice(),stats:S.stats}; paintFleet(acc); }
