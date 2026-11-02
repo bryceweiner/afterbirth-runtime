@@ -87,7 +87,7 @@ docker run -d --name ag8081 -p 8081:8787 \
   -e AGENT_IMAGE_URL=https://staccdotsol.github.io/birth-image-runtime/app.tgz \
   -e BRAIN_TICK_MS=60000 -e EARN_TICK_MS=45000 \
   -e RPC_URL=http://172.17.0.1:8899 \
-  --entrypoint sh ghcr.io/staccdotsol/agent:v124 \
+  --entrypoint sh ghcr.io/staccdotsol/agent:v151 \
   -c "rm -f /var/lib/agent/supervisor.lock; exec /app/start.sh"
 ```
 
