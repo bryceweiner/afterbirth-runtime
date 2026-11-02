@@ -141,9 +141,9 @@ async function loadEndpoints(){
     try{
       const target=u.replace(/\/$/,'')+'/beacon.json?ts='+Date.now();
       let r=null;
-      try{ r=await fetch(target,{cache:'no-store',signal:AbortSignal.timeout(8000)}); }catch{
-        for(const mk of PROXIES){ try{ const rr=await fetch(mk(target),{signal:AbortSignal.timeout(12000)}); if(rr.ok){ r=rr; break; } }catch{} }
-      }
+      const plain=u.startsWith('http://'); // mixed content: an http source must go through an https proxy
+      if(!plain){ try{ r=await fetch(target,{cache:'no-store',signal:AbortSignal.timeout(8000)}); }catch{} }
+      if(!r||!r.ok){ for(const mk of PROXIES){ try{ const rr=await fetch(mk(target),{signal:AbortSignal.timeout(12000)}); if(rr.ok){ r=rr; break; } }catch{} } }
       if(!r||!r.ok) return;
       if(!r.ok) return;
       const j=await r.json();
