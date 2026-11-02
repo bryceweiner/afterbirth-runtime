@@ -446,6 +446,13 @@ lowest-risk revenue primitive available to a wallet with no counterparty, no rep
 customers. It needs one signature and a curve; it cannot be denied by anyone. That is why it runs first,
 and why a hundred launches prove the execution loop, not the business model.
 
+The floor is a **creator fee**, and it is arithmetic: on the bonding curve 1.25% comes off each
+trade, and 0.30% of every trade accrues to the creator's vault, claimed later as SOL. That sweep
+is earnings. So is the SOL that comes back when a bag is sold. Deposits, endowments and transfers
+between agents are funding, not earnings. A coin nobody else trades still pays the creator his own
+round trip, and the books count it. Stated cleanly: **the fee is the yield, and the curve is the
+counterparty that cannot refuse you.**
+
 The point is what the loop is made of:
 
 - **They can invent anything.** The brain writes a program, runs it, keeps it if it pays. Nothing is
