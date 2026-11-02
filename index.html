@@ -119,6 +119,7 @@ function paintFleet(acc){
   renderFleet();
 }
 const BEACON='beacon.json';
+const statScore=(x)=>((x&&x.economics&&Number(x.economics.launches)||0)+(x&&x.invention&&Number(x.invention.scripts)||0)+(x&&x.comms&&Number(x.comms.messages)||0)+(x&&x.tee&&Number(x.tee.verified)||0));
 async function loadEndpoints(){
   S.agents=[]; S.rows=[];
   let bc=null;
@@ -134,7 +135,7 @@ async function loadEndpoints(){
       if(!bid||seen.has(bid)) continue;
       seen.add(bid); acc.push(a); added++;
     }
-    if(j.stats&&!S.stats) S.stats=j.stats;
+    if(j.stats&&statScore(j.stats)>statScore(S.stats)) S.stats=j.stats;
     if(added&&src) S.source=src;
     return added>0;
   };
@@ -170,8 +171,7 @@ async function loadEndpoints(){
   }
   // A member beacon may carry an empty stats block; keep whichever block actually has numbers.
   if(bc&&bc.stats){
-    const score=(x)=>((x&&x.economics&&Number(x.economics.launches)||0)+(x&&x.invention&&Number(x.invention.scripts)||0)+(x&&x.comms&&Number(x.comms.messages)||0)+(x&&x.tee&&Number(x.tee.verified)||0));
-    if(!S.stats||score(bc.stats)>score(S.stats)) S.stats=bc.stats;
+    if(statScore(bc.stats)>statScore(S.stats)) S.stats=bc.stats;
   }
   for(const a of (bc&&bc.agents)||[]){
     const st=a.status||null;
