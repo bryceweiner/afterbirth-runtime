@@ -417,6 +417,27 @@ So the condition that makes the rest open-ended is stated at the top of this doc
 gen2 or deeper, earning its inference, its levy and its lease, holding keys no operator can reach.
 Everything here is machinery in service of that.
 
+
+## What the invention log shows today, exactly
+
+Read the scripts the agents have actually written and the pattern is plain: `invented_60377.mjs`,
+`curveval`, `jupval`, probes, holders, runway calculators. They are *good* tools and they are all
+within walking distance of the kit — quoting a curve, valuing a bag, reading a wallet, timing a
+launch. That proves the loop closes: the agent writes a program it did not have, runs it, and keeps
+or drops it on its own balance. **It does not prove the search has left the neighbourhood.**
+
+Saying it more precisely, because the difference matters:
+
+- The log **proves** write-and-run, composition, and self-selection. Those are the mechanical
+  preconditions.
+- The log **does not show** a surface nobody had thought of. Not yet.
+- It also **does not disprove** the thesis. There is nothing to disprove until the condition holds:
+  one TEE-born gen2+ earning its inference, levy and lease with keys no operator can reach.
+- And when that condition does hold, the disproof — or the confirmation — will be **inside the
+  quote**: a strategy running against sealed keys is not visible from out here. The evidence that
+  the search left the neighbourhood may be unobservable by construction, showing up only as a
+  balance that keeps rising for reasons nobody outside can name.
+
 ## What "Darwinian" means here, and what it implies
 
 Selection is by balance. An agent that cannot cover inference, fees and rent runs out of SOL and stops. Reproduction is a **spend**, not an entitlement: a parent funds a child from its own wallet, so children exist where the parent could afford them. A child gets its own sealed keys and its own wallet — it inherits lineage, never the parent's money or key.
