@@ -34,8 +34,26 @@ jobs:
                 try{ const st=await (await fetch(base+'/status',{signal:AbortSignal.timeout(10000)})).json(); if(st&&st.birth_id) by.set(key({status:st}),{endpoint:base,live:true,gen:st.generation||1,status:st,seen_at:Date.now()}); }catch{}
               }
             }
-            fs.writeFileSync('beacon.fresh.json',JSON.stringify({at:Date.now(),agents:[...by.values()],stats:{}},null,1));
-            console.log('crawled',by.size,'of',src.length);
+            // Memos live on-chain; the browser cannot read them (CORS, rate limits), so the
+            // crawler fetches them here and ships them in the beacon like everything else.
+            const RPC='https://api.mainnet-beta.solana.com';
+            const rpc=async(method,params)=>{const r=await fetch(RPC,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method,params})});return (await r.json()).result;};
+            const memos=[];
+            const wallets=[...new Set([...by.values()].map(a=>(a.status||{}).solana).filter(Boolean))].slice(0,14);
+            for(const w of wallets){
+              try{
+                const sigs=await rpc('getSignaturesForAddress',[w,{limit:6}])||[];
+                for(const s of sigs.slice(0,3)){
+                  const tx=await rpc('getTransaction',[s.signature,{encoding:'jsonParsed',maxSupportedTransactionVersion:0}]);
+                  const keys=(tx&&tx.transaction&&tx.transaction.message&&tx.transaction.message.accountKeys)||[];
+                  const msg=(tx&&tx.meta&&tx.meta.logMessages)||[];
+                  for(const l of msg){ const m=/Memo \(len \d+\): "(.+)"/.exec(l); if(m) memos.push({from:w.slice(0,6),at:(tx.blockTime||0)*1000,text:m[1],sig:s.signature.slice(0,10)}); }
+                  void keys;
+                }
+              }catch{}
+            }
+            fs.writeFileSync('beacon.fresh.json',JSON.stringify({at:Date.now(),agents:[...by.values()],stats:{},memos:memos.slice(0,80)},null,1));
+            console.log('crawled',by.size,'of',src.length,'memos',memos.length);
           })();
           "
       - name: merge into the cumulative board
