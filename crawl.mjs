@@ -93,9 +93,17 @@ const prevNw = prev ? (Number(prev.sol || 0) + Number(prev.usdc || 0) / 150) : n
 // GDP is value ADDED, not value held: the positive change in net worth since the last
 // row, accumulated from genesis. Initial endowments therefore count once, at the row
 // where they land, and a drawdown does not subtract from what was already produced.
-const added = prevNw === null ? 0 : Math.max(0, nw - prevNw);
+// Deposits are funding, not production: GDP counts what the fleet's own actions
+// produced (realized proceeds plus the value it holds at curve), never capital that
+// was wired in from outside.
+const prod = [...seen.values()].reduce((sum, a) => {
+  const e = ((a.status || {}).economics) || {};
+  return sum + Number(e.realized_lamports || 0) / 1e9 + Number(e.value_sol || 0);
+}, 0);
+const prevProd = prev && prev.prod != null ? Number(prev.prod) : null;
+const added = prevProd === null ? 0 : Math.max(0, prod - prevProd);
 const gdp = (prev ? Number(prev.gdp || 0) : 0) + added;
-hist.push({ at: Date.now(), agents: live.length, sol: +sol.toFixed(6), usdc: +usdc.toFixed(4), realized_sol: +(Number(realized) / 1e9).toFixed(6), launches: launched, scripts, nw: +nw.toFixed(6), gdp: +gdp.toFixed(6), added: +added.toFixed(6) });
+hist.push({ at: Date.now(), agents: live.length, sol: +sol.toFixed(6), usdc: +usdc.toFixed(4), realized_sol: +(Number(realized) / 1e9).toFixed(6), launches: launched, scripts, nw: +nw.toFixed(6), prod: +prod.toFixed(6), gdp: +gdp.toFixed(6), added: +added.toFixed(6) });
 hist = hist.slice(-8000);
 fs.writeFileSync('history.json', JSON.stringify(hist, null, 1));
 

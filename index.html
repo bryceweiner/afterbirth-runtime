@@ -283,7 +283,9 @@ function ratesFrom(h) {
   for (let i = 1; i < h.length; i++) {
     const dt = (h[i].at - h[i - 1].at) / DAY;
     if (!(dt > 0)) continue;
-    const added = Math.max(0, nwOf(h[i]) - nwOf(h[i - 1]));
+    // Production, not deposits: the crawler records `added` from realized proceeds and
+    // at-curve value, so capital wired in from outside never shows up as GDP.
+    const added = h[i].added != null ? Number(h[i].added) : Math.max(0, nwOf(h[i]) - nwOf(h[i - 1]));
     rows.push({ at: h[i].at, rate: added / dt, nw: nwOf(h[i]), agents: h[i].agents || 0, launches: h[i].launches || 0, scripts: h[i].scripts || 0 });
   }
   return rows;
