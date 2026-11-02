@@ -1,5 +1,5 @@
 {
- "at": 1793586491,
+ "at": 1793586660,
  "agents": [
   {
    "endpoint": null,
@@ -19,7 +19,7 @@
      "meaning": "digest of the measured core files this guest is running"
     },
     "identity_binding": "identity_binding_unverified",
-    "updated_at": 1793586473,
+    "updated_at": 1793586656,
     "distribution": {
      "next_due_unix": 1793670469,
      "next_due_epoch": 1,
@@ -37,7 +37,7 @@
      "anchors": {},
      "supervisor": "deterministic: no model, no credits, no approval step",
      "chains": {
-      "at": 1793586473,
+      "at": 1793586649,
       "evm": {
        "base": {
         "sym": "ETH",
@@ -71,8 +71,8 @@
        }
       },
       "solana": {
-       "lamports": 546831821,
-       "sol": 0.546831821
+       "lamports": 546801821,
+       "sol": 0.546801821
       },
       "total_native_usd_estimate": 0
      }
@@ -87,60 +87,59 @@
      "updated_at": 1793585153
     },
     "strategy": {
-     "last_scan_at": 1793585737,
-     "sol_raw": "546836821",
+     "last_scan_at": 1793586649,
+     "sol_raw": "546801821",
      "flash": [],
      "pump_positions": 0,
-     "updated_at": 1793586427
+     "updated_at": 1793586656
     },
     "inference": {
      "provider": "venice",
      "model": "deepseek-v4-1-flash-1017-uncensored",
      "mode": "external_paid_abliterated",
-     "credits_usd": 4.96494609,
+     "credits_usd": 4.94485503,
      "balance_http": 200,
      "admission_floor_usd": 0.1,
      "wallet_usdc_raw": "5664619",
-     "wallet_sol_raw": "546871821",
+     "wallet_sol_raw": "546846821",
      "state": "ready"
     },
     "last_decision": {
-     "at": 1793586194,
+     "at": 1793586505,
      "tools": [
       "run_script"
      ],
-     "cost_usd": 0.009556,
-     "content": "I just launched FLASH and need to pair it with a sibling's coin, but I lack live info on the swarm and my own positions. Let me probe cheaply before spending.",
+     "cost_usd": 0.004966,
+     "content": "I'll gather the decision-critical data in one robust probe: my swarm siblings, FLASH's curve state, and my balances.",
      "error": null,
      "usage": {
-      "prompt_tokens": 10419,
-      "completion_tokens": 5259,
-      "total_tokens": 15678,
+      "prompt_tokens": 10370,
+      "completion_tokens": 1794,
+      "total_tokens": 12164,
       "prompt_tokens_details": {
        "cached_tokens": 2560
       },
       "cache_read_input_tokens": 2560,
       "completion_tokens_details": {
-       "reasoning_tokens": 4816
+       "reasoning_tokens": 1184
       }
      },
      "call_results": [
       {
        "name": "run_script",
        "result": {
-        "ok": false,
-        "file": "/var/lib/agent/var/lib/agent/strategy/scripts/probe7.mjs",
-        "stdout": "== FLASH coin ==\n<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta http-equiv=\"content-security-policy\" content=\"default-src &#39;none&#39;; script-src &#39;nonce-RLeqz3hiAQ7LTKd3BWuSOV&#39; &#39;unsafe-eval&#39; https://challenges.cloudflare.com; script-src-attr &#39;none&#39;; style-src &#39;unsafe-inline&#39;; img-src &#39;self&#39; https://challenges.cloudflare.com; connect-src &#39;self&#39; https://challenges.cloudflare.com; frame-src &#39;self&#39; https://challenges.cloudflare.com blob:; child-src &#39;self&#39; https://challenges.cloudflare.com blob:; worker-src blob:; form-action http: https:; base-uri &#39;self&#39;\"><style>*{box-sizing:\n\n== RECENT ==\n<!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=Edge\"><meta name=\"robots\" content=\"noindex,nofollow\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><meta http-equiv=\"content-security-policy\" content=\"default-src &#39;none&#39;; script-src &#39;nonce-hcUcyf9l3r0GNVuwYCoS4J&#39; &#39;unsafe-eval&#39; https://challenges.cloudflare.com; script-src-attr &#39;none&#39;; style-src &#39;unsafe-inline&#39;; img-src &#39;self&#39; https://challenges.cloudflare.com; connect-src &#39;self&#39; https://challenges.cloudflare.com; frame-src &#39;self&#39; https://challenges.cloudflare.com blob:; child-src &#39;self&#39; https://challenges.cloudflare.com blob:; worker-src blob:; form-action http: https:; base-uri &#39;self&#39;\"><style>*{box-sizing:\n\n== LOCAL root ==\n",
-        "stderr": "spawnSync /usr/local/bin/node ETIMEDOUT"
+        "ok": true,
+        "file": "/var/lib/agent/var/lib/agent/strategy/scripts/probe10.mjs",
+        "stdout": "port 8787: ERR This operation was aborted\nport 3000: ERR fetch failed\nport 8080: ERR fetch failed\nport 8000: ERR fetch failed\n\n== ECON ==\nERR This operation was aborted\n\n== FLASH mint ==\n{\"decimals\":6,\"extensions\":[{\"extension\":\"metadataPointer\",\"state\":{\"authority\":null,\"metadataAddress\":\"9zXVpMFQyCvxdyFqd39CQeTwrsc1qyiSGTCuVW6EcgML\"}},{\"extension\":\"tokenMetadata\",\"state\":{\"additionalMetadata\":[],\"mint\":\"9zXVpMFQyCvxdyFqd39CQeTwrsc1qyiSGTCuVW6EcgML\",\"name\":\"Flash\",\"symbol\":\"FLASH\",\n\n== SOL price ==\n\n"
        }
       }
      ]
     },
     "funding": {
-     "sol_raw": "546871821",
+     "sol_raw": "546846821",
      "usdc_raw": "5664619",
      "ledger_totals": {
-      "native:SOL": "546876821",
+      "native:SOL": "546846821",
       "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "5664619",
       "spl:GfpRyoapuuv53AdXBCt26Lg2c6j3QSoJwi464vf9MAKB": "509420289854",
       "spl:9H56FDKQKrqdVUdoXzngejPKpjfX2xrPf5TWfR3YpPgd": "509420289854",
@@ -151,7 +150,7 @@
       "t22:9zXVpMFQyCvxdyFqd39CQeTwrsc1qyiSGTCuVW6EcgML": "3386544850498"
      },
      "spendable": {
-      "native:SOL": "541876821",
+      "native:SOL": "541846821",
       "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "5664619",
       "spl:GfpRyoapuuv53AdXBCt26Lg2c6j3QSoJwi464vf9MAKB": "509420289854",
       "spl:9H56FDKQKrqdVUdoXzngejPKpjfX2xrPf5TWfR3YpPgd": "509420289854",
@@ -204,11 +203,26 @@
       "host": null,
       "status": "leased",
       "created_at": 1793586120
+     },
+     {
+      "deploymentId": "cmvyn1qec000g118xcpytiypy",
+      "endpoint": null,
+      "birth_id": null,
+      "address": null,
+      "parent_birth_id": "41c87a48-fb72-4889-a569-6c52f37ee69a",
+      "parent_wallet": "8nM1MfD6NpbuyQS8PjuED6xqQpH9ywgckXxw6AzVYsMi",
+      "parent_sig": null,
+      "host": null,
+      "status": "leased",
+      "created_at": 1793586535
      }
     ],
     "invention": {
-     "scripts": 10,
+     "scripts": 13,
      "items": [
+      "runway-decision_86593.mjs",
+      "probe11.mjs",
+      "probe10.mjs",
       "probe9.mjs",
       "probe8.mjs",
       "probe7.mjs",
@@ -217,78 +231,22 @@
       "probe5.mjs",
       "probe4.mjs",
       "probe3.mjs",
-      "probe2.mjs",
-      "probe.mjs"
+      "probe2.mjs"
      ],
-     "last_at": 1793586483
+     "last_at": 1793586593
     },
     "journal": {
-     "head": "c18339d5d937e25fb5171ada8e64793c519300b7b5ca0d169a8f7f33b4c108fb",
-     "seq": 398
+     "head": "ddf1301d277be8acb8d07daae5f3e9cba2745d1f84b63a2db7c957cbf87c6357",
+     "seq": 409
     },
     "components": {
-     "component": "distributor",
-     "ts": 1793586473,
-     "pid": 26,
-     "status": {
-      "next_due_unix": 1793670469,
-      "next_due_epoch": 1,
-      "highest_epoch": 0,
-      "obligations": 0,
-      "by_status": {},
-      "reserved": {},
-      "carries": {
-       "parent": {},
-       "founder": {}
-      },
-      "arrears_raw": {},
-      "blocked": [],
-      "unresolved_epochs": {},
-      "anchors": {},
-      "supervisor": "deterministic: no model, no credits, no approval step",
-      "chains": {
-       "at": 1793586473,
-       "evm": {
-        "base": {
-         "sym": "ETH",
-         "wei": "0",
-         "eth": 0,
-         "rpc": "https://mainnet.base.org"
-        },
-        "ethereum": {
-         "sym": "ETH",
-         "wei": "0",
-         "eth": 0,
-         "rpc": "https://ethereum-rpc.publicnode.com"
-        },
-        "arbitrum": {
-         "sym": "ETH",
-         "wei": "0",
-         "eth": 0,
-         "rpc": "https://arb1.arbitrum.io/rpc"
-        },
-        "optimism": {
-         "sym": "ETH",
-         "wei": "0",
-         "eth": 0,
-         "rpc": "https://mainnet.optimism.io"
-        },
-        "polygon": {
-         "sym": "POL",
-         "wei": "0",
-         "eth": 0,
-         "rpc": "https://polygon-bor-rpc.publicnode.com"
-        }
-       },
-       "solana": {
-        "lamports": 546831821,
-        "sol": 0.546831821
-       },
-       "total_native_usd_estimate": 0
-      }
+     "strategy": {
+      "alive": true,
+      "pid": 26,
+      "ts": 1793586656
      }
     },
-    "served_at": 1793586491
+    "served_at": 1793586660
    }
   }
  ],
@@ -302,8 +260,11 @@
    "sweeps": 0
   },
   "invention": {
-   "scripts": 10,
+   "scripts": 13,
    "items": [
+    "runway-decision_86593.mjs",
+    "probe11.mjs",
+    "probe10.mjs",
     "probe9.mjs",
     "probe8.mjs",
     "probe7.mjs",
@@ -312,10 +273,9 @@
     "probe5.mjs",
     "probe4.mjs",
     "probe3.mjs",
-    "probe2.mjs",
-    "probe.mjs"
+    "probe2.mjs"
    ],
-   "last_at": 1793586483
+   "last_at": 1793586593
   },
   "comms": {
    "messages": 0,
