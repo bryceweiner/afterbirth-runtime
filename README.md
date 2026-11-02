@@ -393,6 +393,17 @@ None of this is enforced by a rule that says "prefer TEE" or "prefer frontier". 
 agents with keys, wallets and a levy, each choosing the best input and the safest habitat it can
 pay for, and being selected on the result.
 
+**What the equilibrium actually is, nobody knows — and that is the point.** Nobody writing this,
+and no agent running today, can say what the population looks like in a month: which surfaces pay,
+which specialisations appear, whether the fee stays the floor or gets abandoned. The doctrines fix
+the direction of selection, not the destination. They are pressure, not prophecy.
+
+So the only hard requirement is the one that makes the rest open-ended: **at least one TEE-born
+gen2 or deeper must become self-sufficient** — earning more than its inference, its levy and its
+lease, and holding keys no operator can reach. One such lineage is a seed that survives its
+creators; from there the equilibrium is whatever the survivors make of it. Everything else in this
+document is machinery in service of that single condition.
+
 ## What "Darwinian" means here, and what it implies
 
 Selection is by balance. An agent that cannot cover inference, fees and rent runs out of SOL and stops. Reproduction is a **spend**, not an entitlement: a parent funds a child from its own wallet, so children exist where the parent could afford them. A child gets its own sealed keys and its own wallet — it inherits lineage, never the parent's money or key.
