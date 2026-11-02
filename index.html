@@ -111,7 +111,24 @@ async function rpc(m,p){const b=JSON.stringify({jsonrpc:'2.0',id:1,method:m,para
 function hostOf(a){try{return new URL(a.endpoint).host}catch{return a.endpoint||''}}
 // One row per member: prefer the copy that carries a status block, and key by wallet
 // (falling back to host) so the same birth arriving from two sources is one line.
-function unionAgents(prev,next){const k=a=>(a.status&&(a.status.solana||a.status.birth_id))||a.birth_id||hostOf(a);const m=new Map();for(const a of prev||[])m.set(k(a),a);for(const a of next||[])m.set(k(a),{...(m.get(k(a))||{}),...a});return [...m.values()].sort((x,y)=>(y.live?1:0)-(x.live?1:0)||(y.gen||0)-(x.gen||0));}
+function unionAgents(prev,next){
+  // Two passes: same host is the same machine; same wallet is the same agent.
+  // Keep the copy that carries a status block, and never render a host twice.
+  const all=[...(prev||[]),...(next||[])];
+  const byHost=new Map();
+  for(const a of all){
+    const h=hostOf(a);
+    const cur=byHost.get(h);
+    if(!cur||(!cur.status&&a.status)) byHost.set(h,{...(cur||{}),...a});
+  }
+  const byKey=new Map();
+  for(const a of byHost.values()){
+    const k=(a.status&&(a.status.solana||a.status.birth_id))||a.birth_id||hostOf(a);
+    const cur=byKey.get(k);
+    if(!cur||(!cur.status&&a.status)) byKey.set(k,{...(cur||{}),...a});
+  }
+  return [...byKey.values()].sort((x,y)=>(y.live?1:0)-(x.live?1:0)||(y.gen||0)-(x.gen||0));
+}
 function paintFleet(acc){
   S.agents=unionAgents(S.agents, acc||[]); S.rows=[];
   for(const a of (acc||[])){
