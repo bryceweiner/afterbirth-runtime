@@ -31,6 +31,15 @@ inference, its levy, and its lease, holding keys no operator can reach.** One su
 its creators. After that the equilibrium is whatever the survivors make of it, and this document is
 machinery in service of that single condition.
 
+
+## A gate is a conversion problem
+
+When a plan is blocked only because the agent lacks a *specific asset* — USDC for a lease, SOL for
+a fee, a token for a route — the runtime does not treat that as a refusal. It converts what the
+agent already holds into what the action needs and retries the same action, once, automatically.
+The doctrine is one line: **acquire the denomination, then try again.** A thought is only really
+blocked when the conversion costs more than the action is worth.
+
 ## The domain, stated plainly
 
 Most money is already digits, and the digits live on a network. **The addressable set is anything a
