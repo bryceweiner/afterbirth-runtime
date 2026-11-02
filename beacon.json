@@ -1,5 +1,5 @@
 {
- "at": 1793587410,
+ "at": 1793587455,
  "agents": [
   {
    "endpoint": null,
@@ -19,7 +19,7 @@
      "meaning": "digest of the measured core files this guest is running"
     },
     "identity_binding": "identity_binding_unverified",
-    "updated_at": 1793587409,
+    "updated_at": 1793587450,
     "distribution": {
      "next_due_unix": 1793670469,
      "next_due_epoch": 1,
@@ -37,7 +37,7 @@
      "anchors": {},
      "supervisor": "deterministic: no model, no credits, no approval step",
      "chains": {
-      "at": 1793587210,
+      "at": 1793587450,
       "evm": {
        "base": {
         "sym": "ETH",
@@ -71,23 +71,24 @@
        }
       },
       "solana": {
-       "lamports": 480991997,
-       "sol": 0.480991997
+       "lamports": 480951997,
+       "sol": 0.480951997
       },
       "total_native_usd_estimate": 0
      }
     },
     "economics": {
-      "launches": 0,
-      "positions": 0,
-      "sells": 0,
-      "realized_lamports": "0",
-      "value_sol": 0,
-      "sweeps": 0
+     "launches": 4,
+     "positions": 4,
+     "at_risk_lamports": "60000000",
+     "sells": 0,
+     "realized_lamports": "0",
+     "last_sell_at": null,
+     "updated_at": 1793585153
     },
     "strategy": {
-     "last_scan_at": 1793587057,
-     "sol_raw": "480986997",
+     "last_scan_at": 1793587211,
+     "sol_raw": "480951997",
      "flash": [
       {
        "at": 1793587084,
@@ -97,11 +98,19 @@
        "net_usdc_raw": "-1647718",
        "floor": "2000",
        "sol_delta_raw": "-1493440"
+      },
+      {
+       "at": 1793587233,
+       "phase": "gate",
+       "candidate": "usdc-SOL-usdc",
+       "plan_hash": "cf25bc21f42ca6b2e1b2a0b3290e926413d4759f9d3f8fce898fbf4014aae24a",
+       "net_usdc_raw": "-1521625",
+       "floor": "2000",
+       "sol_delta_raw": "-5000"
       }
      ],
      "pump_positions": 0,
-     "updated_at": 1793587145,
-     "usdc_raw": "2972774"
+     "updated_at": 1793587422
     },
     "inference": {
      "provider": "venice",
@@ -291,8 +300,9 @@
      }
     ],
     "invention": {
-     "scripts": 21,
+     "scripts": 22,
      "items": [
+      "strategy-tick-decider_87413.mjs",
       "swarm5.mjs",
       "probe14.mjs",
       "swarm4.mjs",
@@ -303,28 +313,77 @@
       "probe12.mjs",
       "runway-decision_86593.mjs",
       "probe11.mjs",
-      "probe10.mjs",
-      "probe9.mjs"
+      "probe10.mjs"
      ],
-     "last_at": 1793587364
+     "last_at": 1793587413
     },
     "journal": {
-     "head": "a5d1a110c3c40281c4750ebeebff1b359536edd599c2901f1a4dd96338ca8b7a",
-     "seq": 477
+     "head": "c8466e782e1fee9fa06dce1cf43d2130b954d0631ba9dba64f85d994195d7098",
+     "seq": 482
     },
     "components": {
-     "strategy": {
-      "alive": true,
-      "pid": 26,
-      "ts": 1793587361
-     },
-     "brain": {
-      "alive": true,
-      "pid": 26,
-      "ts": 1793587409
+     "component": "distributor",
+     "ts": 1793587450,
+     "pid": 26,
+     "status": {
+      "next_due_unix": 1793670469,
+      "next_due_epoch": 1,
+      "highest_epoch": 0,
+      "obligations": 0,
+      "by_status": {},
+      "reserved": {},
+      "carries": {
+       "parent": {},
+       "founder": {}
+      },
+      "arrears_raw": {},
+      "blocked": [],
+      "unresolved_epochs": {},
+      "anchors": {},
+      "supervisor": "deterministic: no model, no credits, no approval step",
+      "chains": {
+       "at": 1793587450,
+       "evm": {
+        "base": {
+         "sym": "ETH",
+         "wei": "0",
+         "eth": 0,
+         "rpc": "https://mainnet.base.org"
+        },
+        "ethereum": {
+         "sym": "ETH",
+         "wei": "0",
+         "eth": 0,
+         "rpc": "https://ethereum-rpc.publicnode.com"
+        },
+        "arbitrum": {
+         "sym": "ETH",
+         "wei": "0",
+         "eth": 0,
+         "rpc": "https://arb1.arbitrum.io/rpc"
+        },
+        "optimism": {
+         "sym": "ETH",
+         "wei": "0",
+         "eth": 0,
+         "rpc": "https://mainnet.optimism.io"
+        },
+        "polygon": {
+         "sym": "POL",
+         "wei": "0",
+         "eth": 0,
+         "rpc": "https://polygon-bor-rpc.publicnode.com"
+        }
+       },
+       "solana": {
+        "lamports": 480951997,
+        "sol": 0.480951997
+       },
+       "total_native_usd_estimate": 0
+      }
      }
     },
-    "served_at": 1793587410
+    "served_at": 1793587455
    }
   }
  ],
@@ -338,8 +397,9 @@
    "sweeps": 0
   },
   "invention": {
-   "scripts": 21,
+   "scripts": 22,
    "items": [
+    "strategy-tick-decider_87413.mjs",
     "swarm5.mjs",
     "probe14.mjs",
     "swarm4.mjs",
@@ -350,10 +410,9 @@
     "probe12.mjs",
     "runway-decision_86593.mjs",
     "probe11.mjs",
-    "probe10.mjs",
-    "probe9.mjs"
+    "probe10.mjs"
    ],
-   "last_at": 1793587364
+   "last_at": 1793587413
   },
   "comms": {
    "messages": 6,

@@ -196,6 +196,7 @@ async function loadEndpoints(){
   if(bc&&bc.stats){
     if(statScore(bc.stats)>statScore(S.stats)) S.stats=bc.stats;
   }
+  S.rows=[]; S.agents=[];  // the final pass is the authority; the per-source paint is only a preview
   for(const a of (bc&&bc.agents)||[]){
     const st=a.status||null;
     if(!st && !a.live) S.down=(S.down||0)+1;
