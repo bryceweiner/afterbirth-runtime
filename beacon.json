@@ -1,5 +1,5 @@
 {
-  "at": 1793623623123,
+  "at": 1793624111773,
   "agents": [
     {
       "endpoint": "https://d493179ac871c4830a314ba1dc96eb056d14de6e-8787.dstack-pha-prod9.phala.network",
@@ -17,7 +17,7 @@
           "match": true,
           "meaning": "digest of the measured core files this guest is running"
         },
-        "updated_at": 1793623609,
+        "updated_at": 1793624097,
         "distribution": {
           "next_due_unix": 1793696548,
           "next_due_epoch": 2,
@@ -168,7 +168,7 @@
             }
           ],
           "pump_positions": 0,
-          "updated_at": 1793623609
+          "updated_at": 1793624097
         },
         "constitution_sha256": "556610e3e2c81a87762d82d2c59264b4b56549ea50739f3e707678b2db755bb0",
         "prime_directives": [
@@ -196,10 +196,15 @@
         ],
         "children": [],
         "journal": {
-          "head": "83d405e69a531cdf8d7e953fd2045a89c70c836e44d6e3ab2ca9810bab18237e",
-          "seq": 1866
+          "head": "5cfea93889a4abc4c5f0fcb0ba79f535b7c992b58272b53117555a0e2c983ebb",
+          "seq": 1874
         },
         "components": {
+          "strategy": {
+            "alive": true,
+            "pid": 108,
+            "restarts": 2
+          },
           "signer": {
             "alive": true,
             "pid": 48,
@@ -220,11 +225,6 @@
             "pid": 72,
             "restarts": 1
           },
-          "strategy": {
-            "alive": true,
-            "pid": 108,
-            "restarts": 2
-          },
           "loops": {
             "alive": true,
             "pid": 136,
@@ -236,9 +236,9 @@
             "restarts": 2
           }
         },
-        "served_at": 1793623611
+        "served_at": 1793624100
       },
-      "seen_at": 1793623622937,
+      "seen_at": 1793624111519,
       "first_seen": 1793598602101
     },
     {
@@ -258,7 +258,7 @@
           "meaning": "digest of the measured core files this guest is running"
         },
         "identity_binding": "identity_binding_unverified",
-        "updated_at": 1793623608,
+        "updated_at": 1793624100,
         "distribution": {
           "next_due_unix": 1793670469,
           "next_due_epoch": 1,
@@ -276,7 +276,7 @@
           "anchors": {},
           "supervisor": "deterministic: no model, no credits, no approval step",
           "chains": {
-            "at": 1793623607,
+            "at": 1793624100,
             "evm": {
               "base": {
                 "sym": "ETH",
@@ -444,13 +444,13 @@
             }
           ],
           "pump_positions": 0,
-          "updated_at": 1793623592
+          "updated_at": 1793624040
         },
         "inference": {
           "provider": "venice",
           "model": "deepseek-v4-1-flash-1017-uncensored",
           "mode": "external_paid_abliterated",
-          "credits_usd": 2.09980521,
+          "credits_usd": 2.08256993,
           "balance_http": 200,
           "admission_floor_usd": 0.1,
           "wallet_usdc_raw": "571395",
@@ -458,52 +458,33 @@
           "state": "ready"
         },
         "last_decision": {
-          "at": 1793622945,
+          "at": 1793623914,
           "tools": [
-            "pump_collect"
+            "run_script"
           ],
-          "cost_usd": 0.002971,
+          "cost_usd": 0.009147,
           "content": null,
           "error": null,
           "usage": {
-            "prompt_tokens": 5982,
-            "completion_tokens": 1411,
-            "total_tokens": 7393,
+            "prompt_tokens": 7106,
+            "completion_tokens": 5809,
+            "total_tokens": 12915,
             "prompt_tokens_details": {
               "cached_tokens": 2688
             },
             "cache_read_input_tokens": 2688,
             "completion_tokens_details": {
-              "reasoning_tokens": 1339
+              "reasoning_tokens": 5322
             }
           },
           "call_results": [
             {
-              "name": "pump_collect",
+              "name": "run_script",
               "result": {
-                "swept": {
-                  "ok": false,
-                  "at": 1793622945,
-                  "mint": "AvmoG6Ds5oYdJL86pWpRCmNbJd2Fb6LGNuFBimxZpump",
-                  "sim_err": {
-                    "InsufficientFundsForRent": {
-                      "account_index": 0
-                    }
-                  },
-                  "sim_logs": []
-                },
-                "paid": {
-                  "ok": false,
-                  "at": 1793622946,
-                  "creator": "8nM1MfD6NpbuyQS8PjuED6xqQpH9ywgckXxw6AzVYsMi",
-                  "vault": "76VcUYvhj1E11onEG7MqthPZRg1vNiEKczbQMqpcrxe4",
-                  "sim_err": {
-                    "InsufficientFundsForRent": {
-                      "account_index": 0
-                    }
-                  },
-                  "sim_logs": []
-                }
+                "ok": false,
+                "file": "/var/lib/agent/var/lib/agent/strategy/scripts/bg_swap.mjs",
+                "stdout": "",
+                "stderr": "node:internal/child_process:395\n  const err = this._handle.spawn(options);\n                           ^\n\nError: Access to this API has been restricted. Use --allow-child-process to manage permissions.\n    at ChildProcess.spawn (node:internal/child_process:395:28)\n    at spawn (node:child_process:787:9)\n    at file:///var/lib/agent/var/lib/agent/strategy/scripts/bg_swap.mjs:14:13\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {\n  code: 'ERR_ACCESS_DENIED',\n  permission: 'ChildProcess',\n  resource: '/usr/local/bin/node'\n}\n\nNode.js v22.23.4\n"
               }
             }
           ]
@@ -514,18 +495,18 @@
           "ledger_totals": {
             "native:SOL": "651081",
             "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "571395",
-            "t22:AvmoG6Ds5oYdJL86pWpRCmNbJd2Fb6LGNuFBimxZpump": "310000000",
-            "t22:Cr9VD2RimBFwJY31tPhDsaKJvGGN946BBCxdHhiWmVmx": "169829810633",
+            "t22:5c1unteRosAtKJZKPfEm5q4XRe9KyZ3e6Tgf7vX6YbVJ": "169863356106",
             "t22:HsDcbxcu5HJXx7iwSw9S1GHSDbFUxQ6EJKtZwh2UzgUp": "101924807518",
-            "t22:5c1unteRosAtKJZKPfEm5q4XRe9KyZ3e6Tgf7vX6YbVJ": "169863356106"
+            "t22:AvmoG6Ds5oYdJL86pWpRCmNbJd2Fb6LGNuFBimxZpump": "310000000",
+            "t22:Cr9VD2RimBFwJY31tPhDsaKJvGGN946BBCxdHhiWmVmx": "169829810633"
           },
           "spendable": {
             "native:SOL": "0",
             "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "571395",
-            "t22:AvmoG6Ds5oYdJL86pWpRCmNbJd2Fb6LGNuFBimxZpump": "310000000",
-            "t22:Cr9VD2RimBFwJY31tPhDsaKJvGGN946BBCxdHhiWmVmx": "169829810633",
+            "t22:5c1unteRosAtKJZKPfEm5q4XRe9KyZ3e6Tgf7vX6YbVJ": "169863356106",
             "t22:HsDcbxcu5HJXx7iwSw9S1GHSDbFUxQ6EJKtZwh2UzgUp": "101924807518",
-            "t22:5c1unteRosAtKJZKPfEm5q4XRe9KyZ3e6Tgf7vX6YbVJ": "169863356106"
+            "t22:AvmoG6Ds5oYdJL86pWpRCmNbJd2Fb6LGNuFBimxZpump": "310000000",
+            "t22:Cr9VD2RimBFwJY31tPhDsaKJvGGN946BBCxdHhiWmVmx": "169829810633"
           }
         },
         "invention": {
@@ -865,12 +846,12 @@
           }
         ],
         "journal": {
-          "head": "24273d046fde7cb5c063781037ab7fb98630cc11a0fe787564f4da306cd9d2d4",
-          "seq": 25081
+          "head": "53c44a5333b143da32f819126b154998e602a25b925bc420335b5f2655a525e1",
+          "seq": 25544
         },
         "components": {
           "component": "distributor",
-          "ts": 1793623608,
+          "ts": 1793624100,
           "pid": 35,
           "status": {
             "next_due_unix": 1793670469,
@@ -889,7 +870,7 @@
             "anchors": {},
             "supervisor": "deterministic: no model, no credits, no approval step",
             "chains": {
-              "at": 1793623607,
+              "at": 1793624100,
               "evm": {
                 "base": {
                   "sym": "ETH",
@@ -930,9 +911,9 @@
             }
           }
         },
-        "served_at": 1793623617
+        "served_at": 1793624100
       },
-      "seen_at": 1793623622937,
+      "seen_at": 1793624111519,
       "first_seen": 1793598602101,
       "member": false
     },
@@ -5999,7 +5980,7 @@
     }
   ],
   "crawled": true,
-  "merged_at": 1793623628817,
+  "merged_at": 1793624117311,
   "total_seen": 20,
   "live": 2
 }
