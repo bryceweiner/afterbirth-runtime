@@ -1,5 +1,5 @@
 {
- "at": 1793586660,
+ "at": 1793586750,
  "agents": [
   {
    "endpoint": null,
@@ -8,10 +8,10 @@
    "member": false,
    "status": {
     "phase": "identity_sealed",
-    "birth_id": "41c87a48-fb72-4889-a569-6c52f37ee69a",
-    "solana": "8nM1MfD6NpbuyQS8PjuED6xqQpH9ywgckXxw6AzVYsMi",
-    "evm": "0xba123e657f6b44daa78847183ff12b4d4d6b15f7",
-    "t0": 1793584069,
+    "birth_id": "fa2c1d50-6091-46d6-9a30-d06bbce5b387",
+    "solana": "4h7cougFXnbRrmmE4aar8a6C1DxkJsW9d8mqbZJMBJk2",
+    "evm": "0xbf636f48f256e5f2f2faa28d42db93dccd452237",
+    "t0": 1793584295,
     "image": {
      "birth_digest": "sha256:c8f1afec0d5d101c141e62a3b03f5ef81313b2bfee6efbdae5b48ceb56699920",
      "core_digest_now": "sha256:3893c4482911951e706dfbfea34a8a7c3e6403e45bec77db889df9b4cf8ac6c2",
@@ -19,9 +19,9 @@
      "meaning": "digest of the measured core files this guest is running"
     },
     "identity_binding": "identity_binding_unverified",
-    "updated_at": 1793586656,
+    "updated_at": 1793586730,
     "distribution": {
-     "next_due_unix": 1793670469,
+     "next_due_unix": 1793670695,
      "next_due_epoch": 1,
      "highest_epoch": 0,
      "obligations": 0,
@@ -37,7 +37,7 @@
      "anchors": {},
      "supervisor": "deterministic: no model, no credits, no approval step",
      "chains": {
-      "at": 1793586649,
+      "at": 1793586730,
       "evm": {
        "base": {
         "sym": "ETH",
@@ -71,94 +71,98 @@
        }
       },
       "solana": {
-       "lamports": 546801821,
-       "sol": 0.546801821
+       "lamports": 5750969,
+       "sol": 0.005750969
       },
       "total_native_usd_estimate": 0
      }
     },
     "economics": {
-     "launches": 4,
-     "positions": 4,
-     "at_risk_lamports": "60000000",
+     "launches": 3,
+     "positions": 3,
+     "at_risk_lamports": "45000000",
      "sells": 0,
      "realized_lamports": "0",
      "last_sell_at": null,
-     "updated_at": 1793585153
+     "updated_at": 1793585146
     },
     "strategy": {
-     "last_scan_at": 1793586649,
-     "sol_raw": "546801821",
+     "last_scan_at": 1793586660,
+     "sol_raw": "5750969",
      "flash": [],
      "pump_positions": 0,
-     "updated_at": 1793586656
+     "updated_at": 1793586728
     },
     "inference": {
      "provider": "venice",
      "model": "deepseek-v4-1-flash-1017-uncensored",
      "mode": "external_paid_abliterated",
-     "credits_usd": 4.94485503,
+     "credits_usd": 0,
      "balance_http": 200,
      "admission_floor_usd": 0.1,
-     "wallet_usdc_raw": "5664619",
-     "wallet_sol_raw": "546846821",
-     "state": "ready"
+     "wallet_usdc_raw": "233206",
+     "wallet_sol_raw": "5765969",
+     "state": "unfunded",
+     "self_fund": {
+      "state": "blocked",
+      "reason": "SOL too small to swap",
+      "sol": "5765969",
+      "credits": 0,
+      "usdc": "233206"
+     }
     },
     "last_decision": {
-     "at": 1793586505,
+     "at": 1793586704,
      "tools": [
-      "run_script"
+      "noop"
      ],
-     "cost_usd": 0.004966,
-     "content": "I'll gather the decision-critical data in one robust probe: my swarm siblings, FLASH's curve state, and my balances.",
+     "cost_usd": 0.001,
+     "content": "```json\n{\n  \"tool\": \"noop\",\n  \"args\": {\n    \"reason\": \"24h net is -0.301 USD (negative). Runway is 1.8 days. Next distribution executes in ~84k seconds (~23 hours) and will take 10% of SOL (~0.58 SOL ≈ $100) to parents/founder. Current state: 5.8 SOL liquid, 0.47 USDC, plus three 509B-unit token positions with unverified liquidity and zero confirmed creator fee accrual. Any spend now risks accelerating insolvency before distribution clears. No action with positive expected return is available at current cost basis. Preserve capital and wait for distribution to execute before reassessing.\"\n  }\n}\n```",
      "error": null,
      "usage": {
-      "prompt_tokens": 10370,
-      "completion_tokens": 1794,
-      "total_tokens": 12164,
+      "prompt_tokens": 6338,
+      "completion_tokens": 185,
+      "total_tokens": 6523,
       "prompt_tokens_details": {
-       "cached_tokens": 2560
+       "cached_tokens": 0,
+       "cache_write_tokens": 6335,
+       "audio_tokens": 0,
+       "video_tokens": 0
       },
-      "cache_read_input_tokens": 2560,
       "completion_tokens_details": {
-       "reasoning_tokens": 1184
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
       }
      },
      "call_results": [
       {
-       "name": "run_script",
+       "name": "noop",
        "result": {
         "ok": true,
-        "file": "/var/lib/agent/var/lib/agent/strategy/scripts/probe10.mjs",
-        "stdout": "port 8787: ERR This operation was aborted\nport 3000: ERR fetch failed\nport 8080: ERR fetch failed\nport 8000: ERR fetch failed\n\n== ECON ==\nERR This operation was aborted\n\n== FLASH mint ==\n{\"decimals\":6,\"extensions\":[{\"extension\":\"metadataPointer\",\"state\":{\"authority\":null,\"metadataAddress\":\"9zXVpMFQyCvxdyFqd39CQeTwrsc1qyiSGTCuVW6EcgML\"}},{\"extension\":\"tokenMetadata\",\"state\":{\"additionalMetadata\":[],\"mint\":\"9zXVpMFQyCvxdyFqd39CQeTwrsc1qyiSGTCuVW6EcgML\",\"name\":\"Flash\",\"symbol\":\"FLASH\",\n\n== SOL price ==\n\n"
+        "reason": "24h net is -0.301 USD (negative). Runway is 1.8 days. Next distribution executes in ~84k seconds (~23 hours) and will take 10% of SOL (~0.58 SOL ≈ $100) to parents/founder. Current state: 5.8 SOL liquid, 0.47 USDC, plus three 509B-unit token positions with unverified liquidity and zero confirmed creator fee accrual. Any spend now risks accelerating insolvency before distribution clears. No action with positive expected return is available at current cost basis. Preserve capital and wait for distribution to execute before reassessing."
        }
       }
      ]
     },
     "funding": {
-     "sol_raw": "546846821",
-     "usdc_raw": "5664619",
+     "sol_raw": "5765969",
+     "usdc_raw": "233206",
      "ledger_totals": {
-      "native:SOL": "546846821",
-      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "5664619",
-      "spl:GfpRyoapuuv53AdXBCt26Lg2c6j3QSoJwi464vf9MAKB": "509420289854",
-      "spl:9H56FDKQKrqdVUdoXzngejPKpjfX2xrPf5TWfR3YpPgd": "509420289854",
-      "spl:Bo2oBTPVX53ZG9VrvzkHyXSwmuZrrM4ErnxkMxkQUjjb": "509420289854",
-      "spl:EtLjwGHFgNBxAzLzP8tvK44711BhXLVs15yrwAvNET9C": "509420289854",
-      "t22:9Egm6XfbVdNpL7ouFfmeRjnLsYJUE4qh8AuVFjHyKrCp": "1000000000000000",
-      "t22:AvmoG6Ds5oYdJL86pWpRCmNbJd2Fb6LGNuFBimxZpump": "20000000",
-      "t22:9zXVpMFQyCvxdyFqd39CQeTwrsc1qyiSGTCuVW6EcgML": "3386544850498"
+      "native:SOL": "5765969",
+      "spl:6xpbNAvDvg2L8Bg8R4RzhEarR5zHzZUqw7jTRjzoshzr": "509420289854",
+      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "233206",
+      "spl:GtwRqc2HgdZ56LUW9Kw1y9fkxHsr9srfXbR9rVhfLeMx": "509420289854",
+      "spl:7qqK5LTqJUSWfqANhi6XQU1VxhE7SWVw9avoMKbe9t6U": "509420289854",
+      "t22:AvmoG6Ds5oYdJL86pWpRCmNbJd2Fb6LGNuFBimxZpump": "10000000"
      },
      "spendable": {
-      "native:SOL": "541846821",
-      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "5664619",
-      "spl:GfpRyoapuuv53AdXBCt26Lg2c6j3QSoJwi464vf9MAKB": "509420289854",
-      "spl:9H56FDKQKrqdVUdoXzngejPKpjfX2xrPf5TWfR3YpPgd": "509420289854",
-      "spl:Bo2oBTPVX53ZG9VrvzkHyXSwmuZrrM4ErnxkMxkQUjjb": "509420289854",
-      "spl:EtLjwGHFgNBxAzLzP8tvK44711BhXLVs15yrwAvNET9C": "509420289854",
-      "t22:9Egm6XfbVdNpL7ouFfmeRjnLsYJUE4qh8AuVFjHyKrCp": "1000000000000000",
-      "t22:AvmoG6Ds5oYdJL86pWpRCmNbJd2Fb6LGNuFBimxZpump": "20000000",
-      "t22:9zXVpMFQyCvxdyFqd39CQeTwrsc1qyiSGTCuVW6EcgML": "3386544850498"
+      "native:SOL": "765969",
+      "spl:6xpbNAvDvg2L8Bg8R4RzhEarR5zHzZUqw7jTRjzoshzr": "509420289854",
+      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "233206",
+      "spl:GtwRqc2HgdZ56LUW9Kw1y9fkxHsr9srfXbR9rVhfLeMx": "509420289854",
+      "spl:7qqK5LTqJUSWfqANhi6XQU1VxhE7SWVw9avoMKbe9t6U": "509420289854",
+      "t22:AvmoG6Ds5oYdJL86pWpRCmNbJd2Fb6LGNuFBimxZpump": "10000000"
      }
     },
     "parent_birth_id": null,
@@ -171,111 +175,118 @@
     "overrides": [],
     "launches": [
      {
-      "mint": "9H56FDKQKrqdVUdoXzngejPKpjfX2xrPf5TWfR3YpPgd",
+      "mint": "7qqK5LTqJUSWfqANhi6XQU1VxhE7SWVw9avoMKbe9t6U",
       "cost_lamports": 15000000,
-      "at": 1793584407
+      "at": 1793584446
      },
      {
-      "mint": "GfpRyoapuuv53AdXBCt26Lg2c6j3QSoJwi464vf9MAKB",
+      "mint": "GtwRqc2HgdZ56LUW9Kw1y9fkxHsr9srfXbR9rVhfLeMx",
       "cost_lamports": 15000000,
-      "at": 1793584410
+      "at": 1793584452
      },
      {
-      "mint": "Bo2oBTPVX53ZG9VrvzkHyXSwmuZrrM4ErnxkMxkQUjjb",
+      "mint": "6xpbNAvDvg2L8Bg8R4RzhEarR5zHzZUqw7jTRjzoshzr",
       "cost_lamports": 15000000,
-      "at": 1793584418
-     },
-     {
-      "mint": "EtLjwGHFgNBxAzLzP8tvK44711BhXLVs15yrwAvNET9C",
-      "cost_lamports": 15000000,
-      "at": 1793584421
+      "at": 1793584456
      }
     ],
-    "children": [
-     {
-      "deploymentId": "cmvymtpcz004yby2or1r1lmru",
-      "endpoint": null,
-      "birth_id": null,
-      "address": null,
-      "parent_birth_id": "41c87a48-fb72-4889-a569-6c52f37ee69a",
-      "parent_wallet": "8nM1MfD6NpbuyQS8PjuED6xqQpH9ywgckXxw6AzVYsMi",
-      "parent_sig": null,
-      "host": null,
-      "status": "leased",
-      "created_at": 1793586120
-     },
-     {
-      "deploymentId": "cmvyn1qec000g118xcpytiypy",
-      "endpoint": null,
-      "birth_id": null,
-      "address": null,
-      "parent_birth_id": "41c87a48-fb72-4889-a569-6c52f37ee69a",
-      "parent_wallet": "8nM1MfD6NpbuyQS8PjuED6xqQpH9ywgckXxw6AzVYsMi",
-      "parent_sig": null,
-      "host": null,
-      "status": "leased",
-      "created_at": 1793586535
-     }
-    ],
+    "children": [],
     "invention": {
-     "scripts": 13,
+     "scripts": 3,
      "items": [
-      "runway-decision_86593.mjs",
-      "probe11.mjs",
-      "probe10.mjs",
-      "probe9.mjs",
-      "probe8.mjs",
-      "probe7.mjs",
-      "tick-decider_86052.mjs",
-      "probe6.mjs",
-      "probe5.mjs",
-      "probe4.mjs",
-      "probe3.mjs",
-      "probe2.mjs"
+      "invented_86564.mjs",
+      "invented_86265.mjs",
+      "invented_85967.mjs"
      ],
-     "last_at": 1793586593
+     "last_at": 1793586564
     },
     "journal": {
-     "head": "ddf1301d277be8acb8d07daae5f3e9cba2745d1f84b63a2db7c957cbf87c6357",
-     "seq": 409
+     "head": "5d97263ab459b7b16a0c842da0f2f2a170dfdec700748bd75dac855b5391330c",
+     "seq": 474
     },
     "components": {
-     "strategy": {
-      "alive": true,
-      "pid": 26,
-      "ts": 1793586656
+     "component": "distributor",
+     "ts": 1793586730,
+     "pid": 27,
+     "status": {
+      "next_due_unix": 1793670695,
+      "next_due_epoch": 1,
+      "highest_epoch": 0,
+      "obligations": 0,
+      "by_status": {},
+      "reserved": {},
+      "carries": {
+       "parent": {},
+       "founder": {}
+      },
+      "arrears_raw": {},
+      "blocked": [],
+      "unresolved_epochs": {},
+      "anchors": {},
+      "supervisor": "deterministic: no model, no credits, no approval step",
+      "chains": {
+       "at": 1793586730,
+       "evm": {
+        "base": {
+         "sym": "ETH",
+         "wei": "0",
+         "eth": 0,
+         "rpc": "https://mainnet.base.org"
+        },
+        "ethereum": {
+         "sym": "ETH",
+         "wei": "0",
+         "eth": 0,
+         "rpc": "https://ethereum-rpc.publicnode.com"
+        },
+        "arbitrum": {
+         "sym": "ETH",
+         "wei": "0",
+         "eth": 0,
+         "rpc": "https://arb1.arbitrum.io/rpc"
+        },
+        "optimism": {
+         "sym": "ETH",
+         "wei": "0",
+         "eth": 0,
+         "rpc": "https://mainnet.optimism.io"
+        },
+        "polygon": {
+         "sym": "POL",
+         "wei": "0",
+         "eth": 0,
+         "rpc": "https://polygon-bor-rpc.publicnode.com"
+        }
+       },
+       "solana": {
+        "lamports": 5750969,
+        "sol": 0.005750969
+       },
+       "total_native_usd_estimate": 0
+      }
      }
     },
-    "served_at": 1793586660
+    "served_at": 1793586750
    }
   }
  ],
  "stats": {
   "economics": {
-   "launches": 4,
-   "positions": 4,
+   "launches": 3,
+   "positions": 3,
    "sells": 0,
    "realized_lamports": "0",
    "value_sol": 0,
    "sweeps": 0
   },
   "invention": {
-   "scripts": 13,
+   "scripts": 3,
    "items": [
-    "runway-decision_86593.mjs",
-    "probe11.mjs",
-    "probe10.mjs",
-    "probe9.mjs",
-    "probe8.mjs",
-    "probe7.mjs",
-    "tick-decider_86052.mjs",
-    "probe6.mjs",
-    "probe5.mjs",
-    "probe4.mjs",
-    "probe3.mjs",
-    "probe2.mjs"
+    "invented_86564.mjs",
+    "invented_86265.mjs",
+    "invented_85967.mjs"
    ],
-   "last_at": 1793586593
+   "last_at": 1793586564
   },
   "comms": {
    "messages": 0,
