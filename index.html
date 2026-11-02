@@ -298,7 +298,7 @@ function showTab(n){for(const t of ['fleet','comms','economics','invention'])$(t
 $('tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(b)showTab(b.dataset.tab);});
 // Repaint the cards on a timer as well: the first paint can land before the crawl
 // finishes, and a stale "—" is worse than a slower number.
-if(!window.REPAINT_TIMER){window.REPAINT_TIMER=setInterval(()=>{try{renderFleet();renderEcon();renderInvention();renderComms();}catch{}},5000);}
+if(!window.REPAINT_TIMER){window.REPAINT_TIMER=setInterval(()=>{try{renderFleet();renderEcon();renderInvention();renderComms();renderHero();}catch{}},5000);}
 async function refresh(){try{await loadEndpoints();renderFleet();for(const f of ['renderEcon','renderInvention','renderComms','renderHero']){try{if(typeof eval(f)==='function')eval(f+'()');}catch{}}setTimeout(()=>{try{renderFleet();for(const f of ['renderEcon','renderInvention','renderComms','renderHero'])try{eval(f+'()')}catch{}}catch{}},2500);await loadMemos();try{const v=await getJson('valuation.json?ts='+Date.now(),9000);if(v&&v.totals)S.val=v.totals;}catch{}
   renderComms();renderEcon();renderInvention();}catch(e){document.getElementById("stamp").textContent="render error: "+e.message;}}
 refresh();setInterval(refresh,60000);
