@@ -39,6 +39,9 @@ for (const a of agents) {
 }
 st.invention.items = [...inv].slice(-60);
 const out = { ...fresh, agents, stats: st, crawled: true, merged_at: Date.now(), total_seen: agents.length, live: st.live };
-fs.writeFileSync('beacon.json', JSON.stringify(out, null, 2));
+// Write atomically: a reader must never see a half-written board.
+const body = JSON.stringify(out, null, 2);
+fs.writeFileSync('beacon.json.tmp', body);
+fs.renameSync('beacon.json.tmp', 'beacon.json');
 fs.writeFileSync('tree.json', JSON.stringify(out.tree || fresh.tree || {}, null, 2));
 console.log(JSON.stringify({ live: out.live, total: out.total_seen }));

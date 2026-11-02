@@ -87,7 +87,15 @@ for (const a of live) {
   launched += Number(e.launches || 0);
   scripts += Number((st.invention || {}).scripts || 0);
 }
-hist.push({ at: Date.now(), agents: live.length, sol: +sol.toFixed(6), usdc: +usdc.toFixed(4), realized_sol: +(Number(realized) / 1e9).toFixed(6), launches: launched, scripts });
+const nw = sol + usdc / 150;                       // USDC folded in at a conservative SOL price
+const prev = hist.length ? hist[hist.length - 1] : null;
+const prevNw = prev ? (Number(prev.sol || 0) + Number(prev.usdc || 0) / 150) : null;
+// GDP is value ADDED, not value held: the positive change in net worth since the last
+// row, accumulated from genesis. Initial endowments therefore count once, at the row
+// where they land, and a drawdown does not subtract from what was already produced.
+const added = prevNw === null ? 0 : Math.max(0, nw - prevNw);
+const gdp = (prev ? Number(prev.gdp || 0) : 0) + added;
+hist.push({ at: Date.now(), agents: live.length, sol: +sol.toFixed(6), usdc: +usdc.toFixed(4), realized_sol: +(Number(realized) / 1e9).toFixed(6), launches: launched, scripts, nw: +nw.toFixed(6), gdp: +gdp.toFixed(6), added: +added.toFixed(6) });
 hist = hist.slice(-8000);
 fs.writeFileSync('history.json', JSON.stringify(hist, null, 1));
 
