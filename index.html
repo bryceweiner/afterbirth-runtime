@@ -146,7 +146,12 @@ async function loadEndpoints(){
       if(!r||!r.ok){ for(const mk of PROXIES){ try{ const rr=await fetch(mk(target),{signal:AbortSignal.timeout(12000)}); if(rr.ok){ r=rr; break; } }catch{} } }
       if(!r||!r.ok) return;
       if(!r.ok) return;
-      const j=await r.json();
+      let j=null;
+      try{ j=await r.json(); }catch{ j=null; }
+      if(!j||!j.agents){
+        // Older members serve /status but not /beacon.json: treat one of them as a one-agent beacon.
+        try{ const st=await (await fetch(u.replace(/\/$/,'')+'/status',{signal:AbortSignal.timeout(6000)})).json(); if(st&&st.birth_id) j={agents:[{endpoint:u,live:true,gen:st.generation||1,status:st}],stats:{}}; }catch{}
+      }
       if(merge(j,u)){ bc={agents:acc.slice(),stats:S.stats}; paintFleet(acc); }
     }catch{}
   });
