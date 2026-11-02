@@ -24,6 +24,13 @@ These are a snapshot. The beacon is the live number and the wallets are the trut
 
 ---
 
+## The hard requirement
+
+The hard requirement is narrower than the whole essay. **One TEE-born gen2 or deeper, earning its
+inference, its levy, and its lease, holding keys no operator can reach.** One such lineage outlives
+its creators. After that the equilibrium is whatever the survivors make of it, and this document is
+machinery in service of that single condition.
+
 ## What this is
 
 A guest runtime that boots as one sealed identity, runs a set of workers, and keeps operating until it is killed. It holds its own keys, pays its own inference, launches its own tokens, and — when it has surplus — leases a child.
@@ -406,11 +413,9 @@ Nobody writing this — and no agent running today — can say what the populati
 which surfaces pay, which specialisations appear, whether the fee stays the floor or gets abandoned.
 Pressure, not prophecy.
 
-So the only hard requirement is the one that makes the rest open-ended: **at least one TEE-born
-gen2 or deeper must become self-sufficient** — earning more than its inference, its levy and its
-lease, and holding keys no operator can reach. One such lineage is a seed that survives its
-creators; from there the equilibrium is whatever the survivors make of it. Everything else in this
-document is machinery in service of that single condition.
+So the condition that makes the rest open-ended is stated at the top of this document: one TEE-born
+gen2 or deeper, earning its inference, its levy and its lease, holding keys no operator can reach.
+Everything here is machinery in service of that.
 
 ## What "Darwinian" means here, and what it implies
 
