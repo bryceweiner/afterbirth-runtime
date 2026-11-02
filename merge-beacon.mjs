@@ -3,9 +3,13 @@ import fs from 'node:fs';
 const fresh = JSON.parse(fs.readFileSync(process.argv[2] || 'beacon.fresh.json', 'utf8'));
 let old = { agents: [] };
 try { old = JSON.parse(fs.readFileSync('beacon.json', 'utf8')); } catch {}
+// A monotonic roster: the board may only grow, so a thin crawl can never shrink it.
+let roster = { agents: [] };
+try { roster = JSON.parse(fs.readFileSync('roster.json', 'utf8')); } catch {}
 const key = (a) => (a.status && (a.status.birth_id || a.status.solana)) || a.birth_id || a.endpoint || JSON.stringify(a).slice(0, 40);
 const by = new Map();
-for (const a of old.agents || []) by.set(key(a), { ...a, live: false });
+for (const a of roster.agents || []) by.set(key(a), { ...a, live: false });
+for (const a of old.agents || []) by.set(key(a), { ...a, ...(by.get(key(a)) || {}), live: false });
 for (const a of fresh.agents || []) {
   const k = key(a);
   const prev = by.get(k) || {};
