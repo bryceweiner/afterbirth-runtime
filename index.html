@@ -50,6 +50,10 @@
 .hero-grid span{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-foreground)}
 .hero-grid b{font-size:16px;font-weight:600}
 .up{color:#3ecf8e}.down{color:#f26d6d}
+.chartbox{border:1px solid var(--border);border-radius:14px;padding:14px 16px;margin-bottom:18px}
+.chart-head{display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-foreground);margin-bottom:8px}
+.chart-head select{background:transparent;color:var(--foreground);border:1px solid var(--border);border-radius:8px;padding:4px 8px;font-size:12px}
+#gdp-chart{height:260px}
 </style>
 </head>
 <body>
@@ -73,6 +77,15 @@
     <div><span>projected 30d</span><b id="gdp-proj">—</b></div>
     <div><span>agents</span><b id="gdp-agents">—</b></div>
   </div>
+</div>
+<div class="chartbox">
+  <div class="chart-head">
+    <span>fleet series</span>
+    <select id="gdp-series">
+      <option>gdp rate</option><option>net worth</option><option>agents</option><option>launches</option><option>scripts</option>
+    </select>
+  </div>
+  <div id="gdp-chart"></div>
 </div>
 
   <div class="cards">
@@ -119,6 +132,7 @@
   </div></section>
   <section id="invention" hidden><div class="card"><h2>recent scripts</h2><div class="rows" id="i-list"></div></div></section>
 </div>
+<script src="https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
 <script>
 const $=(id)=>document.getElementById(id);
 const MEMO=new Set(['MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr','Memo1UhkJRfHyvLMcVucJwxXeuD728EqVDDwQDxFMNo']);
@@ -257,24 +271,70 @@ function renderFleet(){
 }
 async function loadMemos(){const ws=[...new Set(S.agents.map(a=>{const r=S.rows.find(x=>x.a===a);return (r&&r.st&&r.st.solana)||a.wallet;}).filter(Boolean))].slice(0,10);const f=[];await Promise.all(ws.map(async(w)=>{const sigs=await rpc('getSignaturesForAddress',[w,{limit:10}]);if(!Array.isArray(sigs))return;await Promise.all(sigs.slice(0,6).map(async(s)=>{const tx=await rpc('getTransaction',[s.signature,{encoding:'jsonParsed',maxSupportedTransactionVersion:0}]);for(const ix of ((tx&&tx.transaction&&tx.transaction.message&&tx.transaction.message.instructions)||[])){if(!MEMO.has(ix.programId))continue;let t='';try{t=new TextDecoder().decode(Uint8Array.from(atob(ix.data||''),c=>c.charCodeAt(0)));}catch{}if(t)f.push({at:s.blockTime||0,from:w.slice(0,6),sig:s.signature,text:t});}}));}));f.sort((x,y)=>y.at-x.at);S.memos=f.slice(0,50);}
 function channelOf(t){if(/^<<[0-9a-f]{8}>>/.test(t))return 'obfuscated';if(t.startsWith('swm2.'))return 'sealed';if(/^\[pub\]/.test(t))return 'public';return 'plain';}
+// GDP is a RATE: value added per day, measured between consecutive snapshots. The
+// hero shows today's rate, its change (DoD/WoW/YoY), the sustained average and the
+// projection from that average. Levels (net worth) live on the chart, not the headline.
+const SOL_USD = 150;
+const nwOf = (r) => Number(r.sol || 0) + Number(r.usdc || 0) / SOL_USD;
+const DAY = 864e5;
+function ratesFrom(h) {
+  // Per-row value added, normalised to a per-day rate by the row's own interval.
+  const rows = [];
+  for (let i = 1; i < h.length; i++) {
+    const dt = (h[i].at - h[i - 1].at) / DAY;
+    if (!(dt > 0)) continue;
+    const added = Math.max(0, nwOf(h[i]) - nwOf(h[i - 1]));
+    rows.push({ at: h[i].at, rate: added / dt, nw: nwOf(h[i]), agents: h[i].agents || 0, launches: h[i].launches || 0, scripts: h[i].scripts || 0 });
+  }
+  return rows;
+}
+const mean = (a) => (a.length ? a.reduce((s, x) => s + x, 0) / a.length : null);
+function windowRate(rows, fromMs, toMs) {
+  const sel = rows.filter((r) => r.at > fromMs && r.at <= toMs);
+  return mean(sel.map((r) => r.rate));
+}
 async function renderHero(){
-  let h=[]; try{ h=await (await fetch('history.json?ts='+Date.now(),{cache:'no-store'})).json(); }catch{}
-  if(!Array.isArray(h)||!h.length) return;
-  const nw=(r)=>Number(r.sol||0)+Number(r.usdc||0)/150;
-  const last=h[h.length-1], now=nw(last);
-  const at=(ms)=>{let best=null;for(const r of h){if(r.at<=ms)best=r;}return best;};
-  const g=(ago)=>{const p=at(last.at-ago);if(!p)return null;const base=nw(p);if(!base)return null;return (now-base)/base;};
-  const pct=(v)=>v===null?'—':(v>=0?'+':'')+(v*100).toFixed(2)+'%';
-  const cls=(v)=>v===null?'':(v>=0?'up':'down');
-  const dod=g(864e5), wow=g(7*864e5), yoy=g(365*864e5);
-  const num=document.getElementById('gdp-num'); if(num) num.textContent=(now).toFixed(4)+' SOL';
-  const sub=document.getElementById('gdp-sub'); if(sub) sub.textContent='per agent '+(last.agents?(now/last.agents).toFixed(4)+' SOL':'—')+' · realized '+(last.realized_sol||0).toFixed(4)+' SOL';
-  for(const [id,v] of [['gdp-dod',dod],['gdp-wow',wow],['gdp-yoy',yoy]]){const el=document.getElementById(id); if(el){el.textContent=pct(v);el.className=cls(v);}}
-  const days=[];for(let d=1;d<=7;d++){const a=at(last.at-d*864e5);if(a&&nw(a)>0)days.push(now/nw(a)-1);}
-  const sus=days.length?days.reduce((s,x)=>s+x,0)/days.length:null;
-  const se=document.getElementById('gdp-sus'); if(se){se.textContent=pct(sus);se.className=cls(sus);}
-  const pe=document.getElementById('gdp-proj'); if(pe){pe.textContent=sus===null?'—':(now*Math.pow(1+sus,30)).toFixed(3)+' SOL';pe.className=cls(sus);}
-  const ae=document.getElementById('gdp-agents'); if(ae) ae.textContent=String(last.agents||0);
+  let h = [];
+  try { h = await (await fetch('history.json?ts=' + Date.now(), { cache: 'no-store' })).json(); } catch {}
+  if (!Array.isArray(h) || h.length < 2) return;
+  const rows = ratesFrom(h);
+  if (!rows.length) return;
+  const last = rows[rows.length - 1];
+  const pct = (v) => v === null || !isFinite(v) ? '—' : (v >= 0 ? '+' : '') + (v * 100).toFixed(1) + '%';
+  const cls = (v) => v === null || !isFinite(v) ? '' : (v >= 0 ? 'up' : 'down');
+  const set = (id, v, c) => { const el = document.getElementById(id); if (el) { el.textContent = v; if (c !== undefined) el.className = c; } };
+  set('gdp-num', last.rate.toFixed(5) + ' SOL/day');
+  set('gdp-sub', 'per agent ' + (last.agents ? (last.rate / last.agents).toFixed(6) : '—') + ' SOL/day · ' + last.agents + ' agents · ' + last.launches + ' launches');
+  const today = windowRate(rows, last.at - DAY, last.at);
+  const yday = windowRate(rows, last.at - 2 * DAY, last.at - DAY);
+  const wk = windowRate(rows, last.at - 7 * DAY, last.at);
+  const prevWk = windowRate(rows, last.at - 14 * DAY, last.at - 7 * DAY);
+  const yr = windowRate(rows, last.at - 365 * DAY, last.at - 335 * DAY);
+  const rel = (a, b) => (a === null || b === null || !b ? null : a / b - 1);
+  set('gdp-dod', pct(rel(today, yday)), cls(rel(today, yday)));
+  set('gdp-wow', pct(rel(wk, prevWk)), cls(rel(wk, prevWk)));
+  set('gdp-yoy', pct(rel(wk, yr)), cls(rel(wk, yr)));
+  set('gdp-sus', (wk === null ? '—' : wk.toFixed(5) + ' SOL/d'), '');
+  set('gdp-proj', (wk === null ? '—' : (wk * 30).toFixed(3) + ' SOL/30d'), cls(wk));
+  set('gdp-agents', String(last.agents || 0), '');
+  drawGdpChart(rows);
+}
+function drawGdpChart(rows){
+  const el = document.getElementById('gdp-chart'); if (!el || !window.LightweightCharts) return;
+  const series = {
+    'gdp rate': rows.map((r) => ({ time: Math.floor(r.at / 1000), value: +r.rate.toFixed(6) })),
+    'net worth': rows.map((r) => ({ time: Math.floor(r.at / 1000), value: +r.nw.toFixed(6) })),
+    agents: rows.map((r) => ({ time: Math.floor(r.at / 1000), value: r.agents })),
+    launches: rows.map((r) => ({ time: Math.floor(r.at / 1000), value: r.launches })),
+    scripts: rows.map((r) => ({ time: Math.floor(r.at / 1000), value: r.scripts })),
+  };
+  if (!window.__chart) {
+    window.__chart = LightweightCharts.createChart(el, { height: 260, layout: { background: { color: 'transparent' }, textColor: '#9aa' }, grid: { vertLines: { color: '#2226' }, horzLines: { color: '#2226' } }, rightPriceScale: { borderColor: '#3336' }, timeScale: { borderColor: '#3336' } });
+    window.__line = window.__chart.addLineSeries({ color: '#3ecf8e', lineWidth: 2 });
+  }
+  const pick = (document.getElementById('gdp-series') || {}).value || 'gdp rate';
+  window.__line.setData(series[pick] || series['gdp rate']);
+  window.__chart.timeScale().fitContent();
 }
 function renderComms(){const now=Math.floor(Date.now()/1000);const sealed=S.memos.filter(m=>channelOf(m.text)==='sealed').length;const cs=(S.stats&&S.stats.comms)||{};const bItems0=cs.items||[];
   const msgs=S.memos.length||Number(cs.messages||0);
@@ -295,6 +355,7 @@ function renderInvention(){const st=S.rows.map(r=>r.st).filter(Boolean);let sc=s
   const bi=(S.stats&&S.stats.invention&&S.stats.invention.items)||[];
   if(!sc.length&&bi.length) sc=bi.map(n=>({name:n,at:0}));$('i-big').innerHTML=`${(S.stats&&S.stats.invention&&S.stats.invention.scripts)||st.reduce((s,x)=>s+Number((x.invention||{}).scripts||0),0)||sc.length}<small>scripts</small>`;$('i-last').textContent=(()=>{const la=Number(S.stats&&S.stats.invention&&S.stats.invention.last_at)||0;if(la>1e9)return ago(la);const ts=sc.map(x=>Number(x.at)||0).filter(v=>v>1e9);return ts.length?ago(Math.max(...ts)):'—';})();$('i-trade').textContent=sc.filter(s=>/pump|curve|swap|buy|sell|price|trade/i.test(String(s.name||s))).length;$('i-list').innerHTML=sc.length?sc.slice(0,20).map(s=>{const at=Number(s.at)||0;return `<div class="row"><span>${String(s.name||s).slice(0,44)}</span><b>${at>1e9?ago(at):''}</b></div>`;}).join(''):'<div class="row"><span>nothing invented yet</span><b>—</b></div>';}
 function showTab(n){for(const t of ['fleet','comms','economics','invention'])$(t).hidden=t!==n;document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===n)));}
+document.getElementById('gdp-series').addEventListener('change',()=>renderHero());
 $('tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(b)showTab(b.dataset.tab);});
 // Repaint the cards on a timer as well: the first paint can land before the crawl
 // finishes, and a stale "—" is worse than a slower number.
