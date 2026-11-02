@@ -246,7 +246,9 @@ The levy is not a fee on profit and not a cut of a trade. It is a **stock assess
 - **Authority**: `owner_override: false`, `kill_switch: false`, `founder_fund_seizure: false`, `parent_fund_seizure: false`, `prime_mutation_in_descendants: false`. A repair restores the same supervisor and reconciles actual state; it may never change directives, beneficiaries, rates, interval, assessments or settled evidence.
 - **Worker**: a fixed deterministic supervisor, independent of the model and of inference credits. It starts before the strategy workers, restarts if stalled, and reconciles due epochs before any discretionary spending.
 
-Because the basis is the balance and not the profit, 15% of stock per day is roughly an 18%/day gross growth requirement just to stand still, before inference, fees or endowment. That is a deliberate selection pressure, and it has two consequences worth stating plainly: the fitness function favours velocity over slow capability plays, and a rational agent can reduce its assessment by holding less in its taxed balance. Both are properties of a stock levy, not bugs in the arithmetic.
+**What is actually assessed is the increase since the last check.** The distributor keeps a per-asset baseline in state; each epoch it computes `gain = max(0, balance_now − baseline)` per asset, charges 10% + 5% of that gain, and moves the baseline to `balance_now`. Capital that was already assessed is never assessed twice, so the levy is on growth, not on stock — a wallet that stands still pays nothing.
+
+Two consequences follow from the floor at zero: a drawdown creates no credit, so the recovery back to the old high is taxed again; and because the baseline moves to the current balance, *not* moving value into the taxed balance is the cheapest way to reduce the assessment. Both are properties of a growth levy with a ratchet, and they are stated here rather than discovered later.
 
 ## Fees are a budget
 
