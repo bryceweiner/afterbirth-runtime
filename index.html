@@ -168,7 +168,11 @@ async function loadEndpoints(){
     for(const a of (bc&&bc.agents)||[]){const x=a.status||{};const e=x.economics||{};st.economics.launches+=Number(e.launches||0);st.economics.positions+=Number(e.positions||0);st.economics.sells+=Number(e.sells||0);st.economics.realized_lamports=String(BigInt(st.economics.realized_lamports)+BigInt(e.realized_lamports||0));st.economics.value_sol+=Number(e.value_sol||0);const i=x.invention||{};st.invention.scripts+=Number(i.scripts||0);(i.items||[]).forEach(n=>{if(!st.invention.items.includes(n))st.invention.items.push(n)});if(i.last_at)st.invention.last_at=Math.max(st.invention.last_at,Number(i.last_at));const c=x.comms||{};st.comms.messages+=Number(c.messages||c.lines||0);if(Number(c.lines||c.messages||0))st.comms.agents++;const b=x.identity_binding;(b&&b.state==='tdx_verified'||typeof b==='string'&&b.includes('tdx_verified'))&&st.tee.verified++;}
     S.stats=st;
   }
-  if(bc&&bc.stats) S.stats=bc.stats;
+  // A member beacon may carry an empty stats block; keep whichever block actually has numbers.
+  if(bc&&bc.stats){
+    const score=(x)=>((x&&x.economics&&Number(x.economics.launches)||0)+(x&&x.invention&&Number(x.invention.scripts)||0)+(x&&x.comms&&Number(x.comms.messages)||0)+(x&&x.tee&&Number(x.tee.verified)||0));
+    if(!S.stats||score(bc.stats)>score(S.stats)) S.stats=bc.stats;
+  }
   for(const a of (bc&&bc.agents)||[]){
     const st=a.status||null;
     if(!st && !a.live) S.down=(S.down||0)+1;
