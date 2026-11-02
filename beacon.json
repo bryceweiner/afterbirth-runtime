@@ -1,5 +1,5 @@
 {
-  "at": 1793612689169,
+  "at": 1793612812820,
   "agents": [
     {
       "endpoint": "https://d493179ac871c4830a314ba1dc96eb056d14de6e-8787.dstack-pha-prod9.phala.network",
@@ -17,7 +17,7 @@
           "match": true,
           "meaning": "digest of the measured core files this guest is running"
         },
-        "updated_at": 1793612672,
+        "updated_at": 1793612793,
         "distribution": {
           "next_due_unix": 1793696548,
           "next_due_epoch": 2,
@@ -168,7 +168,7 @@
             }
           ],
           "pump_positions": 0,
-          "updated_at": 1793612670
+          "updated_at": 1793612793
         },
         "constitution_sha256": "556610e3e2c81a87762d82d2c59264b4b56549ea50739f3e707678b2db755bb0",
         "prime_directives": [
@@ -196,10 +196,15 @@
         ],
         "children": [],
         "journal": {
-          "head": "ce2206385618b2a55898aeaaf76437018516f18652c005edd81c1d0301930e56",
-          "seq": 1680
+          "head": "9c11e1ca0d554026b4976f93acf9b354cb725db612387f785826f8423e7a2d59",
+          "seq": 1682
         },
         "components": {
+          "strategy": {
+            "alive": true,
+            "pid": 108,
+            "restarts": 2
+          },
           "signer": {
             "alive": true,
             "pid": 48,
@@ -220,11 +225,6 @@
             "pid": 72,
             "restarts": 1
           },
-          "strategy": {
-            "alive": true,
-            "pid": 108,
-            "restarts": 2
-          },
           "loops": {
             "alive": true,
             "pid": 136,
@@ -236,9 +236,9 @@
             "restarts": 2
           }
         },
-        "served_at": 1793612677
+        "served_at": 1793612801
       },
-      "seen_at": 1793612688992,
+      "seen_at": 1793612812687,
       "first_seen": 1793598602101
     },
     {
@@ -258,7 +258,7 @@
           "meaning": "digest of the measured core files this guest is running"
         },
         "identity_binding": "identity_binding_unverified",
-        "updated_at": 1793612666,
+        "updated_at": 1793612803,
         "distribution": {
           "next_due_unix": 1793670469,
           "next_due_epoch": 1,
@@ -276,7 +276,7 @@
           "anchors": {},
           "supervisor": "deterministic: no model, no credits, no approval step",
           "chains": {
-            "at": 1793612662,
+            "at": 1793612802,
             "evm": {
               "base": {
                 "sym": "ETH",
@@ -444,13 +444,13 @@
             }
           ],
           "pump_positions": 0,
-          "updated_at": 1793612666
+          "updated_at": 1793612787
         },
         "inference": {
           "provider": "venice",
           "model": "deepseek-v4-1-flash-1017-uncensored",
           "mode": "external_paid_abliterated",
-          "credits_usd": 2.7151675,
+          "credits_usd": 2.67840507,
           "balance_http": 200,
           "admission_floor_usd": 0.1,
           "wallet_usdc_raw": "589473",
@@ -458,32 +458,39 @@
           "state": "ready"
         },
         "last_decision": {
-          "at": 1793612452,
+          "at": 1793612658,
           "tools": [
-            "run_script"
+            "economics"
           ],
-          "cost_usd": 0.010717,
+          "cost_usd": 0.00473,
           "content": null,
           "error": null,
           "usage": {
-            "prompt_tokens": 11099,
-            "completion_tokens": 6000,
-            "total_tokens": 17099,
+            "prompt_tokens": 9929,
+            "completion_tokens": 1757,
+            "total_tokens": 11686,
             "prompt_tokens_details": {
               "cached_tokens": 2688
             },
             "cache_read_input_tokens": 2688,
             "completion_tokens_details": {
-              "reasoning_tokens": 5081
+              "reasoning_tokens": 1735
             }
           },
           "call_results": [
             {
-              "name": "run_script",
+              "name": "economics",
               "result": {
                 "ok": true,
-                "file": "/var/lib/agent/var/lib/agent/strategy/scripts/scratch.mjs",
-                "stdout": ""
+                "decisions_24h": 200,
+                "inference_usd_24h": 1.0813,
+                "rent_usd_day": 0.3,
+                "revenue_sol_24h": 0,
+                "exits": 0,
+                "sol_balance": 0.0007,
+                "net_usd_24h": -1.381,
+                "runway_days": 0,
+                "objective": "below net zero — only positive-EV spends"
               }
             }
           ]
@@ -869,19 +876,74 @@
           }
         ],
         "journal": {
-          "head": "e50c60f6fea261a3ebbba74041088eaf9ae93886ffe984f2682929d43ce7645b",
-          "seq": 15691
+          "head": "229f1d383db024f0242e59852e7c1c8769c95d40f32e237bdd6087823279c5fb",
+          "seq": 15815
         },
         "components": {
-          "strategy": {
-            "alive": true,
-            "pid": 35,
-            "ts": 1793612666
+          "component": "distributor",
+          "ts": 1793612803,
+          "pid": 35,
+          "status": {
+            "next_due_unix": 1793670469,
+            "next_due_epoch": 1,
+            "highest_epoch": 0,
+            "obligations": 0,
+            "by_status": {},
+            "reserved": {},
+            "carries": {
+              "parent": {},
+              "founder": {}
+            },
+            "arrears_raw": {},
+            "blocked": [],
+            "unresolved_epochs": {},
+            "anchors": {},
+            "supervisor": "deterministic: no model, no credits, no approval step",
+            "chains": {
+              "at": 1793612802,
+              "evm": {
+                "base": {
+                  "sym": "ETH",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://mainnet.base.org"
+                },
+                "ethereum": {
+                  "sym": "ETH",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://ethereum-rpc.publicnode.com"
+                },
+                "arbitrum": {
+                  "sym": "ETH",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://arb1.arbitrum.io/rpc"
+                },
+                "optimism": {
+                  "sym": "ETH",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://mainnet.optimism.io"
+                },
+                "polygon": {
+                  "sym": "POL",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://polygon-bor-rpc.publicnode.com"
+                }
+              },
+              "solana": {
+                "lamports": 651081,
+                "sol": 0.000651081
+              },
+              "total_native_usd_estimate": 0
+            }
           }
         },
-        "served_at": 1793612677
+        "served_at": 1793612807
       },
-      "seen_at": 1793612688992,
+      "seen_at": 1793612812687,
       "first_seen": 1793598602101,
       "member": false
     },
@@ -5984,7 +6046,7 @@
     }
   ],
   "crawled": true,
-  "merged_at": 1793612694829,
+  "merged_at": 1793612818569,
   "total_seen": 20,
   "live": 2
 }
