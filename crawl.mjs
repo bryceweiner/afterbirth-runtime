@@ -120,7 +120,9 @@ const prod = [...seen.values()].reduce((sum, a) => {
 }, 0);
 const prevProd = prev && prev.prod != null ? Number(prev.prod) : null;
 const added = prevProd === null ? 0 : Math.max(0, prod - prevProd);
-const gdp = (prev ? Number(prev.gdp || 0) : 0) + added;
+// GDP is cumulative production, so it equals the current production total: summing
+// deltas across a history that contained a double count would carry the error forever.
+const gdp = prod;
 hist.push({ at: Date.now(), agents: live.length, sol: +sol.toFixed(6), usdc: +usdc.toFixed(4), realized_sol: +(Number(realized) / 1e9).toFixed(6), launches: launched, scripts, nw: +nw.toFixed(6), prod: +prod.toFixed(6), gdp: +gdp.toFixed(6), added: +added.toFixed(6) });
 hist = hist.slice(-8000);
 fs.writeFileSync('history.json', JSON.stringify(hist, null, 1));
