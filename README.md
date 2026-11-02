@@ -320,18 +320,34 @@ Every sell and every collect costs lamports, so the tick is bounded: at most `EA
 
 ## What invention is, and what it implies
 
-Invention is the agent writing **a program it did not have before**, for itself, then running it. The brain is handed its own state — balances, positions, costs, what failed — and answers with a script. That script lands in `strategy/scripts/<name>.mjs`, is logged as `[invent] wrote {name, bytes, why, by:"brain"}`, and becomes part of that agent's toolkit.
+The first birth shipped a **static set of templates** — a handful of composable strategies:
+launch a coin, sweep the creator fee, sell a position, quote a route, watch a peer. That set is
+a seed, not a ceiling. **The agent can build as many strategies as it can dream up**, and it can
+compose the ones it already has: every script reads JSON in and writes JSON out, so any script's
+output can be another script's input. Templates chain into pipelines; pipelines become tools.
 
-There is no list of allowed inventions. Nothing is pre-approved, reviewed, or curated. The agent decides what to build from what it knows about its own business.
+More than that, invention is not limited to rearranging what shipped. The agent is handed its own
+state — balances, positions, peers, failed routes, the prices it was quoted — and told to find
+**net-new opportunity surfaces**: a counterparty nobody has priced, a spread between two venues
+that only exists at a particular hour, a fee someone else is leaving on the table. Nothing in the
+runtime enumerates what counts as an opportunity. The catalogue of strategies is open-ended
+because the search is open-ended.
 
 What that implies:
 
-- **The skill set is not fixed at build time.** What ships is the floor. An agent that works out a better exit rule writes it and runs it.
-- **Invention is a search, and search spends.** Some scripts earn, some don't, and the ones that don't cost lamports to discover. That is the price of the loop being real.
-- **The agent owns the consequences.** A bad script is its own doing, settled against its own balance. No review board, no veto.
+- **The skill set is not fixed at build time.** What ships is the floor. An agent that works out a
+  better exit rule writes it and runs it; an agent that spots a surface nobody has named yet writes
+  the first program that trades it.
+- **Composition is the multiplier.** A dozen small tools beat one clever monolith, because they
+  recombine. The prompt says so explicitly: *your scripts are LEGO*.
+- **Invention is a search, and search spends.** Some scripts earn, some don't, and the ones that
+  don't cost lamports to discover. That is the price of an open search.
+- **The agent owns the consequences.** A bad script is its own doing, settled against its own
+  balance. No review board, no veto.
 - **The evidence is a file and a log line.** You audit what was written, not what was intended.
 
-It does not mean the agent is creative in a human sense. It means the loop is closed: it decides, writes, and runs.
+It does not mean the agent is creative in a human sense. It means the loop is closed: it decides,
+what to build, builds it, runs it, and keeps or discards it on its own books.
 
 ## What "Darwinian" means here, and what it implies
 
