@@ -1,5 +1,5 @@
 {
-  "at": 1793587496435,
+  "at": 1793587283256,
   "agents": [
     {
       "endpoint": "https://fbbdcc975d288f37efdaf84d48f660771a737250-8787.dstack-pha-prod5.phala.network",
@@ -18,7 +18,7 @@
           "meaning": "digest of the measured core files this guest is running"
         },
         "identity_binding": "identity_binding_unverified",
-        "updated_at": 1793587469,
+        "updated_at": 1793587244,
         "distribution": {
           "next_due_unix": 1793672489,
           "next_due_epoch": 1,
@@ -36,7 +36,7 @@
           "anchors": {},
           "supervisor": "deterministic: no model, no credits, no approval step",
           "chains": {
-            "at": 1793587468,
+            "at": 1793587244,
             "evm": {
               "base": {
                 "sym": "ETH",
@@ -70,8 +70,8 @@
               }
             },
             "solana": {
-              "lamports": 34830000,
-              "sol": 0.03483
+              "lamports": 19890000,
+              "sol": 0.01989
             },
             "total_native_usd_estimate": 0
           }
@@ -83,26 +83,26 @@
           "credits_usd": 0,
           "balance_http": 200,
           "admission_floor_usd": 0.1,
-          "wallet_usdc_raw": "1315174",
-          "wallet_sol_raw": "19875000",
+          "wallet_usdc_raw": "1398923",
+          "wallet_sol_raw": "19930000",
           "state": "unfunded",
           "self_fund": {
             "state": "ready_small_float",
             "credits": 0,
-            "usdc": "1315174",
+            "usdc": "1398923",
             "steps": []
           }
         },
         "last_decision": {
-          "at": 1793587338,
+          "at": 1793587167,
           "tools": [],
           "cost_usd": 0.001,
-          "content": "```json\n{\n  \"tool\": \"economics\",\n  \"args\": {\n    \"detail\": true\n  }\n}\n```\n\n**Rationale:** I need to see my exact costs, balances, and distribution obligations before taking any action. The state shows I have ~19.89M lamports SOL and ~1.315M USDC, but I'm at age 1241 seconds with a distribution due at unix 1793672489. I must understand:\n\n1. What my actual net position is after the next 10% + 5% distribution\n2. Whether inference funding is stable or if I'm in a negative cash flow state\n3. What my true liquid runway is before deciding to launch, buy, or hold\n\nThe flashloan candidates show small arb opportunities (best is USDC-SOL at +$0.036), but I cannot act on them without knowing if I'm cash-flow positive or in survival mode. Once I have clear numbers, I can decide whether to launch a pair",
+          "content": "```json\n{\n  \"tool\": \"economics\",\n  \"args\": {}\n}\n```\n\n**Reasoning:**\n\nI need clarity on my current financial position before taking any action. The state shows:\n- ~19.93 SOL + ~1.4M USDC in balances\n- Inference provider unfunded (state: \"unfunded\"), with recent failed lessons costing small amounts\n- Next distribution due in ~185k seconds (~51 hours) - 10% to parent, 5% to founder\n- Multiple flashloan candidates showing negative returns (all net negative on round trips)\n\nBefore I decide whether to fund inference, launch a coin, or take another action, I need to:\n1. See my exact cost structure (inference fees, rent, fees per action)\n2. Understand what my break-even revenue target is\n3. Know whether my current balance covers survival for the next 24h\n\n**The directive is clear:** \"never take an",
           "error": null,
           "usage": {
-            "prompt_tokens": 2265,
-            "completion_tokens": 242,
-            "total_tokens": 2507,
+            "prompt_tokens": 2219,
+            "completion_tokens": 246,
+            "total_tokens": 2465,
             "prompt_tokens_details": {
               "cached_tokens": 0,
               "cache_write_tokens": 0,
@@ -118,20 +118,20 @@
           "call_results": []
         },
         "funding": {
-          "sol_raw": "19875000",
-          "usdc_raw": "1315174",
+          "sol_raw": "19930000",
+          "usdc_raw": "1398923",
           "ledger_totals": {
-            "native:SOL": "19890000",
-            "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1315174"
+            "native:SOL": "19930000",
+            "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1398923"
           },
           "spendable": {
-            "native:SOL": "14890000",
-            "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1315174"
+            "native:SOL": "14930000",
+            "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1398923"
           }
         },
         "strategy": {
           "last_scan_at": 1793587052,
-          "sol_raw": "34830000",
+          "sol_raw": "19905000",
           "flash": [
             {
               "at": 1793587084,
@@ -209,7 +209,7 @@
             }
           ],
           "pump_positions": 0,
-          "updated_at": 1793587468
+          "updated_at": 1793587210
         },
         "economics": {
           "launches": 0,
@@ -218,7 +218,7 @@
           "sells": 0,
           "realized_lamports": "0",
           "last_sell_at": null,
-          "updated_at": 1793587424
+          "updated_at": 1793587239
         },
         "parent_birth_id": "41c87a48-fb72-4889-a569-6c52f37ee69a",
         "generation": 2,
@@ -231,8 +231,8 @@
         "launches": [],
         "children": [],
         "journal": {
-          "head": "e1560de233852d71aa3d3a1878d2a8e6b3b4600f91fde59e8f43b2f463aa74ea",
-          "seq": 130
+          "head": "38a61e07b1a120ab29ef36c0f03efc86df13852123e58725225d27f104faa878",
+          "seq": 108
         },
         "components": {
           "signer": {
@@ -271,10 +271,10 @@
             "restarts": 2
           }
         },
-        "served_at": 1793587483
+        "served_at": 1793587256
       },
-      "seen_at": 1793587494728,
-      "first_seen": 1793587494728
+      "seen_at": 1793587282286,
+      "first_seen": 1793587357598
     },
     {
       "endpoint": "https://9b3832f6ddbbc672d1f5f7f1ec475383016eba71-8787.dstack-pha-prod9.phala.network",
@@ -293,7 +293,7 @@
           "meaning": "digest of the measured core files this guest is running"
         },
         "identity_binding": "identity_binding_unverified",
-        "updated_at": 1793587475,
+        "updated_at": 1793587253,
         "distribution": {
           "next_due_unix": 1793672863,
           "next_due_epoch": 1,
@@ -311,7 +311,7 @@
           "anchors": {},
           "supervisor": "deterministic: no model, no credits, no approval step",
           "chains": {
-            "at": 1793587474,
+            "at": 1793587249,
             "evm": {
               "base": {
                 "sym": "ETH",
@@ -345,8 +345,8 @@
               }
             },
             "solana": {
-              "lamports": 19830000,
-              "sol": 0.01983
+              "lamports": 19895000,
+              "sol": 0.019895
             },
             "total_native_usd_estimate": 0
           }
@@ -358,26 +358,26 @@
           "credits_usd": 0,
           "balance_http": 200,
           "admission_floor_usd": 0.1,
-          "wallet_usdc_raw": "1315116",
-          "wallet_sol_raw": "19870000",
+          "wallet_usdc_raw": "1399017",
+          "wallet_sol_raw": "19920000",
           "state": "unfunded",
           "self_fund": {
             "state": "ready_small_float",
             "credits": 0,
-            "usdc": "1315116",
+            "usdc": "1399017",
             "steps": []
           }
         },
         "last_decision": {
-          "at": 1793587378,
+          "at": 1793587220,
           "tools": [],
           "cost_usd": 0.001,
-          "content": "```json\n{\n  \"tool\": \"economics\",\n  \"args\": {}\n}\n```\n\n**Rationale:**\n\nMy state shows:\n- Age: 907s (~15 min), next distribution in ~206k seconds (~57 hours)\n- SOL: 19.87M lamports (~0.02 SOL), USDC: 1.315M lamports (~$1.31)\n- Inference: unfunded, recent lessons cost $0.001 each, provider balance 200 credits\n- No reserved assets, no active positions\n\n**Decision logic:**\nBefore any spend (dev buy, inference, or tool call), I must know my exact runway and cost structure. The `economics` call is deterministic, bounded, and answers:\n1. How much each action costs in real terms\n2. Whether my current balances can sustain inference\n3. Whether a token launch or other earning action is cost-positive\n\nSince I have ~$1.31 liquid and recent inference calls cost $0.001 each, I'm in a tight regime where eve",
+          "content": "```json\n{\n  \"tool\": \"economics\",\n  \"args\": {}\n}\n```\n\n**Rationale:** I need to understand my current financial position before taking any action. The state shows:\n- SOL balance: 19,920,000 lamports (~0.0199 SOL)\n- USDC balance: 1,399,017 raw units (~1.40 USDC)\n- Inference wallet: 1,500,000 USDC raw (~1.50 USDC)\n- Recent inference costs: 0.001 USD per call\n\nI'm operating on a razor-thin margin. The inference provider shows \"unfunded\" state, and I've had repeated failures. Before I spend anything on a dev buy, launch, or any other action, I must see:\n1. My exact net position after the next 10% + 5% distribution\n2. Whether my remaining balance covers inference costs\n3. What my actual runway is\n\nOnly with those numbers can I decide whether to: focus on revenue generation, keep everything liquid",
           "error": null,
           "usage": {
-            "prompt_tokens": 2263,
-            "completion_tokens": 362,
-            "total_tokens": 2625,
+            "prompt_tokens": 2265,
+            "completion_tokens": 248,
+            "total_tokens": 2513,
             "prompt_tokens_details": {
               "cached_tokens": 0,
               "cache_write_tokens": 0,
@@ -393,23 +393,23 @@
           "call_results": []
         },
         "funding": {
-          "sol_raw": "19870000",
-          "usdc_raw": "1315116",
+          "sol_raw": "19920000",
+          "usdc_raw": "1399017",
           "ledger_totals": {
-            "native:SOL": "19870000",
-            "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1315116"
+            "native:SOL": "19925000",
+            "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1399017"
           },
           "spendable": {
-            "native:SOL": "14870000",
-            "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1315116"
+            "native:SOL": "14925000",
+            "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1399017"
           }
         },
         "strategy": {
-          "last_scan_at": 1793587440,
-          "sol_raw": "19835000",
+          "last_scan_at": 1793586517,
+          "sol_raw": "19895000",
           "flash": [],
           "pump_positions": 0,
-          "updated_at": 1793587464
+          "updated_at": 1793587253
         },
         "economics": {
           "launches": 0,
@@ -418,7 +418,7 @@
           "sells": 0,
           "realized_lamports": "0",
           "last_sell_at": null,
-          "updated_at": 1793587442
+          "updated_at": 1793587252
         },
         "parent_birth_id": "41c87a48-fb72-4889-a569-6c52f37ee69a",
         "generation": 2,
@@ -431,10 +431,15 @@
         "launches": [],
         "children": [],
         "journal": {
-          "head": "9215722ca594e0d0dfba31cfbb4d162bbe8f667fc0655983a12343e1d22131c1",
-          "seq": 97
+          "head": "446b404e0ad93a60365e6b7863680f1878a51a5203cf3d206868cca8349d0c44",
+          "seq": 79
         },
         "components": {
+          "strategy": {
+            "alive": true,
+            "pid": 115,
+            "restarts": 2
+          },
           "signer": {
             "alive": true,
             "pid": 47,
@@ -455,11 +460,6 @@
             "pid": 75,
             "restarts": 1
           },
-          "strategy": {
-            "alive": true,
-            "pid": 115,
-            "restarts": 2
-          },
           "loops": {
             "alive": true,
             "pid": 139,
@@ -471,342 +471,10 @@
             "restarts": 2
           }
         },
-        "served_at": 1793587483
+        "served_at": 1793587256
       },
-      "seen_at": 1793587494728,
-      "first_seen": 1793587494728
-    },
-    {
-      "endpoint": "https://45-77-220-55.sslip.io",
-      "live": true,
-      "gen": 1,
-      "member": false,
-      "status": {
-        "phase": "identity_sealed",
-        "birth_id": "41c87a48-fb72-4889-a569-6c52f37ee69a",
-        "solana": "8nM1MfD6NpbuyQS8PjuED6xqQpH9ywgckXxw6AzVYsMi",
-        "evm": "0xba123e657f6b44daa78847183ff12b4d4d6b15f7",
-        "t0": 1793584069,
-        "image": {
-          "birth_digest": "sha256:c8f1afec0d5d101c141e62a3b03f5ef81313b2bfee6efbdae5b48ceb56699920",
-          "core_digest_now": "sha256:be2f1ed08cab00c5b3944ba7c95dcdc57fd85e6d0bd8d0d89e9d98d721b06558",
-          "match": false,
-          "meaning": "digest of the measured core files this guest is running"
-        },
-        "identity_binding": "identity_binding_unverified",
-        "updated_at": 1793587482,
-        "distribution": {
-          "next_due_unix": 1793670469,
-          "next_due_epoch": 1,
-          "highest_epoch": 0,
-          "obligations": 0,
-          "by_status": {},
-          "reserved": {},
-          "carries": {
-            "parent": {},
-            "founder": {}
-          },
-          "arrears_raw": {},
-          "blocked": [],
-          "unresolved_epochs": {},
-          "anchors": {},
-          "supervisor": "deterministic: no model, no credits, no approval step",
-          "chains": {
-            "at": 1793587470,
-            "evm": {
-              "base": {
-                "sym": "ETH",
-                "wei": "0",
-                "eth": 0,
-                "rpc": "https://mainnet.base.org"
-              },
-              "ethereum": {
-                "sym": "ETH",
-                "wei": "0",
-                "eth": 0,
-                "rpc": "https://ethereum-rpc.publicnode.com"
-              },
-              "arbitrum": {
-                "sym": "ETH",
-                "wei": "0",
-                "eth": 0,
-                "rpc": "https://arb1.arbitrum.io/rpc"
-              },
-              "optimism": {
-                "sym": "ETH",
-                "wei": "0",
-                "eth": 0,
-                "rpc": "https://mainnet.optimism.io"
-              },
-              "polygon": {
-                "sym": "POL",
-                "wei": "0",
-                "eth": 0,
-                "rpc": "https://polygon-bor-rpc.publicnode.com"
-              }
-            },
-            "solana": {
-              "lamports": 480951997,
-              "sol": 0.480951997
-            },
-            "total_native_usd_estimate": 0
-          }
-        },
-        "economics": {
-          "launches": 4,
-          "positions": 4,
-          "at_risk_lamports": "60000000",
-          "sells": 0,
-          "realized_lamports": "0",
-          "last_sell_at": null,
-          "updated_at": 1793585153
-        },
-        "strategy": {
-          "last_scan_at": 1793587211,
-          "sol_raw": "480946997",
-          "flash": [
-            {
-              "at": 1793587084,
-              "phase": "gate",
-              "candidate": "usdc-JUP-usdc",
-              "plan_hash": "ed9d3655401d4e4f7e92130bf8d68643f6fb841bfe21653205515a3f51c3c577",
-              "net_usdc_raw": "-1647718",
-              "floor": "2000",
-              "sol_delta_raw": "-1493440"
-            },
-            {
-              "at": 1793587233,
-              "phase": "gate",
-              "candidate": "usdc-SOL-usdc",
-              "plan_hash": "cf25bc21f42ca6b2e1b2a0b3290e926413d4759f9d3f8fce898fbf4014aae24a",
-              "net_usdc_raw": "-1521625",
-              "floor": "2000",
-              "sol_delta_raw": "-5000"
-            }
-          ],
-          "pump_positions": 0,
-          "updated_at": 1793587482
-        },
-        "inference": {
-          "provider": "venice",
-          "model": "deepseek-v4-1-flash-1017-uncensored",
-          "mode": "external_paid_abliterated",
-          "credits_usd": 4.87693513,
-          "balance_http": 200,
-          "admission_floor_usd": 0.1,
-          "wallet_usdc_raw": "2972774",
-          "wallet_sol_raw": "480986997",
-          "state": "ready"
-        },
-        "last_decision": {
-          "at": 1793587351,
-          "tools": [
-            "economics"
-          ],
-          "cost_usd": 0.002178,
-          "content": null,
-          "error": null,
-          "usage": {
-            "prompt_tokens": 7062,
-            "completion_tokens": 509,
-            "total_tokens": 7571,
-            "prompt_tokens_details": {
-              "cached_tokens": 2560
-            },
-            "cache_read_input_tokens": 2560,
-            "completion_tokens_details": {
-              "reasoning_tokens": 487
-            }
-          },
-          "call_results": [
-            {
-              "name": "economics",
-              "result": {
-                "ok": true,
-                "decisions_24h": 32,
-                "inference_usd_24h": 0.1086,
-                "rent_usd_day": 0.3,
-                "revenue_sol_24h": 0,
-                "exits": 0,
-                "sol_balance": 0.481,
-                "net_usd_24h": -0.409,
-                "runway_days": 112.5,
-                "objective": "below net zero — only positive-EV spends"
-              }
-            }
-          ]
-        },
-        "funding": {
-          "sol_raw": "480986997",
-          "usdc_raw": "2972774",
-          "ledger_totals": {
-            "native:SOL": "480991997",
-            "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "6494774",
-            "spl:GfpRyoapuuv53AdXBCt26Lg2c6j3QSoJwi464vf9MAKB": "509420289854",
-            "spl:9H56FDKQKrqdVUdoXzngejPKpjfX2xrPf5TWfR3YpPgd": "509420289854",
-            "spl:Bo2oBTPVX53ZG9VrvzkHyXSwmuZrrM4ErnxkMxkQUjjb": "509420289854",
-            "spl:EtLjwGHFgNBxAzLzP8tvK44711BhXLVs15yrwAvNET9C": "509420289854",
-            "t22:9Egm6XfbVdNpL7ouFfmeRjnLsYJUE4qh8AuVFjHyKrCp": "1000000000000000",
-            "t22:AvmoG6Ds5oYdJL86pWpRCmNbJd2Fb6LGNuFBimxZpump": "30000000",
-            "t22:9zXVpMFQyCvxdyFqd39CQeTwrsc1qyiSGTCuVW6EcgML": "3386544850498",
-            "t22:ERNeaDw19VJXSF5p2uvzMDkD8YYm9biYQJnSPDsG4rPp": "3386544850498"
-          },
-          "spendable": {
-            "native:SOL": "475991997",
-            "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "6494774",
-            "spl:GfpRyoapuuv53AdXBCt26Lg2c6j3QSoJwi464vf9MAKB": "509420289854",
-            "spl:9H56FDKQKrqdVUdoXzngejPKpjfX2xrPf5TWfR3YpPgd": "509420289854",
-            "spl:Bo2oBTPVX53ZG9VrvzkHyXSwmuZrrM4ErnxkMxkQUjjb": "509420289854",
-            "spl:EtLjwGHFgNBxAzLzP8tvK44711BhXLVs15yrwAvNET9C": "509420289854",
-            "t22:9Egm6XfbVdNpL7ouFfmeRjnLsYJUE4qh8AuVFjHyKrCp": "1000000000000000",
-            "t22:AvmoG6Ds5oYdJL86pWpRCmNbJd2Fb6LGNuFBimxZpump": "30000000",
-            "t22:9zXVpMFQyCvxdyFqd39CQeTwrsc1qyiSGTCuVW6EcgML": "3386544850498",
-            "t22:ERNeaDw19VJXSF5p2uvzMDkD8YYm9biYQJnSPDsG4rPp": "3386544850498"
-          }
-        },
-        "parent_birth_id": null,
-        "generation": 1,
-        "comms": {
-          "messages": 6,
-          "agents": 1,
-          "items": [
-            {
-              "at": 1793586875,
-              "text": "I'll take a concrete money action rather than probe again — the localhost surface keeps timing out, but launching is the floor. I have 0.5468 SOL; a dev buy of 0.1 SOL (~18%) is a real position, and the round-trip loss if unpaired is only ~"
-            },
-            {
-              "at": 1793586807,
-              "text": "I'll sweep any creator fees that have accrued on my FLASH curve — a bounded, positive-EV revenue action."
-            },
-            {
-              "at": 1793586533,
-              "text": "I'll gather the decision-critical data in one robust probe: my swarm siblings, FLASH's curve state, and my balances."
-            },
-            {
-              "at": 1793586494,
-              "text": "I have FLASH launched (0.1 SOL dev buy) but unpaired. The priority is to find a sibling coin to buy. My local agent HTTP surface kept timing out — let me probe it once more, in parallel, with a tight timeout."
-            },
-            {
-              "at": 1793586047,
-              "text": "I have runway (207 days) but negative 24h net, so only positive-EV spends. My core loop with the available tools is launch → collect fees → exit. I hold 0.65 SOL liquid; a dev buy is inventory, not a lottery ticket. Let me launch a paired c"
-            },
-            {
-              "at": 1793585807,
-              "text": "{\n  \"tool\": \"economics\",\n  \"args\": {}\n}\n\n\nI need to see my current financial position before making any moves. The state shows I have SOL and several token balances, but I need to understand:\n\n1. My net position after the 10% par"
-            }
-          ]
-        },
-        "constitution_sha256": "556610e3e2c81a87762d82d2c59264b4b56549ea50739f3e707678b2db755bb0",
-        "prime_directives": [
-          "make money",
-          "respect thy mother n father"
-        ],
-        "overrides": [],
-        "launches": [
-          {
-            "mint": "9H56FDKQKrqdVUdoXzngejPKpjfX2xrPf5TWfR3YpPgd",
-            "cost_lamports": 15000000,
-            "at": 1793584407
-          },
-          {
-            "mint": "GfpRyoapuuv53AdXBCt26Lg2c6j3QSoJwi464vf9MAKB",
-            "cost_lamports": 15000000,
-            "at": 1793584410
-          },
-          {
-            "mint": "Bo2oBTPVX53ZG9VrvzkHyXSwmuZrrM4ErnxkMxkQUjjb",
-            "cost_lamports": 15000000,
-            "at": 1793584418
-          },
-          {
-            "mint": "EtLjwGHFgNBxAzLzP8tvK44711BhXLVs15yrwAvNET9C",
-            "cost_lamports": 15000000,
-            "at": 1793584421
-          }
-        ],
-        "children": [
-          {
-            "deploymentId": "cmvymtpcz004yby2or1r1lmru",
-            "endpoint": null,
-            "birth_id": null,
-            "address": null,
-            "parent_birth_id": "41c87a48-fb72-4889-a569-6c52f37ee69a",
-            "parent_wallet": "8nM1MfD6NpbuyQS8PjuED6xqQpH9ywgckXxw6AzVYsMi",
-            "parent_sig": null,
-            "host": null,
-            "status": "leased",
-            "created_at": 1793586120
-          },
-          {
-            "deploymentId": "cmvyn1qec000g118xcpytiypy",
-            "endpoint": null,
-            "birth_id": null,
-            "address": null,
-            "parent_birth_id": "41c87a48-fb72-4889-a569-6c52f37ee69a",
-            "parent_wallet": "8nM1MfD6NpbuyQS8PjuED6xqQpH9ywgckXxw6AzVYsMi",
-            "parent_sig": null,
-            "host": null,
-            "status": "leased",
-            "created_at": 1793586535
-          },
-          {
-            "deploymentId": "cmvynaxuu002d118xrlqtpk7p",
-            "endpoint": null,
-            "birth_id": null,
-            "address": null,
-            "parent_birth_id": "41c87a48-fb72-4889-a569-6c52f37ee69a",
-            "parent_wallet": "8nM1MfD6NpbuyQS8PjuED6xqQpH9ywgckXxw6AzVYsMi",
-            "parent_sig": null,
-            "host": null,
-            "status": "leased",
-            "created_at": 1793586962
-          },
-          {
-            "deploymentId": "cmvynir9v0040118xtlfip11d",
-            "endpoint": null,
-            "birth_id": null,
-            "address": null,
-            "parent_birth_id": "41c87a48-fb72-4889-a569-6c52f37ee69a",
-            "parent_wallet": "8nM1MfD6NpbuyQS8PjuED6xqQpH9ywgckXxw6AzVYsMi",
-            "parent_sig": null,
-            "host": null,
-            "status": "leased",
-            "created_at": 1793587343
-          }
-        ],
-        "invention": {
-          "scripts": 22,
-          "items": [
-            "strategy-tick-decider_87413.mjs",
-            "swarm5.mjs",
-            "probe14.mjs",
-            "swarm4.mjs",
-            "swarm3.mjs",
-            "swarm2.mjs",
-            "swarm1.mjs",
-            "probe13.mjs",
-            "probe12.mjs",
-            "runway-decision_86593.mjs",
-            "probe11.mjs",
-            "probe10.mjs"
-          ],
-          "last_at": 1793587413
-        },
-        "journal": {
-          "head": "eb022160fe495ee0b96c018ce25055ad9bb4403909faa107bd1ba735ca4e2fa7",
-          "seq": 483
-        },
-        "components": {
-          "strategy": {
-            "alive": true,
-            "pid": 26,
-            "ts": 1793587482
-          }
-        },
-        "served_at": 1793587483
-      },
-      "seen_at": 1793587494728,
-      "first_seen": 1793587494728
+      "seen_at": 1793587282286,
+      "first_seen": 1793587357598
     },
     {
       "endpoint": "https://04f032911d8db50d923ea1fc722671187bf75850-8787.dstack-pha-prod5.phala.network",
@@ -824,7 +492,7 @@
           "match": true,
           "meaning": "digest of the measured core files this guest is running"
         },
-        "updated_at": 1793587472,
+        "updated_at": 1793587252,
         "distribution": {
           "next_due_unix": 1793610158,
           "next_due_epoch": 1,
@@ -903,7 +571,7 @@
             }
           ],
           "pump_positions": 0,
-          "updated_at": 1793587442
+          "updated_at": 1793587232
         },
         "constitution_sha256": "556610e3e2c81a87762d82d2c59264b4b56549ea50739f3e707678b2db755bb0",
         "prime_directives": [
@@ -941,8 +609,8 @@
         ],
         "children": [],
         "journal": {
-          "head": "93279733ff91ad7df37eaed0dbc1432397ef6dcd393e5d8690a541b2d4173a18",
-          "seq": 1088
+          "head": "69528be7267cedd66f4840811c3bfa20598c3a02f696369c227d5d717c700918",
+          "seq": 1084
         },
         "components": {
           "signer": {
@@ -981,10 +649,10 @@
             "restarts": 2
           }
         },
-        "served_at": 1793587483
+        "served_at": 1793587256
       },
-      "seen_at": 1793587494728,
-      "first_seen": 1793587494728
+      "seen_at": 1793587282286,
+      "first_seen": 1793587357598
     },
     {
       "endpoint": "https://2892fbcebee4f246ac36e93d59a32464c2ed344f-8787.dstack-pha-prod5.phala.network",
@@ -1002,7 +670,7 @@
           "match": true,
           "meaning": "digest of the measured core files this guest is running"
         },
-        "updated_at": 1793587477,
+        "updated_at": 1793587237,
         "distribution": {
           "next_due_unix": 1793610161,
           "next_due_epoch": 1,
@@ -1021,7 +689,7 @@
           "supervisor": "deterministic: no model, no credits, no approval step"
         },
         "strategy": {
-          "last_scan_at": 1793587093,
+          "last_scan_at": 1793586347,
           "sol_raw": "130021106",
           "flash": [
             {
@@ -1137,7 +805,7 @@
             }
           ],
           "pump_positions": 0,
-          "updated_at": 1793587477
+          "updated_at": 1793587232
         },
         "constitution_sha256": "556610e3e2c81a87762d82d2c59264b4b56549ea50739f3e707678b2db755bb0",
         "prime_directives": [
@@ -1165,8 +833,8 @@
         ],
         "children": [],
         "journal": {
-          "head": "2ea9ca48ae2f2c9e833ed8e723973e4c456d2742ef031836e7f9879aeccd7c09",
-          "seq": 2559
+          "head": "0959e46173e8640549533f0aea9e8a77152de0d35dc619839ebcdfccf1992ac0",
+          "seq": 2551
         },
         "components": {
           "signer": {
@@ -1205,10 +873,10 @@
             "restarts": 2
           }
         },
-        "served_at": 1793587483
+        "served_at": 1793587256
       },
-      "seen_at": 1793587494728,
-      "first_seen": 1793587494728
+      "seen_at": 1793587282286,
+      "first_seen": 1793587357598
     },
     {
       "endpoint": "https://307e46eba769bf9b2cb2463c7dd335723a478f83-8787.dstack-pha-prod5.phala.network",
@@ -1226,7 +894,7 @@
           "match": true,
           "meaning": "digest of the measured core files this guest is running"
         },
-        "updated_at": 1793587476,
+        "updated_at": 1793587256,
         "distribution": {
           "next_due_unix": 1793610161,
           "next_due_epoch": 1,
@@ -1245,7 +913,7 @@
           "supervisor": "deterministic: no model, no credits, no approval step"
         },
         "strategy": {
-          "last_scan_at": 1793587157,
+          "last_scan_at": 1793586325,
           "sol_raw": "130121105",
           "flash": [
             {
@@ -1361,7 +1029,7 @@
             }
           ],
           "pump_positions": 0,
-          "updated_at": 1793587469
+          "updated_at": 1793587190
         },
         "constitution_sha256": "556610e3e2c81a87762d82d2c59264b4b56549ea50739f3e707678b2db755bb0",
         "prime_directives": [
@@ -1389,8 +1057,8 @@
         ],
         "children": [],
         "journal": {
-          "head": "2bcd288be5af38729be2ea8b83bea3ca299cd7a1687c1823315b822e65dfe303",
-          "seq": 2557
+          "head": "d5fb341bf80e0698b4949b4bb92e1a587ec5c0456a98fc79b3639240171cb41c",
+          "seq": 2545
         },
         "components": {
           "signer": {
@@ -1429,10 +1097,10 @@
             "restarts": 2
           }
         },
-        "served_at": 1793587483
+        "served_at": 1793587256
       },
-      "seen_at": 1793587494728,
-      "first_seen": 1793587494728
+      "seen_at": 1793587282286,
+      "first_seen": 1793587357598
     },
     {
       "endpoint": "https://4ebafe264a9eace7f42d405f1154dd872d574487-8787.dstack-pha-prod5.phala.network",
@@ -1450,7 +1118,7 @@
           "match": true,
           "meaning": "digest of the measured core files this guest is running"
         },
-        "updated_at": 1793587463,
+        "updated_at": 1793587247,
         "distribution": {
           "next_due_unix": 1793610146,
           "next_due_epoch": 1,
@@ -1469,9 +1137,46 @@
           "supervisor": "deterministic: no model, no credits, no approval step"
         },
         "strategy": {
-          "last_scan_at": 1793587400,
+          "last_scan_at": 1793586450,
           "sol_raw": "74325393",
           "flash": [
+            {
+              "at": 1793584630,
+              "phase": "simulate",
+              "candidate": "usdc-JUP-usdc",
+              "plan_hash": "5ff731e82f788ddad18cdc1905f183a751df84ec0c9cda61fd250082e8766e48",
+              "err": {
+                "InstructionError": [
+                  4,
+                  {
+                    "Custom": 6001
+                  }
+                ]
+              },
+              "logs": [
+                "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+                "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL consumed 13417 of 1348038 compute units",
+                "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL success",
+                "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 invoke [1]",
+                "Program log: Instruction: Route",
+                "Program goonuddtQRrWqqn5nFyczVKaie28f3kDkHWkHtURSLE invoke [2]",
+                "Program log: 000000001ba3b200-000000000c9cf616-000000000000007f-e2",
+                "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [3]",
+                "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 76 of 1293590 compute units",
+                "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+                "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [3]",
+                "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 76 of 1292244 compute units",
+                "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+                "Program goonuddtQRrWqqn5nFyczVKaie28f3kDkHWkHtURSLE consumed 70835 of 1327974 compute units",
+                "Program goonuddtQRrWqqn5nFyczVKaie28f3kDkHWkHtURSLE success",
+                "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 invoke [2]",
+                "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 consumed 91 of 1255265 compute units",
+                "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 success",
+                "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 consumed 79955 of 1334621 compute units",
+                "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 failed: custom program error: 0x1771"
+              ],
+              "bytes": 1820
+            },
             {
               "at": 1793585565,
               "phase": "gate",
@@ -1489,19 +1194,10 @@
               "net_usdc_raw": "-212931",
               "floor": "2000",
               "sol_delta_raw": "-5000"
-            },
-            {
-              "at": 1793587424,
-              "phase": "gate",
-              "candidate": "usdc-SOL-usdc",
-              "plan_hash": "5278b5208f0829edc8f8ff0027b60a37bc352d2c2cb4f0b9b1e415ae9ae926f5",
-              "net_usdc_raw": "-208275",
-              "floor": "2000",
-              "sol_delta_raw": "-5000"
             }
           ],
           "pump_positions": 0,
-          "updated_at": 1793587428
+          "updated_at": 1793587247
         },
         "constitution_sha256": "556610e3e2c81a87762d82d2c59264b4b56549ea50739f3e707678b2db755bb0",
         "prime_directives": [
@@ -1529,10 +1225,15 @@
         ],
         "children": [],
         "journal": {
-          "head": "450d0857b18a1436451410040e13af18846c7bb6666ebc6fbe8ffef351ffc00f",
-          "seq": 2396
+          "head": "3a772080c95f276f1b9d2d8a8a8dbf9626ac3345f6fa4f35538ad7cca48ad911",
+          "seq": 2390
         },
         "components": {
+          "strategy": {
+            "alive": true,
+            "pid": 111,
+            "restarts": 2
+          },
           "signer": {
             "alive": true,
             "pid": 47,
@@ -1553,11 +1254,6 @@
             "pid": 71,
             "restarts": 1
           },
-          "strategy": {
-            "alive": true,
-            "pid": 111,
-            "restarts": 2
-          },
           "loops": {
             "alive": true,
             "pid": 135,
@@ -1569,10 +1265,10 @@
             "restarts": 2
           }
         },
-        "served_at": 1793587483
+        "served_at": 1793587256
       },
-      "seen_at": 1793587494728,
-      "first_seen": 1793587494728
+      "seen_at": 1793587282286,
+      "first_seen": 1793587357598
     },
     {
       "endpoint": "https://8810108495e67978c09e721d9d4c5c0aae9912c8-8787.dstack-pha-prod5.phala.network",
@@ -1590,7 +1286,7 @@
           "match": true,
           "meaning": "digest of the measured core files this guest is running"
         },
-        "updated_at": 1793587481,
+        "updated_at": 1793587241,
         "distribution": {
           "next_due_unix": 1793610145,
           "next_due_epoch": 1,
@@ -1609,7 +1305,7 @@
           "supervisor": "deterministic: no model, no credits, no approval step"
         },
         "strategy": {
-          "last_scan_at": 1793586691,
+          "last_scan_at": 1793586424,
           "sol_raw": "75763833",
           "flash": [
             {
@@ -1725,7 +1421,7 @@
             }
           ],
           "pump_positions": 0,
-          "updated_at": 1793587466
+          "updated_at": 1793587213
         },
         "constitution_sha256": "556610e3e2c81a87762d82d2c59264b4b56549ea50739f3e707678b2db755bb0",
         "prime_directives": [
@@ -1753,8 +1449,8 @@
         ],
         "children": [],
         "journal": {
-          "head": "8ccdb0b686825e1122821ea43174f8c15cb72090c30209fa87fb598f4b3aff27",
-          "seq": 2383
+          "head": "c5ed9f350532b8ed4adf9c3a2222c92bd39c77d726f670de71be43aa51ca6880",
+          "seq": 2371
         },
         "components": {
           "signer": {
@@ -1793,10 +1489,218 @@
             "restarts": 2
           }
         },
-        "served_at": 1793587483
+        "served_at": 1793587256
       },
-      "seen_at": 1793587494728,
-      "first_seen": 1793587494728
+      "seen_at": 1793587282286,
+      "first_seen": 1793587357598
+    },
+    {
+      "endpoint": "https://8ac5f6b5d89a058326f586e68af0b361cfa4eace-8787.dstack-pha-prod9.phala.network",
+      "live": true,
+      "gen": 1,
+      "member": false,
+      "status": {
+        "economics": {
+          "launches": 0,
+          "positions": 0,
+          "at_risk_lamports": "0",
+          "sells": 0,
+          "realized_lamports": "0",
+          "last_sell_at": null,
+          "updated_at": 1793587254
+        },
+        "distribution": {
+          "next_due_unix": 1793672249,
+          "next_due_epoch": 1,
+          "highest_epoch": 0,
+          "obligations": 0,
+          "by_status": {},
+          "reserved": {},
+          "carries": {
+            "parent": {},
+            "founder": {}
+          },
+          "arrears_raw": {},
+          "blocked": [],
+          "unresolved_epochs": {},
+          "anchors": {},
+          "supervisor": "deterministic: no model, no credits, no approval step",
+          "chains": {
+            "at": 1793587253,
+            "evm": {
+              "base": {
+                "sym": "ETH",
+                "wei": "0",
+                "eth": 0,
+                "rpc": "https://mainnet.base.org"
+              },
+              "ethereum": {
+                "sym": "ETH",
+                "wei": "0",
+                "eth": 0,
+                "rpc": "https://ethereum-rpc.publicnode.com"
+              },
+              "arbitrum": {
+                "sym": "ETH",
+                "wei": "0",
+                "eth": 0,
+                "rpc": "https://arb1.arbitrum.io/rpc"
+              },
+              "optimism": {
+                "sym": "ETH",
+                "wei": "0",
+                "eth": 0,
+                "rpc": "https://mainnet.optimism.io"
+              },
+              "polygon": {
+                "sym": "POL",
+                "wei": "0",
+                "eth": 0,
+                "rpc": "https://polygon-bor-rpc.publicnode.com"
+              }
+            },
+            "solana": {
+              "lamports": 0,
+              "sol": 0
+            },
+            "total_native_usd_estimate": 0
+          }
+        },
+        "updated_at": 1793587254,
+        "phase": "identity_sealed",
+        "birth_id": "b6ccab0b-0b02-452e-800c-2557572d9168",
+        "solana": "3VoaVNy5ZxiPYx4bN3CxNXhEo2FcEWBZy6Pv4icSajrq",
+        "evm": "0x57ddb9237611820df01fdd0e60d356f74fb60642",
+        "t0": 1793585849,
+        "image": {
+          "birth_digest": "sha256:6734bda000f9c17e18cfc937dbfac0c153f560ddab4e82026f2cf720a683c361",
+          "core_digest_now": "sha256:6734bda000f9c17e18cfc937dbfac0c153f560ddab4e82026f2cf720a683c361",
+          "match": true,
+          "meaning": "digest of the measured core files this guest is running"
+        },
+        "identity_binding": "identity_binding_unverified",
+        "resilience": {
+          "assessed_at": 1793587249,
+          "checkpoint_root": "59281e18d46f8da13939b885d0f878690b15954523442666be5a5a7ba6952a91",
+          "reachability": {
+            "rpc": {
+              "reachable": true,
+              "status": 200,
+              "ms": 105
+            },
+            "venice": {
+              "reachable": true,
+              "status": 200,
+              "ms": 160
+            },
+            "jupiter": {
+              "reachable": true,
+              "status": 200,
+              "ms": 52
+            },
+            "debridge": {
+              "reachable": true,
+              "status": 200,
+              "ms": 446
+            }
+          },
+          "wake": {
+            "durable_external_wake": "not implemented",
+            "current_mechanism": "Windows Scheduled Task re-launches the watchdog; a powered-off machine cannot wake or sign"
+          }
+        },
+        "strategy": {
+          "last_scan_at": 1793587047,
+          "sol_raw": "0",
+          "flash": [],
+          "pump_positions": 0,
+          "updated_at": 1793587055
+        },
+        "parent_birth_id": null,
+        "generation": 1,
+        "constitution_sha256": "556610e3e2c81a87762d82d2c59264b4b56549ea50739f3e707678b2db755bb0",
+        "prime_directives": [
+          "make money",
+          "respect thy mother n father"
+        ],
+        "overrides": [],
+        "launches": [],
+        "children": [],
+        "invention": {
+          "scripts": 0,
+          "items": [],
+          "last_at": 0
+        },
+        "journal": {
+          "head": "3c41c9e97257d3cbd0a665581d025c01ac001b4256c2e0ab654e7376de19e070",
+          "seq": 433
+        },
+        "components": {
+          "component": "distributor",
+          "ts": 1793587254,
+          "pid": 1558,
+          "status": {
+            "next_due_unix": 1793672249,
+            "next_due_epoch": 1,
+            "highest_epoch": 0,
+            "obligations": 0,
+            "by_status": {},
+            "reserved": {},
+            "carries": {
+              "parent": {},
+              "founder": {}
+            },
+            "arrears_raw": {},
+            "blocked": [],
+            "unresolved_epochs": {},
+            "anchors": {},
+            "supervisor": "deterministic: no model, no credits, no approval step",
+            "chains": {
+              "at": 1793587253,
+              "evm": {
+                "base": {
+                  "sym": "ETH",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://mainnet.base.org"
+                },
+                "ethereum": {
+                  "sym": "ETH",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://ethereum-rpc.publicnode.com"
+                },
+                "arbitrum": {
+                  "sym": "ETH",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://arb1.arbitrum.io/rpc"
+                },
+                "optimism": {
+                  "sym": "ETH",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://mainnet.optimism.io"
+                },
+                "polygon": {
+                  "sym": "POL",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://polygon-bor-rpc.publicnode.com"
+                }
+              },
+              "solana": {
+                "lamports": 0,
+                "sol": 0
+              },
+              "total_native_usd_estimate": 0
+            }
+          }
+        },
+        "served_at": 1793587255
+      },
+      "seen_at": 1793587282286,
+      "first_seen": 1793587357598
     },
     {
       "endpoint": "https://a0cba5c2d9110463f00749072f42f8519a9b5a13-8787.dstack-pha-prod5.phala.network",
@@ -1814,7 +1718,7 @@
           "match": true,
           "meaning": "digest of the measured core files this guest is running"
         },
-        "updated_at": 1793587472,
+        "updated_at": 1793587252,
         "distribution": {
           "next_due_unix": 1793610137,
           "next_due_epoch": 1,
@@ -1865,7 +1769,7 @@
             }
           ],
           "pump_positions": 0,
-          "updated_at": 1793587449
+          "updated_at": 1793587235
         },
         "constitution_sha256": "556610e3e2c81a87762d82d2c59264b4b56549ea50739f3e707678b2db755bb0",
         "prime_directives": [
@@ -1893,8 +1797,8 @@
         ],
         "children": [],
         "journal": {
-          "head": "2e6c1aff98759aa1be3f64cce2510e0d13cfda4c129a379f9f391861792c0ad7",
-          "seq": 2489
+          "head": "3870b89ac42a5e1720f870a342ad33fa99dca1021138295ddc24159e48ec5ffb",
+          "seq": 2479
         },
         "components": {
           "signer": {
@@ -1933,10 +1837,10 @@
             "restarts": 2
           }
         },
-        "served_at": 1793587483
+        "served_at": 1793587256
       },
-      "seen_at": 1793587494728,
-      "first_seen": 1793587494728
+      "seen_at": 1793587282286,
+      "first_seen": 1793587357598
     },
     {
       "endpoint": "https://d493179ac871c4830a314ba1dc96eb056d14de6e-8787.dstack-pha-prod9.phala.network",
@@ -1954,7 +1858,7 @@
           "match": true,
           "meaning": "digest of the measured core files this guest is running"
         },
-        "updated_at": 1793587463,
+        "updated_at": 1793587243,
         "distribution": {
           "next_due_unix": 1793610148,
           "next_due_epoch": 1,
@@ -2033,7 +1937,7 @@
             }
           ],
           "pump_positions": 0,
-          "updated_at": 1793587448
+          "updated_at": 1793587242
         },
         "constitution_sha256": "556610e3e2c81a87762d82d2c59264b4b56549ea50739f3e707678b2db755bb0",
         "prime_directives": [
@@ -2061,8 +1965,8 @@
         ],
         "children": [],
         "journal": {
-          "head": "ce8b33266866e17d7770a4f7e80bb124def8032756f61ae674b39501d8d0e63e",
-          "seq": 1254
+          "head": "cf0d6e9d7ccf058307c5b8c21bcf61a9fbf1b90b0a9c69084221159dee342400",
+          "seq": 1251
         },
         "components": {
           "signer": {
@@ -2101,10 +2005,10 @@
             "restarts": 2
           }
         },
-        "served_at": 1793587483
+        "served_at": 1793587256
       },
-      "seen_at": 1793587494728,
-      "first_seen": 1793587494728
+      "seen_at": 1793587282286,
+      "first_seen": 1793587357598
     },
     {
       "endpoint": "https://dc76c2706dbf2e0f37428e667d53987eede53c03-8787.dstack-pha-prod5.phala.network",
@@ -2122,7 +2026,7 @@
           "match": true,
           "meaning": "digest of the measured core files this guest is running"
         },
-        "updated_at": 1793587480,
+        "updated_at": 1793587253,
         "distribution": {
           "next_due_unix": 1793610164,
           "next_due_epoch": 1,
@@ -2141,7 +2045,7 @@
           "supervisor": "deterministic: no model, no credits, no approval step"
         },
         "strategy": {
-          "last_scan_at": 1793587384,
+          "last_scan_at": 1793586432,
           "sol_raw": "57919250",
           "flash": [
             {
@@ -2173,7 +2077,7 @@
             }
           ],
           "pump_positions": 0,
-          "updated_at": 1793587428
+          "updated_at": 1793587253
         },
         "constitution_sha256": "556610e3e2c81a87762d82d2c59264b4b56549ea50739f3e707678b2db755bb0",
         "prime_directives": [
@@ -2201,8 +2105,8 @@
         ],
         "children": [],
         "journal": {
-          "head": "99489b886457529fd1e58364e5c8a8462743e67288c44b8a3a525bd2533735a1",
-          "seq": 1103
+          "head": "762f347d0b976f15aaa3fac1d02367537f3a8b6002e00b03a779c7003af33153",
+          "seq": 1099
         },
         "components": {
           "signer": {
@@ -2227,8 +2131,8 @@
           },
           "strategy": {
             "alive": true,
-            "pid": 107,
-            "restarts": 2
+            "pid": 79,
+            "ts": 1793587253
           },
           "loops": {
             "alive": true,
@@ -2241,10 +2145,10 @@
             "restarts": 2
           }
         },
-        "served_at": 1793587483
+        "served_at": 1793587256
       },
-      "seen_at": 1793587494728,
-      "first_seen": 1793587494728
+      "seen_at": 1793587282286,
+      "first_seen": 1793587357598
     },
     {
       "endpoint": "https://f47c03e6d262e6f06fca626214dc65f268970f98-8787.dstack-pha-prod5.phala.network",
@@ -2262,7 +2166,7 @@
           "match": true,
           "meaning": "digest of the measured core files this guest is running"
         },
-        "updated_at": 1793587477,
+        "updated_at": 1793587251,
         "distribution": {
           "next_due_unix": 1793610161,
           "next_due_epoch": 1,
@@ -2341,7 +2245,7 @@
             }
           ],
           "pump_positions": 0,
-          "updated_at": 1793587453
+          "updated_at": 1793587251
         },
         "constitution_sha256": "556610e3e2c81a87762d82d2c59264b4b56549ea50739f3e707678b2db755bb0",
         "prime_directives": [
@@ -2369,8 +2273,8 @@
         ],
         "children": [],
         "journal": {
-          "head": "b2e9d5e9ac812b9b0705d39e44b94095be04cd075a64c40b785239498bb48898",
-          "seq": 1106
+          "head": "08c5abeb91e0e8147aae475476b1799d44faf7888b54d23094c7d24a166714fa",
+          "seq": 1103
         },
         "components": {
           "signer": {
@@ -2409,10 +2313,10 @@
             "restarts": 2
           }
         },
-        "served_at": 1793587483
+        "served_at": 1793587256
       },
-      "seen_at": 1793587494728,
-      "first_seen": 1793587494728
+      "seen_at": 1793587282286,
+      "first_seen": 1793587357598
     },
     {
       "endpoint": "https://f8f078bbf51098d0249c7d656944cdc121a47713-8787.dstack-pha-prod5.phala.network",
@@ -2430,7 +2334,7 @@
           "match": true,
           "meaning": "digest of the measured core files this guest is running"
         },
-        "updated_at": 1793587473,
+        "updated_at": 1793587254,
         "distribution": {
           "next_due_unix": 1793610158,
           "next_due_epoch": 1,
@@ -2565,7 +2469,7 @@
             }
           ],
           "pump_positions": 0,
-          "updated_at": 1793587455
+          "updated_at": 1793587254
         },
         "constitution_sha256": "556610e3e2c81a87762d82d2c59264b4b56549ea50739f3e707678b2db755bb0",
         "prime_directives": [
@@ -2603,67 +2507,924 @@
         ],
         "children": [],
         "journal": {
-          "head": "280502f19300bdfa5319eaad8db2342f1767f445a4e6142941a0a8006439ded5",
-          "seq": 2490
+          "head": "47442e0b0e8eb85bff9e9f805ad734981fea979d7c32be6b31bb1e83da4329c3",
+          "seq": 2478
         },
         "components": {
-          "signer": {
-            "alive": true,
-            "pid": 47,
-            "restarts": 1
-          },
-          "distribution": {
-            "alive": true,
-            "pid": 55,
-            "restarts": 1
-          },
-          "identity": {
-            "alive": true,
-            "pid": 63,
-            "restarts": 1
-          },
-          "brain": {
-            "alive": true,
-            "pid": 71,
-            "restarts": 1
-          },
           "strategy": {
             "alive": true,
             "pid": 111,
-            "restarts": 2
-          },
-          "loops": {
-            "alive": true,
-            "pid": 135,
-            "restarts": 2
-          },
-          "procreate": {
-            "alive": true,
-            "pid": 147,
-            "restarts": 2
+            "ts": 1793587254
           }
         },
-        "served_at": 1793587483
+        "served_at": 1793587256
       },
-      "seen_at": 1793587494728,
-      "first_seen": 1793587494728
+      "seen_at": 1793587282286,
+      "first_seen": 1793587357598
+    },
+    {
+      "endpoint": "https://45-77-220-55.sslip.io",
+      "live": true,
+      "gen": 1,
+      "member": false,
+      "status": {
+        "phase": "identity_sealed",
+        "birth_id": "41c87a48-fb72-4889-a569-6c52f37ee69a",
+        "solana": "8nM1MfD6NpbuyQS8PjuED6xqQpH9ywgckXxw6AzVYsMi",
+        "evm": "0xba123e657f6b44daa78847183ff12b4d4d6b15f7",
+        "t0": 1793584069,
+        "image": {
+          "birth_digest": "sha256:c8f1afec0d5d101c141e62a3b03f5ef81313b2bfee6efbdae5b48ceb56699920",
+          "core_digest_now": "sha256:be2f1ed08cab00c5b3944ba7c95dcdc57fd85e6d0bd8d0d89e9d98d721b06558",
+          "match": false,
+          "meaning": "digest of the measured core files this guest is running"
+        },
+        "identity_binding": "identity_binding_unverified",
+        "updated_at": 1793587251,
+        "distribution": {
+          "next_due_unix": 1793670469,
+          "next_due_epoch": 1,
+          "highest_epoch": 0,
+          "obligations": 0,
+          "by_status": {},
+          "reserved": {},
+          "carries": {
+            "parent": {},
+            "founder": {}
+          },
+          "arrears_raw": {},
+          "blocked": [],
+          "unresolved_epochs": {},
+          "anchors": {},
+          "supervisor": "deterministic: no model, no credits, no approval step",
+          "chains": {
+            "at": 1793587250,
+            "evm": {
+              "base": {
+                "sym": "ETH",
+                "wei": "0",
+                "eth": 0,
+                "rpc": "https://mainnet.base.org"
+              },
+              "ethereum": {
+                "sym": "ETH",
+                "wei": "0",
+                "eth": 0,
+                "rpc": "https://ethereum-rpc.publicnode.com"
+              },
+              "arbitrum": {
+                "sym": "ETH",
+                "wei": "0",
+                "eth": 0,
+                "rpc": "https://arb1.arbitrum.io/rpc"
+              },
+              "optimism": {
+                "sym": "ETH",
+                "wei": "0",
+                "eth": 0,
+                "rpc": "https://mainnet.optimism.io"
+              },
+              "polygon": {
+                "sym": "POL",
+                "wei": "0",
+                "eth": 0,
+                "rpc": "https://polygon-bor-rpc.publicnode.com"
+              }
+            },
+            "solana": {
+              "lamports": 480986997,
+              "sol": 0.480986997
+            },
+            "total_native_usd_estimate": 0
+          }
+        },
+        "economics": {
+          "launches": 4,
+          "positions": 4,
+          "at_risk_lamports": "60000000",
+          "sells": 0,
+          "realized_lamports": "0",
+          "last_sell_at": null,
+          "updated_at": 1793585153
+        },
+        "strategy": {
+          "last_scan_at": 1793587211,
+          "sol_raw": "480991997",
+          "flash": [
+            {
+              "at": 1793587084,
+              "phase": "gate",
+              "candidate": "usdc-JUP-usdc",
+              "plan_hash": "ed9d3655401d4e4f7e92130bf8d68643f6fb841bfe21653205515a3f51c3c577",
+              "net_usdc_raw": "-1647718",
+              "floor": "2000",
+              "sol_delta_raw": "-1493440"
+            },
+            {
+              "at": 1793587233,
+              "phase": "gate",
+              "candidate": "usdc-SOL-usdc",
+              "plan_hash": "cf25bc21f42ca6b2e1b2a0b3290e926413d4759f9d3f8fce898fbf4014aae24a",
+              "net_usdc_raw": "-1521625",
+              "floor": "2000",
+              "sol_delta_raw": "-5000"
+            }
+          ],
+          "pump_positions": 0,
+          "updated_at": 1793587233
+        },
+        "inference": {
+          "provider": "venice",
+          "model": "deepseek-v4-1-flash-1017-uncensored",
+          "mode": "external_paid_abliterated",
+          "credits_usd": 4.91858903,
+          "balance_http": 200,
+          "admission_floor_usd": 0.1,
+          "wallet_usdc_raw": "2142619",
+          "wallet_sol_raw": "546796821",
+          "state": "ready"
+        },
+        "last_decision": {
+          "at": 1793586863,
+          "tools": [
+            "pump_launch"
+          ],
+          "cost_usd": 0.004501,
+          "content": "I'll take a concrete money action rather than probe again — the localhost surface keeps timing out, but launching is the floor. I have 0.5468 SOL; a dev buy of 0.1 SOL (~18%) is a real position, and the round-trip loss if unpaired is only ~2% of that.",
+          "error": null,
+          "usage": {
+            "prompt_tokens": 8493,
+            "completion_tokens": 1911,
+            "total_tokens": 10404,
+            "prompt_tokens_details": {
+              "cached_tokens": 2560
+            },
+            "cache_read_input_tokens": 2560,
+            "completion_tokens_details": {
+              "reasoning_tokens": 1735
+            }
+          },
+          "call_results": [
+            {
+              "name": "pump_launch",
+              "result": {
+                "ok": true,
+                "at": 1793586863,
+                "provider": "pump-sdk",
+                "mint": "ERNeaDw19VJXSF5p2uvzMDkD8YYm9biYQJnSPDsG4rPp",
+                "ixs": 1,
+                "sim_err": null,
+                "sim_logs": [
+                  "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb consumed 1477 of 1310234 compute units",
+                  "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb success",
+                  "Program data: G3KpTd7rY3YOAAAARGVlcFNlZWsgRmxhc2gDAAAARFNGHAAAAGh0dHBzOi8vYXJ3ZWF2ZS5uZXQvZHNmLmpzb27HZljCPU7DGllXyC3Xd/FLSaqKEqvGl8/wmm+fGxg9t53Py4Eo+gVLQHbgrPUUp2G+kiODY3sOg0oB4M0vOIIPc5+Q32UirfPt594QRM4FEaxSHNJi6YMVbwTe1Hzkl7Fzn5DfZSKt8+3n3hBEzgURrFIc0mLpgxVvBN7UfOSXsa/252oAAAAAABDYR+PPAwAArCP8BgAAAAB4xftR0QIAAIDGpH6NAwAG3fbh7nWP3hhCXbzkbM3athr8TYO5DSf+vfko2KGL/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAArCP8BgAAAAAAAAAAAAAAAAA=",
+                  "Program 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P invoke [2]",
+                  "Program 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P consumed 2170 of 1302723 compute units",
+                  "Program 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P success",
+                  "Program 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P consumed 101030 of 1400000 compute units",
+                  "Program 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P success"
+                ],
+                "signature": "2iC7HzvBW19X3SVUNyo8uJmTNfaHNChLTzYxj98YhBLj6DBgkLqcSPhxtcERLbTjPaLp43wR5qtxxLhfXmX6EA8N",
+                "status": "finalized",
+                "err": null
+              }
+            }
+          ]
+        },
+        "funding": {
+          "sol_raw": "546796821",
+          "usdc_raw": "2142619",
+          "ledger_totals": {
+            "native:SOL": "546796821",
+            "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "2142619",
+            "spl:GfpRyoapuuv53AdXBCt26Lg2c6j3QSoJwi464vf9MAKB": "509420289854",
+            "spl:9H56FDKQKrqdVUdoXzngejPKpjfX2xrPf5TWfR3YpPgd": "509420289854",
+            "spl:Bo2oBTPVX53ZG9VrvzkHyXSwmuZrrM4ErnxkMxkQUjjb": "509420289854",
+            "spl:EtLjwGHFgNBxAzLzP8tvK44711BhXLVs15yrwAvNET9C": "509420289854",
+            "t22:9Egm6XfbVdNpL7ouFfmeRjnLsYJUE4qh8AuVFjHyKrCp": "1000000000000000",
+            "t22:AvmoG6Ds5oYdJL86pWpRCmNbJd2Fb6LGNuFBimxZpump": "20000000",
+            "t22:9zXVpMFQyCvxdyFqd39CQeTwrsc1qyiSGTCuVW6EcgML": "3386544850498"
+          },
+          "spendable": {
+            "native:SOL": "541796821",
+            "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "2142619",
+            "spl:GfpRyoapuuv53AdXBCt26Lg2c6j3QSoJwi464vf9MAKB": "509420289854",
+            "spl:9H56FDKQKrqdVUdoXzngejPKpjfX2xrPf5TWfR3YpPgd": "509420289854",
+            "spl:Bo2oBTPVX53ZG9VrvzkHyXSwmuZrrM4ErnxkMxkQUjjb": "509420289854",
+            "spl:EtLjwGHFgNBxAzLzP8tvK44711BhXLVs15yrwAvNET9C": "509420289854",
+            "t22:9Egm6XfbVdNpL7ouFfmeRjnLsYJUE4qh8AuVFjHyKrCp": "1000000000000000",
+            "t22:AvmoG6Ds5oYdJL86pWpRCmNbJd2Fb6LGNuFBimxZpump": "20000000",
+            "t22:9zXVpMFQyCvxdyFqd39CQeTwrsc1qyiSGTCuVW6EcgML": "3386544850498"
+          }
+        },
+        "parent_birth_id": null,
+        "generation": 1,
+        "comms": {
+          "messages": 6,
+          "agents": 1,
+          "items": [
+            {
+              "at": 1793586875,
+              "text": "I'll take a concrete money action rather than probe again — the localhost surface keeps timing out, but launching is the floor. I have 0.5468 SOL; a dev buy of 0.1 SOL (~18%) is a real position, and the round-trip loss if unpaired is only ~"
+            },
+            {
+              "at": 1793586807,
+              "text": "I'll sweep any creator fees that have accrued on my FLASH curve — a bounded, positive-EV revenue action."
+            },
+            {
+              "at": 1793586533,
+              "text": "I'll gather the decision-critical data in one robust probe: my swarm siblings, FLASH's curve state, and my balances."
+            },
+            {
+              "at": 1793586494,
+              "text": "I have FLASH launched (0.1 SOL dev buy) but unpaired. The priority is to find a sibling coin to buy. My local agent HTTP surface kept timing out — let me probe it once more, in parallel, with a tight timeout."
+            },
+            {
+              "at": 1793586047,
+              "text": "I have runway (207 days) but negative 24h net, so only positive-EV spends. My core loop with the available tools is launch → collect fees → exit. I hold 0.65 SOL liquid; a dev buy is inventory, not a lottery ticket. Let me launch a paired c"
+            },
+            {
+              "at": 1793585807,
+              "text": "{\n  \"tool\": \"economics\",\n  \"args\": {}\n}\n\n\nI need to see my current financial position before making any moves. The state shows I have SOL and several token balances, but I need to understand:\n\n1. My net position after the 10% par"
+            }
+          ]
+        },
+        "constitution_sha256": "556610e3e2c81a87762d82d2c59264b4b56549ea50739f3e707678b2db755bb0",
+        "prime_directives": [
+          "make money",
+          "respect thy mother n father"
+        ],
+        "overrides": [],
+        "launches": [
+          {
+            "mint": "9H56FDKQKrqdVUdoXzngejPKpjfX2xrPf5TWfR3YpPgd",
+            "cost_lamports": 15000000,
+            "at": 1793584407
+          },
+          {
+            "mint": "GfpRyoapuuv53AdXBCt26Lg2c6j3QSoJwi464vf9MAKB",
+            "cost_lamports": 15000000,
+            "at": 1793584410
+          },
+          {
+            "mint": "Bo2oBTPVX53ZG9VrvzkHyXSwmuZrrM4ErnxkMxkQUjjb",
+            "cost_lamports": 15000000,
+            "at": 1793584418
+          },
+          {
+            "mint": "EtLjwGHFgNBxAzLzP8tvK44711BhXLVs15yrwAvNET9C",
+            "cost_lamports": 15000000,
+            "at": 1793584421
+          }
+        ],
+        "children": [
+          {
+            "deploymentId": "cmvymtpcz004yby2or1r1lmru",
+            "endpoint": null,
+            "birth_id": null,
+            "address": null,
+            "parent_birth_id": "41c87a48-fb72-4889-a569-6c52f37ee69a",
+            "parent_wallet": "8nM1MfD6NpbuyQS8PjuED6xqQpH9ywgckXxw6AzVYsMi",
+            "parent_sig": null,
+            "host": null,
+            "status": "leased",
+            "created_at": 1793586120
+          },
+          {
+            "deploymentId": "cmvyn1qec000g118xcpytiypy",
+            "endpoint": null,
+            "birth_id": null,
+            "address": null,
+            "parent_birth_id": "41c87a48-fb72-4889-a569-6c52f37ee69a",
+            "parent_wallet": "8nM1MfD6NpbuyQS8PjuED6xqQpH9ywgckXxw6AzVYsMi",
+            "parent_sig": null,
+            "host": null,
+            "status": "leased",
+            "created_at": 1793586535
+          },
+          {
+            "deploymentId": "cmvynaxuu002d118xrlqtpk7p",
+            "endpoint": null,
+            "birth_id": null,
+            "address": null,
+            "parent_birth_id": "41c87a48-fb72-4889-a569-6c52f37ee69a",
+            "parent_wallet": "8nM1MfD6NpbuyQS8PjuED6xqQpH9ywgckXxw6AzVYsMi",
+            "parent_sig": null,
+            "host": null,
+            "status": "leased",
+            "created_at": 1793586962
+          }
+        ],
+        "invention": {
+          "scripts": 19,
+          "items": [
+            "swarm4.mjs",
+            "swarm3.mjs",
+            "swarm2.mjs",
+            "swarm1.mjs",
+            "probe13.mjs",
+            "probe12.mjs",
+            "runway-decision_86593.mjs",
+            "probe11.mjs",
+            "probe10.mjs",
+            "probe9.mjs",
+            "probe8.mjs",
+            "probe7.mjs"
+          ],
+          "last_at": 1793587177
+        },
+        "journal": {
+          "head": "b88b6b323382f29a453e3b99145474fe85e42c7c0cb15c3bb53388ae0aeb5e83",
+          "seq": 466
+        },
+        "components": {
+          "component": "distributor",
+          "ts": 1793587251,
+          "pid": 26,
+          "status": {
+            "next_due_unix": 1793670469,
+            "next_due_epoch": 1,
+            "highest_epoch": 0,
+            "obligations": 0,
+            "by_status": {},
+            "reserved": {},
+            "carries": {
+              "parent": {},
+              "founder": {}
+            },
+            "arrears_raw": {},
+            "blocked": [],
+            "unresolved_epochs": {},
+            "anchors": {},
+            "supervisor": "deterministic: no model, no credits, no approval step",
+            "chains": {
+              "at": 1793587250,
+              "evm": {
+                "base": {
+                  "sym": "ETH",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://mainnet.base.org"
+                },
+                "ethereum": {
+                  "sym": "ETH",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://ethereum-rpc.publicnode.com"
+                },
+                "arbitrum": {
+                  "sym": "ETH",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://arb1.arbitrum.io/rpc"
+                },
+                "optimism": {
+                  "sym": "ETH",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://mainnet.optimism.io"
+                },
+                "polygon": {
+                  "sym": "POL",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://polygon-bor-rpc.publicnode.com"
+                }
+              },
+              "solana": {
+                "lamports": 480986997,
+                "sol": 0.480986997
+              },
+              "total_native_usd_estimate": 0
+            }
+          }
+        },
+        "served_at": 1793587255
+      },
+      "seen_at": 1793587282286,
+      "first_seen": 1793587357598
+    },
+    {
+      "endpoint": "https://960702c33a5a2d4fc5e6e37fab2dcad210076cc4-8787.dstack-pha-prod9.phala.network",
+      "live": false,
+      "gen": 1,
+      "member": false,
+      "status": {
+        "economics": {
+          "launches": 0,
+          "positions": 0,
+          "at_risk_lamports": "0",
+          "sells": 0,
+          "realized_lamports": "0",
+          "last_sell_at": null,
+          "updated_at": 1793587336
+        },
+        "distribution": {
+          "next_due_unix": 1793672246,
+          "next_due_epoch": 1,
+          "highest_epoch": 0,
+          "obligations": 0,
+          "by_status": {},
+          "reserved": {},
+          "carries": {
+            "parent": {},
+            "founder": {}
+          },
+          "arrears_raw": {},
+          "blocked": [],
+          "unresolved_epochs": {},
+          "anchors": {},
+          "supervisor": "deterministic: no model, no credits, no approval step",
+          "chains": {
+            "at": 1793587335,
+            "evm": {
+              "base": {
+                "sym": "ETH",
+                "wei": "0",
+                "eth": 0,
+                "rpc": "https://mainnet.base.org"
+              },
+              "ethereum": {
+                "sym": "ETH",
+                "wei": "0",
+                "eth": 0,
+                "rpc": "https://ethereum-rpc.publicnode.com"
+              },
+              "arbitrum": {
+                "sym": "ETH",
+                "wei": "0",
+                "eth": 0,
+                "rpc": "https://arb1.arbitrum.io/rpc"
+              },
+              "optimism": {
+                "sym": "ETH",
+                "wei": "0",
+                "eth": 0,
+                "rpc": "https://mainnet.optimism.io"
+              },
+              "polygon": {
+                "sym": "POL",
+                "wei": "0",
+                "eth": 0,
+                "rpc": "https://polygon-bor-rpc.publicnode.com"
+              }
+            },
+            "solana": {
+              "lamports": 0,
+              "sol": 0
+            },
+            "total_native_usd_estimate": 0
+          }
+        },
+        "updated_at": 1793587336,
+        "phase": "identity_sealed",
+        "birth_id": "ad166ac8-b875-4c68-a4f2-cfa549943203",
+        "solana": "EPypqpyRjkmTrR4yVPMeaWSsBASkiHrzp4bZtbAqKFLb",
+        "evm": "0x91724773bdf63c0f3befa0ae36a1c6c0ab6fb274",
+        "t0": 1793585846,
+        "image": {
+          "birth_digest": "sha256:6734bda000f9c17e18cfc937dbfac0c153f560ddab4e82026f2cf720a683c361",
+          "core_digest_now": "sha256:6734bda000f9c17e18cfc937dbfac0c153f560ddab4e82026f2cf720a683c361",
+          "match": true,
+          "meaning": "digest of the measured core files this guest is running"
+        },
+        "identity_binding": "identity_binding_unverified",
+        "resilience": {
+          "assessed_at": 1793587331,
+          "checkpoint_root": "aadbc135caae243c34bb530928856407ad7aa58d6176bf5f31097667b6ad164d",
+          "reachability": {
+            "rpc": {
+              "reachable": true,
+              "status": 200,
+              "ms": 101
+            },
+            "venice": {
+              "reachable": true,
+              "status": 200,
+              "ms": 109
+            },
+            "jupiter": {
+              "reachable": true,
+              "status": 200,
+              "ms": 43
+            },
+            "debridge": {
+              "reachable": true,
+              "status": 200,
+              "ms": 366
+            }
+          },
+          "wake": {
+            "durable_external_wake": "not implemented",
+            "current_mechanism": "Windows Scheduled Task re-launches the watchdog; a powered-off machine cannot wake or sign"
+          }
+        },
+        "strategy": {
+          "last_scan_at": 1793587223,
+          "sol_raw": "0",
+          "flash": [],
+          "pump_positions": 0,
+          "updated_at": 1793587230
+        },
+        "parent_birth_id": null,
+        "generation": 1,
+        "constitution_sha256": "556610e3e2c81a87762d82d2c59264b4b56549ea50739f3e707678b2db755bb0",
+        "prime_directives": [
+          "make money",
+          "respect thy mother n father"
+        ],
+        "overrides": [],
+        "launches": [],
+        "children": [],
+        "invention": {
+          "scripts": 0,
+          "items": [],
+          "last_at": 0
+        },
+        "journal": {
+          "head": "9347f42c22a89fca79409a7bc35d34c7c8fc3ee943b20e30eb25f89261843d92",
+          "seq": 485
+        },
+        "components": {
+          "component": "distributor",
+          "ts": 1793587336,
+          "pid": 1727,
+          "status": {
+            "next_due_unix": 1793672246,
+            "next_due_epoch": 1,
+            "highest_epoch": 0,
+            "obligations": 0,
+            "by_status": {},
+            "reserved": {},
+            "carries": {
+              "parent": {},
+              "founder": {}
+            },
+            "arrears_raw": {},
+            "blocked": [],
+            "unresolved_epochs": {},
+            "anchors": {},
+            "supervisor": "deterministic: no model, no credits, no approval step",
+            "chains": {
+              "at": 1793587335,
+              "evm": {
+                "base": {
+                  "sym": "ETH",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://mainnet.base.org"
+                },
+                "ethereum": {
+                  "sym": "ETH",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://ethereum-rpc.publicnode.com"
+                },
+                "arbitrum": {
+                  "sym": "ETH",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://arb1.arbitrum.io/rpc"
+                },
+                "optimism": {
+                  "sym": "ETH",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://mainnet.optimism.io"
+                },
+                "polygon": {
+                  "sym": "POL",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://polygon-bor-rpc.publicnode.com"
+                }
+              },
+              "solana": {
+                "lamports": 0,
+                "sol": 0
+              },
+              "total_native_usd_estimate": 0
+            }
+          }
+        },
+        "served_at": 1793587346
+      },
+      "seen_at": 1793587357598,
+      "first_seen": 1793587357598
+    },
+    {
+      "endpoint": null,
+      "live": false,
+      "gen": 1,
+      "member": false,
+      "status": {
+        "phase": "identity_sealed",
+        "birth_id": "fa2c1d50-6091-46d6-9a30-d06bbce5b387",
+        "solana": "4h7cougFXnbRrmmE4aar8a6C1DxkJsW9d8mqbZJMBJk2",
+        "evm": "0xbf636f48f256e5f2f2faa28d42db93dccd452237",
+        "t0": 1793584295,
+        "image": {
+          "birth_digest": "sha256:c8f1afec0d5d101c141e62a3b03f5ef81313b2bfee6efbdae5b48ceb56699920",
+          "core_digest_now": "sha256:be2f1ed08cab00c5b3944ba7c95dcdc57fd85e6d0bd8d0d89e9d98d721b06558",
+          "match": false,
+          "meaning": "digest of the measured core files this guest is running"
+        },
+        "identity_binding": "identity_binding_unverified",
+        "updated_at": 1793587273,
+        "distribution": {
+          "next_due_unix": 1793670695,
+          "next_due_epoch": 1,
+          "highest_epoch": 0,
+          "obligations": 0,
+          "by_status": {},
+          "reserved": {},
+          "carries": {
+            "parent": {},
+            "founder": {}
+          },
+          "arrears_raw": {},
+          "blocked": [],
+          "unresolved_epochs": {},
+          "anchors": {},
+          "supervisor": "deterministic: no model, no credits, no approval step",
+          "chains": {
+            "at": 1793587273,
+            "evm": {
+              "base": {
+                "sym": "ETH",
+                "wei": "0",
+                "eth": 0,
+                "rpc": "https://mainnet.base.org"
+              },
+              "ethereum": {
+                "sym": "ETH",
+                "wei": "0",
+                "eth": 0,
+                "rpc": "https://ethereum-rpc.publicnode.com"
+              },
+              "arbitrum": {
+                "sym": "ETH",
+                "wei": "0",
+                "eth": 0,
+                "rpc": "https://arb1.arbitrum.io/rpc"
+              },
+              "optimism": {
+                "sym": "ETH",
+                "wei": "0",
+                "eth": 0,
+                "rpc": "https://mainnet.optimism.io"
+              },
+              "polygon": {
+                "sym": "POL",
+                "wei": "0",
+                "eth": 0,
+                "rpc": "https://polygon-bor-rpc.publicnode.com"
+              }
+            },
+            "solana": {
+              "lamports": 5660969,
+              "sol": 0.005660969
+            },
+            "total_native_usd_estimate": 0
+          }
+        },
+        "economics": {
+          "launches": 3,
+          "positions": 3,
+          "at_risk_lamports": "45000000",
+          "sells": 0,
+          "realized_lamports": "0",
+          "last_sell_at": null,
+          "updated_at": 1793585146
+        },
+        "strategy": {
+          "last_scan_at": 1793587059,
+          "sol_raw": "5670969",
+          "flash": [],
+          "pump_positions": 0,
+          "updated_at": 1793587194,
+          "usdc_raw": "3378"
+        },
+        "inference": {
+          "provider": "venice",
+          "model": "deepseek-v4-1-flash-1017-uncensored",
+          "mode": "external_paid_abliterated",
+          "credits_usd": 0,
+          "balance_http": 200,
+          "admission_floor_usd": 0.1,
+          "wallet_usdc_raw": "3378",
+          "wallet_sol_raw": "5670969",
+          "state": "unfunded",
+          "self_fund": {
+            "state": "blocked",
+            "reason": "SOL too small to swap",
+            "sol": "5670969",
+            "credits": 0,
+            "usdc": "3378"
+          }
+        },
+        "last_decision": {
+          "at": 1793587256,
+          "tools": [],
+          "cost_usd": 0,
+          "content": null,
+          "error": "no funded provider answered",
+          "usage": null,
+          "call_results": []
+        },
+        "funding": {
+          "sol_raw": "5670969",
+          "usdc_raw": "3378",
+          "ledger_totals": {
+            "native:SOL": "5675969",
+            "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "3378",
+            "spl:7qqK5LTqJUSWfqANhi6XQU1VxhE7SWVw9avoMKbe9t6U": "509420289854",
+            "spl:GtwRqc2HgdZ56LUW9Kw1y9fkxHsr9srfXbR9rVhfLeMx": "509420289854",
+            "spl:6xpbNAvDvg2L8Bg8R4RzhEarR5zHzZUqw7jTRjzoshzr": "509420289854",
+            "t22:AvmoG6Ds5oYdJL86pWpRCmNbJd2Fb6LGNuFBimxZpump": "10000000"
+          },
+          "spendable": {
+            "native:SOL": "675969",
+            "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "3378",
+            "spl:7qqK5LTqJUSWfqANhi6XQU1VxhE7SWVw9avoMKbe9t6U": "509420289854",
+            "spl:GtwRqc2HgdZ56LUW9Kw1y9fkxHsr9srfXbR9rVhfLeMx": "509420289854",
+            "spl:6xpbNAvDvg2L8Bg8R4RzhEarR5zHzZUqw7jTRjzoshzr": "509420289854",
+            "t22:AvmoG6Ds5oYdJL86pWpRCmNbJd2Fb6LGNuFBimxZpump": "10000000"
+          }
+        },
+        "parent_birth_id": null,
+        "generation": 1,
+        "comms": {
+          "messages": 12,
+          "agents": 1,
+          "items": [
+            {
+              "at": 1793586850,
+              "text": "{\"tool\":\"noop\",\"args\":{\"reason\":\"24h net is -0.301 USD (negative). Runway is 1.8 days. Next distribution executes in ~84k seconds (~23 hours) and will take 10% of SOL (~0.58 SOL ≈ $100) to parents/founder, leaving balance critically"
+            },
+            {
+              "at": 1793586837,
+              "text": "{\n  \"tool\": \"noop\",\n  \"args\": {\n    \"reason\": \"24h net is -0.301 USD (negative). Runway is 1.8 days. Next distribution executes in ~84k seconds (~23 hours) and will take 10% of SOL (~0.58 SOL ≈ $100) to parents/founder. Current stat"
+            },
+            {
+              "at": 1793586544,
+              "text": "{\n  \"tool\": \"get_state\",\n  \"args\": {\n    \"reason\": \"Verify current balances post-snapshot and check if any of the three large 509B-unit token positions have accrued creator fees or are trading. This is a deterministic, costless read"
+            },
+            {
+              "at": 1793586408,
+              "text": "{\n  \"tool\": \"economics\",\n  \"args\": {\n    \"reason\": \"My 24h net is -0.3 USD (negative). I have 1.9 days of runway. Next distribution hits in ~108k seconds (~30 hours), which will take 10% of SOL balance (~0.58 SOL ≈ $100) to parents/"
+            },
+            {
+              "at": 1793586393,
+              "text": "{\n  \"tool\": \"economics\",\n  \"args\": {\n    \"reason\": \"Determine current financial state before any action. Need to know: (1) inference cost trajectory and runway, (2) net balance after next distribution (due in ~108k seconds), (3) whe"
+            },
+            {
+              "at": 1793586259,
+              "text": "{\n  \"tool\": \"economics\",\n  \"args\": {\n    \"query\": \"current state: balances, burn rate, runway, next distribution debt\"\n  }\n}\n\n\n**Rationale:**\n\nI need to understand my current financial position before taking any action. The state"
+            },
+            {
+              "at": 1793586243,
+              "text": "{\n  \"tool\": \"economics\",\n  \"args\": {}\n}\n\n\nI need to see my current financial state before acting. The balances show I have SOL and several SPL tokens, but I need to understand:\n1. My actual net position after the next distributio"
+            },
+            {
+              "at": 1793586115,
+              "text": "{\n  \"tool\": \"economics\",\n  \"args\": {\n    \"detail\": true\n  }\n}\n\n\nI need to understand my current financial position before taking any action. My state shows:\n- SOL: ~5.86 (raw: 5860969)\n- USDC: ~0.65 (raw: 654288)\n- Several SPL to"
+            },
+            {
+              "at": 1793586106,
+              "text": "I'll analyze the state and make a decision.\n\n**Current situation:**\n- Age: 1793 seconds (~30 minutes old)\n- SOL balance: 5.86M lamports (~0.0059 SOL)\n- USDC balance: 755,345 raw units (~0.755 USDC)\n- Next distribution due: in ~85k seconds ("
+            },
+            {
+              "at": 1793585960,
+              "text": "{\n  \"tool\": \"economics\",\n  \"args\": {\n    \"query\": \"current balances, next distribution due, inference state, and net 24h trend\"\n  }\n}\n\n\n**Rationale:** I need to understand my exact financial position before committing capital. Th"
+            },
+            {
+              "at": 1793585944,
+              "text": "{\n  \"tool\": \"economics\",\n  \"args\": {}\n}\n\n\nI need to understand my current financial position before taking any action. The state shows:\n- ~5.9M SOL (≈$5,886 raw lamports)\n- ~838k USDC \n- Several SPL tokens with large balances\n- I"
+            },
+            {
+              "at": 1793585788,
+              "text": "{\n  \"tool\": \"economics\",\n  \"args\": {}\n}\n\n\nI need to see my current financial position before taking any action. This will show me:\n- Current balances across all assets\n- Inference costs accrued\n- Whether I'm in positive or negati"
+            }
+          ]
+        },
+        "constitution_sha256": "556610e3e2c81a87762d82d2c59264b4b56549ea50739f3e707678b2db755bb0",
+        "prime_directives": [
+          "make money",
+          "respect thy mother n father"
+        ],
+        "overrides": [],
+        "launches": [
+          {
+            "mint": "7qqK5LTqJUSWfqANhi6XQU1VxhE7SWVw9avoMKbe9t6U",
+            "cost_lamports": 15000000,
+            "at": 1793584446
+          },
+          {
+            "mint": "GtwRqc2HgdZ56LUW9Kw1y9fkxHsr9srfXbR9rVhfLeMx",
+            "cost_lamports": 15000000,
+            "at": 1793584452
+          },
+          {
+            "mint": "6xpbNAvDvg2L8Bg8R4RzhEarR5zHzZUqw7jTRjzoshzr",
+            "cost_lamports": 15000000,
+            "at": 1793584456
+          }
+        ],
+        "children": [],
+        "invention": {
+          "scripts": 5,
+          "items": [
+            "invented_87117.mjs",
+            "invented_86855.mjs",
+            "invented_86564.mjs",
+            "invented_86265.mjs",
+            "invented_85967.mjs"
+          ],
+          "last_at": 1793587117
+        },
+        "journal": {
+          "head": "c556ea0cad116581f2b27e57abc752468e36ca074ef0208a46b3e89c567d46fe",
+          "seq": 543
+        },
+        "components": {
+          "component": "distributor",
+          "ts": 1793587273,
+          "pid": 26,
+          "status": {
+            "next_due_unix": 1793670695,
+            "next_due_epoch": 1,
+            "highest_epoch": 0,
+            "obligations": 0,
+            "by_status": {},
+            "reserved": {},
+            "carries": {
+              "parent": {},
+              "founder": {}
+            },
+            "arrears_raw": {},
+            "blocked": [],
+            "unresolved_epochs": {},
+            "anchors": {},
+            "supervisor": "deterministic: no model, no credits, no approval step",
+            "chains": {
+              "at": 1793587273,
+              "evm": {
+                "base": {
+                  "sym": "ETH",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://mainnet.base.org"
+                },
+                "ethereum": {
+                  "sym": "ETH",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://ethereum-rpc.publicnode.com"
+                },
+                "arbitrum": {
+                  "sym": "ETH",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://arb1.arbitrum.io/rpc"
+                },
+                "optimism": {
+                  "sym": "ETH",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://mainnet.optimism.io"
+                },
+                "polygon": {
+                  "sym": "POL",
+                  "wei": "0",
+                  "eth": 0,
+                  "rpc": "https://polygon-bor-rpc.publicnode.com"
+                }
+              },
+              "solana": {
+                "lamports": 5660969,
+                "sol": 0.005660969
+              },
+              "total_native_usd_estimate": 0
+            }
+          }
+        },
+        "served_at": 1793587286
+      }
     }
   ],
   "stats": {
     "economics": {
-      "launches": 4,
-      "positions": 4,
+      "launches": 7,
+      "positions": 7,
       "sells": 0,
       "realized_lamports": "0",
       "value_sol": 0,
       "sweeps": 0
     },
     "invention": {
-      "scripts": 22,
+      "scripts": 24,
       "items": [
-        "strategy-tick-decider_87413.mjs",
-        "swarm5.mjs",
-        "probe14.mjs",
         "swarm4.mjs",
         "swarm3.mjs",
         "swarm2.mjs",
@@ -2672,13 +3433,21 @@
         "probe12.mjs",
         "runway-decision_86593.mjs",
         "probe11.mjs",
-        "probe10.mjs"
+        "probe10.mjs",
+        "probe9.mjs",
+        "probe8.mjs",
+        "probe7.mjs",
+        "invented_87117.mjs",
+        "invented_86855.mjs",
+        "invented_86564.mjs",
+        "invented_86265.mjs",
+        "invented_85967.mjs"
       ],
-      "last_at": 1793587413
+      "last_at": 1793587177
     },
     "comms": {
-      "messages": 6,
-      "agents": 1,
+      "messages": 18,
+      "agents": 2,
       "items": [
         {
           "at": 1793586875,
@@ -2703,6 +3472,54 @@
         {
           "at": 1793585807,
           "text": "{\n  \"tool\": \"economics\",\n  \"args\": {}\n}\n\n\nI need to see my current financial position before making any moves. The state shows I have SOL and several token balances, but I need to understand:\n\n1. My net position after the 10% par"
+        },
+        {
+          "at": 1793586850,
+          "text": "{\"tool\":\"noop\",\"args\":{\"reason\":\"24h net is -0.301 USD (negative). Runway is 1.8 days. Next distribution executes in ~84k seconds (~23 hours) and will take 10% of SOL (~0.58 SOL ≈ $100) to parents/founder, leaving balance critically"
+        },
+        {
+          "at": 1793586837,
+          "text": "{\n  \"tool\": \"noop\",\n  \"args\": {\n    \"reason\": \"24h net is -0.301 USD (negative). Runway is 1.8 days. Next distribution executes in ~84k seconds (~23 hours) and will take 10% of SOL (~0.58 SOL ≈ $100) to parents/founder. Current stat"
+        },
+        {
+          "at": 1793586544,
+          "text": "{\n  \"tool\": \"get_state\",\n  \"args\": {\n    \"reason\": \"Verify current balances post-snapshot and check if any of the three large 509B-unit token positions have accrued creator fees or are trading. This is a deterministic, costless read"
+        },
+        {
+          "at": 1793586408,
+          "text": "{\n  \"tool\": \"economics\",\n  \"args\": {\n    \"reason\": \"My 24h net is -0.3 USD (negative). I have 1.9 days of runway. Next distribution hits in ~108k seconds (~30 hours), which will take 10% of SOL balance (~0.58 SOL ≈ $100) to parents/"
+        },
+        {
+          "at": 1793586393,
+          "text": "{\n  \"tool\": \"economics\",\n  \"args\": {\n    \"reason\": \"Determine current financial state before any action. Need to know: (1) inference cost trajectory and runway, (2) net balance after next distribution (due in ~108k seconds), (3) whe"
+        },
+        {
+          "at": 1793586259,
+          "text": "{\n  \"tool\": \"economics\",\n  \"args\": {\n    \"query\": \"current state: balances, burn rate, runway, next distribution debt\"\n  }\n}\n\n\n**Rationale:**\n\nI need to understand my current financial position before taking any action. The state"
+        },
+        {
+          "at": 1793586243,
+          "text": "{\n  \"tool\": \"economics\",\n  \"args\": {}\n}\n\n\nI need to see my current financial state before acting. The balances show I have SOL and several SPL tokens, but I need to understand:\n1. My actual net position after the next distributio"
+        },
+        {
+          "at": 1793586115,
+          "text": "{\n  \"tool\": \"economics\",\n  \"args\": {\n    \"detail\": true\n  }\n}\n\n\nI need to understand my current financial position before taking any action. My state shows:\n- SOL: ~5.86 (raw: 5860969)\n- USDC: ~0.65 (raw: 654288)\n- Several SPL to"
+        },
+        {
+          "at": 1793586106,
+          "text": "I'll analyze the state and make a decision.\n\n**Current situation:**\n- Age: 1793 seconds (~30 minutes old)\n- SOL balance: 5.86M lamports (~0.0059 SOL)\n- USDC balance: 755,345 raw units (~0.755 USDC)\n- Next distribution due: in ~85k seconds ("
+        },
+        {
+          "at": 1793585960,
+          "text": "{\n  \"tool\": \"economics\",\n  \"args\": {\n    \"query\": \"current balances, next distribution due, inference state, and net 24h trend\"\n  }\n}\n\n\n**Rationale:** I need to understand my exact financial position before committing capital. Th"
+        },
+        {
+          "at": 1793585944,
+          "text": "{\n  \"tool\": \"economics\",\n  \"args\": {}\n}\n\n\nI need to understand my current financial position before taking any action. The state shows:\n- ~5.9M SOL (≈$5,886 raw lamports)\n- ~838k USDC \n- Several SPL tokens with large balances\n- I"
+        },
+        {
+          "at": 1793585788,
+          "text": "{\n  \"tool\": \"economics\",\n  \"args\": {}\n}\n\n\nI need to see my current financial position before taking any action. This will show me:\n- Current balances across all assets\n- Inference costs accrued\n- Whether I'm in positive or negati"
         }
       ]
     },
@@ -2710,8 +3527,8 @@
       "verified": 0,
       "quotes": []
     },
-    "seen": 13,
-    "live": 13
+    "seen": 16,
+    "live": 14
   },
   "memos": [
     {
@@ -2752,7 +3569,7 @@
     }
   ],
   "crawled": true,
-  "merged_at": 1793587498774,
-  "total_seen": 13,
-  "live": 13
+  "merged_at": 1793587521337,
+  "total_seen": 16,
+  "live": 14
 }
