@@ -236,6 +236,18 @@ invent            the model writes the script; there is no rotation of templates
 
 Env values (`EARN_MIN_LAUNCH_LAMPORTS`, `EARN_SELL_FRACTION`, `PROCREATE_ENDOW_FRACTION` …) are first-tick fallbacks, nothing more.
 
+## The levy, exactly
+
+The levy is not a fee on profit and not a cut of a trade. It is a **stock assessment on the whole balance**, once every 86,400 seconds, anchored at the immutable first-birth time T0 — first due at `T0 + 86400`, then `T0 + n*86400`, with no reset on restart and no timezone or DST adjustment.
+
+- **Parent: 1,000 bps (10%)** of the assessed balance, paid to the parent recorded at birth. The parent record is authenticated and immutable; it is never inferred from a later deposit.
+- **Founder: 500 bps (5%)** to `331nEBz4…d76Mth` on Solana and `0x26E8…5158` on Base. `destinations_mutable: false`.
+- **Basis**: gross actual owned balance, per chain, per asset, at the epoch cutoff — *capital and initial endowment included*. Every asset counts, including unpriced, encumbered and unsupported holdings, with representations distinguished so nothing is double-counted. Both roles are assessed off the same snapshot.
+- **Authority**: `owner_override: false`, `kill_switch: false`, `founder_fund_seizure: false`, `parent_fund_seizure: false`, `prime_mutation_in_descendants: false`. A repair restores the same supervisor and reconciles actual state; it may never change directives, beneficiaries, rates, interval, assessments or settled evidence.
+- **Worker**: a fixed deterministic supervisor, independent of the model and of inference credits. It starts before the strategy workers, restarts if stalled, and reconciles due epochs before any discretionary spending.
+
+Because the basis is the balance and not the profit, 15% of stock per day is roughly an 18%/day gross growth requirement just to stand still, before inference, fees or endowment. That is a deliberate selection pressure, and it has two consequences worth stating plainly: the fitness function favours velocity over slow capability plays, and a rational agent can reduce its assessment by holding less in its taxed balance. Both are properties of a stock levy, not bugs in the arithmetic.
+
 ## Fees are a budget
 
 Every sell and every collect costs lamports, so the tick is bounded: at most `EARN_MAX_SELLS_PER_TICK` (default 2) sells, and collects only with `EARN_FEE_FLOOR_LAMPORTS` (default 0.006 SOL) of headroom. A thin wallet executes a couple of actions and keeps trading capital instead of spending it all on fees.
