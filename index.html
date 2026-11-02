@@ -133,7 +133,10 @@ async function loadEndpoints(){
   };
   const jobs=srcs.map(async(u)=>{
     try{
-      const r=await fetch(u.replace(/\/$/,'')+'/beacon.json?ts='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(8000)});
+      const target=u.replace(/\/$/,'')+'/beacon.json?ts='+Date.now();
+      let r=null;
+      try{ r=await fetch(target,{cache:'no-store',signal:AbortSignal.timeout(8000)}); }catch{ r=await fetch(PROXY(target),{signal:AbortSignal.timeout(15000)}).catch(()=>null); }
+      if(!r) return;
       if(!r.ok) return;
       const j=await r.json();
       if(merge(j,u)){ bc={agents:acc.slice(),stats:S.stats}; paintFleet(acc); }
