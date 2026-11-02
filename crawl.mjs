@@ -17,20 +17,20 @@ const rpc = async (method, params) => {
 const key = (a) => (a.status && (a.status.birth_id || a.status.solana)) || a.birth_id || a.endpoint;
 const by = new Map();
 
-for (const s of src) {
+await Promise.all(src.map(async (s) => {
   const base = s.replace(/\/$/, '');
   let j = null;
-  try { j = await (await fetch(base + '/beacon.json', { signal: AbortSignal.timeout(12000) })).json(); } catch {}
+  try { j = await (await fetch(base + '/beacon.json', { signal: AbortSignal.timeout(5000) })).json(); } catch {}
   if (j && Array.isArray(j.agents)) {
     for (const a of j.agents) by.set(key(a), { ...(by.get(key(a)) || {}), ...a, live: true, seen_at: Date.now() });
   }
   if (!j || !Array.isArray(j.agents) || !j.agents.length) {
     try {
-      const st = await (await fetch(base + '/status', { signal: AbortSignal.timeout(10000) })).json();
+      const st = await (await fetch(base + '/status', { signal: AbortSignal.timeout(5000) })).json();
       if (st && st.birth_id) by.set(key({ status: st }), { endpoint: base, live: true, gen: st.generation || 1, status: st, seen_at: Date.now() });
     } catch {}
   }
-}
+}));
 
 // Comms live in each member's /status (the brain's own words). Chain memos are a
 // second source: read both, prefer the status text when present.
