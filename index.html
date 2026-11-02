@@ -121,6 +121,7 @@ function paintFleet(acc){
 const BEACON='beacon.json';
 const statScore=(x)=>((x&&x.economics&&Number(x.economics.launches)||0)+(x&&x.invention&&Number(x.invention.scripts)||0)+(x&&x.comms&&Number(x.comms.messages)||0)+(x&&x.tee&&Number(x.tee.verified)||0));
 async function loadEndpoints(){
+  S.rows=[];S.agents=[];  // rebuild from scratch: refresh used to append and double-count
   S.agents=[]; S.rows=[];
   let bc=null;
   // Crawl every source at once and paint each result as it lands; dedupe by birth_id.
