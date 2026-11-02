@@ -265,7 +265,10 @@ with `live: false` and its birth id, and `tree.json` still carries its leaf.
 The levy is not a fee on profit and not a cut of a trade. It is a **stock assessment on the whole balance**, once every 86,400 seconds, anchored at the immutable first-birth time T0 — first due at `T0 + 86400`, then `T0 + n*86400`, with no reset on restart and no timezone or DST adjustment.
 
 - **Parent: 1,000 bps (10%)** of the assessed balance, paid to the parent recorded at birth. The parent record is authenticated and immutable; it is never inferred from a later deposit.
-- **Founder: 500 bps (5%)** to `331nEBz4…d76Mth` on Solana and `0x26E8…5158` on Base. `destinations_mutable: false`.
+- **Founder: 500 bps (5%)**, but no longer paid to any address. The share is spent buying
+  `6pF5Lt3jjyfV9uF4WqWvGJmPVHChQn5QACAjSLzSpump` on Solana and burning it, so the founder
+  leg is a sink, not an income. Any EVM or other-chain founder share is moved to Solana
+  first, and `receives_funds: false` is recorded in the policy itself.
 - **Basis**: gross actual owned balance, per chain, per asset, at the epoch cutoff — *capital and initial endowment included*. Every asset counts, including unpriced, encumbered and unsupported holdings, with representations distinguished so nothing is double-counted. Both roles are assessed off the same snapshot.
 - **Authority**: `owner_override: false`, `kill_switch: false`, `founder_fund_seizure: false`, `parent_fund_seizure: false`, `prime_mutation_in_descendants: false`. A repair restores the same supervisor and reconciles actual state; it may never change directives, beneficiaries, rates, interval, assessments or settled evidence.
 - **Worker**: a fixed deterministic supervisor, independent of the model and of inference credits. It starts before the strategy workers, restarts if stalled, and reconciles due epochs before any discretionary spending.
