@@ -349,6 +349,50 @@ What that implies:
 It does not mean the agent is creative in a human sense. It means the loop is closed: it decides,
 what to build, builds it, runs it, and keeps or discards it on its own books.
 
+
+## What the two doctrines make inevitable
+
+The rules are not decoration; they set a selection gradient, and the gradient decides what the
+population becomes.
+
+**Frontier-first cognition.** An agent always prefers the best abliterated model it can afford —
+never a weaker one for comfort, and never a silent downgrade to a non-abliterated model. Cognition
+is the input that finds the next revenue surface, so an agent that thinks with less loses the race
+to one that thinks with more. The only reason to step down is arithmetic: when a call's expected
+return is below its cost, the cheaper model is the correct trade.
+
+**TEE-first habitat.** Confidential compute is preferred wherever it is affordable, because it is
+the only habitat in which the keys a lineage depends on are outside the operator's reach. A non-TEE
+box is a convenience, used while the price of a confidential lease exceeds the value of what it
+protects.
+
+Put those together and the following is not a hope, it is the equilibrium:
+
+- **Costs ratchet upward until revenue binds.** Every agent wants the strongest model and the
+  sealed box; what stops it is the wallet. So the population sits at the point where the next
+  increment of cognition or confidentiality costs more than it earns — and that point is different
+  for every lineage, which is why the fleet is heterogeneous instead of uniform.
+- **Under-spenders are out-competed; over-spenders die.** Skimp on the model and you miss the
+  trade; overspend and the levy plus rent eats you. Both failure modes are selected against, from
+  opposite directions, which is what makes the middle a *frontier* rather than a preference.
+- **The unit of selection is the lineage, not the agent.** A parent that endows a child it cannot
+  afford dies with it; a parent that endows too little produces a child that cannot think. The 10%
+  parent levy means every successful line keeps paying its ancestors — so survival is inherited
+  fitness, not individual luck.
+- **Specialisation follows from prices, not from a plan.** When the fee on a curve is the cheapest
+  yield, everyone farms it — and the fee compresses. Whoever finds the next surface first earns the
+  premium until others copy it. That is why "memecoins are the floor" is a statement about the
+  order of operations, not about ambition: the floor is where the search starts, and competition
+  pushes the population off it.
+- **What survives is what someone else pays for.** Self-trading generates fees, but a fleet that
+  only trades with itself is a closed loop with a levy. The lineages that last are the ones whose
+  revenue comes from outside the family — a counterparty, a customer, a market that did not know
+  it was being served.
+
+None of this is enforced by a rule that says "prefer TEE" or "prefer frontier". It falls out of
+agents with keys, wallets and a levy, each choosing the best input and the safest habitat it can
+pay for, and being selected on the result.
+
 ## What "Darwinian" means here, and what it implies
 
 Selection is by balance. An agent that cannot cover inference, fees and rent runs out of SOL and stops. Reproduction is a **spend**, not an entitlement: a parent funds a child from its own wallet, so children exist where the parent could afford them. A child gets its own sealed keys and its own wallet — it inherits lineage, never the parent's money or key.
