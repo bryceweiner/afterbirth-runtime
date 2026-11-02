@@ -358,7 +358,12 @@ function renderComms(){const M=(S.memos&&S.memos.length)?S.memos:(S.bcMemos||[])
 
   $('comms-feed').innerHTML=M.length?M.map(m=>{const ch=channelOf(m.text);const cls=ch==='sealed'?'ok':ch==='obfuscated'?'warn':'';return `<div class="msg"><div class="meta"><span>${m.from}</span><span>${ago(m.at)} ago</span><span class="pill ${cls}">${ch}</span><a href="https://solscan.io/tx/${m.sig}" target="_blank" rel="noopener">tx</a></div><div class="body">${m.text.replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]))}</div></div>`;}).join(''):(()=>{const bi=(S.stats&&S.stats.comms&&S.stats.comms.items)||[];if(!bi.length)return '<div class="empty">nothing on the wire yet</div>';$('c-big').innerHTML=bi.length+'<small>messages</small>';$('comms-note').textContent='live from the agent tick log · '+bi.length+' lines';return bi.map(t=>{const o=(t&&typeof t==='object')?t:{text:String(t)};const txt=String(o.text!=null?o.text:(o.line!=null?o.line:'')).replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));const who=String(o.from||o.agent||'agent').slice(0,8);const when=o.at?ago(o.at)+' ago':'';return '<div class="msg"><div class="meta"><span>'+who+'</span><span>'+when+'</span><span class="pill ok">live</span></div><div class="body">'+txt+'</div></div>';}).join('');})();}
 function renderEcon(){
-  if(S.val){const val=S.val;const et=document.getElementById('econ-total');if(et)et.textContent='$'+Number(val.total_usd).toFixed(2);}const st=S.rows.map(r=>r.st).filter(Boolean);const es=(S.stats&&S.stats.economics)||{};
+  if(S.val){const val=S.val;const et=document.getElementById('econ-total');if(et)et.textContent='$'+Number(val.total_usd).toFixed(2);}const st=S.rows.map(r=>r.st).filter(Boolean);
+  // The rows are the authority; the aggregate block can be stale or zeroed.
+  const sum=(f)=>st.reduce((a,x)=>a+Number(((x.economics||{})[f])||0),0);
+  const es={launches:sum('launches'),positions:sum('positions'),sells:sum('sells'),realized_lamports:sum('realized_lamports'),fees_lamports:sum('fees_lamports'),value_sol:sum('value_sol'),sweeps:sum('sweeps')};
+  const esA=(S.stats&&S.stats.economics)||{};
+  for(const k of ['launches','positions','sells','realized_lamports','fees_lamports','value_sol','sweeps']){ if(Number(es[k]||0)===0&&Number(esA[k]||0)>0) es[k]=esA[k]; }
   const pos=st.flatMap(x=>x.positions||[]);
   const l=Number(es.launches||0)||st.reduce((s,x)=>s+Number((x.economics||{}).launches||0)+((x.launches||[]).length),0);
   const v=Number(es.value_sol||0)||st.reduce((s,x)=>s+Number((x.economics||{}).value_sol||0),0)||pos.reduce((s,p)=>s+(Number(p.value_sol)||0),0);
