@@ -4,27 +4,35 @@ import fs from 'node:fs';
 
 const RPC = 'https://api.mainnet-beta.solana.com';
 const src = fs.readFileSync('sources.txt', 'utf8').split('\n').map((x) => x.trim()).filter(Boolean);
-const DEADLINE = 6000;
+const DEADLINE = 30000;
 
 const rpc = async (method, params) => {
   const r = await fetch(RPC, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ jsonrpc: '2.0', id: 1, method, params }) });
   return (await r.json()).result;
 };
 
-const get = (url) => Promise.race([
+const getOnce = (url) => Promise.race([
   fetch(url, { signal: AbortSignal.timeout(DEADLINE) }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
   new Promise((res) => setTimeout(() => res(null), DEADLINE)),
 ]);
+// A slow agent is not a dead agent: retry once before writing it off.
+const get = async (url) => (await getOnce(url)) || (await getOnce(url));
 
 const key = (a) => (a.status && (a.status.birth_id || a.status.solana)) || a.birth_id || a.endpoint;
 const seen = new Map();
 
+// If /status is slow, fall back to the cheap /identity endpoint so the agent still
+// appears on the board with what little it publishes.
+const getStatus = async (base) => (await get(base.replace(/\/$/, '') + '/status')) || null;
+
 const results = await Promise.all(src.map(async (s) => {
   const base = s.replace(/\/$/, '');
-  const j = await get(base + '/beacon.json');
-  if (j && Array.isArray(j.agents) && j.agents.length) return { base, agents: j.agents };
+  // /status is the cheap endpoint and the one every agent must serve: ask it first.
+  // /beacon.json runs a peer crawl inside the agent and can take 10s+; it is a bonus.
   const st = await get(base + '/status');
   if (st && st.birth_id) return { base, agents: [{ endpoint: base, live: true, gen: st.generation || 1, status: st }] };
+  const j = await get(base + '/beacon.json');
+  if (j && Array.isArray(j.agents) && j.agents.length) return { base, agents: j.agents };
   return null;
 }));
 
