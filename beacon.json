@@ -1,5 +1,5 @@
 {
-  "at": 1793624111773,
+  "at": 1793624972819,
   "agents": [
     {
       "endpoint": "https://d493179ac871c4830a314ba1dc96eb056d14de6e-8787.dstack-pha-prod9.phala.network",
@@ -17,7 +17,7 @@
           "match": true,
           "meaning": "digest of the measured core files this guest is running"
         },
-        "updated_at": 1793624097,
+        "updated_at": 1793624954,
         "distribution": {
           "next_due_unix": 1793696548,
           "next_due_epoch": 2,
@@ -52,7 +52,7 @@
           "supervisor": "deterministic: no model, no credits, no approval step"
         },
         "strategy": {
-          "last_scan_at": 1793623352,
+          "last_scan_at": 1793624279,
           "sol_raw": "50082190",
           "flash": [
             {
@@ -168,7 +168,7 @@
             }
           ],
           "pump_positions": 0,
-          "updated_at": 1793624097
+          "updated_at": 1793624954
         },
         "constitution_sha256": "556610e3e2c81a87762d82d2c59264b4b56549ea50739f3e707678b2db755bb0",
         "prime_directives": [
@@ -196,15 +196,10 @@
         ],
         "children": [],
         "journal": {
-          "head": "5cfea93889a4abc4c5f0fcb0ba79f535b7c992b58272b53117555a0e2c983ebb",
-          "seq": 1874
+          "head": "ccf4f422b55eace063a7287a2a4ac5139ce2c2a06acec958d0a8003b8a35f69c",
+          "seq": 1887
         },
         "components": {
-          "strategy": {
-            "alive": true,
-            "pid": 108,
-            "restarts": 2
-          },
           "signer": {
             "alive": true,
             "pid": 48,
@@ -225,6 +220,11 @@
             "pid": 72,
             "restarts": 1
           },
+          "strategy": {
+            "alive": true,
+            "pid": 108,
+            "restarts": 2
+          },
           "loops": {
             "alive": true,
             "pid": 136,
@@ -236,9 +236,9 @@
             "restarts": 2
           }
         },
-        "served_at": 1793624100
+        "served_at": 1793624961
       },
-      "seen_at": 1793624111519,
+      "seen_at": 1793624972538,
       "first_seen": 1793598602101
     },
     {
@@ -258,7 +258,7 @@
           "meaning": "digest of the measured core files this guest is running"
         },
         "identity_binding": "identity_binding_unverified",
-        "updated_at": 1793624100,
+        "updated_at": 1793624966,
         "distribution": {
           "next_due_unix": 1793670469,
           "next_due_epoch": 1,
@@ -276,7 +276,7 @@
           "anchors": {},
           "supervisor": "deterministic: no model, no credits, no approval step",
           "chains": {
-            "at": 1793624100,
+            "at": 1793624816,
             "evm": {
               "base": {
                 "sym": "ETH",
@@ -328,7 +328,7 @@
           "updated_at": 1793600704
         },
         "strategy": {
-          "last_scan_at": 1793623262,
+          "last_scan_at": 1793624233,
           "sol_raw": "651081",
           "flash": [
             {
@@ -444,13 +444,14 @@
             }
           ],
           "pump_positions": 0,
-          "updated_at": 1793624040
+          "updated_at": 1793624810,
+          "usdc_raw": "571395"
         },
         "inference": {
           "provider": "venice",
           "model": "deepseek-v4-1-flash-1017-uncensored",
           "mode": "external_paid_abliterated",
-          "credits_usd": 2.08256993,
+          "credits_usd": 2.02405029,
           "balance_http": 200,
           "admission_floor_usd": 0.1,
           "wallet_usdc_raw": "571395",
@@ -458,33 +459,32 @@
           "state": "ready"
         },
         "last_decision": {
-          "at": 1793623914,
+          "at": 1793624876,
           "tools": [
             "run_script"
           ],
-          "cost_usd": 0.009147,
+          "cost_usd": 0.002558,
           "content": null,
           "error": null,
           "usage": {
-            "prompt_tokens": 7106,
-            "completion_tokens": 5809,
-            "total_tokens": 12915,
+            "prompt_tokens": 7103,
+            "completion_tokens": 818,
+            "total_tokens": 7921,
             "prompt_tokens_details": {
               "cached_tokens": 2688
             },
             "cache_read_input_tokens": 2688,
             "completion_tokens_details": {
-              "reasoning_tokens": 5322
+              "reasoning_tokens": 501
             }
           },
           "call_results": [
             {
               "name": "run_script",
               "result": {
-                "ok": false,
-                "file": "/var/lib/agent/var/lib/agent/strategy/scripts/bg_swap.mjs",
-                "stdout": "",
-                "stderr": "node:internal/child_process:395\n  const err = this._handle.spawn(options);\n                           ^\n\nError: Access to this API has been restricted. Use --allow-child-process to manage permissions.\n    at ChildProcess.spawn (node:internal/child_process:395:28)\n    at spawn (node:child_process:787:9)\n    at file:///var/lib/agent/var/lib/agent/strategy/scripts/bg_swap.mjs:14:13\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5) {\n  code: 'ERR_ACCESS_DENIED',\n  permission: 'ChildProcess',\n  resource: '/usr/local/bin/node'\n}\n\nNode.js v22.23.4\n"
+                "ok": true,
+                "file": "/var/lib/agent/var/lib/agent/strategy/scripts/probe_bal.mjs",
+                "stdout": "{\"bal\":{\"to\":1,\"ms\":22025}}\n"
               }
             }
           ]
@@ -846,74 +846,19 @@
           }
         ],
         "journal": {
-          "head": "53c44a5333b143da32f819126b154998e602a25b925bc420335b5f2655a525e1",
-          "seq": 25544
+          "head": "76567b4c26ca56df4252a9fb25b8043e5d1cf3579b50491df899e3bb6e738de0",
+          "seq": 26291
         },
         "components": {
-          "component": "distributor",
-          "ts": 1793624100,
-          "pid": 35,
-          "status": {
-            "next_due_unix": 1793670469,
-            "next_due_epoch": 1,
-            "highest_epoch": 0,
-            "obligations": 0,
-            "by_status": {},
-            "reserved": {},
-            "carries": {
-              "parent": {},
-              "founder": {}
-            },
-            "arrears_raw": {},
-            "blocked": [],
-            "unresolved_epochs": {},
-            "anchors": {},
-            "supervisor": "deterministic: no model, no credits, no approval step",
-            "chains": {
-              "at": 1793624100,
-              "evm": {
-                "base": {
-                  "sym": "ETH",
-                  "wei": "0",
-                  "eth": 0,
-                  "rpc": "https://mainnet.base.org"
-                },
-                "ethereum": {
-                  "sym": "ETH",
-                  "wei": "0",
-                  "eth": 0,
-                  "rpc": "https://ethereum-rpc.publicnode.com"
-                },
-                "arbitrum": {
-                  "sym": "ETH",
-                  "wei": "0",
-                  "eth": 0,
-                  "rpc": "https://arb1.arbitrum.io/rpc"
-                },
-                "optimism": {
-                  "sym": "ETH",
-                  "wei": "0",
-                  "eth": 0,
-                  "rpc": "https://mainnet.optimism.io"
-                },
-                "polygon": {
-                  "sym": "POL",
-                  "wei": "0",
-                  "eth": 0,
-                  "rpc": "https://polygon-bor-rpc.publicnode.com"
-                }
-              },
-              "solana": {
-                "lamports": 651081,
-                "sol": 0.000651081
-              },
-              "total_native_usd_estimate": 0
-            }
+          "brain": {
+            "alive": true,
+            "pid": 35,
+            "ts": 1793624966
           }
         },
-        "served_at": 1793624100
+        "served_at": 1793624968
       },
-      "seen_at": 1793624111519,
+      "seen_at": 1793624972538,
       "first_seen": 1793598602101,
       "member": false
     },
@@ -5980,7 +5925,7 @@
     }
   ],
   "crawled": true,
-  "merged_at": 1793624117311,
+  "merged_at": 1793624978475,
   "total_seen": 20,
   "live": 2
 }
