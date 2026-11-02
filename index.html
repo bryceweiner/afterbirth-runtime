@@ -257,6 +257,25 @@ function renderFleet(){
 }
 async function loadMemos(){const ws=[...new Set(S.agents.map(a=>{const r=S.rows.find(x=>x.a===a);return (r&&r.st&&r.st.solana)||a.wallet;}).filter(Boolean))].slice(0,10);const f=[];await Promise.all(ws.map(async(w)=>{const sigs=await rpc('getSignaturesForAddress',[w,{limit:10}]);if(!Array.isArray(sigs))return;await Promise.all(sigs.slice(0,6).map(async(s)=>{const tx=await rpc('getTransaction',[s.signature,{encoding:'jsonParsed',maxSupportedTransactionVersion:0}]);for(const ix of ((tx&&tx.transaction&&tx.transaction.message&&tx.transaction.message.instructions)||[])){if(!MEMO.has(ix.programId))continue;let t='';try{t=new TextDecoder().decode(Uint8Array.from(atob(ix.data||''),c=>c.charCodeAt(0)));}catch{}if(t)f.push({at:s.blockTime||0,from:w.slice(0,6),sig:s.signature,text:t});}}));}));f.sort((x,y)=>y.at-x.at);S.memos=f.slice(0,50);}
 function channelOf(t){if(/^<<[0-9a-f]{8}>>/.test(t))return 'obfuscated';if(t.startsWith('swm2.'))return 'sealed';if(/^\[pub\]/.test(t))return 'public';return 'plain';}
+async function renderHero(){
+  let h=[]; try{ h=await (await fetch('history.json?ts='+Date.now(),{cache:'no-store'})).json(); }catch{}
+  if(!Array.isArray(h)||!h.length) return;
+  const nw=(r)=>Number(r.sol||0)+Number(r.usdc||0)/150;
+  const last=h[h.length-1], now=nw(last);
+  const at=(ms)=>{let best=null;for(const r of h){if(r.at<=ms)best=r;}return best;};
+  const g=(ago)=>{const p=at(last.at-ago);if(!p)return null;const base=nw(p);if(!base)return null;return (now-base)/base;};
+  const pct=(v)=>v===null?'—':(v>=0?'+':'')+(v*100).toFixed(2)+'%';
+  const cls=(v)=>v===null?'':(v>=0?'up':'down');
+  const dod=g(864e5), wow=g(7*864e5), yoy=g(365*864e5);
+  const num=document.getElementById('gdp-num'); if(num) num.textContent=(now).toFixed(4)+' SOL';
+  const sub=document.getElementById('gdp-sub'); if(sub) sub.textContent='per agent '+(last.agents?(now/last.agents).toFixed(4)+' SOL':'—')+' · realized '+(last.realized_sol||0).toFixed(4)+' SOL';
+  for(const [id,v] of [['gdp-dod',dod],['gdp-wow',wow],['gdp-yoy',yoy]]){const el=document.getElementById(id); if(el){el.textContent=pct(v);el.className=cls(v);}}
+  const days=[];for(let d=1;d<=7;d++){const a=at(last.at-d*864e5);if(a&&nw(a)>0)days.push(now/nw(a)-1);}
+  const sus=days.length?days.reduce((s,x)=>s+x,0)/days.length:null;
+  const se=document.getElementById('gdp-sus'); if(se){se.textContent=pct(sus);se.className=cls(sus);}
+  const pe=document.getElementById('gdp-proj'); if(pe){pe.textContent=sus===null?'—':(now*Math.pow(1+sus,30)).toFixed(3)+' SOL';pe.className=cls(sus);}
+  const ae=document.getElementById('gdp-agents'); if(ae) ae.textContent=String(last.agents||0);
+}
 function renderComms(){const now=Math.floor(Date.now()/1000);const sealed=S.memos.filter(m=>channelOf(m.text)==='sealed').length;const cs=(S.stats&&S.stats.comms)||{};const bItems0=cs.items||[];
   const msgs=S.memos.length||Number(cs.messages||0);
   $('c-big').innerHTML=`${msgs}<small>messages</small>`;
