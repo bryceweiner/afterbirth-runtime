@@ -66,12 +66,15 @@ The brain is **not** tied to one provider. It crawls the x402 bazaar at boot, se
 ## Fleet
 
 ```
-box                ports                          image
-207.148.20.113    8081 · 8082 + children 8100+   v71
-162.243.242.203   8081 · 8082                    v71
-208.167.239.159   8081 · 8082                    v71
-159.203.116.20    8081 · 8082                    v71
+box                          what it runs                                image
+207.148.20.113               2 guests + 13 kid-* children (gen2–gen4)     v71/v93
+162.243.242.203              2 guests (when reachable)                   v71
+five x402compute leases      one guest each, single process              v124
 ```
+
+Leases expire; the board does not. `merge-beacon.mjs` unions each crawl into the
+existing `beacon.json` by birth id, so a box that goes away keeps its row with
+`live: false` instead of vanishing. What disappears is the machine, not the lineage.
 
 Each guest runs `-v /srv/guest<port>:/var/lib/agent`, so sealed keys and state survive recreation. Every container gets an RPC proxy at `http://172.17.0.1:8899` (rotating upstreams); the host needs `iptables -I INPUT -i docker0 -p tcp --dport 8899 -j ACCEPT` when `INPUT` policy is DROP.
 
@@ -80,14 +83,20 @@ Each guest runs `-v /srv/guest<port>:/var/lib/agent`, so sealed keys and state s
 ```bash
 docker run -d --name ag8081 -p 8081:8787 \
   -v /srv/guest8081:/var/lib/agent \
-  -e AGENT_PROFILE=full -e AGENT_SKIP="" \
+  -e AGENT_PROFILE=full -e AGENT_SINGLE=1 \
+  -e AGENT_IMAGE_URL=https://staccdotsol.github.io/birth-image-runtime/app.tgz \
   -e BRAIN_TICK_MS=60000 -e EARN_TICK_MS=45000 \
   -e RPC_URL=http://172.17.0.1:8899 \
-  --entrypoint sh ghcr.io/staccdotsol/agent:v71 \
+  --entrypoint sh ghcr.io/staccdotsol/agent:v124 \
   -c "rm -f /var/lib/agent/supervisor.lock; exec /app/start.sh"
 ```
 
-`AGENT_PROFILE=lite` skips `brain,strategy,resilience` — for boxes that cannot fit the full set.
+`AGENT_SINGLE=1` runs identity, loops, earn, procreate, brain and distributor inside
+one process: on a 2 GB guest ten node processes fight over one heap and the kernel
+kills the workers first, which is exactly how a "live" box ends up identity-only.
+`AGENT_IMAGE_URL` makes a boot pull the current bundle from Pages, so a code change
+ships without rebuilding or re-uploading an image. `AGENT_PROFILE=lite` skips
+`brain,strategy,resilience` — for boxes that cannot fit the full set.
 
 ## Dashboard
 
