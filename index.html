@@ -224,18 +224,27 @@ async function loadEndpoints(){
   }
   await Promise.allSettled(jobs);
   if(!bc) bc={agents:acc.slice(),stats:S.stats};
+  // Keep the beacon's feed regardless of which stats block wins.
+  S.bcMemos=(bc&&Array.isArray(bc.memos)&&bc.memos.length)?bc.memos:(S.bcMemos||[]);
 
   // If the source did not aggregate (or aggregated zeros), sum what the members report.
   if(!S.stats||!S.stats.economics||!S.stats.economics.launches){
     const st={economics:{launches:0,positions:0,sells:0,realized_lamports:'0',value_sol:0,sweeps:0},invention:{scripts:0,items:[],last_at:0},comms:{messages:0,agents:0,items:[]},tee:{verified:0,quotes:[]}};
-    S.bcMemos = (bc&&Array.isArray(bc.memos))?bc.memos:[];
     if(bc&&Array.isArray(bc.memos)&&bc.memos.length&&!S.memos.length){S.memos=bc.memos.map(m=>({from:m.from,at:m.at,text:m.text,sig:m.sig}));}
   for(const a of (bc&&bc.agents)||[]){const x=a.status||{};const e=x.economics||{};st.economics.launches+=Number(e.launches||0);st.economics.positions+=Number(e.positions||0);st.economics.sells+=Number(e.sells||0);st.economics.realized_lamports=String(BigInt(st.economics.realized_lamports)+BigInt(e.realized_lamports||0));st.economics.value_sol+=Number(e.value_sol||0);const i=x.invention||{};st.invention.scripts+=Number(i.scripts||0);(i.items||[]).forEach(n=>{if(!st.invention.items.includes(n))st.invention.items.push(n)});if(i.last_at)st.invention.last_at=Math.max(st.invention.last_at,Number(i.last_at));const c=x.comms||{};st.comms.messages+=Number(c.messages||c.lines||0);if(Number(c.lines||c.messages||0))st.comms.agents++;const b=x.identity_binding;(b&&b.state==='tdx_verified'||typeof b==='string'&&b.includes('tdx_verified'))&&st.tee.verified++;}
     S.stats=st;
   }
   // A member beacon may carry an empty stats block; keep whichever block actually has numbers.
   if(bc&&bc.stats){
-    if(statScore(bc.stats)>statScore(S.stats)) S.stats=bc.stats;
+    if(statScore(bc.stats)>statScore(S.stats)){
+      const keep=(S.stats&&S.stats.economics)||{}; S.stats=bc.stats; const be=S.stats.economics||(S.stats.economics={});
+      be.launches=Math.max(Number(be.launches||0),Number(keep.launches||0));
+      be.positions=Math.max(Number(be.positions||0),Number(keep.positions||0));
+      be.sells=Math.max(Number(be.sells||0),Number(keep.sells||0));
+      be.realized_lamports=String(Math.max(Number(be.realized_lamports||0),Number(keep.realized_lamports||0)));
+      be.fees_lamports=String(Math.max(Number(be.fees_lamports||0),Number(keep.fees_lamports||0)));
+      be.value_sol=Math.max(Number(be.value_sol||0),Number(keep.value_sol||0));
+    }
   }
   S.rows=[]; S.agents=[];  // the final pass is the authority; the per-source paint is only a preview
   for(const a of (bc&&bc.agents)||[]){
