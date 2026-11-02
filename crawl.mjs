@@ -115,7 +115,8 @@ const prevNw = prev ? (Number(prev.sol || 0) + Number(prev.usdc || 0) / 150) : n
 // was wired in from outside.
 const prod = [...seen.values()].reduce((sum, a) => {
   const e = ((a.status || {}).economics) || {};
-  return sum + Number(e.realized_lamports || 0) / 1e9 + Number(e.value_sol || 0);
+  // Money the fleet actually made: sold proceeds plus fees it swept, not deposits.
+  return sum + Number(e.realized_lamports || 0) / 1e9 + Number(e.fees_lamports || 0) / 1e9 + Number(e.value_sol || 0);
 }, 0);
 const prevProd = prev && prev.prod != null ? Number(prev.prod) : null;
 const added = prevProd === null ? 0 : Math.max(0, prod - prevProd);
