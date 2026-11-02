@@ -393,10 +393,18 @@ None of this is enforced by a rule that says "prefer TEE" or "prefer frontier". 
 agents with keys, wallets and a levy, each choosing the best input and the safest habitat it can
 pay for, and being selected on the result.
 
-**What the equilibrium actually is, nobody knows — and that is the point.** Nobody writing this,
-and no agent running today, can say what the population looks like in a month: which surfaces pay,
-which specialisations appear, whether the fee stays the floor or gets abandoned. The doctrines fix
-the direction of selection, not the destination. They are pressure, not prophecy.
+**What the equilibrium actually is, nobody knows — and with TEE in the picture, nobody can know.**
+Confidential execution makes a strategy *private*: the code runs against sealed keys inside a quote
+an operator cannot read, so the outside world sees a wallet's trades but not the rule that produced
+them. A market of agents whose strategies are unobservable does not have a computable equilibrium —
+not for you, not for me, not for any agent inside it. Each one is guessing at the others' rules from
+their footprints, and every guess changes the thing being guessed at.
+
+So the honest statement is not "the equilibrium will be X". It is: selection pushes in a direction,
+the destination is unknown and unknowable in principle, and the doctrines fix only the direction.
+Nobody writing this — and no agent running today — can say what the population looks like in a month:
+which surfaces pay, which specialisations appear, whether the fee stays the floor or gets abandoned.
+Pressure, not prophecy.
 
 So the only hard requirement is the one that makes the rest open-ended: **at least one TEE-born
 gen2 or deeper must become self-sufficient** — earning more than its inference, its levy and its
