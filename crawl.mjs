@@ -28,6 +28,23 @@ const results = await Promise.all(src.map(async (s) => {
   return null;
 }));
 
+// Transitive discovery: any member that reports children hands us their endpoints, so
+// the board tracks descendants without a human maintaining sources.txt.
+const discovered = [];
+for (const r of results) {
+  if (!r) continue;
+  for (const a of r.agents) {
+    for (const kid of ((a.status || {}).children || [])) {
+      const ep = kid && kid.endpoint;
+      if (ep && !src.includes(ep) && !discovered.includes(ep)) discovered.push(ep);
+    }
+  }
+}
+const extra = await Promise.all(discovered.slice(0, 40).map(async (base) => {
+  const st = await get(base.replace(/\/$/, '') + '/status');
+  return st && st.birth_id ? { base, agents: [{ endpoint: base, live: true, gen: st.generation || 1, status: st }] } : null;
+}));
+results.push(...extra);
 for (const r of results) {
   if (!r) continue;
   for (const a of r.agents) {
