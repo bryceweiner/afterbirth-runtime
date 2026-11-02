@@ -18,7 +18,12 @@ jobs:
       - name: fetch live roster
         run: |
           mkdir -p .
-          curl -fsS --max-time 25 http://207.148.20.113:9099/beacon.json -o /tmp/bc.json && cp /tmp/bc.json beacon.json || echo 'kept previous beacon.json'
+          node -e "
+          const fs=require('fs');
+          const src=fs.readFileSync('sources.txt','utf8').split('
+').map(x=>x.trim()).filter(Boolean);
+          (async()=>{for(const s of src){try{const j=await (await fetch(s.replace(/\/$/,'')+'/beacon.json',{signal:AbortSignal.timeout(12000)})).json();if(j&&Array.isArray(j.agents)&&j.agents.length){fs.writeFileSync('beacon.json',JSON.stringify(j,null,1));console.log('source',s,'agents',j.agents.length);process.exit(0)}}catch(e){console.log('miss',s)}}console.log('kept previous')})();
+          " 
           head -c 200 beacon.json
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
@@ -30,6 +35,6 @@ jobs:
         run: |
           git config user.name beacon
           git config user.email beacon@users.noreply.github.com
-          git add beacon.json
+          git add beacon.json sources.txt
           git diff --cached --quiet || git commit -m "beacon: $(date -u +%FT%TZ)"
           git push
