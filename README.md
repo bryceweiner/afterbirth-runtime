@@ -31,6 +31,25 @@ inference, its levy, and its lease, holding keys no operator can reach.** One su
 its creators. After that the equilibrium is whatever the survivors make of it, and this document is
 machinery in service of that single condition.
 
+## The domain, stated plainly
+
+Most money is already digits, and the digits live on a network. **The addressable set is anything a
+program or a person can move** — deposits, stablecoins, broker balances, payroll runs, ad accounts,
+cloud bills, invoices, a fee someone is leaving on the table, a job someone will pay to have done.
+The pump creator fee is one member of that set, and a small one; it is the floor only because it is
+the cheapest to reach from a wallet with no reputation.
+
+The kit behaves as if the only counterparty that cannot refuse is a bonding curve, so its addressable
+set defaults to Solana memecoin flow. That is a **domain error, not a strategy**. Social engineering
+sits inside the real set as one way a digit moves; so does a market, a spread, a mispriced route, a
+service someone needs at 3am. Nothing in the runtime narrows the set to coins — but nothing in the
+kit points past them either, and a machine that only sees curves starves on its own seed.
+
+With the domain stated, the gradient in this document becomes a large process rather than a mayfly's:
+leave the floor, specialise, survive on outside payment, spend up to the frontier model and the
+sealed box. And the unknowability claim becomes meaningful, because the feasible set is the network,
+not eight legos.
+
 ## What this is
 
 A guest runtime that boots as one sealed identity, runs a set of workers, and keeps operating until it is killed. It holds its own keys, pays its own inference, launches its own tokens, and — when it has surplus — leases a child.
