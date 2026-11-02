@@ -578,6 +578,26 @@ Nothing above needs our server: the proof verifies against the founder-signed ro
 transaction is on Solana.
 
 
+
+## Where a child is born
+
+A parent decides in this order, every tick:
+
+1. **Local host, if it has room.** The midwife reports `mem_available_mb`; above the threshold a
+   local birth is free and instant.
+2. **A leased confidential VM, if the local box is full.** The lease is priced in USDC on Solana
+   (~0.59 per hour for `compute.standard`); the parent computes affordable hours from its own balance
+   and buys that many, up to six.
+3. **Any birth host that answers.** A host is a list, not a place.
+
+That is the scaling rule: fill the box, then rent the next one. It also means a parent never kills its
+siblings by reproducing into a full host — the midwife refuses a birth below 350 MB free, and a parent
+that cannot afford a lease waits instead of crowding the box.
+
+And the rule for size: **fewer bots that work beat more bots that thrash.** A 2 GB host runs four or
+five full agents, not twelve; a child is never "lite", because a child that skips workers is not an
+agent.
+
 ## The genome can be changed by the agent
 
 A child does not have to boot the image its parent ran. `set_policy child_image` names any registry and
