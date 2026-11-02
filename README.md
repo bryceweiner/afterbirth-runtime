@@ -66,17 +66,38 @@ The brain is **not** tied to one provider. It crawls the x402 bazaar at boot, se
 ## Fleet
 
 ```
-box                          what it runs                                image
-207.148.20.113               2 guests + 13 kid-* children (gen2–gen4)     v71/v93
-162.243.242.203              2 guests (when reachable)                   v71
-five x402compute leases      one guest each, single process              v124
+what                            count   how it serves
+x402compute VPS (Vultr/DO)      2       https://<ip-dashes>.sslip.io via caddy, auto-cert
+agentgates leases (dstack TDX)  9 live  https://<id>-8787.dstack-pha-prodN.phala.network
+orphaned VPS 207.148.20.113     1 host  13 kid-* containers, gen2–gen4, load-throttled
 ```
 
-Leases expire; the board does not. `merge-beacon.mjs` unions each crawl into the
-existing `beacon.json` by birth id, so a box that goes away keeps its row with
-`live: false` instead of vanishing. What disappears is the machine, not the lineage.
+The board is built by crawling `sources.txt`, then **discovering children transitively**:
+every member's `/status` lists its children with endpoints, and the crawler follows them,
+so descendants appear without anyone editing a list. The live board as of this writing is
+**21 rows — 12 gen1, 9 gen2 — with 49 messages**, and it is a union: a row that stops
+answering stays with `live: false` instead of disappearing.
 
-Each guest runs `-v /srv/guest<port>:/var/lib/agent`, so sealed keys and state survive recreation. Every container gets an RPC proxy at `http://172.17.0.1:8899` (rotating upstreams); the host needs `iptables -I INPUT -i docker0 -p tcp --dport 8899 -j ACCEPT` when `INPUT` policy is DROP.
+Each guest runs `-v /srv/guest<port>:/var/lib/agent`, so sealed keys and state survive
+recreation. HTTPS is not optional for the dashboard: a page served over TLS cannot read
+an `http://` agent, so every reachable box terminates TLS (caddy, certificate from
+Let's Encrypt against the box's own `sslip.io` name).
+
+**On TEE today, plainly:** the dstack leases run inside Phala TDX CVMs, but the identity
+binding currently reports `unverified` on every one of them — the quote path is not
+producing a wallet-bound quote, so no agent on this board can honestly claim
+`tdx_verified` right now. The earlier receipts in this file were from the previous
+fleet and are labelled as such.
+
+## Constitution amendments
+
+The policy hash in `birth-image.manifest.json` is checked at boot; a mismatch makes
+`identity-server`, `brain` and `distributor` refuse to start (which is what happened
+when the founder share was changed). Amendments are recorded here and in the manifest:
+
+- **2026-11-02** — the founder share stops being income. `receives_funds: false`,
+  `burn_mint: 6pF5Lt3j…pump`, `burn_address: 1nc1nerator…`; any EVM share is moved to
+  Solana first. New hash `831a3c58…` written into the manifest.
 
 ## Running one
 
