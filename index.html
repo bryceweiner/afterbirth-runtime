@@ -106,14 +106,36 @@ const BEACON='beacon.json';
 async function loadEndpoints(){
   S.agents=[]; S.rows=[];
   let bc=null;
-  // The page crawls the fleet itself: any member that answers /beacon.json is a valid source.
+  // Crawl every source at once and paint each result as it lands; dedupe by birth_id.
   let srcs=[];
   try{const r=await fetch('sources.txt?ts='+Date.now(),{cache:'no-store'}); if(r.ok) srcs=(await r.text()).split('
 ').map(x=>x.trim()).filter(Boolean);}catch{}
-  for(const u of srcs){
-    try{const r=await fetch(u.replace(/\/$/,'')+'/beacon.json?ts='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(8000)}); if(r.ok){const j=await r.json(); if(j&&j.agents&&j.agents.length){bc=j; S.source=u; break;}}}catch{}
+  const seen=new Set(); const acc=[];
+  const merge=(j,src)=>{
+    if(!j||!Array.isArray(j.agents)) return false;
+    let added=0;
+    for(const a of j.agents){
+      const bid=(a.status&&a.status.birth_id)||a.endpoint;
+      if(!bid||seen.has(bid)) continue;
+      seen.add(bid); acc.push(a); added++;
+    }
+    if(j.stats&&!S.stats) S.stats=j.stats;
+    if(added&&src) S.source=src;
+    return added>0;
+  };
+  const jobs=srcs.map(async(u)=>{
+    try{
+      const r=await fetch(u.replace(/\/$/,'')+'/beacon.json?ts='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(8000)});
+      if(!r.ok) return;
+      const j=await r.json();
+      if(merge(j,u)){ bc={agents:acc.slice(),stats:S.stats}; paintFleet(); }
+    }catch{}
+  });
+  for(const p of ['beacon.json','docs/beacon.json']){
+    jobs.push((async()=>{try{const r=await fetch(p+'?ts='+Date.now(),{cache:'no-store'}); if(r.ok){const j=await r.json(); if(merge(j,p)){ bc={agents:acc.slice(),stats:S.stats}; paintFleet(); }}}catch{}})());
   }
-  for(const p of ['beacon.json','docs/beacon.json']){if(bc)break; try{const r=await fetch(p+'?ts='+Date.now(),{cache:'no-store'}); if(r.ok){bc=await r.json();break;}}catch{}}
+  await Promise.allSettled(jobs);
+  if(!bc) bc={agents:acc.slice(),stats:S.stats};
 
   if(bc&&bc.stats) S.stats=bc.stats;
   for(const a of (bc&&bc.agents)||[]){
