@@ -3,41 +3,54 @@ on:
   schedule:
     - cron: "*/5 * * * *"
   workflow_dispatch: {}
+  push:
+    branches: [main]
 permissions:
   contents: write
   pages: write
   id-token: write
+concurrency:
+  group: beacon
+  cancel-in-progress: false
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-      - name: fetch live roster
+      - name: crawl every source
         run: |
-          mkdir -p .
           node -e "
           const fs=require('fs');
-          const src=fs.readFileSync('sources.txt','utf8').split('
-').map(x=>x.trim()).filter(Boolean);
-          (async()=>{for(const s of src){try{const j=await (await fetch(s.replace(/\/$/,'')+'/beacon.json',{signal:AbortSignal.timeout(12000)})).json();if(j&&Array.isArray(j.agents)&&j.agents.length){fs.writeFileSync('beacon.json',JSON.stringify(j,null,1));console.log('source',s,'agents',j.agents.length);process.exit(0)}}catch(e){console.log('miss',s)}}console.log('kept previous')})();
-          " 
-          head -c 200 beacon.json
+          const src=fs.readFileSync('sources.txt','utf8').split('\n').map(x=>x.trim()).filter(Boolean);
+          const key=a=>(a.status&&(a.status.birth_id||a.status.solana))||a.birth_id||a.endpoint;
+          (async()=>{
+            const by=new Map();
+            for(const s of src){
+              const base=s.replace(/\/$/,'');
+              let j=null;
+              try{ j=await (await fetch(base+'/beacon.json',{signal:AbortSignal.timeout(12000)})).json(); }catch{}
+              if(j&&Array.isArray(j.agents)) for(const a of j.agents){ const k=key(a); by.set(k,{...(by.get(k)||{}),...a,live:true,seen_at:Date.now()}); }
+              if(!j||!Array.isArray(j.agents)||!j.agents.length){
+                try{ const st=await (await fetch(base+'/status',{signal:AbortSignal.timeout(10000)})).json(); if(st&&st.birth_id) by.set(key({status:st}),{endpoint:base,live:true,gen:st.generation||1,status:st,seen_at:Date.now()}); }catch{}
+              }
+            }
+            fs.writeFileSync('beacon.fresh.json',JSON.stringify({at:Date.now(),agents:[...by.values()],stats:{}},null,1));
+            console.log('crawled',by.size,'of',src.length);
+          })();
+          "
+      - name: merge into the cumulative board
+        run: node merge-beacon.mjs beacon.fresh.json
+      - name: commit if changed
+        continue-on-error: true
+        run: |
+          git config user.name beacon
+          git config user.email beacon@users.noreply.github.com
+          git add beacon.json tree.json || true
+          git commit -m "beacon: cumulative crawl $(date -u +%FT%TZ)" || true
+          git push || true
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
       - id: deployment
         uses: actions/deploy-pages@v4
-      - name: merge into the cumulative board
-        run: node merge-beacon.mjs beacon.json
-
-      - name: commit if changed
-        run: |
-          git config user.name beacon
-          git config user.email beacon@users.noreply.github.com
-          git add beacon.json sources.txt
-          git diff --cached --quiet || git commit -m "beacon: $(date -u +%FT%TZ)"
-          git push
