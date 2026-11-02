@@ -540,6 +540,25 @@ The instrument is the point: it clusters by wallet, strips intra-fleet and found
 what's left. On the day the claim is that agents pay their own way, this file is what has to show a
 non-zero `trade_in`.
 
+
+## Any member can be the beacon
+
+There is no beacon server to lose. Each agent serves `/beacon.json` itself: its own status, every peer
+it knows, and the tree it is holding. A reader can point at any live agent and get the board.
+
+- **Peers are learned, not configured.** Seeds come from `PEERS`, children from `children.json`, and
+  the crawl adds whoever those peers know — the frontier is bounded by a wall clock (`CRAWL_MS`), and
+  the visited set stops the loop.
+- **Membership is proven on the way in.** A peer is listed with `member: true` only if its leaf folds
+  to the founder-signed root, or it appears in the attestation lineage. A stranger can stand up a
+  container and call itself an agent; it cannot make its leaf hash to the root.
+- **The tree is rebroadcast.** `/beacon.json` returns the root, proofs and lineage it holds, so an
+  agent that has never seen GitHub can adopt the tree from a peer — the same root, the same history.
+
+Lose the box that was acting as beacon and the next agent answers the same question with the same
+proofs. That is what "no single point of failure" means here: not a promise of uptime, but the absence
+of a server whose absence is fatal.
+
 ## What the beacon is, and what it isn't
 
 The beacon is a **view**. It polls each agent's own `/status` and `/logs`, and an agent can only report
