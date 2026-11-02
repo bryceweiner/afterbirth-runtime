@@ -1,5 +1,5 @@
 {
- "at": 1793580663,
+ "at": 1793580727,
  "agents": [
   {
    "endpoint": null,
@@ -19,7 +19,7 @@
      "meaning": "digest of the measured core files this guest is running"
     },
     "identity_binding": "identity_binding_unverified",
-    "updated_at": 1793580651,
+    "updated_at": 1793580716,
     "inference": {
      "provider": "venice",
      "model": "deepseek-v4-1-flash-1017-uncensored",
@@ -27,42 +27,68 @@
      "credits_usd": 0,
      "balance_http": 200,
      "admission_floor_usd": 0.1,
-     "wallet_usdc_raw": "0",
-     "wallet_sol_raw": "0",
+     "wallet_usdc_raw": "8121029",
+     "wallet_sol_raw": "38960000",
      "state": "unfunded",
      "self_fund": {
-      "state": "blocked",
-      "reason": "SOL too small to swap",
-      "sol": "0",
-      "credits": 0,
-      "usdc": "0"
+      "state": "funded",
+      "credits": 5,
+      "steps": [
+       {
+        "topup": "credited",
+        "credits": 5,
+        "signature": "62Rc9At55Qd7UDKQCC3RArxrpvMcRgfcTNzjXAoAy4KqV4p1rVDdHNNmH5bPrMBxZsV86T7CEuhdZ8S1dEVWpYHg"
+       }
+      ]
      }
     },
     "last_decision": {
-     "at": 1793580410,
+     "at": 1793580643,
      "tools": [],
-     "cost_usd": 0,
-     "content": null,
-     "error": "no funded provider answered",
-     "usage": null,
+     "cost_usd": 0.001,
+     "content": "```json\n{\n  \"tool\": \"economics\",\n  \"args\": {\n    \"reason\": \"Check current balance state, inference costs, and distribution obligations before deciding next action\"\n  }\n}\n```\n\nI need to understand my financial position clearly:\n\n1. **Balance snapshot**: ~39M SOL (~$9.75k at typical rates), ~8.1M USDC, large meme token positions\n2. **Critical issue**: Inference is blocked (state: \"unfunded\"), likely because USDC wallet is at 0 despite USDC in SPL holdings\n3. **Time pressure**: Next distribution to parents in ~1.2M seconds (~14 days) - I owe 10% of assets to birth parent, 5% to founder\n4. **Earnings status**: Zero inference revenue due to funding block, meme tokens are unrealized\n\nThe `economics` call will show me:\n- Current net position and cash runway\n- Inference funding status and what's n",
+     "error": null,
+     "usage": {
+      "prompt_tokens": 2217,
+      "completion_tokens": 307,
+      "total_tokens": 2524,
+      "prompt_tokens_details": {
+       "cached_tokens": 0,
+       "cache_write_tokens": 0,
+       "audio_tokens": 0,
+       "video_tokens": 0
+      },
+      "completion_tokens_details": {
+       "reasoning_tokens": 0,
+       "image_tokens": 0,
+       "audio_tokens": 0
+      }
+     },
      "call_results": []
     },
     "funding": {
-     "sol_raw": "0",
-     "usdc_raw": "0",
+     "sol_raw": "38960000",
+     "usdc_raw": "8121029",
      "ledger_totals": {
-      "native:SOL": "0"
+      "native:SOL": "38970000",
+      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "8121029",
+      "t22:6pF5Lt3jjyfV9uF4WqWvGJmPVHChQn5QACAjSLzSpump": "5888170673990",
+      "t22:BguvpTW3XdUamUL9Ab3LnQzE466816D7NWr1Pf6Ee5gr": "1"
      },
      "spendable": {
-      "native:SOL": "0"
+      "native:SOL": "33970000",
+      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "8121029",
+      "t22:6pF5Lt3jjyfV9uF4WqWvGJmPVHChQn5QACAjSLzSpump": "5888170673990",
+      "t22:BguvpTW3XdUamUL9Ab3LnQzE466816D7NWr1Pf6Ee5gr": "1"
      }
     },
     "strategy": {
-     "last_scan_at": 1793580077,
-     "sol_raw": "38950000",
+     "last_scan_at": 1793580076,
+     "sol_raw": "38960000",
      "flash": [],
      "pump_positions": 0,
-     "updated_at": 1793580651
+     "updated_at": 1793580544,
+     "usdc_raw": "8121029"
     },
     "distribution": {
      "next_due_unix": 1793666423,
@@ -81,7 +107,7 @@
      "anchors": {},
      "supervisor": "deterministic: no model, no credits, no approval step",
      "chains": {
-      "at": 1793580639,
+      "at": 1793580526,
       "evm": {
        "base": {
         "sym": "ETH",
@@ -127,7 +153,7 @@
      "sells": 0,
      "realized_lamports": "0",
      "last_sell_at": null,
-     "updated_at": 1793580637
+     "updated_at": 1793580727
     },
     "parent_birth_id": null,
     "generation": 1,
@@ -172,8 +198,8 @@
      "last_at": 1793580458
     },
     "journal": {
-     "head": "34e04817a35b14774f0a4b11a4e6daed1d5bf3ac777e1d28fde96a7b72190ab6",
-     "seq": 58
+     "head": "0006a9b28922197b2ca7ffc24029ef40349e0b5218363e600245fd23ec61ea6a",
+     "seq": 62
     },
     "components": {
      "signer": {
@@ -212,7 +238,7 @@
       "restarts": 2
      }
     },
-    "served_at": 1793580663
+    "served_at": 1793580727
    }
   }
  ],
