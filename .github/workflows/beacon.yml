@@ -26,7 +26,7 @@ jobs:
         run: |
           git config user.name beacon
           git config user.email beacon@users.noreply.github.com
-          git add beacon.json tree.json || true
+          git add beacon.json tree.json history.json || true
           git commit -m "beacon: cumulative crawl $(date -u +%FT%TZ)" || true
           git push || true
       - uses: actions/configure-pages@v5
