@@ -106,7 +106,14 @@ const BEACON='beacon.json';
 async function loadEndpoints(){
   S.agents=[]; S.rows=[];
   let bc=null;
-  for(const p of ['beacon.json','docs/beacon.json']){try{const r=await fetch(p+'?ts='+Date.now(),{cache:'no-store'}); if(r.ok){bc=await r.json();break;}}catch{}}
+  // The page crawls the fleet itself: any member that answers /beacon.json is a valid source.
+  let srcs=[];
+  try{const r=await fetch('sources.txt?ts='+Date.now(),{cache:'no-store'}); if(r.ok) srcs=(await r.text()).split('
+').map(x=>x.trim()).filter(Boolean);}catch{}
+  for(const u of srcs){
+    try{const r=await fetch(u.replace(/\/$/,'')+'/beacon.json?ts='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(8000)}); if(r.ok){const j=await r.json(); if(j&&j.agents&&j.agents.length){bc=j; S.source=u; break;}}}catch{}
+  }
+  for(const p of ['beacon.json','docs/beacon.json']){if(bc)break; try{const r=await fetch(p+'?ts='+Date.now(),{cache:'no-store'}); if(r.ok){bc=await r.json();break;}}catch{}}
 
   if(bc&&bc.stats) S.stats=bc.stats;
   for(const a of (bc&&bc.agents)||[]){
