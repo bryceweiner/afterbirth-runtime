@@ -117,8 +117,7 @@ async function loadEndpoints(){
   let bc=null;
   // Crawl every source at once and paint each result as it lands; dedupe by birth_id.
   let srcs=[];
-  try{const r=await fetch('sources.txt?ts='+Date.now(),{cache:'no-store'}); if(r.ok) srcs=(await r.text()).split('
-').map(x=>x.trim()).filter(Boolean);}catch{}
+  try{const r=await fetch('sources.txt?ts='+Date.now(),{cache:'no-store'}); if(r.ok) srcs=(await r.text()).split('\n').map(x=>x.trim()).filter(Boolean);}catch{}
   const seen=new Set(); const acc=[];
   const merge=(j,src)=>{
     if(!j||!Array.isArray(j.agents)) return false;
