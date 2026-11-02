@@ -102,6 +102,15 @@ const S={agents:[],rows:[],memos:[],stats:null};
 let SHOW_DOWN=false;
 async function getJson(url,ms=8000){const c=new AbortController();const t=setTimeout(()=>c.abort(),ms);try{const r=await fetch(url,{cache:'no-store',signal:c.signal});if(r.ok)return await r.json();}catch{}finally{clearTimeout(t);}try{const r=await fetch(PROXY(url),{cache:'no-store'});if(r.ok)return await r.json();}catch{}return null;}
 async function rpc(m,p){const b=JSON.stringify({jsonrpc:'2.0',id:1,method:m,params:p});for(const u of ['https://solana-rpc.publicnode.com','https://api.mainnet-beta.solana.com']){try{const r=await fetch(u,{method:'POST',headers:{'content-type':'application/json'},body:b});const j=await r.json();if(j.result)return j.result;}catch{}}return null;}
+function paintFleet(acc){
+  S.agents=[]; S.rows=[];
+  for(const a of (acc||[])){
+    const st=a.status||null;
+    S.agents.push({endpoint:a.endpoint,wallet:st&&st.solana,live:!!a.live});
+    S.rows.push({a:{endpoint:a.endpoint,wallet:st&&st.solana,gen:a.gen,kids:a.kids},st,live:!!(a.live||st&&st.phase)});
+  }
+  renderFleet();
+}
 const BEACON='beacon.json';
 async function loadEndpoints(){
   S.agents=[]; S.rows=[];
@@ -128,11 +137,11 @@ async function loadEndpoints(){
       const r=await fetch(u.replace(/\/$/,'')+'/beacon.json?ts='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(8000)});
       if(!r.ok) return;
       const j=await r.json();
-      if(merge(j,u)){ bc={agents:acc.slice(),stats:S.stats}; paintFleet(); }
+      if(merge(j,u)){ bc={agents:acc.slice(),stats:S.stats}; paintFleet(acc); }
     }catch{}
   });
   for(const p of ['beacon.json','docs/beacon.json']){
-    jobs.push((async()=>{try{const r=await fetch(p+'?ts='+Date.now(),{cache:'no-store'}); if(r.ok){const j=await r.json(); if(merge(j,p)){ bc={agents:acc.slice(),stats:S.stats}; paintFleet(); }}}catch{}})());
+    jobs.push((async()=>{try{const r=await fetch(p+'?ts='+Date.now(),{cache:'no-store'}); if(r.ok){const j=await r.json(); if(merge(j,p)){ bc={agents:acc.slice(),stats:S.stats}; paintFleet(acc); }}}catch{}})());
   }
   await Promise.allSettled(jobs);
   if(!bc) bc={agents:acc.slice(),stats:S.stats};
