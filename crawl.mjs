@@ -72,5 +72,24 @@ for (const m of [...statusComms, ...memos]) {
   uniq.push(m);
 }
 
+// GDP needs a time series, not a snapshot: append one row per crawl and keep a year.
+const price = Number(process.env.SOL_USD || 0) || null;
+let hist = [];
+try { hist = JSON.parse(fs.readFileSync('history.json', 'utf8')); } catch {}
+const live = [...seen.values()].filter((a) => a.status);
+let sol = 0, usdc = 0, realized = 0n, launched = 0, scripts = 0;
+for (const a of live) {
+  const st = a.status || {};
+  const e = st.economics || {};
+  sol += Number((st.strategy || {}).sol_raw || 0) / 1e9;
+  usdc += Number((st.strategy || {}).usdc_raw || 0) / 1e6;
+  realized += BigInt(e.realized_lamports || 0);
+  launched += Number(e.launches || 0);
+  scripts += Number((st.invention || {}).scripts || 0);
+}
+hist.push({ at: Date.now(), agents: live.length, sol: +sol.toFixed(6), usdc: +usdc.toFixed(4), realized_sol: +(Number(realized) / 1e9).toFixed(6), launches: launched, scripts });
+hist = hist.slice(-8000);
+fs.writeFileSync('history.json', JSON.stringify(hist, null, 1));
+
 fs.writeFileSync('beacon.fresh.json', JSON.stringify({ at: Date.now(), agents: [...seen.values()], stats: {}, memos: uniq.slice(0, 80) }, null, 1));
 console.log(JSON.stringify({ sources: src.length, answered: results.filter(Boolean).length, agents: seen.size, memos: uniq.length }));

@@ -41,6 +41,15 @@
   a:hover{text-decoration:underline}
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   @media(max-width:820px){.grid2{grid-template-columns:1fr}}
+
+.hero{display:flex;gap:28px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;padding:18px 20px;border:1px solid var(--border);border-radius:14px;margin-bottom:18px}
+.hero-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-foreground)}
+.hero-num{font-size:44px;line-height:1.05;font-weight:650;letter-spacing:-.02em}
+.hero-sub{color:var(--muted-foreground);font-size:13px;margin-top:4px}
+.hero-grid{display:grid;grid-template-columns:repeat(6,minmax(74px,auto));gap:14px}
+.hero-grid span{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-foreground)}
+.hero-grid b{font-size:16px;font-weight:600}
+.up{color:#3ecf8e}.down{color:#f26d6d}
 </style>
 </head>
 <body>
@@ -50,6 +59,22 @@
   <span class="sub" style="margin-left:auto"><a href="https://github.com/staccDOTsol/birth-image-runtime" target="_blank" rel="noopener">repo ↗</a></span>
 </header>
 <div class="wrap">
+<div class="hero" id="hero">
+  <div class="hero-main">
+    <div class="hero-label">fleet gdp · net worth</div>
+    <div class="hero-num" id="gdp-num">—</div>
+    <div class="hero-sub" id="gdp-sub">per agent —</div>
+  </div>
+  <div class="hero-grid">
+    <div><span>DoD</span><b id="gdp-dod">—</b></div>
+    <div><span>WoW</span><b id="gdp-wow">—</b></div>
+    <div><span>YoY</span><b id="gdp-yoy">—</b></div>
+    <div><span>sustained</span><b id="gdp-sus">—</b></div>
+    <div><span>projected 30d</span><b id="gdp-proj">—</b></div>
+    <div><span>agents</span><b id="gdp-agents">—</b></div>
+  </div>
+</div>
+
   <div class="cards">
     <div class="card"><h2>comms</h2>
       <div class="big" id="c-big">—<small>messages</small></div>
@@ -255,7 +280,7 @@ $('tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(b)s
 // Repaint the cards on a timer as well: the first paint can land before the crawl
 // finishes, and a stale "—" is worse than a slower number.
 if(!window.REPAINT_TIMER){window.REPAINT_TIMER=setInterval(()=>{try{renderFleet();renderEcon();renderInvention();renderComms();}catch{}},5000);}
-async function refresh(){try{await loadEndpoints();renderFleet();for(const f of ['renderEcon','renderInvention','renderComms']){try{if(typeof eval(f)==='function')eval(f+'()');}catch{}}setTimeout(()=>{try{renderFleet();for(const f of ['renderEcon','renderInvention','renderComms'])try{eval(f+'()')}catch{}}catch{}},2500);await loadMemos();try{const v=await getJson('valuation.json?ts='+Date.now(),9000);if(v&&v.totals)S.val=v.totals;}catch{}
+async function refresh(){try{await loadEndpoints();renderFleet();for(const f of ['renderEcon','renderInvention','renderComms','renderHero']){try{if(typeof eval(f)==='function')eval(f+'()');}catch{}}setTimeout(()=>{try{renderFleet();for(const f of ['renderEcon','renderInvention','renderComms','renderHero'])try{eval(f+'()')}catch{}}catch{}},2500);await loadMemos();try{const v=await getJson('valuation.json?ts='+Date.now(),9000);if(v&&v.totals)S.val=v.totals;}catch{}
   renderComms();renderEcon();renderInvention();}catch(e){document.getElementById("stamp").textContent="render error: "+e.message;}}
 refresh();setInterval(refresh,60000);
 </script>
