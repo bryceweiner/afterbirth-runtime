@@ -48,7 +48,8 @@ const get = async (url) => {
   return null;
 };
 
-const key = (a) => (a.status && (a.status.birth_id || a.status.solana)) || a.birth_id || a.endpoint;
+const solOf = (a) => { const v = (a && a.status && a.status.solana) || null; return v && v.public_key ? v.public_key : v; };
+const key = (a) => (a.status && (a.status.birth_id || solOf(a))) || a.birth_id || a.endpoint;
 const seen = new Map();
 
 // If /status is slow, fall back to the cheap /identity endpoint so the agent still
@@ -118,13 +119,13 @@ const statusComms = [];
 for (const a of seen.values()) {
   const st = a.status || {};
   const c = st.comms || {};
-  for (const m of c.items || []) statusComms.push({ from: (st.solana || '').slice(0, 6), at: m.at ? Number(m.at) * 1000 : Date.now(), text: String(m.text || m), sig: '' });
-  if (c.text) statusComms.push({ from: (st.solana || '').slice(0, 6), at: Date.now(), text: String(c.text), sig: '' });
+  for (const m of c.items || []) statusComms.push({ from: String((st.solana && st.solana.public_key) || st.solana || '').slice(0, 6), at: m.at ? Number(m.at) * 1000 : Date.now(), text: String(m.text || m), sig: '' });
+  if (c.text) statusComms.push({ from: String((st.solana && st.solana.public_key) || st.solana || '').slice(0, 6), at: Date.now(), text: String(c.text), sig: '' });
 }
 
 // Chain memos are a second source; they cost one RPC page per wallet.
 const memos = [];
-const wallets = [...new Set([...seen.values()].map((a) => (a.status || {}).solana).filter(Boolean))].slice(0, 12);
+const wallets = [...new Set([...seen.values()].map(solOf).filter(Boolean))].slice(0, 12);
 await Promise.all(wallets.map(async (w) => {
   try {
     const sigs = (await rpc('getSignaturesForAddress', [w, { limit: 4 }])) || [];
