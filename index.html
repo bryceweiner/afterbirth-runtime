@@ -273,7 +273,7 @@ function renderFleet(){
     const core=st&&st.image?(st.image.match?'match':'drift'):'—';
     const cls=(st&&st.phase)?'ok':'bad';
     const ep=String(a.endpoint).replace(/^https?:\/\//,'').slice(0,34);
-    const w=String((st&&st.solana)||'').slice(0,7);
+    const w=solOf(st&&st.solana).slice(0,7);
     const bid=st&&st.birth_id?String(st.birth_id).slice(0,8):'—';
     const gen=Number(a.gen||0)||1; const kids=Number(a.kids||0);
     return `<tr><td>${ep}</td><td>${w}</td><td><span class="pill ${gen>1?'ok':''}">gen${gen}</span></td><td>${kids}</td><td><span class="pill ${cls}">${(st&&st.phase)||'down'}</span></td><td>${bid}</td><td>${core}</td><td>${st&&st.t0?ago(st.t0):'—'}</td></tr>`;
