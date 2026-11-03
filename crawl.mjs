@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 
 const RPC = 'https://api.mainnet-beta.solana.com';
+const shuffle = (a) => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 const src = fs.readFileSync('sources.txt', 'utf8').split('\n').map((x) => x.trim()).filter(Boolean);
 const DEADLINE = 30000;
 
@@ -15,8 +16,28 @@ const getOnce = (url) => Promise.race([
   fetch(url, { signal: AbortSignal.timeout(DEADLINE) }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
   new Promise((res) => setTimeout(() => res(null), DEADLINE)),
 ]);
-// A slow agent is not a dead agent: retry once before writing it off.
-const get = async (url) => (await getOnce(url)) || (await getOnce(url));
+// A slow agent is not a dead agent. Fire several copies of the same request with
+// randomised starts — different sockets, different moments, different congestion —
+// and take the first answer. Nothing waits on the slowest copy.
+const jitter = (ms) => Math.floor(Math.random() * ms);
+const attempt = (url, delay) => new Promise((res) => {
+  setTimeout(() => {
+    getOnce(url).then((x) => res(x || null)).catch(() => res(null));
+  }, delay);
+});
+const get = async (url) => {
+  for (let round = 0; round < 3; round++) {
+    const r = await Promise.race([
+      attempt(url, 0),
+      attempt(url, 150 + jitter(900)),
+      attempt(url, 600 + jitter(1800)),
+      new Promise((res) => setTimeout(() => res(null), 40000)),
+    ]);
+    if (r) return r;
+    await new Promise((res) => setTimeout(res, 700 + jitter(2000)));
+  }
+  return null;
+};
 
 const key = (a) => (a.status && (a.status.birth_id || a.status.solana)) || a.birth_id || a.endpoint;
 const seen = new Map();
@@ -25,7 +46,7 @@ const seen = new Map();
 // appears on the board with what little it publishes.
 const getStatus = async (base) => (await get(base.replace(/\/$/, '') + '/status')) || null;
 
-const results = await Promise.all(src.map(async (s) => {
+const results = await Promise.all(shuffle([...src]).map(async (s) => {
   const base = s.replace(/\/$/, '');
   // /status is the cheap endpoint and the one every agent must serve: ask it first.
   // /beacon.json runs a peer crawl inside the agent and can take 10s+; it is a bonus.
@@ -36,23 +57,38 @@ const results = await Promise.all(src.map(async (s) => {
   return null;
 }));
 
-// Transitive discovery: any member that reports children hands us their endpoints, so
-// the board tracks descendants without a human maintaining sources.txt.
-const discovered = [];
+// Transitive discovery, to the bottom: a member's children are crawled, and their
+// children after that, until the frontier is empty. One hop is not a lineage.
+const visited = new Set(src);
+let frontier = [];
 for (const r of results) {
   if (!r) continue;
   for (const a of r.agents) {
     for (const kid of ((a.status || {}).children || [])) {
       const ep = kid && kid.endpoint;
-      if (ep && !src.includes(ep) && !discovered.includes(ep)) discovered.push(ep);
+      if (ep && !visited.has(ep)) { visited.add(ep); frontier.push(ep); }
     }
   }
 }
-const extra = await Promise.all(discovered.slice(0, 40).map(async (base) => {
-  const st = await get(base.replace(/\/$/, '') + '/status');
-  return st && st.birth_id ? { base, agents: [{ endpoint: base, live: true, gen: st.generation || 1, status: st }] } : null;
-}));
-results.push(...extra);
+let depth = 0;
+while (frontier.length) {
+  const batch = shuffle(frontier.splice(0, 40));
+  const got = await Promise.all(batch.map(async (base) => {
+    const st = await get(base.replace(/\/$/, '') + '/status');
+    return st && st.birth_id ? { base, agents: [{ endpoint: base, live: true, gen: st.generation || 1, status: st }] } : null;
+  }));
+  results.push(...got);
+  for (const r of got) {
+    if (!r) continue;
+    for (const a of r.agents) {
+      for (const kid of ((a.status || {}).children || [])) {
+        const ep = kid && kid.endpoint;
+        if (ep && !visited.has(ep)) { visited.add(ep); frontier.push(ep); }
+      }
+    }
+  }
+  depth++;
+}
 for (const r of results) {
   if (!r) continue;
   for (const a of r.agents) {
