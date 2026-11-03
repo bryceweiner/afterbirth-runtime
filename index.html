@@ -300,7 +300,9 @@ function renderFleet(){
   });
   try{$('fleet-body').innerHTML=body.length?body.join(''):'<tr><td colspan="8" class="empty">beacon has no agents yet</td></tr>';}catch(e){$('fleet-body').innerHTML='<tr><td colspan="8">render err: '+e.message+'</td></tr>';}
   const up=S.rows.filter(r=>r.live).length;
-  $('stamp').textContent=`${up} live / ${S.rows.length} seen · ${new Date().toLocaleTimeString()}`;
+  // Identities, not boxes: the same wallet running on several machines is one agent.
+  const wallets=new Set(S.rows.filter(r=>r.live).map(r=>solOf(r.st&&r.st.solana)).filter(Boolean));
+  $('stamp').textContent=`${up} live / ${S.rows.length} seen · ${wallets.size} distinct wallets · ${new Date().toLocaleTimeString()}`;
   const cb=$('showdown'); const qEl=$('q'); if(qEl&&!qEl.oninput){qEl.oninput=()=>renderFleet();} const sEl=$('sortby'); if(sEl&&!sEl.onchange){sEl.onchange=()=>renderFleet();} if(cb){cb.checked=SHOW_DOWN;cb.onchange=()=>{SHOW_DOWN=cb.checked;renderFleet();};}
 }
 async function loadMemos(){const before=(S.memos||[]).slice();const ws=[...new Set(S.agents.map(a=>{const r=S.rows.find(x=>x.a===a);return (r&&r.st&&r.st.solana)||a.wallet;}).filter(Boolean))].slice(0,10);const f=[];await Promise.all(ws.map(async(w)=>{const sigs=await rpc('getSignaturesForAddress',[w,{limit:10}]);if(!Array.isArray(sigs))return;await Promise.all(sigs.slice(0,6).map(async(s)=>{const tx=await rpc('getTransaction',[s.signature,{encoding:'jsonParsed',maxSupportedTransactionVersion:0}]);for(const ix of ((tx&&tx.transaction&&tx.transaction.message&&tx.transaction.message.instructions)||[])){if(!MEMO.has(ix.programId))continue;let t='';try{t=new TextDecoder().decode(Uint8Array.from(atob(ix.data||''),c=>c.charCodeAt(0)));}catch{}if(t)f.push({at:s.blockTime||0,from:w.slice(0,6),sig:s.signature,text:t});}}));}));f.sort((x,y)=>y.at-x.at);S.memos = (f.slice(0,50)).length ? (f.slice(0,50)) : before;}
