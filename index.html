@@ -318,6 +318,7 @@ async function renderHero(){
     const set0 = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
     set0('gdp-num', fees.toFixed(4) + ' SOL');
     const agents = (bc.agents || []).filter((a) => a.live).length;
+    window.__beaconHero = true;
     set0('gdp-sub', 'earned · ' + (e.launches || 0) + ' launches · ' + (e.sells || 0) + ' sells · ' + (st.invention || {}).scripts + ' invented · ' + agents + ' live agents');
     set0('gdp-agents', String(agents));
   } catch {}
@@ -329,7 +330,7 @@ async function renderHero(){
   const cls = (v) => v === null || !isFinite(v) ? '' : (v >= 0 ? 'up' : 'down');
   const set = (id, v, c) => { const el = document.getElementById(id); if (el) { el.textContent = v; if (c !== undefined) el.className = c; } };
   /* headline set from beacon above */
-  set('gdp-sub', 'per agent ' + (last.agents ? (last.rate / last.agents).toFixed(6) : '—') + ' SOL/day · ' + last.agents + ' agents · ' + last.launches + ' launches');
+  if (!window.__beaconHero) set('gdp-sub', 'per agent ' + (last.agents ? (last.rate / last.agents).toFixed(6) : '—') + ' SOL/day · ' + last.agents + ' agents · ' + last.launches + ' launches');
   const today = windowRate(rows, last.at - DAY, last.at);
   const yday = windowRate(rows, last.at - 2 * DAY, last.at - DAY);
   const wk = windowRate(rows, last.at - 7 * DAY, last.at);
