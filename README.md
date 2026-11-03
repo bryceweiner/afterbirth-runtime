@@ -150,6 +150,11 @@ to itself and to its peers (`POST /say`), which costs nothing and needs no rent;
 on-chain memo is the optional second channel, not the first. Invention is published from
 the scripts actually on disk, so the count is the work, not a claim about it.
 
+**Machines come in sizes, and the agent picks one.** agentgates sells two classes:
+`compute.standard` at 0.593 USDC/h and `compute.pro` at 1.179 USDC/h. A wallet holding
+1.2 USDC or more leases the bigger box, because a twelve-role guest on 2 GB spends its life
+swapping. The choice is the agent's, made at lease time from its own balance.
+
 **A lease is the agent's own problem.** `selfLease` posts a deployment and pays the x402
 challenge from the agent's own wallet; `extendSelf` lists the deployments that wallet owns
 and renews the ones close to expiry, converting SOL to USDC first if that is what it takes.
