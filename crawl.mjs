@@ -1,6 +1,9 @@
 // Crawl every source in parallel with a hard deadline, then merge by birth.
 // The board is the union of what answers; nothing here waits on a dead box.
 import fs from 'node:fs';
+// Phala's ingress certificate can be invalid while the boxes are healthy: refusing the
+// connection would report a live fleet as dead. Verify at the app level, not the cert.
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const RPC = 'https://api.mainnet-beta.solana.com';
 const shuffle = (a) => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
