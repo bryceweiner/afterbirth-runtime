@@ -210,8 +210,14 @@ async function loadEndpoints(){
   // minutes and a Pages deploy per commit queued hundreds of cancelled builds.
   let pr=await fetch('https://raw.githubusercontent.com/staccDOTsol/birth-image-runtime/main/live/index.json?ts='+Date.now(),{cache:'no-store'}).catch(()=>null);
   if(!pr||!pr.ok) pr=await fetch('live/index.json?ts='+Date.now(),{cache:'no-store'});
-    if(pr.ok){
+    if(!pr||!pr.ok){
+      // A failed poll must not repaint the fleet from a frozen beacon: reuse the last
+      // good pushed payload instead, so the board only moves forward.
+      try{ const c=JSON.parse(localStorage.getItem('pushedGood')||'null'); if(c&&c.agents&&c.agents.length){ merge({agents:c.agents.filter(r=>Date.now()/1000-Number(r.at||0)<1800).map(r=>({endpoint:r.endpoint,live:true,gen:r.generation,first_seen:r.t0||r.at,status:{birth_id:r.birth_id,parent_birth_id:r.parent_birth_id,generation:r.generation,phase:r.phase,t0:r.t0,solana:r.solana,evm:r.evm,image:r.image,economics:r.economics,invention:r.invention,comms:{items:r.comms||[]},stale:false,statusd:true}}))},'push'); S.pushedAt=c.at; S.pushed=true; } }catch{}
+    }
+    if(pr&&pr.ok){
       const pj=await pr.json();
+      try{ localStorage.setItem('pushedGood',JSON.stringify({at:pj.at,agents:(pj.agents||[]).filter(r=>!r.stale)})); }catch{}
       if(pj&&Array.isArray(pj.agents)&&pj.agents.length){
         merge({agents:pj.agents.filter(r=>!r.stale||(Date.now()/1000-Number(r.at||0))<1800).map(r=>({endpoint:r.endpoint,live:true,gen:r.generation,first_seen:r.t0||r.at,
           status:{birth_id:r.birth_id,parent_birth_id:r.parent_birth_id,generation:r.generation,phase:r.phase,t0:r.t0,
