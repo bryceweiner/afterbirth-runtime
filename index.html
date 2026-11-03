@@ -203,6 +203,26 @@ async function loadEndpoints(){
     if(added&&src) S.source=src;
     return added>0;
   };
+  // PUSHED STATE FIRST: the fleet writes live/index.json itself, so the board is correct
+  // even when no box is reachable from this browser.
+  try{
+    const pr=await fetch('live/index.json?ts='+Date.now(),{cache:'no-store'});
+    if(pr.ok){
+      const pj=await pr.json();
+      if(pj&&Array.isArray(pj.agents)&&pj.agents.length){
+        merge({agents:pj.agents.map(r=>({endpoint:r.endpoint,live:true,gen:r.generation,first_seen:r.t0||r.at,
+          status:{birth_id:r.birth_id,parent_birth_id:r.parent_birth_id,generation:r.generation,phase:r.phase,t0:r.t0,
+            solana:r.solana,evm:r.evm,image:r.image,children:Array(Number(r.children||0)).fill({}),
+            economics:r.economics,invention:r.invention,comms:{items:r.comms||[]},statusd:true}}))},'push');
+        S.pushedAt=pj.at; S.pushed=true;
+      }
+    }
+  }catch{}
+  if(acc.length){
+    S.agents=acc;
+    S.rows=acc.map((a)=>({a:{endpoint:a.endpoint,wallet:solOf(a.status&&a.status.solana),gen:a.gen||1,kids:Number((a.status&&a.status.children||[]).length||0),first_seen:a.first_seen},st:a.status||{},live:!!a.live}));
+    try{ paintFleet(acc); }catch(e){}
+  }
   const jobs=srcs.map(async(u)=>{
     try{
       const target=u.replace(/\/$/,'')+'/beacon.json?ts='+Date.now();
