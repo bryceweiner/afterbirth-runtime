@@ -270,13 +270,13 @@ function renderFleet(){
   });
   const rowsAll=rows.length?rows:S.rows;
   const body=rowsAll.map(({a,st})=>{
-    const core=(()=>{const im=(st&&st.image)||{};const t=im.tag||im.core_tag||'';const dg=im.birth_digest||im.core_digest_now||'';return t?String(t):(dg?String(dg).slice(7,15):'—');})();
+    const core=(()=>{const im=(st&&st.image)||{};const t=im.tag||im.core_tag||'';const dg=im.birth_digest||im.core_digest_now||'';if(t)return String(t);if(dg)return String(dg).slice(7,15);const sd=st&&st.statusd;const v=sd&&typeof sd==='object'?(sd.version||sd.tag||''):'';return v?String(v):'pre-229';})();
     const cls=(st&&st.phase)?'ok':'bad';
     const ep=String(a.endpoint).replace(/^https?:\/\//,'').slice(0,34);
     const w=solOf(st&&st.solana).slice(0,7);
     const bid=st&&st.birth_id?String(st.birth_id).slice(0,8):'—';
     const gen=Number(a.gen||0)||1; const kids=Number(a.kids||0);
-    return `<tr><td>${ep}</td><td>${w}</td><td><span class="pill ${gen>1?'ok':''}">gen${gen}</span></td><td>${kids}</td><td><span class="pill ${cls}">${(st&&st.phase)||'down'}</span></td><td>${bid}</td><td>${core}</td><td>${st&&st.t0?ago(st.t0):'—'}</td></tr>`;
+    return `<tr><td>${ep}</td><td>${w}</td><td><span class="pill ${gen>1?'ok':''}">gen${gen}</span></td><td>${kids}</td><td><span class="pill ${cls}">${(st&&st.phase)||'down'}</span></td><td>${bid}</td><td>${core}</td><td>${st&&st.t0?ago(st.t0):(a&&a.first_seen?ago(a.first_seen):'—')}</td></tr>`;
   });
   try{$('fleet-body').innerHTML=body.length?body.join(''):'<tr><td colspan="8" class="empty">beacon has no agents yet</td></tr>';}catch(e){$('fleet-body').innerHTML='<tr><td colspan="8">render err: '+e.message+'</td></tr>';}
   const up=S.rows.filter(r=>r.live).length;
