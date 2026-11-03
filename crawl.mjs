@@ -15,10 +15,15 @@ const rpc = async (method, params) => {
   return (await r.json()).result;
 };
 
-const getOnce = (url) => Promise.race([
-  fetch(url, { signal: AbortSignal.timeout(DEADLINE) }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
-  new Promise((res) => setTimeout(() => res(null), DEADLINE)),
-]);
+// Node's fetch and this ingress disagree about TLS sessions often enough that a healthy
+// box reads as dead. curl is the transport that always works here.
+const { execFile } = await import("node:child_process");
+const getOnce = (url) => new Promise((res) => {
+  execFile("curl", ["-sk", "-m", "20", "--compressed", url], { maxBuffer: 8 * 1024 * 1024, timeout: DEADLINE }, (err, out) => {
+    if (err || !out) return res(null);
+    try { res(JSON.parse(out)); } catch { res(null); }
+  });
+});
 // A slow agent is not a dead agent. Fire several copies of the same request with
 // randomised starts — different sockets, different moments, different congestion —
 // and take the first answer. Nothing waits on the slowest copy.
