@@ -19,6 +19,15 @@ const getOnce = (url) => Promise.race([
 // A slow agent is not a dead agent. Fire several copies of the same request with
 // randomised starts — different sockets, different moments, different congestion —
 // and take the first answer. Nothing waits on the slowest copy.
+const resolveEndpoint = async (kid) => {
+  if (kid.endpoint) return kid.endpoint;
+  if (!kid.deploymentId) return null;
+  try {
+    const html = await (await fetch('https://agentgates-backend.vercel.app/compute/verify/' + kid.deploymentId, { signal: AbortSignal.timeout(15000) })).text();
+    const m = html.match(/https:\/\/[a-z0-9]+-8787\.[a-z0-9.-]+\.network/);
+    return m ? m[0] : null;
+  } catch { return null; }
+};
 const jitter = (ms) => Math.floor(Math.random() * ms);
 const attempt = (url, delay) => new Promise((res) => {
   setTimeout(() => {
@@ -65,7 +74,8 @@ for (const r of results) {
   if (!r) continue;
   for (const a of r.agents) {
     for (const kid of ((a.status || {}).children || [])) {
-      const ep = kid && kid.endpoint;
+      const ep0 = kid && kid.endpoint;
+      const ep = ep0 || (await resolveEndpoint(kid));
       if (ep && !visited.has(ep)) { visited.add(ep); frontier.push(ep); }
     }
   }
