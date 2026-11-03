@@ -309,6 +309,18 @@ function windowRate(rows, fromMs, toMs) {
 async function renderHero(){
   let h = [];
   try { h = await (await fetch('history.json?ts=' + Date.now(), { cache: 'no-store' })).json(); } catch {}
+  // The headline is production, not a delta: what the fleet has actually earned, spent
+  // nothing, and invented. A rate over a quiet hour is not the fleet's worth.
+  try {
+    const bc = await (await fetch('beacon.json?ts=' + Date.now(), { cache: 'no-store' })).json();
+    const st = bc.stats || {}; const e = st.economics || {};
+    const fees = Number(e.fees_lamports || 0) / 1e9;
+    const set0 = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+    set0('gdp-num', fees.toFixed(4) + ' SOL');
+    const agents = (bc.agents || []).filter((a) => a.live).length;
+    set0('gdp-sub', 'earned · ' + (e.launches || 0) + ' launches · ' + (e.sells || 0) + ' sells · ' + (st.invention || {}).scripts + ' invented · ' + agents + ' live agents');
+    set0('gdp-agents', String(agents));
+  } catch {}
   if (!Array.isArray(h) || h.length < 2) return;
   const rows = ratesFrom(h);
   if (!rows.length) return;
@@ -316,7 +328,7 @@ async function renderHero(){
   const pct = (v) => v === null || !isFinite(v) ? '—' : (v >= 0 ? '+' : '') + (v * 100).toFixed(1) + '%';
   const cls = (v) => v === null || !isFinite(v) ? '' : (v >= 0 ? 'up' : 'down');
   const set = (id, v, c) => { const el = document.getElementById(id); if (el) { el.textContent = v; if (c !== undefined) el.className = c; } };
-  set('gdp-num', last.rate.toFixed(5) + ' SOL/day');
+  /* headline set from beacon above */
   set('gdp-sub', 'per agent ' + (last.agents ? (last.rate / last.agents).toFixed(6) : '—') + ' SOL/day · ' + last.agents + ' agents · ' + last.launches + ' launches');
   const today = windowRate(rows, last.at - DAY, last.at);
   const yday = windowRate(rows, last.at - 2 * DAY, last.at - DAY);
