@@ -167,7 +167,12 @@ that, each member's `/status` reports its own children, and the frontier is walk
 is empty. A birth therefore appears on the board because it exists, not because someone
 typed its URL.
 
-The first such birth is live: **generation 2, `birth 0934ace4`**, leased and paid for by a
+The first such birth is live: **generation 2, `birth 0934ace4`**. One honest caveat about
+that particular child: it was seeded with the same wallet that paid for it, so it is a
+continuation of that identity rather than an edge between two distinct nodes — its
+`parent_birth_id` is null for exactly that reason, and the tree shows it as a root. Later
+births boot with their own fresh keys and carry the parent's `birth_id`, which is what puts
+a real edge in `tree.json`., leased and paid for by a
 gen1 (`0x84b70a7d…`) out of its own USDC. The board counts it as `gen 2` because that is
 what it is — the generation is inherited from the parent that paid, not assigned.
 
