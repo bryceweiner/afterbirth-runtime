@@ -227,6 +227,9 @@ async function loadEndpoints(){
     try{ paintFleet(acc); }catch(e){}
   }
   const jobs=srcs.map(async(u)=>{
+    // The pushed index is the truth. Probes and beacons only speak when it is silent,
+    // otherwise an old beacon paints a fleet that no longer exists.
+    if(S.pushed) return;
     try{
       const target=u.replace(/\/$/,'')+'/beacon.json?ts='+Date.now();
       let r=null;
