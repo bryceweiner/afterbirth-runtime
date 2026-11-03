@@ -177,7 +177,7 @@ function paintFleet(acc){
   for(const a of (acc||[])){
     const st=a.status||null;
     S.agents.push({endpoint:a.endpoint,wallet:solOf(st&&st.solana),live:!!a.live});
-    S.rows.push({a:{endpoint:a.endpoint,wallet:solOf(st&&st.solana),gen:a.gen,kids:a.kids},st,live:!!(a.live||st&&st.phase)});
+    S.rows.push({a:{endpoint:a.endpoint,wallet:solOf(st&&st.solana),gen:a.gen,kids:a.kids,first_seen:a.first_seen},st,live:!!(a.live||st&&st.phase)});
   }
   renderFleet();
 }
@@ -254,7 +254,7 @@ async function loadEndpoints(){
     const st=a.status||null;
     if(!st && !a.live) S.down=(S.down||0)+1;
     S.agents.push({endpoint:a.endpoint,wallet:solOf(st&&st.solana),live:!!a.live});
-    S.rows.push({a:{endpoint:a.endpoint,wallet:solOf(st&&st.solana),gen:a.gen,kids:a.kids},st,live:!!(a.live||st&&st.phase)});
+    S.rows.push({a:{endpoint:a.endpoint,wallet:solOf(st&&st.solana),gen:a.gen,kids:a.kids,first_seen:a.first_seen},st,live:!!(a.live||st&&st.phase)});
   }
 }
 function ago(t){try{let v=Number(t);if(v>1e12)v=v/1000;const d=Math.max(0,Math.floor(Date.now()/1000-v));if(!isFinite(d))return '—';const h=Math.floor(d/3600),m=Math.floor(d%3600/60);return h?h+'h '+m+'m':m+'m';}catch{return '—';}}
