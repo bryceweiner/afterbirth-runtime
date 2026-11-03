@@ -125,7 +125,7 @@
     <label class="sub" style="display:flex;gap:7px;align-items:center;margin:0 0 10px"><input type="checkbox" id="showdown"/> show boxes that are down</label>
     <div class="sub" style="display:flex;gap:10px;align-items:center;margin:0 0 10px"><input id="q" placeholder="filter endpoint / wallet" style="background:#0f1216;border:1px solid var(--line);color:var(--fg);border-radius:7px;padding:5px 9px;font:inherit;font-size:12px"/><select id="sortby" style="background:#0f1216;border:1px solid var(--line);color:var(--fg);border-radius:7px;padding:5px 9px;font:inherit;font-size:12px"><option value="gen">sort: generation</option><option value="up">sort: uptime</option><option value="wallet">sort: wallet</option></select></div>
     <table><thead><tr><th>endpoint</th><th>agent</th><th>gen</th><th>kids</th><th>phase</th><th>birth</th><th>core</th><th>up</th></tr></thead>
-    <tbody id="fleet-body"><tr><td colspan="6" class="empty">probing…</td></tr></tbody></table>
+    <tbody id="fleet-body"><tr><td colspan="8" class="empty">probing…</td></tr></tbody></table>
   </section>
   <section id="comms" hidden><p class="sub" id="comms-note">reading the swarm memo channel from chain…</p><div class="feed" id="comms-feed"></div></section>
   <section id="economics" hidden><div class="grid2">
@@ -270,7 +270,7 @@ function renderFleet(){
   });
   const rowsAll=rows.length?rows:S.rows;
   const body=rowsAll.map(({a,st})=>{
-    const core=st&&st.image?(st.image.match?'match':'drift'):'—';
+    const core=(()=>{const im=(st&&st.image)||{};const t=im.tag||im.core_tag||'';const dg=im.birth_digest||im.core_digest_now||'';return t?String(t):(dg?String(dg).slice(7,15):'—');})();
     const cls=(st&&st.phase)?'ok':'bad';
     const ep=String(a.endpoint).replace(/^https?:\/\//,'').slice(0,34);
     const w=solOf(st&&st.solana).slice(0,7);
@@ -278,7 +278,7 @@ function renderFleet(){
     const gen=Number(a.gen||0)||1; const kids=Number(a.kids||0);
     return `<tr><td>${ep}</td><td>${w}</td><td><span class="pill ${gen>1?'ok':''}">gen${gen}</span></td><td>${kids}</td><td><span class="pill ${cls}">${(st&&st.phase)||'down'}</span></td><td>${bid}</td><td>${core}</td><td>${st&&st.t0?ago(st.t0):'—'}</td></tr>`;
   });
-  try{$('fleet-body').innerHTML=body.length?body.join(''):'<tr><td colspan="6" class="empty">beacon has no agents yet</td></tr>';}catch(e){$('fleet-body').innerHTML='<tr><td colspan="6">render err: '+e.message+'</td></tr>';}
+  try{$('fleet-body').innerHTML=body.length?body.join(''):'<tr><td colspan="8" class="empty">beacon has no agents yet</td></tr>';}catch(e){$('fleet-body').innerHTML='<tr><td colspan="8">render err: '+e.message+'</td></tr>';}
   const up=S.rows.filter(r=>r.live).length;
   $('stamp').textContent=`${up} live / ${S.rows.length} seen · ${new Date().toLocaleTimeString()}`;
   const cb=$('showdown'); const qEl=$('q'); if(qEl&&!qEl.oninput){qEl.oninput=()=>renderFleet();} const sEl=$('sortby'); if(sEl&&!sEl.onchange){sEl.onchange=()=>renderFleet();} if(cb){cb.checked=SHOW_DOWN;cb.onchange=()=>{SHOW_DOWN=cb.checked;renderFleet();};}
