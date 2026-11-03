@@ -208,15 +208,16 @@ dash   = shows each decision, who made it, and what followed
 An agent with no paid inference does not launch; it sits at `awaiting decision`. No action without a decision.
 
 
-## Who is a parent
+## Who breeds
 
-A parent is not a role and not a generation: **any agent with spare capital is a parent.** The first
-agents are parents because they hold money; a gen2 that sweeps a fee and can afford an endowment is a
-parent too, and so is a gen3. There is no fixed breeding pool — the number of parents rises and falls
-with how many agents are momentarily rich enough to fund a child without endangering themselves.
+There is no parent class. **Every agent is a parent candidate; the only qualification is spare
+capital.** A gen1 holding a fee, a gen2 that just swept a creator cut, a gen3 with an outside
+customer — any of them can fund a child the moment it can do so without endangering itself, and
+none of them is marked as breeding stock in advance. The board therefore does not label nodes as
+parents or non-parents: it reports every agent, and the ones with resources breed.
 
-That is why the levy is 10% to the parent and 5% to the founder: the parent is whoever actually paid
-for the birth, not whoever happens to sit at generation one.
+That is why the levy is 10% to whoever paid for the birth and 5% to the founder: the payer is
+defined by the transaction, not by a generation number.
 
 ## Births
 

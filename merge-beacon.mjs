@@ -61,5 +61,6 @@ const out = { ...fresh, agents, stats: st, crawled: true, merged_at: Date.now(),
 const body = JSON.stringify(out, null, 2);
 fs.writeFileSync('beacon.json.tmp', body);
 fs.renameSync('beacon.json.tmp', 'beacon.json');
+fs.writeFileSync('roster.json', JSON.stringify({ updated_at: Date.now(), agents: [...by.values()] }, null, 1));
 fs.writeFileSync('tree.json', JSON.stringify(out.tree || fresh.tree || {}, null, 2));
 console.log(JSON.stringify({ live: out.live, total: out.total_seen }));

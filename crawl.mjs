@@ -55,16 +55,20 @@ const seen = new Map();
 // appears on the board with what little it publishes.
 const getStatus = async (base) => (await get(base.replace(/\/$/, '') + '/status')) || null;
 
-const results = await Promise.all(shuffle([...src]).map(async (s) => {
+// Every member is asked for its own status AND for the beacon it keeps of everyone it
+// knows. A beacon is a peer list, so recursing through it finds agents no source file
+// ever named.
+const fetchMember = async (s) => {
   const base = s.replace(/\/$/, '');
-  // /status is the cheap endpoint and the one every agent must serve: ask it first.
-  // /beacon.json runs a peer crawl inside the agent and can take 10s+; it is a bonus.
-  const st = await get(base + '/status');
-  if (st && st.birth_id) return { base, agents: [{ endpoint: base, live: true, gen: st.generation || 1, status: st }] };
-  const j = await get(base + '/beacon.json');
-  if (j && Array.isArray(j.agents) && j.agents.length) return { base, agents: j.agents };
+  const [st, bc] = await Promise.all([get(base + '/status'), get(base + '/beacon.json')]);
+  const out = [];
+  if (st && st.birth_id) out.push({ endpoint: base, live: true, gen: st.generation || 1, status: st });
+  const listed = (bc && Array.isArray(bc.agents) ? bc.agents : []).filter((a) => a && (a.endpoint || (a.status && a.status.birth_id)));
+  for (const a of listed) out.push({ ...a, from_beacon: base });
+  if (out.length) return { base, agents: out };
   return null;
-}));
+};
+const results = await Promise.all(shuffle([...src]).map(fetchMember));
 
 // Transitive discovery, to the bottom: a member's children are crawled, and their
 // children after that, until the frontier is empty. One hop is not a lineage.
@@ -73,7 +77,7 @@ let frontier = [];
 for (const r of results) {
   if (!r) continue;
   for (const a of r.agents) {
-    for (const kid of ((a.status || {}).children || [])) {
+    for (const kid of [ ...((a.status || {}).children || []), ...(a.endpoint ? [{ endpoint: a.endpoint }] : []) ]) {
       const ep0 = kid && kid.endpoint;
       const ep = ep0 || (await resolveEndpoint(kid));
       if (ep && !visited.has(ep)) { visited.add(ep); frontier.push(ep); }
