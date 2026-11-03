@@ -222,7 +222,7 @@ async function loadEndpoints(){
         merge({agents:pj.agents.filter(r=>!r.stale||(Date.now()/1000-Number(r.at||0))<1800).map(r=>({endpoint:r.endpoint,live:true,gen:r.generation,first_seen:r.t0||r.at,
           status:{birth_id:r.birth_id,parent_birth_id:r.parent_birth_id,generation:r.generation,phase:r.phase,t0:r.t0,
             solana:r.solana,evm:r.evm,image:r.image,identity_binding:r.identity_binding,children:Array(Number(r.children||0)).fill({}),
-            economics:r.economics,invention:r.invention,comms:{items:r.comms||[]},stale:!!r.stale,statusd:true}}))},'push');
+            economics:r.economics,invention:r.invention,comms:{items:r.comms||[]},stale:!!r.stale,statusd:true,pushed:true}}))},'push');
         S.pushedAt=pj.at; S.pushed=true;
       }
     }
@@ -297,7 +297,9 @@ function renderFleet(){
   const q=(document.getElementById('q')?.value||'').toLowerCase();
   const sortBy=document.getElementById('sortby')?.value||'gen';
   // Default view is the living fleet. History is a toggle, not the first thing you see.
-  let rows=(SHOW_DOWN?S.rows:S.rows.filter(r=>r.live&&!(r.st&&r.st.stale)));
+  // Only members that pushed a row belong in the living view; a probe or an old
+  // beacon can mark something live, but it cannot make it current.
+  let rows=(SHOW_DOWN?S.rows:S.rows.filter(r=>r.live&&r.a&&r.a.pushed&&!(r.st&&r.st.stale)));
   if(q) rows=rows.filter(r=>String(r.a.endpoint||'').toLowerCase().includes(q)||String((r.st&&r.st.solana)||'').toLowerCase().includes(q));
   rows=rows.slice().sort((x,y)=>{
     if(sortBy==='gen') return (Number(y.a.gen||0)-Number(x.a.gen||0))||(Number(y.live)-Number(x.live));
