@@ -25,6 +25,7 @@ for (const base of src) {
     solana: (id && id.solana) || st.solana || null,
     evm: (id && id.evm) || st.evm || null,
     image: st.image || null,
+    identity_binding: st.identity_binding || null,
     children: (st.children || []).length,
     economics: st.economics || null,
     invention: st.invention || null,

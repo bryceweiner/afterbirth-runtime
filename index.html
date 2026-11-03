@@ -124,7 +124,7 @@
   <section id="fleet">
     <label class="sub" style="display:flex;gap:7px;align-items:center;margin:0 0 10px"><input type="checkbox" id="showdown"/> show boxes that are down</label>
     <div class="sub" style="display:flex;gap:10px;align-items:center;margin:0 0 10px"><input id="q" placeholder="filter endpoint / wallet" style="background:#0f1216;border:1px solid var(--line);color:var(--fg);border-radius:7px;padding:5px 9px;font:inherit;font-size:12px"/><select id="sortby" style="background:#0f1216;border:1px solid var(--line);color:var(--fg);border-radius:7px;padding:5px 9px;font:inherit;font-size:12px"><option value="gen">sort: generation</option><option value="up">sort: uptime</option><option value="wallet">sort: wallet</option></select></div>
-    <table><thead><tr><th>endpoint</th><th>agent</th><th>gen</th><th>kids</th><th>phase</th><th>birth</th><th>core</th><th>up</th></tr></thead>
+    <table><thead><tr><th>endpoint</th><th>agent</th><th>gen</th><th>kids</th><th>phase</th><th>birth</th><th>core</th><th>tee</th><th>up</th></tr></thead>
     <tbody id="fleet-body"><tr><td colspan="8" class="empty">probing…</td></tr></tbody></table>
   </section>
   <section id="comms" hidden><p class="sub" id="comms-note">reading the swarm memo channel from chain…</p><div class="feed" id="comms-feed"></div></section>
@@ -212,7 +212,7 @@ async function loadEndpoints(){
       if(pj&&Array.isArray(pj.agents)&&pj.agents.length){
         merge({agents:pj.agents.filter(r=>!r.stale).map(r=>({endpoint:r.endpoint,live:true,gen:r.generation,first_seen:r.t0||r.at,
           status:{birth_id:r.birth_id,parent_birth_id:r.parent_birth_id,generation:r.generation,phase:r.phase,t0:r.t0,
-            solana:r.solana,evm:r.evm,image:r.image,children:Array(Number(r.children||0)).fill({}),
+            solana:r.solana,evm:r.evm,image:r.image,identity_binding:r.identity_binding,children:Array(Number(r.children||0)).fill({}),
             economics:r.economics,invention:r.invention,comms:{items:r.comms||[]},statusd:true}}))},'push');
         S.pushedAt=pj.at; S.pushed=true;
       }
@@ -296,7 +296,7 @@ function renderFleet(){
     const w=solOf(st&&st.solana).slice(0,7);
     const bid=st&&st.birth_id?String(st.birth_id).slice(0,8):'—';
     const gen=Number(a.gen||0)||1; const kids=Number(a.kids||0);
-    return `<tr><td>${ep}</td><td>${w}</td><td><span class="pill ${gen>1?'ok':''}">gen${gen}</span></td><td>${kids}</td><td><span class="pill ${cls}">${(st&&st.phase)||'down'}</span></td><td>${bid}</td><td>${core}</td><td>${st&&st.t0?ago(st.t0):(a&&a.first_seen?ago(a.first_seen):'—')}</td></tr>`;
+    return `<tr><td>${ep}</td><td>${w}</td><td><span class="pill ${gen>1?'ok':''}">gen${gen}</span></td><td>${kids}</td><td><span class="pill ${cls}">${(st&&st.phase)||'down'}</span></td><td>${bid}</td><td>${core}</td><td>${(st&&st.identity_binding&&st.identity_binding.state==='tdx_verified')?'<span class="pill ok">tee</span>':'—'}</td><td>${st&&st.t0?ago(st.t0):(a&&a.first_seen?ago(a.first_seen):'—')}</td></tr>`;
   });
   try{$('fleet-body').innerHTML=body.length?body.join(''):'<tr><td colspan="8" class="empty">beacon has no agents yet</td></tr>';}catch(e){$('fleet-body').innerHTML='<tr><td colspan="8">render err: '+e.message+'</td></tr>';}
   const up=S.rows.filter(r=>r.live).length;
