@@ -62,5 +62,29 @@ const body = JSON.stringify(out, null, 2);
 fs.writeFileSync('beacon.json.tmp', body);
 fs.renameSync('beacon.json.tmp', 'beacon.json');
 fs.writeFileSync('roster.json', JSON.stringify({ updated_at: Date.now(), agents: [...by.values()] }, null, 1));
-fs.writeFileSync('tree.json', JSON.stringify(out.tree || fresh.tree || {}, null, 2));
+// The tree is derived from the board in the same pass. Writing `{}` here (as this file
+// used to) meant every merge — including the scheduled one — published an empty tree.
+{
+  const nodes = {}; const roots = [];
+  for (const a of (out.agents || [])) {
+    const stt = a.status || {};
+    const id = stt.birth_id; if (!id) continue;
+    nodes[id] = {
+      birth_id: id,
+      generation: stt.generation || 1,
+      parent: stt.parent_birth_id || null,
+      solana: (stt.solana && (stt.solana.public_key || stt.solana)) || null,
+      evm: (stt.evm && (stt.evm.address || stt.evm)) || null,
+      live: !!a.live,
+      endpoint: a.endpoint || null,
+    };
+    if (!stt.parent_birth_id) roots.push(id);
+  }
+  for (const id of Object.keys(nodes)) {
+    const par = nodes[id].parent;
+    if (par) { nodes[par] = nodes[par] || { birth_id: par, children: [] }; (nodes[par].children = nodes[par].children || []).push(id); }
+  }
+  fs.writeFileSync('tree.json', JSON.stringify({ at: Date.now(), nodes }, null, 1));
+  fs.writeFileSync('roots.json', JSON.stringify({ at: Math.floor(Date.now() / 1000), roots }, null, 1));
+}
 console.log(JSON.stringify({ live: out.live, total: out.total_seen }));
