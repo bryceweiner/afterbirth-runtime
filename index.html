@@ -232,7 +232,7 @@ async function loadEndpoints(){
     // The headline must count what the board is actually showing, not whatever the
     // last historical row or a stale beacon claimed.
     try{ const el=document.getElementById('gdp-agents'); if(el) el.textContent=String(acc.length); window.__liveCount=acc.length; }catch{}
-    S.rows=acc.map((a)=>({a:{endpoint:a.endpoint,wallet:solOf(a.status&&a.status.solana),gen:a.gen||1,kids:Number((a.status&&a.status.children||[]).length||0),first_seen:a.first_seen},st:a.status||{},live:!!a.live}));
+    S.rows=acc.map((a)=>({a:{endpoint:a.endpoint,wallet:solOf(a.status&&a.status.solana),gen:a.gen||1,kids:Number((a.status&&a.status.children||[]).length||0),first_seen:a.first_seen,pushed:!!a.pushed},st:a.status||{},live:!!a.live}));
     try{ paintFleet(acc); }catch(e){}
     // The push is the latest truth; repaint the table from it instead of leaving
     // whatever the first probe pass drew.
