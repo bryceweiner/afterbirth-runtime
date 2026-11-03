@@ -216,7 +216,7 @@ async function loadEndpoints(){
         merge({agents:pj.agents.filter(r=>!r.stale).map(r=>({endpoint:r.endpoint,live:true,gen:r.generation,first_seen:r.t0||r.at,
           status:{birth_id:r.birth_id,parent_birth_id:r.parent_birth_id,generation:r.generation,phase:r.phase,t0:r.t0,
             solana:r.solana,evm:r.evm,image:r.image,identity_binding:r.identity_binding,children:Array(Number(r.children||0)).fill({}),
-            economics:r.economics,invention:r.invention,comms:{items:r.comms||[]},statusd:true}}))},'push');
+            economics:r.economics,invention:r.invention,comms:{items:r.comms||[]},stale:!!r.stale,statusd:true}}))},'push');
         S.pushedAt=pj.at; S.pushed=true;
       }
     }
