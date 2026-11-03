@@ -405,7 +405,11 @@ function drawGdpChart(rows){
   window.__line.setData(series[pick] || series['gdp rate']);
   window.__chart.timeScale().fitContent();
 }
-function renderComms(){const M=(S.memos&&S.memos.length)?S.memos:(S.bcMemos||[]);const now=Math.floor(Date.now()/1000);const sealed=M.filter(m=>channelOf(m.text)==='sealed').length;const cs=(S.stats&&S.stats.comms)||{};const bItems0=cs.items||[];
+function renderComms(){
+  // What the members push about themselves comes before any chain memo or beacon:
+  // the rows are the only feed that is guaranteed to be current.
+  const fromRows=S.rows.flatMap(r=>((r.st&&r.st.comms&&r.st.comms.items)||[]).map(m=>({from:m.from||(r.a&&r.a.wallet)||'agent',at:Number(m.at||0),text:String(m.text||'')}))).filter(m=>m.text);
+  const M=(S.memos&&S.memos.length)?S.memos:(fromRows.length?fromRows:(S.bcMemos||[]));const now=Math.floor(Date.now()/1000);const sealed=M.filter(m=>channelOf(m.text)==='sealed').length;const cs=(S.stats&&S.stats.comms)||{};const bItems0=cs.items||[];
   const msgs=M.length||Number(cs.messages||0);
   $('c-big').innerHTML=`${msgs}<small>messages</small>`;
   $('c-hour').textContent=M.length?M.filter(m=>now-m.at<3600).length:bItems0.length;
