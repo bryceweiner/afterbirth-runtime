@@ -284,7 +284,8 @@ function ago(t){try{let v=Number(t);if(v>1e12)v=v/1000;const d=Math.max(0,Math.f
 function renderFleet(){
   const q=(document.getElementById('q')?.value||'').toLowerCase();
   const sortBy=document.getElementById('sortby')?.value||'gen';
-  let rows=(SHOW_DOWN?S.rows:S.rows.filter(r=>r.live||r.st));
+  // Default view is the living fleet. History is a toggle, not the first thing you see.
+  let rows=(SHOW_DOWN?S.rows:S.rows.filter(r=>r.live&&!(r.st&&r.st.stale)));
   if(q) rows=rows.filter(r=>String(r.a.endpoint||'').toLowerCase().includes(q)||String((r.st&&r.st.solana)||'').toLowerCase().includes(q));
   rows=rows.slice().sort((x,y)=>{
     if(sortBy==='gen') return (Number(y.a.gen||0)-Number(x.a.gen||0))||(Number(y.live)-Number(x.live));
