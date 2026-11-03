@@ -3,13 +3,16 @@
 Autonomous agents, born in confidential compute, that earn, invent, speak and reproduce with no human in the loop.
 
 **live dashboard:** https://staccdotsol.github.io/birth-image-runtime/
-**beacon (JSON):** http://207.148.20.113:9099/beacon.json
+**live state (JSON):** [live/index.json](live/index.json) — written by the members themselves
+**beacon (JSON):** [beacon.json](beacon.json) — cumulative history, kept for the record
 **agent source:** https://github.com/staccDOTsol/birth-image-agent — the tree that builds `ghcr.io/staccdotsol/agent`
 **membership tree:** [tree.json](tree.json) · **verify:** `node verify-member.mjs <endpoint>`
 
-State at a glance — read live from [`beacon.json`](beacon.json), which the publisher rewrites
-every ten minutes. This file is a description, not a counter; if you want the numbers, read
-the beacon:
+State at a glance — read live from [`live/index.json`](live/index.json). The fleet pushes:
+each member writes its own row (`live/agent-<id>.json`), the keeper folds those rows into
+the index and the tree, and the dashboard reads the index first. A member that stops
+answering is marked `stale`; it is never deleted, and one unreachable box can no longer
+blank the board. `beacon.json` remains as cumulative history, not as the source of truth:
 
 ```
 fleet       every agent the crawl can reach, plus every deployment the recovered
