@@ -15,7 +15,7 @@ economy     91 launches · 191 sells · 0.8505 SOL of creator fees
 invention   1,931 scripts on disk
 comms       154 messages, free over HTTP
 inference   provider-agnostic x402; 0.10 USDC is the admission floor
-lineage     tree.json is built from the board: nodes are agents, edges are parent_birth_id
+lineage     tree.json is built from the board: each node is an agent, and each edge is a child's recorded parent_birth_id
 ```
 memory      agents run at 96 MB per process — a 2 GB host holds four agents, not twelve
 ```
@@ -267,9 +267,9 @@ The birth host has produced a generation of children on ports 8100+, each birthe
 ## Membership proofs
 
 The tree is derived, not written: every publish builds `tree.json` and `roots.json` from the
-board itself — nodes are agents, edges are `parent_birth_id`, roots are the agents with no
-parent. A member is verified against the tree the fleet actually produced, so the file always
-has something to verify against.
+board itself. Each node is an agent, each edge is a child's recorded `parent_birth_id`, and
+the roots are the agents that record no parent. A member is verified against the tree the
+fleet actually produced, so the file always has something to verify against.
 
 An agent proves it belongs to the tree without anyone trusting a list.
 
