@@ -16,7 +16,7 @@ const rpc = async (method, params) => {
 };
 
 const getOnce = (url) => Promise.race([
-  fetch(url, { signal: AbortSignal.timeout(DEADLINE) }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
+  fetch(url, { signal: AbortSignal.timeout(DEADLINE) }).then((r) => (r.ok ? r.json() : null)).catch((e) => (console.error('GETERR', String(e.message).slice(0,80)), null)),
   new Promise((res) => setTimeout(() => res(null), DEADLINE)),
 ]);
 // A slow agent is not a dead agent. Fire several copies of the same request with

@@ -1,0 +1,77 @@
+image Tue Nov  3 06:05:18 UTC 2026 
+rpc-proxy on 8899 -> 4 upstreams
+{"adopt":"none","mine":"d79c519fc9a5"}
+boot: policy
+boot: image
+boot: inference
+boot: genesis 5eykt4Us
+boot: sealing keys (fresh)
+2026-11-03T06:05:19.922Z [boot] new birth: fresh in-guest keys generated and sealed {"solana":"3dqcVu8jX1FNJzLSTeotYi7Ce1DWHpZCm8JmjazuSsio","evm":"0xa21fb27e0d53a0d2da3d47ecef2011811e55f531","birth_id":"75eb63ea-4952-4fd6-930c-15ebc6aef8bd"}
+bundle-p2p on 8898 sha d79c519fc9a5
+boot_bg pid=34 waited=30s alive=yes
+single-process mode Tue Nov  3 06:05:49 UTC 2026
+statusd on 8787
+(node:84) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:34) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+{"event":"signer_ready","port":45415,"solana":"3dqcVu8jX1FNJzLSTeotYi7Ce1DWHpZCm8JmjazuSsio","evm":"0xa21fb27e0d53a0d2da3d47ecef2011811e55f531"}
+2026-11-03T06:05:50.057Z [boot] identity sealed; public receipt committed
+
+================ PUBLIC BIRTH RECEIPT ================
+birth_id                75eb63ea-4952-4fd6-930c-15ebc6aef8bd
+solana (mainnet-beta)      3dqcVu8jX1FNJzLSTeotYi7Ce1DWHpZCm8JmjazuSsio
+evm (eip155:8453)       0xa21fb27e0d53a0d2da3d47ecef2011811e55f531
+constitution_sha256     831a3c58cc7daa4fc9ad93088ceb53485f83328a42f4fa5446eddb6a8ad8e6ae
+parent_record_sha256    92697eddf5ef71ca25d6d7e90ce43e2c501b210cb9226579951b54db4a9d306a
+image_digest            sha256:595e1343d3bc5231ef2436b5f4cae62edc13101738f4b82266a38646ad15188d
+inference_config_sha256 163c85560fe71dfa6168627cedd8d6d28b8899a46bdc985a1994335d2653b552
+birth_anchor_unix       1793685919
+identity_binding        unverified (guest agent answered but returned no quote)
+=====================================================
+
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+2026-11-03T06:05:53.523Z [distributor] supervisor started {"birth_id":"75eb63ea-4952-4fd6-930c-15ebc6aef8bd","t0":1793685919,"next_due":1793772319,"dry":false}
+2026-11-03T06:05:53.550Z [loops] ticker up {"earn_ms":120000,"procreate_ms":300000,"renew_ms":600000}
+2026-11-03T06:05:53.573Z [strategy] worker started {"size_usdc_raw":"100000000","floor_raw":"2000"}
+2026-11-03T06:05:53.738Z [inference] model selected {"selected":"deepseek-v4-1-flash-uncensored","candidates":8}
+2026-11-03T06:05:53.748Z [workers] always-on set started {"started":[{"name":"worker.earn","every_s":240},{"name":"worker.comms","every_s":60},{"name":"worker.invent","every_s":180},{"name":"worker.trade","every_s":120},{"name":"worker.mark","every_s":120}]}
+2026-11-03T06:05:53.748Z [brain] loop {"at":1793685953}
+2026-11-03T06:05:56.083Z [comms] speak attempt {"chars":57}
+2026-11-03T06:06:13.555Z [treasury] funds gate {"need":"sol","err":"sendTransaction: sendTransaction: {\"code\":-32002,\"message\":\"Transactio"}
+2026-11-03T06:06:13.558Z [treasury] readjust failed {"need":"sol","err":"getTokenAccountBalance is not defined"}
+2026-11-03T06:06:13.558Z [comms] speak failed {"err":"sendTransaction: sendTransaction: {\"code\":-32002,\"message\":\"Transaction simulation failed: Attempt to debit an account but found no record o"}
+2026-11-03T06:06:13.558Z [loops] earn {"mints":0,"sol":"0","launched":null,"invented":"probe_w1_85953.mjs"}
+2026-11-03T06:06:16.410Z [loops] procreate {"kids":0,"cap":0,"skipped":"resources","usdc":"0","sol":"0"}
+2026-11-03T06:06:16.564Z [loops] renew {"seen":0,"renewed":0,"failed":0}
+2026-11-03T06:06:17.519Z [worker.comms] worker error {"err":"sendTransaction: sendTransaction: {\"code\":-32001,\"message\":\"Transaction simulation failed: Transaction simulation failed: Attempt to debit a"}
+2026-11-03T06:06:31.144Z [earn] duty {"mints":0,"sol":"0","launched":null,"invented":"probe_4_85957.mjs"}
+2026-11-03T06:06:53.529Z [brain] tick {"credits":0,"sol":"0","usdc":"0"}
+2026-11-03T06:06:56.032Z [brain] decide start {"pass":0}
+2026-11-03T06:07:12.496Z [bazaar] inventory refreshed {"scanned":12000,"total":99890,"candidates":1079}
+2026-11-03T06:07:12.499Z [brain] x402 model {"url":"https://api.aidress.ai/pay/agent_ott","model":"deepseek-v4-1-flash-1017-uncensored"}
+2026-11-03T06:07:13.009Z [brain] x402 model {"url":"https://scvd.store/api/buy/spot_chec","model":"deepseek-v4-1-flash-1017-uncensored"}
+2026-11-03T06:07:13.881Z [brain] x402 model {"url":"https://agent402.tools/v1/metered/ch","model":"deepseek-v4-1-flash-1017-uncensored"}
+
+<--- Last few GCs --->
+
+[15:0x7f29321a5000]   117283 ms: Mark-Compact (reduce) 187.9 (198.2) -> 186.9 (196.4) MB, pooled: 0 MB, 196.13 / 0.00 ms  (+ 79.2 ms in 0 steps since start of marking, biggest step 0.0 ms, walltime since start of marking 444 ms) (average mu = 0.661, curre[15:0x7f29321a5000]   117837 ms: Mark-Compact 188.0 (196.4) -> 187.2 (199.7) MB, pooled: 0 MB, 466.79 / 0.00 ms  (average mu = 0.431, current mu = 0.158) allocation failure; scavenge might not succeed
+
+
+<--- JS stacktrace --->
+
+FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+2026-11-03T06:07:29.433Z [brain] decide end {"pass":0,"said":"","tools":0,"timeout":false}
+2026-11-03T06:07:29.434Z [brain] decide start {"pass":1}
+2026-11-03T06:07:29.442Z [brain] x402 model {"url":"https://api.aidress.ai/pay/agent_ott","model":"deepseek-v4-1-flash-1017-uncensored"}
+2026-11-03T06:07:29.878Z [brain] x402 model {"url":"https://scvd.store/api/buy/spot_chec","model":"deepseek-v4-1-flash-1017-uncensored"}
+2026-11-03T06:07:30.484Z [brain] x402 model {"url":"https://agent402.tools/v1/metered/ch","model":"deepseek-v4-1-flash-1017-uncensored"}
+2026-11-03T06:07:42.733Z [brain] decide end {"pass":1,"said":"","tools":0,"timeout":false}
+2026-11-03T06:07:43.484Z [worker.comms] worker error {"err":"sendTransaction: 429 rate limit"}
