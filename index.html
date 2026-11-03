@@ -374,7 +374,9 @@ async function renderHero(){
   set('gdp-yoy', pct(rel(wk, yr)), cls(rel(wk, yr)));
   set('gdp-sus', (wk === null ? '—' : wk.toFixed(5) + ' SOL/d'), '');
   set('gdp-proj', (wk === null ? '—' : (wk * 30).toFixed(3) + ' SOL/30d'), cls(wk));
-  set('gdp-agents', String(last.agents || 0), '');
+  // The historical series carries agents:0 for quiet ticks; it must not overwrite the
+  // live count that the beacon just set.
+  if (!window.__beaconHero) set('gdp-agents', String(last.agents || 0), '');
   drawGdpChart(rows);
 }
 function drawGdpChart(rows){
