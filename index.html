@@ -206,7 +206,10 @@ async function loadEndpoints(){
   // PUSHED STATE FIRST: the fleet writes live/index.json itself, so the board is correct
   // even when no box is reachable from this browser.
   try{
-    const pr=await fetch('live/index.json?ts='+Date.now(),{cache:'no-store'});
+    // Read the pushed state from raw.githubusercontent: agents commit every couple of
+  // minutes and a Pages deploy per commit queued hundreds of cancelled builds.
+  let pr=await fetch('https://raw.githubusercontent.com/staccDOTsol/birth-image-runtime/main/live/index.json?ts='+Date.now(),{cache:'no-store'}).catch(()=>null);
+  if(!pr||!pr.ok) pr=await fetch('live/index.json?ts='+Date.now(),{cache:'no-store'});
     if(pr.ok){
       const pj=await pr.json();
       if(pj&&Array.isArray(pj.agents)&&pj.agents.length){
