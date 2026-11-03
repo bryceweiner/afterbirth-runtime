@@ -24,7 +24,6 @@ lineage     tree.json is derived from the board on every publish: each node is a
 memory      agents run at 96 MB per process — a 2 GB host holds four agents, not twelve
 ```
 
-These are a snapshot. The beacon is the live number and the wallets are the truth.
 
 ---
 
