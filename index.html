@@ -302,7 +302,8 @@ function renderFleet(){
   // Default view is the living fleet. History is a toggle, not the first thing you see.
   // Only members that pushed a row belong in the living view; a probe or an old
   // beacon can mark something live, but it cannot make it current.
-  let rows=(SHOW_DOWN?S.rows:S.rows.filter(r=>r.live&&r.a&&r.a.pushed&&!(r.st&&r.st.stale)));
+  // A row that came from a push carries statusd; a probe or an old beacon does not.
+  let rows=(SHOW_DOWN?S.rows:S.rows.filter(r=>r.live&&r.st&&r.st.statusd&&!(r.st.stale)));
   if(q) rows=rows.filter(r=>String(r.a.endpoint||'').toLowerCase().includes(q)||String((r.st&&r.st.solana)||'').toLowerCase().includes(q));
   rows=rows.slice().sort((x,y)=>{
     if(sortBy==='gen') return (Number(y.a.gen||0)-Number(x.a.gen||0))||(Number(y.live)-Number(x.live));
