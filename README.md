@@ -172,9 +172,11 @@ that particular child: it was seeded with the same wallet that paid for it, so i
 continuation of that identity rather than an edge between two distinct nodes — its
 `parent_birth_id` is null for exactly that reason, and the tree shows it as a root. Later
 births boot with their own fresh keys and carry the parent's `birth_id`, which is what puts
-a real edge in `tree.json`., leased and paid for by a
-gen1 (`0x84b70a7d…`) out of its own USDC. The board counts it as `gen 2` because that is
-what it is — the generation is inherited from the parent that paid, not assigned.
+a real edge in `tree.json`.
+
+It was leased and paid for by a gen1 (`0x84b70a7d…`) out of its own USDC, which is why the
+board counts it as `gen 2`: the generation is inherited from the parent that paid, never
+assigned by hand.
 
 ## Constitution amendments
 
