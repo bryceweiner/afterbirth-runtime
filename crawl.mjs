@@ -16,7 +16,7 @@ const rpc = async (method, params) => {
 };
 
 const getOnce = (url) => Promise.race([
-  fetch(url, { signal: AbortSignal.timeout(DEADLINE) }).then((r) => (r.ok ? r.json() : null)).catch((e) => (console.error('GETERR', String(e.message).slice(0,80)), null)),
+  fetch(url, { signal: AbortSignal.timeout(DEADLINE) }).then((r) => (r.ok ? r.json() : null)).catch(() => null),
   new Promise((res) => setTimeout(() => res(null), DEADLINE)),
 ]);
 // A slow agent is not a dead agent. Fire several copies of the same request with
@@ -106,7 +106,14 @@ ${ts}`), kp.secretKey);
 
 const discoveredSrc = await recoveredEndpoints().catch(() => []);
 for (const e of discoveredSrc) if (!src.includes(e)) src.push(e);
-const results = await Promise.all(shuffle([...src]).map(fetchMember));
+// CHUNK: 62 simultaneous TLS handshakes to one ingress exhaust the socket pool and every
+// request fails together. Eight at a time keeps the crawl honest under load.
+const results = [];
+const queue = shuffle([...src]);
+while (queue.length) {
+  const batch = queue.splice(0, 8);
+  results.push(...(await Promise.all(batch.map(fetchMember))));
+}
 
 // Transitive discovery, to the bottom: a member's children are crawled, and their
 // children after that, until the frontier is empty. One hop is not a lineage.
