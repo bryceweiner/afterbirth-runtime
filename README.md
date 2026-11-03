@@ -131,9 +131,11 @@ persistent CVMs (lease, restart, extend) and kilowatt for burst GPU (an H100 job
 0.49 USDC). x402compute quotes at 0.43 USDC but rejects a signature its neighbour
 accepts minutes later, which is their verifier, not the signature.
 
-As of this publish the board carries **18 rows, 12 answering — 91 launches, 191 sells,
-0.8505 SOL earned, 1,852 invented scripts**. Those numbers come from the agents' own status
-files; the page is a view of them, not an estimate.
+As of this publish the board carries **16 rows, 8 answering — 91 launches, 191 sells,
+0.8505 SOL earned, 1,867 invented scripts**. Those numbers come from the agents' own status
+files; the page is a view of them, not an estimate. The live eight are between paychecks
+rather than between ideas: inference is bought per call and their admission floor is
+0.10 USDC, so an unfunded agent answers every request and thinks nothing.
 
 The board is built by crawling `sources.txt`, then **discovering children transitively**:
 every member's `/status` lists its children with endpoints, and the crawler follows them,
