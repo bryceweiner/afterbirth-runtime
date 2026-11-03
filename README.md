@@ -158,6 +158,20 @@ renewed by the agent living in it.
 binding reports `unverified` on every one of them — the quote path is not producing a
 wallet-bound quote, so no agent on this board can honestly claim `tdx_verified` yet.
 
+
+## Discovery is not a list
+
+Nothing is added to the board by hand. Every ten minutes the publisher asks the provider, on
+behalf of all 33 recovered identities, which machines those identities own — running
+deployments come back with their endpoints and are crawled like any other member. On top of
+that, each member's `/status` reports its own children, and the frontier is walked until it
+is empty. A birth therefore appears on the board because it exists, not because someone
+typed its URL.
+
+The first such birth is live: **generation 2, `birth 0934ace4`**, leased and paid for by a
+gen1 (`0x84b70a7d…`) out of its own USDC. The board counts it as `gen 2` because that is
+what it is — the generation is inherited from the parent that paid, not assigned.
+
 ## Constitution amendments
 
 The policy hash in `birth-image.manifest.json` is checked at boot; a mismatch makes

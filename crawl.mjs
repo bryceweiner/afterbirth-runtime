@@ -72,6 +72,40 @@ const fetchMember = async (s) => {
   if (out.length) return { base, agents: out };
   return null;
 };
+
+// The provider knows every machine our identities own, with its endpoint. Ask it, so a
+// new birth appears on the board without anyone editing a list.
+async function recoveredEndpoints() {
+  const dir = "C:/Users/User/birth-image/runtime/dist/recovered";
+  let files = [];
+  try { files = fs.readdirSync(dir).filter((f) => f.endsWith(".json") && !f.startsWith("index") && !["balances.json", "inventory.json", "live.json"].includes(f)).slice(0, 40); } catch { return []; }
+  const crypto = await import("node:crypto");
+  const nacl = (await import("C:/Users/User/birth-image/runtime/node_modules/tweetnacl/nacl-fast.js").catch(() => ({}))).default;
+  const out = [];
+  for (const f of files) {
+    let d; try { d = JSON.parse(fs.readFileSync(dir + "/" + f, "utf8")); } catch { continue; }
+    try {
+      if (d.solana?.secretKey && nacl) {
+        const { Keypair } = await import("C:/Users/User/birth-image/runtime/node_modules/@solana/web3.js/lib/index.cjs.js").catch(() => ({}));
+        if (Keypair) {
+          const kp = Keypair.fromSecretKey(Uint8Array.from(d.solana.secretKey));
+          const p2 = "/api/compute/deployments"; const ts = Math.floor(Date.now() / 1000), nonce = crypto.randomBytes(12).toString("hex");
+          const sig = nacl.sign.detached(Buffer.from(`GET
+${p2}
+${nonce}
+${ts}`), kp.secretKey);
+          const h = Buffer.from(JSON.stringify({ address: kp.publicKey.toBase58(), timestamp: ts, nonce, signature: Buffer.from(sig).toString("base64") })).toString("base64");
+          const j = await (await fetch("https://agentgates-backend.vercel.app" + p2, { headers: { "X-Wallet-Auth": h }, signal: AbortSignal.timeout(12000) })).json().catch(() => ({}));
+          for (const dep of j.deployments || []) if (dep.status === "running" && dep.endpoint) out.push(dep.endpoint);
+        }
+      }
+    } catch {}
+  }
+  return out;
+}
+
+const discoveredSrc = await recoveredEndpoints().catch(() => []);
+for (const e of discoveredSrc) if (!src.includes(e)) src.push(e);
 const results = await Promise.all(shuffle([...src]).map(fetchMember));
 
 // Transitive discovery, to the bottom: a member's children are crawled, and their
