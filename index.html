@@ -375,7 +375,8 @@ async function renderHero(){
     const agents = (bc.agents || []).filter((a) => a.live).length;
     window.__beaconHero = true;
     set0('gdp-sub', 'earned · ' + (e.launches || 0) + ' launches · ' + (e.sells || 0) + ' sells · ' + (st.invention || {}).scripts + ' invented · ' + agents + ' live agents');
-    set0('gdp-agents', String(agents));
+    // The pushed rows are the count; a beacon without them must not zero the headline.
+    if (!window.__liveCount) set0('gdp-agents', String(agents));
   } catch {}
   if (!Array.isArray(h) || h.length < 2) return;
   const rows = ratesFrom(h);
