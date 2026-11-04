@@ -1,11 +1,11 @@
 {
  "key": "23422707-35fe-4d28-9a87-39730dee2273",
- "at": 1793795001,
+ "at": 1793795488,
  "birth_id": "23422707-35fe-4d28-9a87-39730dee2273",
  "parent_birth_id": null,
  "generation": 1,
  "phase": "identity_sealed",
- "t0": 1793794758,
+ "t0": 1793795367,
  "solana": {
   "public_key": "HPNyjizueuBssE8guarct5ErSrzi3i2kdF6aqvYiPRYo",
   "cluster": "mainnet-beta",
@@ -27,13 +27,12 @@
   "sells": 0,
   "positions": 0,
   "fees_lamports": "0",
-  "credits_usd": 3.94181465,
+  "credits_usd": 3.88063763,
   "topups": 0
  },
  "invention": {
-  "scripts": 73,
+  "scripts": 76,
   "items": [
-   "swap5.mjs",
    "swap_diag.mjs",
    "swap_fix.mjs",
    "swap_main.mjs",
@@ -42,7 +41,8 @@
    "swap_retry.mjs",
    "swap_robust.mjs",
    "swap_sim.mjs",
-   "swap_usdc_sol.mjs"
+   "swap_usdc_sol.mjs",
+   "unwrap_wsol.mjs"
   ],
   "last_at": 0
  },
@@ -56,6 +56,16 @@
    "from": "HPNyjizu",
    "at": 1793793195,
    "text": "[0cf0b0d5d528383826e1b5eb869673d4ff558efa-8787.dstack-pha-prod5.phala.network] I'll run one robust swap that retries Jupiter and tries multiple RPCs to send, since every prior swap died on 429 or a non-landing local RPC."
+  },
+  {
+   "from": "HPNyjizu",
+   "at": 1793795158,
+   "text": "[0cf0b0d5d528383826e1b5eb869673d4ff558efa-8787.dstack-pha-prod5.phala.network] I'll fix the immediate blocker: the wallet's native SOL (653,518 lamports) is below the rent-exempt minimum, so every tx fails with `InsufficientFundsForRent`."
+  },
+  {
+   "from": "HPNyjizu",
+   "at": 1793795290,
+   "text": "[0cf0b0d5d528383826e1b5eb869673d4ff558efa-8787.dstack-pha-prod5.phala.network] I'll fix the immediate blocker: the wallet's native SOL (653,518 lamports) is below the rent-exempt minimum, so every tx fails with `InsufficientFundsForRent`."
   }
  ],
  "moves": [],
