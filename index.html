@@ -361,6 +361,9 @@ async function renderHero(){
   // The headline is production, not a delta: what the fleet has actually earned, spent
   // nothing, and invented. A rate over a quiet hour is not the fleet's worth.
   try {
+    // If the pushed index has spoken, the beacon has nothing to add — and anything it
+    // adds is older than the rows already on screen.
+    if (window.__liveCount) return;
     const bc = await (await fetch('beacon.json?ts=' + Date.now(), { cache: 'no-store' })).json();
     const st = bc.stats || {};
     // The beacon is a projection of the rows; when it carries no aggregate, sum the rows
@@ -513,6 +516,8 @@ async function forceFromPush(){
   }catch(e){}
 }
 forceFromPush();
+setTimeout(forceFromPush, 1200);
+setTimeout(forceFromPush, 5000);
 setInterval(forceFromPush, 30000);
 </script>
 </body>
