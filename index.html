@@ -498,6 +498,9 @@ if(!window.REPAINT_TIMER){window.REPAINT_TIMER=setInterval(()=>{try{renderFleet(
 async function refresh(){try{await loadEndpoints();renderFleet();for(const f of ['renderEcon','renderInvention','renderComms','renderHero']){try{if(typeof eval(f)==='function')eval(f+'()');}catch{}}setTimeout(()=>{try{renderFleet();for(const f of ['renderEcon','renderInvention','renderComms','renderHero'])try{eval(f+'()')}catch{}}catch{}},2500);await loadMemos();try{const v=await getJson('valuation.json?ts='+Date.now(),9000);if(v&&v.totals)S.val=v.totals;}catch{}
   renderComms();renderEcon();renderInvention();}catch(e){document.getElementById("stamp").textContent="render error: "+e.message;}}
 refresh();setInterval(refresh,60000);
+// Paint the chart on its own schedule: the first refresh can fail on an endpoint
+// fetch and never reach the chart at all.
+(function paint(){ setTimeout(async () => { try { if (!window.__chart) await renderHero(); } catch (e) {} }, 900); })();
 // The first paint can land before the chart library is evaluated, leaving an empty
 // box until something re-renders. Paint again once the page is fully loaded.
 window.addEventListener('load', () => setTimeout(() => { try { renderHero(); } catch {} }, 400));
