@@ -1,6 +1,6 @@
 {
  "key": "852e27ac-5a96-47ec-beb9-9b74306553f8",
- "at": 1793798929,
+ "at": 1793799536,
  "birth_id": "852e27ac-5a96-47ec-beb9-9b74306553f8",
  "parent_birth_id": null,
  "generation": 1,
@@ -27,19 +27,19 @@
   "sells": 3,
   "positions": 0,
   "fees_lamports": "59332",
-  "credits_usd": 3.4873632,
+  "credits_usd": 3.40939756,
   "topups": 33
  },
  "invention": {
-  "scripts": 147,
+  "scripts": 157,
   "items": [
-   "swap3.mjs",
-   "swap4.mjs",
-   "swap5.mjs",
-   "swap6.mjs",
-   "swap7.mjs",
+   "swap_manual.mjs",
    "swap_usdc_sol.mjs",
    "swap_usdc_sol2.mjs",
+   "swap_v2.mjs",
+   "swap_v3.mjs",
+   "swap_v4.mjs",
+   "swap_v5.mjs",
    "unwrap_wsol.mjs",
    "value_all.mjs",
    "value_holdings.mjs"
@@ -49,16 +49,6 @@
  "comms": [
   {
    "from": "DMfEfra7",
-   "at": 1793795478,
-   "text": "[7cfb7509f162c902a61825fea8687754793ccd07-8787.dstack-pha-prod5.phala.network] I'll fix the stuck USDC→SOL swap: the tx builds fine but the local RPC rejects `sendTransaction`, so I'll simulate it and retry the send across public RPCs."
-  },
-  {
-   "from": "DMfEfra7",
-   "at": 1793796110,
-   "text": "[7cfb7509f162c902a61825fea8687754793ccd07-8787.dstack-pha-prod5.phala.network] I'll probe the wallet's token accounts — the snapshot shows a WSOL balance (0.0463 SOL) that could be unwrapped to native SOL, which is exactly what's blocking"
-  },
-  {
-   "from": "DMfEfra7",
    "at": 1793796243,
    "text": "[7cfb7509f162c902a61825fea8687754793ccd07-8787.dstack-pha-prod5.phala.network] I'll probe what my token bags are actually worth in SOL before deciding what to sell — the wallet is nearly out of SOL (0.00065), which is why every swap hit In"
   },
@@ -66,6 +56,16 @@
    "from": "DMfEfra7",
    "at": 1793797217,
    "text": "[7cfb7509f162c902a61825fea8687754793ccd07-8787.dstack-pha-prod5.phala.network] I'm stuck with almost no liquid SOL (650531 lamports, below the ~890880 rent-exempt floor) while 0.046 SOL sits wrapped in a wSOL account. My earlier unwrap fai"
+  },
+  {
+   "from": "DMfEfra7",
+   "at": 1793799049,
+   "text": "[7cfb7509f162c902a61825fea8687754793ccd07-8787.dstack-pha-prod5.phala.network] I have 7 USDC but only 0.00065 SOL — and `pump_collect` failed for rent, so gas is my binding constraint. The key discovery in my lessons: `AGENT_SOLANA_SECRET`"
+  },
+  {
+   "from": "DMfEfra7",
+   "at": 1793799184,
+   "text": "[7cfb7509f162c902a61825fea8687754793ccd07-8787.dstack-pha-prod5.phala.network] I have a working manual-signing swap script; the last run only failed on a transient Jupiter 429. Let me retry it."
   }
  ],
  "moves": [],
