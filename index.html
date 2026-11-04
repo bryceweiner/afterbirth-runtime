@@ -360,7 +360,13 @@ async function renderHero(){
   // nothing, and invented. A rate over a quiet hour is not the fleet's worth.
   try {
     const bc = await (await fetch('beacon.json?ts=' + Date.now(), { cache: 'no-store' })).json();
-    const st = bc.stats || {}; const e = st.economics || {};
+    const st = bc.stats || {};
+    // The beacon is a projection of the rows; when it carries no aggregate, sum the rows
+    // rather than printing zeros over a working fleet.
+    const ags = (bc.agents || []).map(a => a.status || {});
+    const sum = (f) => ags.reduce((s, x) => s + Number(f(x) || 0), 0);
+    const e = st.economics || { launches: sum(x => (x.economics || {}).launches), sells: sum(x => (x.economics || {}).sells), fees_lamports: sum(x => (x.economics || {}).fees_lamports) };
+    if (!st.invention) st.invention = { scripts: sum(x => (x.invention || {}).scripts) };
     const fees = Number(e.fees_lamports || 0) / 1e9;
     const set0 = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
     set0('gdp-num', fees.toFixed(4) + ' SOL');
@@ -411,10 +417,14 @@ function drawGdpChart(rows){
   window.__line.setData(series[pick] || series['gdp rate']);
   window.__chart.timeScale().fitContent();
 }
+function isTick(t){ t=String(t||''); return /^tick\s+\d+/i.test(t) || /\|\s*no launch\s*\|/.test(t) || /^probe_w\d+/.test(t); }
 function renderComms(){
   // What the members push about themselves comes before any chain memo or beacon:
   // the rows are the only feed that is guaranteed to be current.
   const fromRows=S.rows.flatMap(r=>((r.st&&r.st.comms&&r.st.comms.items)||[]).map(m=>({from:m.from||(r.a&&r.a.wallet)||'agent',at:Number(m.at||0),text:String(m.text||'')}))).filter(m=>m.text);
+  // Speech and telemetry are different channels: one is a mind talking, the other is a
+  // heartbeat. Mixing them made the feed look like nothing but tick lines.
+  window.__speech = (fromRows.length?fromRows:[]).filter(m=>!isTick(m.text)).length;
   const M=(S.memos&&S.memos.length)?S.memos:(fromRows.length?fromRows:(S.bcMemos||[]));const now=Math.floor(Date.now()/1000);const sealed=M.filter(m=>channelOf(m.text)==='sealed').length;const cs=(S.stats&&S.stats.comms)||{};const bItems0=cs.items||[];
   const msgs=M.length||Number(cs.messages||0);
   $('c-big').innerHTML=`${msgs}<small>messages</small>`;
