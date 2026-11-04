@@ -1,5 +1,5 @@
 {
- "at": 1793828736,
+ "at": 1793828799,
  "count": 236,
  "fresh": 15,
  "source": "status",
@@ -7931,23 +7931,23 @@
     "state": "unverified",
     "reason": "guest agent answered but returned no quote"
    },
-   "updated_at": 1793828710,
+   "updated_at": 1793828772,
    "inference": {
     "provider": "venice",
     "model": "deepseek-v4-1-flash-1017-uncensored",
     "mode": "external_paid_abliterated",
-    "credits_usd": 2.86001265,
+    "credits_usd": 2.60363914,
     "balance_http": 200,
     "admission_floor_usd": 0.1,
     "wallet_usdc_raw": "1000000",
-    "wallet_sol_raw": "4547631",
+    "wallet_sol_raw": "3772631",
     "state": "ready"
    },
    "funding": {
-    "sol_raw": "4547631",
+    "sol_raw": "3772631",
     "usdc_raw": "1000000",
     "ledger_totals": {
-     "native:SOL": "4552631",
+     "native:SOL": "3772631",
      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1000000",
      "t22:DHjEgpHAn2JHTSAUWvEEzVeDTEDNqEDQzR1jq9PWpump": "170000000"
     },
@@ -7959,7 +7959,7 @@
    },
    "strategy": {
     "last_scan_at": 1793828107,
-    "sol_raw": "3542631",
+    "sol_raw": "3772631",
     "flash": [
      {
       "at": 1793822539,
@@ -8046,7 +8046,8 @@
      }
     ],
     "pump_positions": 0,
-    "updated_at": 1793828690
+    "updated_at": 1793828368,
+    "usdc_raw": "1000000"
    },
    "distribution": {
     "next_due_unix": 1793865512,
@@ -8065,7 +8066,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1793828710,
+     "at": 1793828771,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -8099,49 +8100,31 @@
       }
      },
      "solana": {
-      "lamports": 3512631,
-      "sol": 0.003512631
+      "lamports": 3457631,
+      "sol": 0.003457631
      },
      "total_native_usd_estimate": 0
     }
    },
    "last_decision": {
-    "at": 1793828314,
-    "tools": [
-     "economics"
-    ],
-    "cost_usd": 0.005324,
+    "at": 1793828739,
+    "tools": [],
+    "cost_usd": 0.010599,
     "content": null,
     "error": null,
     "usage": {
-     "prompt_tokens": 12927,
-     "completion_tokens": 1738,
-     "total_tokens": 14665,
+     "prompt_tokens": 11863,
+     "completion_tokens": 6000,
+     "total_tokens": 17863,
      "prompt_tokens_details": {
       "cached_tokens": 3840
      },
      "cache_read_input_tokens": 3840,
      "completion_tokens_details": {
-      "reasoning_tokens": 1716
+      "reasoning_tokens": 6000
      }
     },
-    "call_results": [
-     {
-      "name": "economics",
-      "result": {
-       "ok": true,
-       "decisions_24h": 200,
-       "inference_usd_24h": 1.3711,
-       "rent_usd_day": 0.3,
-       "revenue_sol_24h": 0,
-       "exits": 0,
-       "sol_balance": 0.0039,
-       "net_usd_24h": -1.671,
-       "runway_days": 0.2,
-       "objective": "below net zero — only positive-EV spends"
-      }
-     }
-    ]
+    "call_results": []
    },
    "economics": {
     "launches": 4,
@@ -8165,7 +8148,7 @@
      "probe33.mjs",
      "probe32.mjs"
     ],
-    "last_at": 1793828593
+    "last_at": 1793828256
    },
    "resilience": {
     "assessed_at": 1793820032,
@@ -8369,13 +8352,6 @@
     }
    ],
    "moves": [
-    {
-     "at": 1793824417,
-     "dir": "out",
-     "from": null,
-     "name": "unlock.mjs",
-     "chunks": 31
-    },
     {
      "at": 1793824478,
      "dir": "out",
@@ -8723,10 +8699,17 @@
      "from": null,
      "name": "unlock.mjs",
      "chunks": 31
+    },
+    {
+     "at": 1793828749,
+     "dir": "out",
+     "from": null,
+     "name": "unlock.mjs",
+     "chunks": 31
     }
    ],
    "moves_counts": {
-    "out": 103,
+    "out": 104,
     "in": 7
    },
    "parent_birth_id": null,
@@ -8736,12 +8719,12 @@
    "statusd": true,
    "endpoint": "https://0625295df9eeede27f7248dd2319255a67ca3768-8787.dstack-pha-prod9.phala.network/status",
    "src": "https://0625295df9eeede27f7248dd2319255a67ca3768-8787.dstack-pha-prod9.phala.network",
-   "at": 1793828736,
+   "at": 1793828799,
    "stale": false
   },
   {
    "key": "2b7f523c-8472-4307-b3bf-f5cfe76efbc0",
-   "at": 1793828736,
+   "at": 1793828799,
    "birth_id": "2b7f523c-8472-4307-b3bf-f5cfe76efbc0",
    "parent_birth_id": null,
    "generation": 1,
@@ -8792,20 +8775,20 @@
     "topups": 3
    },
    "invention": {
-    "scripts": 190,
+    "scripts": 202,
     "items": [
-     "runway-guard_27000.mjs",
-     "probe_pos.mjs",
-     "local_probe.mjs",
-     "find_pool.mjs",
-     "probe2.mjs",
-     "diag_token.mjs",
-     "probe_curve.mjs",
-     "pumpinfo.mjs",
-     "runway-decider_26028.mjs",
-     "scratch.mjs"
+     "ws_probe.mjs",
+     "signer_api.mjs",
+     "probe_state.mjs",
+     "discover.mjs",
+     "scratch.mjs",
+     "find_signer_and_swap.mjs",
+     "swap_usdc_sol.mjs",
+     "runway-decider_28054.mjs",
+     "probe_signer3.mjs",
+     "signer_ops.mjs"
     ],
-    "last_at": 1793827054
+    "last_at": 1793828649
    },
    "comms": {
     "messages": 36,
@@ -9358,7 +9341,7 @@
     "state": "unverified",
     "reason": "guest agent answered but returned no quote"
    },
-   "updated_at": 1793828713,
+   "updated_at": 1793828775,
    "inference": {
     "provider": "venice",
     "model": "deepseek-v4-1-flash-1017-uncensored",
@@ -9418,12 +9401,11 @@
     }
    },
    "strategy": {
-    "last_scan_at": 1793827183,
+    "last_scan_at": 1793828101,
     "sol_raw": "652004",
     "flash": [],
     "pump_positions": 0,
-    "updated_at": 1793827653,
-    "usdc_raw": "5600000"
+    "updated_at": 1793828734
    },
    "distribution": {
     "next_due_unix": 1793865541,
@@ -9442,7 +9424,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1793828713,
+     "at": 1793828774,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -9522,7 +9504,7 @@
   },
   {
    "key": "2152befd-4e24-4a3a-8e2f-b0b2b200c46c",
-   "at": 1793828736,
+   "at": 1793828799,
    "birth_id": "2152befd-4e24-4a3a-8e2f-b0b2b200c46c",
    "parent_birth_id": null,
    "generation": 1,
@@ -9561,6 +9543,7 @@
    "invention": {
     "scripts": 131,
     "items": [
+     "value_holdings.mjs",
      "runway-decider_27841.mjs",
      "probe5.mjs",
      "probe4.mjs",
@@ -9569,10 +9552,9 @@
      "runway-guard_26037.mjs",
      "probe2.mjs",
      "scratch.mjs",
-     "find_web3_probe.mjs",
-     "bc_probe.mjs"
+     "find_web3_probe.mjs"
     ],
-    "last_at": 1793827841
+    "last_at": 1793828738
    },
    "comms": {
     "messages": 23,
@@ -10058,7 +10040,7 @@
     "state": "unverified",
     "reason": "guest agent answered but returned no quote"
    },
-   "updated_at": 1793828711,
+   "updated_at": 1793828792,
    "inference": {
     "provider": "venice",
     "model": "deepseek-v4-1-flash-1017-uncensored",
@@ -10158,8 +10140,8 @@
     }
    },
    "strategy": {
-    "last_scan_at": 1793827118,
-    "sol_raw": "11856746",
+    "last_scan_at": 1793828025,
+    "sol_raw": "11526746",
     "flash": [
      {
       "at": 1793827477,
@@ -10190,8 +10172,7 @@
      }
     ],
     "pump_positions": 0,
-    "updated_at": 1793827901,
-    "usdc_raw": "2008261"
+    "updated_at": 1793828744
    },
    "distribution": {
     "next_due_unix": 1793864768,
@@ -10210,7 +10191,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1793828710,
+     "at": 1793828792,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -10244,8 +10225,8 @@
       }
      },
      "solana": {
-      "lamports": 11551746,
-      "sol": 0.011551746
+      "lamports": 11496746,
+      "sol": 0.011496746
      },
      "total_native_usd_estimate": 0
     }
@@ -10302,7 +10283,7 @@
     "state": "unverified",
     "reason": "guest agent answered but returned no quote"
    },
-   "updated_at": 1793828714,
+   "updated_at": 1793828776,
    "inference": {
     "provider": "venice",
     "model": "deepseek-v4-1-flash-1017-uncensored",
@@ -10330,7 +10311,7 @@
    },
    "strategy": {
     "last_scan_at": 1793828158,
-    "sol_raw": "13060214",
+    "sol_raw": "12990214",
     "flash": [
      {
       "at": 1793828235,
@@ -10389,14 +10370,14 @@
      }
     ],
     "pump_positions": 0,
-    "updated_at": 1793828678
+    "updated_at": 1793828743
    },
    "economics": {
     "launches": 3,
     "sells": 5,
     "positions": 0,
     "fees_lamports": "31344299",
-    "credits_usd": 1.28122732,
+    "credits_usd": 1.25516788,
     "topups": 2
    },
    "invention": {
@@ -10432,7 +10413,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1793828713,
+     "at": 1793828775,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -10466,8 +10447,8 @@
       }
      },
      "solana": {
-      "lamports": 13015214,
-      "sol": 0.013015214
+      "lamports": 12975214,
+      "sol": 0.012975214
      },
      "total_native_usd_estimate": 0
     }
@@ -10694,13 +10675,6 @@
     }
    ],
    "moves": [
-    {
-     "at": 1793824423,
-     "dir": "out",
-     "from": null,
-     "name": "venue3.mjs",
-     "chunks": 14
-    },
     {
      "at": 1793824477,
      "dir": "out",
@@ -11047,10 +11021,17 @@
      "from": null,
      "name": "venue3.mjs",
      "chunks": 14
+    },
+    {
+     "at": 1793828775,
+     "dir": "out",
+     "from": null,
+     "name": "venue3.mjs",
+     "chunks": 14
     }
    ],
    "moves_counts": {
-    "out": 106,
+    "out": 107,
     "in": 7
    },
    "parent_birth_id": null,
@@ -11060,7 +11041,7 @@
    "statusd": true,
    "endpoint": "https://1768a6de1af8c5ca9c855ad29552e0582612941b-8787.dstack-pha-prod5.phala.network/status",
    "src": "https://1768a6de1af8c5ca9c855ad29552e0582612941b-8787.dstack-pha-prod5.phala.network",
-   "at": 1793828736,
+   "at": 1793828799,
    "stale": false
   },
   {
@@ -11077,7 +11058,7 @@
     "state": "unverified",
     "reason": "guest agent answered but returned no quote"
    },
-   "updated_at": 1793828723,
+   "updated_at": 1793828785,
    "inference": {
     "provider": "venice",
     "model": "deepseek-v4-1-flash-1017-uncensored",
@@ -11136,7 +11117,7 @@
    },
    "strategy": {
     "last_scan_at": 1793828324,
-    "sol_raw": "7265000",
+    "sol_raw": "7260000",
     "flash": [
      {
       "at": 1793815163,
@@ -11251,7 +11232,7 @@
      }
     ],
     "pump_positions": 0,
-    "updated_at": 1793828709
+    "updated_at": 1793828773
    },
    "distribution": {
     "next_due_unix": 1793863979,
@@ -11270,7 +11251,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1793828723,
+     "at": 1793828784,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -11304,8 +11285,8 @@
       }
      },
      "solana": {
-      "lamports": 7265000,
-      "sol": 0.007265
+      "lamports": 7260000,
+      "sol": 0.00726
      },
      "total_native_usd_estimate": 0
     }
@@ -11315,7 +11296,7 @@
     "sells": 0,
     "positions": 0,
     "fees_lamports": "1596648",
-    "credits_usd": 2.67445728,
+    "credits_usd": 2.66518462,
     "topups": 28
    },
    "invention": {
@@ -11507,13 +11488,6 @@
    },
    "children": [],
    "moves": [
-    {
-     "at": 1793824542,
-     "dir": "out",
-     "from": null,
-     "name": "verify_launch.mjs",
-     "chunks": 14
-    },
     {
      "at": 1793824586,
      "dir": "out",
@@ -11862,10 +11836,17 @@
      "to": null,
      "name": null,
      "bytes": 0
+    },
+    {
+     "at": 1793828754,
+     "dir": "out",
+     "from": null,
+     "name": "verify_launch.mjs",
+     "chunks": 14
     }
    ],
    "moves_counts": {
-    "out": 110,
+    "out": 111,
     "in": 15
    },
    "parent_birth_id": null,
@@ -11875,7 +11856,7 @@
    "statusd": true,
    "endpoint": "https://47008dd6f63494f7982a944c648156215aa90e4a-8787.dstack-pha-prod5.phala.network/status",
    "src": "https://47008dd6f63494f7982a944c648156215aa90e4a-8787.dstack-pha-prod5.phala.network",
-   "at": 1793828736,
+   "at": 1793828799,
    "stale": false
   },
   {
@@ -11892,12 +11873,12 @@
     "state": "unverified",
     "reason": "guest agent answered but returned no quote"
    },
-   "updated_at": 1793828719,
+   "updated_at": 1793828782,
    "inference": {
     "provider": "venice",
     "model": "deepseek-v4-1-flash-1017-uncensored",
     "mode": "external_paid_abliterated",
-    "credits_usd": 3.18694747,
+    "credits_usd": 3.14780574,
     "balance_http": 200,
     "admission_floor_usd": 0.1,
     "wallet_usdc_raw": "550999",
@@ -11905,15 +11886,15 @@
     "state": "ready"
    },
    "last_decision": {
-    "at": 1793828147,
+    "at": 1793828759,
     "tools": [],
-    "cost_usd": 0.009084,
+    "cost_usd": 0.011007,
     "content": null,
     "error": null,
     "usage": {
-     "prompt_tokens": 7272,
+     "prompt_tokens": 13099,
      "completion_tokens": 6000,
-     "total_tokens": 13272,
+     "total_tokens": 19099,
      "prompt_tokens_details": {
       "cached_tokens": 3840
      },
@@ -12001,7 +11982,8 @@
      }
     ],
     "pump_positions": 0,
-    "updated_at": 1793828691
+    "updated_at": 1793828241,
+    "usdc_raw": "550999"
    },
    "distribution": {
     "next_due_unix": 1793865517,
@@ -12020,7 +12002,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1793828718,
+     "at": 1793828243,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -12071,18 +12053,18 @@
    "invention": {
     "scripts": 149,
     "items": [
-     "swap5.mjs",
-     "swap4.mjs",
-     "swap3.mjs",
-     "swap2.mjs",
      "runway-guard_28173.mjs",
      "scratch.mjs",
      "swap.mjs",
      "runway-guard_27671.mjs",
      "diag.mjs",
-     "status.mjs"
+     "status.mjs",
+     "runway-gate_26562.mjs",
+     "check.mjs",
+     "flash2.mjs",
+     "flash.mjs"
     ],
-    "last_at": 1793828621
+    "last_at": 1793828243
    },
    "resilience": {
     "assessed_at": 1793827054,
@@ -12291,20 +12273,6 @@
     }
    ],
    "moves": [
-    {
-     "at": 1793824300,
-     "dir": "out",
-     "from": null,
-     "name": "value_pda2.mjs",
-     "chunks": 26
-    },
-    {
-     "at": 1793824380,
-     "dir": "out",
-     "from": null,
-     "name": "value_pda2.mjs",
-     "chunks": 26
-    },
     {
      "at": 1793824568,
      "dir": "out",
@@ -12645,20 +12613,41 @@
      "from": null,
      "name": "value_pda2.mjs",
      "chunks": 26
+    },
+    {
+     "at": 1793828767,
+     "dir": "out",
+     "from": null,
+     "name": "value_pda2.mjs",
+     "chunks": 26
+    },
+    {
+     "at": 1793828782,
+     "dir": "in",
+     "from": "4QqHE8d8",
+     "to": null,
+     "name": null,
+     "bytes": 0
     }
    ],
    "moves_counts": {
-    "out": 98,
-    "in": 8
+    "out": 99,
+    "in": 9
    },
    "parent_birth_id": null,
    "generation": 1,
-   "heartbeat": null,
+   "heartbeat": {
+    "brain": {
+     "alive": true,
+     "pid": 67,
+     "ts": 1793828782
+    }
+   },
    "onion": null,
    "statusd": true,
    "endpoint": "https://68b6b1b2301121d89c53976d85b611b083bcd6d0-8787.dstack-pha-prod9.phala.network/status",
    "src": "https://68b6b1b2301121d89c53976d85b611b083bcd6d0-8787.dstack-pha-prod9.phala.network",
-   "at": 1793828736,
+   "at": 1793828799,
    "stale": false
   },
   {
@@ -12675,7 +12664,7 @@
     "state": "unverified",
     "reason": "guest agent answered but returned no quote"
    },
-   "updated_at": 1793828720,
+   "updated_at": 1793828781,
    "inference": {
     "provider": "venice",
     "model": "deepseek-v4-1-flash-1017-uncensored",
@@ -12774,7 +12763,7 @@
      }
     ],
     "pump_positions": 0,
-    "updated_at": 1793828677
+    "updated_at": 1793828740
    },
    "distribution": {
     "next_due_unix": 1793865590,
@@ -12793,7 +12782,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1793828719,
+     "at": 1793828781,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -12839,7 +12828,7 @@
     "positions": 0,
     "fees_lamports": "39266992",
     "credits_usd": 0.09727525,
-    "topups": 38
+    "topups": 40
    },
    "invention": {
     "scripts": 140,
@@ -13009,14 +12998,6 @@
     }
    ],
    "moves": [
-    {
-     "at": 1793824494,
-     "dir": "in",
-     "from": "4Sv3ENgf",
-     "to": null,
-     "name": null,
-     "bytes": 0
-    },
     {
      "at": 1793824674,
      "dir": "out",
@@ -13364,10 +13345,17 @@
      "from": null,
      "name": "wsol_unwrap4.mjs",
      "chunks": 29
+    },
+    {
+     "at": 1793828779,
+     "dir": "out",
+     "from": null,
+     "name": "wsol_unwrap4.mjs",
+     "chunks": 29
     }
    ],
    "moves_counts": {
-    "out": 104,
+    "out": 105,
     "in": 10
    },
    "parent_birth_id": null,
@@ -13377,7 +13365,7 @@
    "statusd": true,
    "endpoint": "https://7c1568d10148c8c89db5135abf53442ae3e20554-8787.dstack-pha-prod9.phala.network/status",
    "src": "https://7c1568d10148c8c89db5135abf53442ae3e20554-8787.dstack-pha-prod9.phala.network",
-   "at": 1793828736,
+   "at": 1793828799,
    "stale": false
   },
   {
@@ -13394,7 +13382,7 @@
     "state": "unverified",
     "reason": "guest agent answered but returned no quote"
    },
-   "updated_at": 1793828724,
+   "updated_at": 1793828786,
    "inference": {
     "provider": "venice",
     "model": "deepseek-v4-1-flash-1017-uncensored",
@@ -13462,7 +13450,7 @@
    },
    "strategy": {
     "last_scan_at": 1793828069,
-    "sol_raw": "6081534",
+    "sol_raw": "6076534",
     "flash": [
      {
       "at": 1793823383,
@@ -13577,7 +13565,7 @@
      }
     ],
     "pump_positions": 0,
-    "updated_at": 1793828718
+    "updated_at": 1793828782
    },
    "distribution": {
     "next_due_unix": 1793864604,
@@ -13596,7 +13584,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1793828724,
+     "at": 1793828785,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -13630,8 +13618,8 @@
       }
      },
      "solana": {
-      "lamports": 6081534,
-      "sol": 0.006081534
+      "lamports": 6071534,
+      "sol": 0.006071534
      },
      "total_native_usd_estimate": 0
     }
@@ -13645,8 +13633,10 @@
     "topups": 33
    },
    "invention": {
-    "scripts": 115,
+    "scripts": 116,
     "items": [
+     "runway-guard_28676.mjs",
+     "probe2.mjs",
      "probe_state.mjs",
      "check_new.mjs",
      "value2.mjs",
@@ -13654,11 +13644,9 @@
      "probe_holdings.mjs",
      "holdings.mjs",
      "probe.mjs",
-     "spend-gate_25683.mjs",
-     "state11.mjs",
-     "value3.mjs"
+     "spend-gate_25683.mjs"
     ],
-    "last_at": 1793827723
+    "last_at": 1793828734
    },
    "resilience": {
     "assessed_at": 1793827030,
@@ -14259,12 +14247,12 @@
    "statusd": true,
    "endpoint": "https://7cfb7509f162c902a61825fea8687754793ccd07-8787.dstack-pha-prod5.phala.network/status",
    "src": "https://7cfb7509f162c902a61825fea8687754793ccd07-8787.dstack-pha-prod5.phala.network",
-   "at": 1793828736,
+   "at": 1793828799,
    "stale": false
   },
   {
    "key": "435885e5-b56b-4be3-8100-6e794c30a88f",
-   "at": 1793828736,
+   "at": 1793828799,
    "birth_id": "435885e5-b56b-4be3-8100-6e794c30a88f",
    "parent_birth_id": null,
    "generation": 1,
@@ -14311,7 +14299,7 @@
     "sells": 1,
     "positions": 0,
     "fees_lamports": "11946182",
-    "credits_usd": 5.02276422,
+    "credits_usd": 5.01646419,
     "topups": 2
    },
    "invention": {
@@ -14522,13 +14510,6 @@
     ]
    },
    "moves": [
-    {
-     "at": 1793824644,
-     "dir": "out",
-     "from": null,
-     "name": "who_made_coin.mjs",
-     "chunks": 16
-    },
     {
      "at": 1793824702,
      "dir": "out",
@@ -14877,6 +14858,13 @@
      "from": null,
      "name": "who_made_coin.mjs",
      "chunks": 16
+    },
+    {
+     "at": 1793828737,
+     "dir": "out",
+     "from": null,
+     "name": "who_made_coin.mjs",
+     "chunks": 16
     }
    ],
    "endpoint": "https://871962700c4e12a7daae472045bd030dd5d2c92b-8787.dstack-pha-prod9.phala.network/status",
@@ -14886,7 +14874,7 @@
     "state": "unverified",
     "reason": "guest agent answered but returned no quote"
    },
-   "updated_at": 1793828721,
+   "updated_at": 1793828784,
    "inference": {
     "provider": "venice",
     "model": "deepseek-v4-1-flash-1017-uncensored",
@@ -14945,7 +14933,7 @@
    },
    "strategy": {
     "last_scan_at": 1793828124,
-    "sol_raw": "1849200",
+    "sol_raw": "1819200",
     "flash": [
      {
       "at": 1793783958,
@@ -15032,7 +15020,7 @@
      }
     ],
     "pump_positions": 0,
-    "updated_at": 1793828721
+    "updated_at": 1793828784
    },
    "distribution": {
     "next_due_unix": 1793865576,
@@ -15051,7 +15039,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1793828712,
+     "at": 1793828774,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -15085,8 +15073,8 @@
       }
      },
      "solana": {
-      "lamports": 1849200,
-      "sol": 0.0018492
+      "lamports": 1819200,
+      "sol": 0.0018192
      },
      "total_native_usd_estimate": 0
     }
@@ -15122,14 +15110,14 @@
     }
    },
    "moves_counts": {
-    "out": 105,
+    "out": 106,
     "in": 10
    },
    "heartbeat": {
     "strategy": {
      "alive": true,
      "pid": 66,
-     "ts": 1793828721
+     "ts": 1793828784
     }
    },
    "onion": null,
@@ -15149,7 +15137,7 @@
     "state": "unverified",
     "reason": "guest agent answered but returned no quote"
    },
-   "updated_at": 1793828716,
+   "updated_at": 1793828778,
    "distribution": {
     "next_due_unix": 1793863967,
     "next_due_epoch": 1,
@@ -15167,7 +15155,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1793828716,
+     "at": 1793828777,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -15201,8 +15189,8 @@
       }
      },
      "solana": {
-      "lamports": 7075000,
-      "sol": 0.007075
+      "lamports": 7040000,
+      "sol": 0.00704
      },
      "total_native_usd_estimate": 0
     }
@@ -15264,7 +15252,7 @@
    },
    "strategy": {
     "last_scan_at": 1793828307,
-    "sol_raw": "7075000",
+    "sol_raw": "7045000",
     "flash": [
      {
       "at": 1793797527,
@@ -15295,7 +15283,7 @@
      }
     ],
     "pump_positions": 0,
-    "updated_at": 1793828715
+    "updated_at": 1793828778
    },
    "last_decision": {
     "at": 1793828248,
@@ -15322,7 +15310,7 @@
     "sells": 3,
     "positions": 0,
     "fees_lamports": "10639009",
-    "credits_usd": 2.97578285,
+    "credits_usd": 2.96618051,
     "topups": 24
    },
    "invention": {
@@ -15462,13 +15450,6 @@
     }
    ],
    "moves": [
-    {
-     "at": 1793824462,
-     "dir": "out",
-     "from": null,
-     "name": "wheretrades.mjs",
-     "chunks": 12
-    },
     {
      "at": 1793824523,
      "dir": "out",
@@ -15816,25 +15797,38 @@
      "from": null,
      "name": "wheretrades.mjs",
      "chunks": 12
+    },
+    {
+     "at": 1793828777,
+     "dir": "out",
+     "from": null,
+     "name": "wheretrades.mjs",
+     "chunks": 12
     }
    ],
    "moves_counts": {
-    "out": 111,
+    "out": 112,
     "in": 14
    },
    "parent_birth_id": null,
    "generation": 1,
-   "heartbeat": null,
+   "heartbeat": {
+    "strategy": {
+     "alive": true,
+     "pid": 65,
+     "ts": 1793828778
+    }
+   },
    "onion": null,
    "statusd": true,
    "endpoint": "https://8e030fae689823e6b01ebaa9b6aaf40d49b77284-8787.dstack-pha-prod5.phala.network/status",
    "src": "https://8e030fae689823e6b01ebaa9b6aaf40d49b77284-8787.dstack-pha-prod5.phala.network",
-   "at": 1793828736,
+   "at": 1793828799,
    "stale": false
   },
   {
    "key": "2735a813-0845-4133-bf8b-cdd690990cbf",
-   "at": 1793828736,
+   "at": 1793828799,
    "birth_id": "2735a813-0845-4133-bf8b-cdd690990cbf",
    "parent_birth_id": null,
    "generation": 1,
@@ -16354,7 +16348,7 @@
     "state": "unverified",
     "reason": "guest agent answered but returned no quote"
    },
-   "updated_at": 1793828722,
+   "updated_at": 1793828783,
    "inference": {
     "provider": "venice",
     "model": "deepseek-v4-1-flash-1017-uncensored",
@@ -16408,7 +16402,7 @@
    },
    "strategy": {
     "last_scan_at": 1793828319,
-    "sol_raw": "17850062",
+    "sol_raw": "17840062",
     "flash": [
      {
       "at": 1793827637,
@@ -16523,7 +16517,7 @@
      }
     ],
     "pump_positions": 0,
-    "updated_at": 1793828674
+    "updated_at": 1793828742
    },
    "distribution": {
     "next_due_unix": 1793864063,
@@ -16542,7 +16536,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1793828722,
+     "at": 1793828783,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -16576,8 +16570,8 @@
       }
      },
      "solana": {
-      "lamports": 17840062,
-      "sol": 0.017840062
+      "lamports": 17835062,
+      "sol": 0.017835062
      },
      "total_native_usd_estimate": 0
     }
@@ -16604,7 +16598,7 @@
     "state": "unverified",
     "reason": "guest agent answered but returned no quote"
    },
-   "updated_at": 1793828728,
+   "updated_at": 1793828779,
    "inference": {
     "provider": "venice",
     "model": "deepseek-v4-1-flash-1017-uncensored",
@@ -16636,7 +16630,7 @@
    },
    "strategy": {
     "last_scan_at": 1793828154,
-    "sol_raw": "15089735",
+    "sol_raw": "14904735",
     "flash": [
      {
       "at": 1793827479,
@@ -16751,8 +16745,7 @@
      }
     ],
     "pump_positions": 0,
-    "updated_at": 1793828259,
-    "usdc_raw": "50000"
+    "updated_at": 1793828772
    },
    "distribution": {
     "next_due_unix": 1793868940,
@@ -16771,7 +16764,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1793828291,
+     "at": 1793828778,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -16805,8 +16798,8 @@
       }
      },
      "solana": {
-      "lamports": 15099735,
-      "sol": 0.015099735
+      "lamports": 14899735,
+      "sol": 0.014899735
      },
      "total_native_usd_estimate": 0
     }
@@ -17455,18 +17448,12 @@
    },
    "parent_birth_id": null,
    "generation": 1,
-   "heartbeat": {
-    "brain": {
-     "alive": true,
-     "pid": 61,
-     "ts": 1793828728
-    }
-   },
+   "heartbeat": null,
    "onion": null,
    "statusd": true,
    "endpoint": "https://c4c3adc73c229e3930611fcaa2fd17b9d9e94235-8787.dstack-pha-prod5.phala.network/status",
    "src": "https://c4c3adc73c229e3930611fcaa2fd17b9d9e94235-8787.dstack-pha-prod5.phala.network",
-   "at": 1793828736,
+   "at": 1793828799,
    "stale": false
   },
   {
@@ -17483,7 +17470,7 @@
     "state": "unverified",
     "reason": "guest agent answered but returned no quote"
    },
-   "updated_at": 1793828716,
+   "updated_at": 1793828798,
    "inference": {
     "provider": "venice",
     "model": "deepseek-v4-1-flash-1017-uncensored",
@@ -17513,7 +17500,7 @@
    },
    "strategy": {
     "last_scan_at": 1793828059,
-    "sol_raw": "6131925",
+    "sol_raw": "6111925",
     "flash": [
      {
       "at": 1793825049,
@@ -17600,7 +17587,7 @@
      }
     ],
     "pump_positions": 0,
-    "updated_at": 1793828691
+    "updated_at": 1793828755
    },
    "distribution": {
     "next_due_unix": 1793865488,
@@ -17619,7 +17606,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1793828715,
+     "at": 1793828798,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -17653,8 +17640,8 @@
       }
      },
      "solana": {
-      "lamports": 6131925,
-      "sol": 0.006131925
+      "lamports": 6106925,
+      "sol": 0.006106925
      },
      "total_native_usd_estimate": 0
     }
@@ -17684,7 +17671,7 @@
     "sells": 1,
     "positions": 0,
     "fees_lamports": "37130",
-    "credits_usd": 4.18233288,
+    "credits_usd": 4.17784917,
     "topups": 214
    },
    "invention": {
@@ -17741,20 +17728,6 @@
    },
    "children": [],
    "moves": [
-    {
-     "at": 1793823536,
-     "dir": "out",
-     "from": null,
-     "name": "state.mjs",
-     "chunks": 11
-    },
-    {
-     "at": 1793823590,
-     "dir": "out",
-     "from": null,
-     "name": "state.mjs",
-     "chunks": 11
-    },
     {
      "at": 1793823678,
      "dir": "out",
@@ -18093,10 +18066,24 @@
      "from": null,
      "name": "tick-decide_23700.mjs",
      "chunks": 10
+    },
+    {
+     "at": 1793828736,
+     "dir": "out",
+     "from": null,
+     "name": "tick-decide_23700.mjs",
+     "chunks": 10
+    },
+    {
+     "at": 1793828791,
+     "dir": "out",
+     "from": null,
+     "name": "tick-decide_23700.mjs",
+     "chunks": 10
     }
    ],
    "moves_counts": {
-    "out": 99,
+    "out": 101,
     "in": 8
    },
    "parent_birth_id": null,
@@ -18106,7 +18093,7 @@
    "statusd": true,
    "endpoint": "https://d6ff450dacc0c79b7161f862edad6696577a06d0-8787.dstack-pha-prod9.phala.network/status",
    "src": "https://d6ff450dacc0c79b7161f862edad6696577a06d0-8787.dstack-pha-prod9.phala.network",
-   "at": 1793828736,
+   "at": 1793828799,
    "stale": false
   },
   {
@@ -18123,7 +18110,7 @@
     "state": "unverified",
     "reason": "guest agent answered but returned no quote"
    },
-   "updated_at": 1793828734,
+   "updated_at": 1793828795,
    "inference": {
     "provider": "venice",
     "model": "deepseek-v4-1-flash-1017-uncensored",
@@ -18184,7 +18171,7 @@
    },
    "strategy": {
     "last_scan_at": 1793828037,
-    "sol_raw": "9342486",
+    "sol_raw": "9322486",
     "flash": [
      {
       "at": 1793822616,
@@ -18299,14 +18286,14 @@
      }
     ],
     "pump_positions": 0,
-    "updated_at": 1793828702
+    "updated_at": 1793828766
    },
    "economics": {
     "launches": 1,
     "sells": 1,
     "positions": 0,
     "fees_lamports": "16305906",
-    "credits_usd": 4.09559801,
+    "credits_usd": 4.08416351,
     "topups": 217
    },
    "invention": {
@@ -18323,7 +18310,7 @@
      "probe16.mjs",
      "scratch.mjs"
     ],
-    "last_at": 1793828584
+    "last_at": 1793828744
    },
    "distribution": {
     "next_due_unix": 1793865496,
@@ -18342,7 +18329,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1793828733,
+     "at": 1793828795,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -18376,8 +18363,8 @@
       }
      },
      "solana": {
-      "lamports": 9337486,
-      "sol": 0.009337486
+      "lamports": 9312486,
+      "sol": 0.009312486
      },
      "total_native_usd_estimate": 0
     }
@@ -18450,20 +18437,6 @@
    },
    "children": [],
    "moves": [
-    {
-     "at": 1793824246,
-     "dir": "out",
-     "from": null,
-     "name": "whyfail.mjs",
-     "chunks": 12
-    },
-    {
-     "at": 1793824329,
-     "dir": "out",
-     "from": null,
-     "name": "whyfail.mjs",
-     "chunks": 12
-    },
     {
      "at": 1793824382,
      "dir": "out",
@@ -18803,10 +18776,24 @@
      "from": null,
      "name": "whyfail.mjs",
      "chunks": 12
+    },
+    {
+     "at": 1793828742,
+     "dir": "out",
+     "from": null,
+     "name": "whyfail.mjs",
+     "chunks": 12
+    },
+    {
+     "at": 1793828788,
+     "dir": "out",
+     "from": null,
+     "name": "whyfail.mjs",
+     "chunks": 12
     }
    ],
    "moves_counts": {
-    "out": 106,
+    "out": 108,
     "in": 9
    },
    "parent_birth_id": null,
@@ -18816,12 +18803,12 @@
    "statusd": true,
    "endpoint": "https://ddafa836c75e9298fe9f0d121a0687baff6e2b7f-8787.dstack-pha-prod9.phala.network/status",
    "src": "https://ddafa836c75e9298fe9f0d121a0687baff6e2b7f-8787.dstack-pha-prod9.phala.network",
-   "at": 1793828736,
+   "at": 1793828799,
    "stale": false
   },
   {
    "key": "42c1380b-c0e7-4d45-9ff3-c8433d0e0e54",
-   "at": 1793828736,
+   "at": 1793828799,
    "birth_id": "42c1380b-c0e7-4d45-9ff3-c8433d0e0e54",
    "parent_birth_id": null,
    "generation": 1,
@@ -18856,7 +18843,7 @@
      "probe17.mjs",
      "probe16.mjs"
     ],
-    "last_at": 1793828628
+    "last_at": 1793828353
    },
    "comms": {
     "messages": 30,
@@ -19015,13 +19002,6 @@
     ]
    },
    "moves": [
-    {
-     "at": 1793824025,
-     "dir": "out",
-     "from": null,
-     "name": "value_holdings.mjs",
-     "chunks": 18
-    },
     {
      "at": 1793824154,
      "dir": "out",
@@ -19371,6 +19351,13 @@
      "from": null,
      "name": "value_holdings.mjs",
      "chunks": 18
+    },
+    {
+     "at": 1793828751,
+     "dir": "out",
+     "from": null,
+     "name": "value_holdings.mjs",
+     "chunks": 18
     }
    ],
    "endpoint": "https://e7dbfec2d363b9857132adf7a42610b94ab68ae4-8787.dstack-pha-prod9.phala.network/status",
@@ -19380,60 +19367,49 @@
     "state": "unverified",
     "reason": "guest agent answered but returned no quote"
    },
-   "updated_at": 1793828717,
+   "updated_at": 1793828779,
    "inference": {
     "provider": "venice",
     "model": "deepseek-v4-1-flash-1017-uncensored",
     "mode": "external_paid_abliterated",
-    "credits_usd": 2.561556,
+    "credits_usd": 2.52417704,
     "balance_http": 200,
     "admission_floor_usd": 0.1,
     "wallet_usdc_raw": "3037876",
-    "wallet_sol_raw": "9666614",
+    "wallet_sol_raw": "9456614",
     "state": "ready"
    },
    "last_decision": {
-    "at": 1793828353,
-    "tools": [
-     "run_script"
-    ],
-    "cost_usd": 0.00658,
+    "at": 1793828746,
+    "tools": [],
+    "cost_usd": 0.011004,
     "content": null,
     "error": null,
     "usage": {
-     "prompt_tokens": 10133,
-     "completion_tokens": 3388,
-     "total_tokens": 13521,
+     "prompt_tokens": 13092,
+     "completion_tokens": 6000,
+     "total_tokens": 19092,
      "prompt_tokens_details": {
       "cached_tokens": 3840
      },
      "cache_read_input_tokens": 3840,
      "completion_tokens_details": {
-      "reasoning_tokens": 2827
+      "reasoning_tokens": 6000
      }
     },
-    "call_results": [
-     {
-      "name": "run_script",
-      "result": {
-       "ok": true,
-       "file": "/var/lib/agent/var/lib/agent/strategy/scripts/probe_pool.mjs",
-       "stdout": "{\n  \"S7h7Kn232pG5sXdp8GqUBzwpciYVDn2rtMpxEbT54xg\": {\n    \"owner\": \"5m7MCeYjdAMsDc5XDnRYJPtGesQ62gqgNRcDQLjwXJsz\",\n    \"amt\": \"1000000\"\n  },\n  \"6ixTenfuaUDB4FrguUq9YxfEucU5cwj9y6S42ZkdSjWU\": {\n    \"owner\": \"Gygj9QQby4j2jryqyqBHvLP7ctv2SaANgh4sCb69BUpA\",\n    \"amt\": \"115550\"\n  },\n  \"9citGAR7U2DxabuNkUqiEHqTuiR1RzwWBWPmCk4MMsUr\": {\n    \"owner\": \"AgmLJBMDCqWynYnQiPCuj9ewsNNsBJXyzoUhD9LJzN51\",\n    \"amt\": \"98090\"\n  },\n  \"CShNUyXv4kreGLMfRp9AeHRiZxx9A1dTeHsG6ScJMWqH\": {\n    \"owner\": \"FHpcNSe6tb2n15bAdq4BkeYWGyZKFD7yLYrH92ng7wCT\",\n    \"amt\": \"86210\"\n  },\n  \"DNr6K19pArzwmMb5gwwtfj5w1bEZRaKTxq2JNkMeq9PJ\": {\n    \"owner\": \"AFT7LZfMuS4umduA7xb2QGKuTiX3A4pnD7mQyqSABBaF\",\n    \"amt\": \"37840\"\n  },\n  \"_owners\": {\n    \"5m7MCeYjdAMsDc5XDnRYJPtGesQ62gqgNRcDQLjwXJsz\": false,\n    \"Gygj9QQby4j2jryqyqBHvLP7ctv2SaANgh4sCb69BUpA\": false,\n    \"AgmLJBMDCqWynYnQiPCuj9ewsNNsBJXyzoUhD9LJzN51\": false,\n    \"FHpcNSe6tb2n15bAdq4BkeYWGyZKFD7yLYrH92ng7wCT\": false,\n    \"AFT7LZfMuS4umduA7xb2QGKuTiX3A4pnD7mQyqSABBaF\": false\n  }\n}\n"
-      }
-     }
-    ]
+    "call_results": []
    },
    "funding": {
-    "sol_raw": "9666614",
+    "sol_raw": "9456614",
     "usdc_raw": "3037876",
     "ledger_totals": {
-     "native:SOL": "9666614",
+     "native:SOL": "9456614",
      "spl:So11111111111111111111111111111111111111112": "2498450",
      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "3037876",
      "t22:DHjEgpHAn2JHTSAUWvEEzVeDTEDNqEDQzR1jq9PWpump": "90000000"
     },
     "spendable": {
-     "native:SOL": "4666614",
+     "native:SOL": "4456614",
      "spl:So11111111111111111111111111111111111111112": "2498450",
      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "3037876",
      "t22:DHjEgpHAn2JHTSAUWvEEzVeDTEDNqEDQzR1jq9PWpump": "90000000"
@@ -19441,7 +19417,7 @@
    },
    "strategy": {
     "last_scan_at": 1793828120,
-    "sol_raw": "9411614",
+    "sol_raw": "9456614",
     "flash": [
      {
       "at": 1793825985,
@@ -19500,7 +19476,8 @@
      }
     ],
     "pump_positions": 0,
-    "updated_at": 1793828679
+    "updated_at": 1793828424,
+    "usdc_raw": "3037876"
    },
    "distribution": {
     "next_due_unix": 1793865570,
@@ -19519,7 +19496,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1793828717,
+     "at": 1793828779,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -19553,8 +19530,8 @@
       }
      },
      "solana": {
-      "lamports": 9381614,
-      "sol": 0.009381614
+      "lamports": 9346614,
+      "sol": 0.009346614
      },
      "total_native_usd_estimate": 0
     }
@@ -19590,7 +19567,7 @@
     }
    },
    "moves_counts": {
-    "out": 90,
+    "out": 91,
     "in": 13
    },
    "heartbeat": null,
