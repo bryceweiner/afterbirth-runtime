@@ -421,20 +421,15 @@ function drawGdpChart(rows){
 }
 function isTick(t){ t=String(t||''); return /^tick\s+\d+/i.test(t) || /\|\s*no launch\s*\|/.test(t) || /^probe_w\d+/.test(t); }
 function esc(x){return String(x==null?'':x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function renderMoves(){
-  const mv=[];
-  for(const r of S.rows){
-    const st=r.st||{}; const me=(r.a&&r.a.wallet)||'';
-    for(const m of (st.moves||[])){
-      mv.push({at:Number(m.at||0),dir:m.dir||'?',name:m.name||'?',from:m.from||null,to:m.to||null,me,bytes:m.bytes||0,chunks:m.chunks||0});
-    }
-  }
-  mv.sort((a,b)=>b.at-a.at);
-  const now=Math.floor(Date.now()/1000);
-  const el=document.getElementById('moves-feed');
-  if(!el) return;
-  el.innerHTML=mv.length?mv.slice(0,40).map(m=>`<div class="msg"><div class="meta"><b>${m.dir==='out'?'taught':'learned'}</b> · ${esc(m.name)} · ${m.bytes?m.bytes+'B':'—'} · ${ago(Number(m.at||0)*1000)}</div><div>${m.dir==='out'?'→ channel':'← '+esc(String(m.from||'sibling'))}</div></div>`).join(''):'<div class="empty">no moves taught or learned yet</div>';
-  window.__moves=mv.length;
+async function renderMoves(){
+  const el=document.getElementById('moves-feed'); if(!el) return;
+  try{
+    const r=await fetch('https://raw.githubusercontent.com/staccDOTsol/birth-image-runtime/main/live/moves.json?ts='+Date.now(),{cache:'no-store'});
+    const d=await r.json();
+    const mv=(d.moves||[]);
+    el.innerHTML=mv.length?mv.slice(0,60).map(m=>`<div class="msg"><div class="meta"><b>${m.dir==='out'?'taught':'learned'}</b> · ${esc(m.name)} · ${m.bytes?m.bytes+'B':'—'} · ${ago(Number(m.at||0)*1000)}${m.hop?' · hop '+m.hop:''}</div><div>${m.dir==='out'?'→ channel':'← '+esc(String(m.from||'sibling'))}${m.agent?' · '+esc(String(m.agent)):''}</div></div>`).join(''):'<div class="empty">no moves taught or learned yet</div>';
+    window.__moves=mv.length;
+  }catch(e){}
 }
 function renderComms(){
   // What the members push about themselves comes before any chain memo or beacon:
