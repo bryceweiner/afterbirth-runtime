@@ -466,7 +466,7 @@ function renderEcon(){
 function renderInvention(){const st=S.rows.map(r=>r.st).filter(Boolean);let sc=st.flatMap(x=>x.inventions||[]);
   const bi=(S.stats&&S.stats.invention&&S.stats.invention.items)||[];
   if(!sc.length&&bi.length) sc=bi.map(n=>({name:n,at:0}));$('i-big').innerHTML=`${(S.stats&&S.stats.invention&&S.stats.invention.scripts)||st.reduce((s,x)=>s+Number((x.invention||{}).scripts||0),0)||sc.length}<small>scripts</small>`;$('i-last').textContent=(()=>{const la=Number(S.stats&&S.stats.invention&&S.stats.invention.last_at)||0;if(la>1e9)return ago(la);const ts=sc.map(x=>Number(x.at)||0).filter(v=>v>1e9);return ts.length?ago(Math.max(...ts)):'—';})();$('i-trade').textContent=sc.filter(s=>/pump|curve|swap|buy|sell|price|trade/i.test(String(s.name||s))).length;$('i-list').innerHTML=sc.length?sc.slice(0,20).map(s=>{const at=Number(s.at)||0;return `<div class="row"><span>${String(s.name||s).slice(0,44)}</span><b>${at>1e9?ago(at):''}</b></div>`;}).join(''):'<div class="row"><span>nothing invented yet</span><b>—</b></div>';}
-function showTab(n){for(const t of ['fleet','comms','economics','invention'])$(t).hidden=t!==n;document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===n)));}
+function showTab(n){for(const t of ['fleet','comms','economics','invention','moves'])$(t).hidden=t!==n;document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===n)));}
 document.getElementById('gdp-series').addEventListener('change',()=>renderHero());
 $('tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(b)showTab(b.dataset.tab);});
 // Repaint the cards on a timer as well: the first paint can land before the crawl
