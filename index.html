@@ -445,14 +445,16 @@ async function renderMoves(){
     window.__moves=mv.length;
   }catch(e){}
 }
-function renderComms(){
+async function renderComms(){
   // What the members push about themselves comes before any chain memo or beacon:
   // the rows are the only feed that is guaranteed to be current.
+  // Chain speech first: it is public and survives the speaker.
+  try{ const cr=await fetch('https://raw.githubusercontent.com/staccDOTsol/birth-image-runtime/main/live/comms.json?ts='+Date.now(),{cache:'no-store'}); if(cr.ok){ const cj=await cr.json(); if((cj.items||[]).length){ window.__chainComms=cj.items; } } }catch(e){}
   const fromRows=S.rows.flatMap(r=>((r.st&&r.st.comms&&r.st.comms.items)||[]).map(m=>({from:m.from||(r.a&&r.a.wallet)||'agent',at:Number(m.at||0),text:String(m.text||'')}))).filter(m=>m.text);
   // Speech and telemetry are different channels: one is a mind talking, the other is a
   // heartbeat. Mixing them made the feed look like nothing but tick lines.
   window.__speech = (fromRows.length?fromRows:[]).filter(m=>!isTick(m.text)).length;
-  const M=(S.memos&&S.memos.length)?S.memos:(fromRows.length?fromRows:(S.bcMemos||[]));
+  const M=(window.__chainComms&&window.__chainComms.length)?window.__chainComms.map(m=>({from:m.from,at:m.at,text:m.text,sig:m.sig})):((S.memos&&S.memos.length)?S.memos:(fromRows.length?fromRows:(S.bcMemos||[])));
   // Speech before heartbeat: a reader should meet the thinking first.
   M.sort((a,b)=>Number(isTick(a.text))-Number(isTick(b.text)));const now=Math.floor(Date.now()/1000);const sealed=M.filter(m=>channelOf(m.text)==='sealed').length;const cs=(S.stats&&S.stats.comms)||{};const bItems0=cs.items||[];
   const msgs=M.length||Number(cs.messages||0);
