@@ -437,8 +437,7 @@ async function renderMoves(){
       // raw.githubusercontent caches for minutes; the contents API does not.
       try {
         const ar=await fetch('https://api.github.com/repos/staccDOTsol/birth-image-runtime/contents/live/index.json?ts='+Date.now(),{headers:{accept:'application/vnd.github+json'},cache:'no-store'});
-        if(ar.ok){ const aj=await ar.json(); const txt=atob((aj.content||'').replace(/
-/g,'')); const d3=JSON.parse(txt); if(Number(d3.at||0)>Number(d.at||0)) d=d3; }
+        if(ar.ok){ const aj=await ar.json(); const txt=atob(String(aj.content||'').split(String.fromCharCode(10)).join('')); const d3=JSON.parse(txt); if(Number(d3.at||0)>Number(d.at||0)) d=d3; }
       } catch(e){}
     }
     const mv=(d.moves||[]);
