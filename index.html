@@ -480,12 +480,17 @@ refresh();setInterval(refresh,60000);
    them all, on load and every 30s, with exactly the members that pushed recently. */
 async function forceFromPush(){
   try{
-    const r=await fetch('https://raw.githubusercontent.com/staccDOTsol/birth-image-runtime/main/live/index.json?ts='+Date.now(),{cache:'no-store'});
+    let r=await fetch('https://raw.githubusercontent.com/staccDOTsol/birth-image-runtime/main/live/index.json?ts='+Date.now(),{cache:'no-store'}).catch(()=>null);
+    if(!r||!r.ok) r=await fetch('live/index.json?ts='+Date.now(),{cache:'no-store'});
     const d=await r.json();
     const now=Date.now()/1000;
     const fr=(d.agents||[]).filter(x=>!x.stale && now-Number(x.at||0)<3600);
     S.rows=fr.map(x=>({a:{endpoint:x.endpoint,wallet:solOf(x.solana),gen:Number(x.generation||1),kids:Number(x.children||0),first_seen:x.t0,pushed:true},
                         st:{...x,statusd:true},live:true}));
+    // Monotonic: a payload that shows fewer living members than the last one is a
+    // stale read, not a death, and must not flip the board backwards.
+    if(window.__lastFresh && fr.length<window.__lastFresh && (Date.now()/1000-Math.max(...fr.map(x=>Number(x.at||0)),0))>600){ return; }
+    window.__lastFresh=fr.length;
     S.agents=fr;
     window.__liveCount=fr.length;
     try{ renderFleet(); }catch(e){}
