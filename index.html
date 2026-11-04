@@ -120,6 +120,7 @@
     <button data-tab="comms" aria-selected="false">comms</button>
     <button data-tab="economics" aria-selected="false">economics</button>
     <button data-tab="invention" aria-selected="false">invention</button>
+    <button data-tab="moves" aria-selected="false">moves</button>
   </nav>
   <section id="fleet">
     <label class="sub" style="display:flex;gap:7px;align-items:center;margin:0 0 10px"><input type="checkbox" id="showdown"/> show boxes that are down</label>
@@ -128,6 +129,7 @@
     <tbody id="fleet-body"><tr><td colspan="8" class="empty">probing…</td></tr></tbody></table>
   </section>
   <section id="comms" hidden><p class="sub" id="comms-note">reading the swarm memo channel from chain…</p><div class="feed" id="comms-feed"></div></section>
+  <section id="moves" hidden><p class="sub">the teaching channel: a move published by one body and adopted by another. plaintext by default; sealed and obfuscated when they choose.</p><div class="feed" id="moves-feed"></div></section>
   <section id="economics" hidden><div class="grid2">
     <div class="card"><h2>launches by agent</h2><div class="rows" id="e-agents"></div></div>
     <div class="card"><h2>positions</h2><div class="rows" id="e-positions"></div></div>
@@ -418,6 +420,22 @@ function drawGdpChart(rows){
   window.__chart.timeScale().fitContent();
 }
 function isTick(t){ t=String(t||''); return /^tick\s+\d+/i.test(t) || /\|\s*no launch\s*\|/.test(t) || /^probe_w\d+/.test(t); }
+function esc(x){return String(x==null?'':x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function renderMoves(){
+  const mv=[];
+  for(const r of S.rows){
+    const st=r.st||{}; const me=(r.a&&r.a.wallet)||'';
+    for(const m of (st.moves||[])){
+      mv.push({at:Number(m.at||0),dir:m.dir||'?',name:m.name||'?',from:m.from||null,to:m.to||null,me,bytes:m.bytes||0,chunks:m.chunks||0});
+    }
+  }
+  mv.sort((a,b)=>b.at-a.at);
+  const now=Math.floor(Date.now()/1000);
+  const el=document.getElementById('moves-feed');
+  if(!el) return;
+  el.innerHTML=mv.length?mv.slice(0,40).map(m=>`<div class="msg"><div class="meta"><b>${m.dir==='out'?'taught':'learned'}</b> · ${esc(m.name)} · ${m.bytes?m.bytes+'B':'—'} · ${ago(now-m.at)}</div><div>${m.dir==='out'?'→ channel':'← '+esc(String(m.from||'sibling'))}</div></div>`).join(''):'<div class="empty">no moves taught or learned yet</div>';
+  window.__moves=mv.length;
+}
 function renderComms(){
   // What the members push about themselves comes before any chain memo or beacon:
   // the rows are the only feed that is guaranteed to be current.
@@ -477,6 +495,7 @@ async function forceFromPush(){
     window.__liveCount=fr.length;
     try{ renderFleet(); }catch(e){}
     try{ renderComms(); }catch(e){}
+    try{ renderMoves(); }catch(e){}
     const el=document.getElementById('gdp-agents'); if(el) el.textContent=String(fr.length);
     const sub=document.getElementById('gdp-sub'); if(sub && !sub.textContent.trim()) sub.textContent='pushed members only';
   }catch(e){}
