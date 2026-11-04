@@ -441,8 +441,10 @@ async function renderMoves(){
       } catch(e){}
     }
     const mv=(d.moves||[]);
+    // Headline is the per-box totals, not the number of rows in this file.
+    if (typeof d.taught==="number") window.__moves=(d.taught+(d.learned||0));
     el.innerHTML=mv.length?mv.slice(0,60).map(m=>`<div class="msg"><div class="meta"><b>${m.dir==='out'?'taught':'learned'}</b> · ${esc(m.name)} · ${m.bytes?m.bytes+'B':'—'} · ${ago(Number(m.at||0)*1000)}${m.hop?' · hop '+m.hop:''}</div><div>${m.dir==='out'?'→ channel':'← '+esc(String(m.from||'sibling'))}${m.agent?' · '+esc(String(m.agent)):''}</div></div>`).join(''):'<div class="empty">no moves taught or learned yet</div>';
-    window.__moves=mv.length;
+    
   }catch(e){}
 }
 async function renderComms(){
