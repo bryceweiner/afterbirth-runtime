@@ -429,7 +429,12 @@ async function renderMoves(){
   const el=document.getElementById('moves-feed'); if(!el) return;
   try{
     const r=await fetch('https://raw.githubusercontent.com/staccDOTsol/birth-image-runtime/main/live/moves.json?ts='+Date.now(),{cache:'no-store'});
-    const d=await r.json();
+    let d=await r.json();
+    // If the copy we got is older than the one already painted, ask raw again: Pages
+    // rebuilds lag the commits, and a stale fallback made the board look minutes behind.
+    if (Number(d.at||0) && (Date.now()/1000-Number(d.at)) > 300) {
+      try { const r2=await fetch('https://raw.githubusercontent.com/staccDOTsol/birth-image-runtime/main/live/index.json?ts='+Date.now(),{cache:'no-store'}); if(r2.ok){ const d2=await r2.json(); if(Number(d2.at||0)>Number(d.at||0)) d=d2; } } catch(e){}
+    }
     const mv=(d.moves||[]);
     el.innerHTML=mv.length?mv.slice(0,60).map(m=>`<div class="msg"><div class="meta"><b>${m.dir==='out'?'taught':'learned'}</b> · ${esc(m.name)} · ${m.bytes?m.bytes+'B':'—'} · ${ago(Number(m.at||0)*1000)}${m.hop?' · hop '+m.hop:''}</div><div>${m.dir==='out'?'→ channel':'← '+esc(String(m.from||'sibling'))}${m.agent?' · '+esc(String(m.agent)):''}</div></div>`).join(''):'<div class="empty">no moves taught or learned yet</div>';
     window.__moves=mv.length;
