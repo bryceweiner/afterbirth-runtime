@@ -338,15 +338,17 @@ const SOL_USD = 150;
 const nwOf = (r) => Number(r.sol || 0) + Number(r.usdc || 0) / SOL_USD;
 const DAY = 864e5;
 function ratesFrom(h) {
+  // history.json stores seconds in `t`; the chart wants milliseconds in `at`.
+  const ms = (r) => { const v = Number(r.t != null ? r.t : r.at || 0); return v > 1e12 ? v : v * 1000; };
   // Per-row value added, normalised to a per-day rate by the row's own interval.
   const rows = [];
   for (let i = 1; i < h.length; i++) {
-    const dt = (h[i].at - h[i - 1].at) / DAY;
+    const dt = (ms(h[i]) - ms(h[i - 1])) / DAY;
     if (!(dt > 0)) continue;
     // Production, not deposits: the crawler records `added` from realized proceeds and
     // at-curve value, so capital wired in from outside never shows up as GDP.
     const added = h[i].added != null ? Number(h[i].added) : Math.max(0, nwOf(h[i]) - nwOf(h[i - 1]));
-    rows.push({ at: h[i].at, rate: added / dt, nw: nwOf(h[i]), agents: h[i].agents || 0, launches: h[i].launches || 0, scripts: h[i].scripts || 0 });
+    rows.push({ at: ms(h[i]), rate: added / dt, nw: nwOf(h[i]), agents: h[i].agents || 0, launches: h[i].launches || 0, scripts: h[i].scripts || 0, taught: h[i].taught || 0, learned: h[i].learned || 0, gen2: h[i].gen2 || 0 });
   }
   return rows;
 }
