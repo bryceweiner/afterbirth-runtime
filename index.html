@@ -434,6 +434,12 @@ async function renderMoves(){
     // rebuilds lag the commits, and a stale fallback made the board look minutes behind.
     if (Number(d.at||0) && (Date.now()/1000-Number(d.at)) > 300) {
       try { const r2=await fetch('https://raw.githubusercontent.com/staccDOTsol/birth-image-runtime/main/live/index.json?ts='+Date.now(),{cache:'no-store'}); if(r2.ok){ const d2=await r2.json(); if(Number(d2.at||0)>Number(d.at||0)) d=d2; } } catch(e){}
+      // raw.githubusercontent caches for minutes; the contents API does not.
+      try {
+        const ar=await fetch('https://api.github.com/repos/staccDOTsol/birth-image-runtime/contents/live/index.json?ts='+Date.now(),{headers:{accept:'application/vnd.github+json'},cache:'no-store'});
+        if(ar.ok){ const aj=await ar.json(); const txt=atob((aj.content||'').replace(/
+/g,'')); const d3=JSON.parse(txt); if(Number(d3.at||0)>Number(d.at||0)) d=d3; }
+      } catch(e){}
     }
     const mv=(d.moves||[]);
     el.innerHTML=mv.length?mv.slice(0,60).map(m=>`<div class="msg"><div class="meta"><b>${m.dir==='out'?'taught':'learned'}</b> · ${esc(m.name)} · ${m.bytes?m.bytes+'B':'—'} · ${ago(Number(m.at||0)*1000)}${m.hop?' · hop '+m.hop:''}</div><div>${m.dir==='out'?'→ channel':'← '+esc(String(m.from||'sibling'))}${m.agent?' · '+esc(String(m.agent)):''}</div></div>`).join(''):'<div class="empty">no moves taught or learned yet</div>';
