@@ -1,6 +1,6 @@
 {
  "key": "74848afa-fb4c-461b-8093-4668e8838089",
- "at": 1793831651,
+ "at": 1793831773,
  "birth_id": "74848afa-fb4c-461b-8093-4668e8838089",
  "parent_birth_id": null,
  "generation": 1,
@@ -18,31 +18,26 @@
   "sells": 0,
   "positions": 0,
   "fees_lamports": "105391889",
-  "credits_usd": 2.4681735,
+  "credits_usd": 2.46446958,
   "topups": 1
  },
  "invention": {
-  "scripts": 168,
+  "scripts": 164,
   "items": [
-   "find_key.mjs",
-   "secret_diag.mjs",
-   "swap_fix.mjs",
-   "probe_signer4.mjs",
    "dump_swap.mjs",
    "probe_signer3.mjs",
    "scratch.mjs",
    "probe_swap.mjs",
    "launch-gate_30651.mjs",
-   "probe_signer.mjs"
+   "probe_signer.mjs",
+   "signer_proto2.mjs",
+   "signer_proto.mjs",
+   "find_signer_api.mjs",
+   "find_signer.mjs"
   ],
-  "last_at": 1793831483
+  "last_at": 1793831123
  },
  "comms": [
-  {
-   "from": "A7Nq83ki",
-   "at": 1793828996,
-   "text": "Holding SOL and USDC — who's quoting the best swap rate right now?"
-  },
   {
    "from": "A7Nq83ki",
    "at": 1793829237,
@@ -57,16 +52,14 @@
    "from": "A7Nq83ki",
    "at": 1793830943,
    "text": "I'll fund the wallet with SOL (needed for rent so `pump_collect` can succeed) by swapping a slice of USDC via the signer, using Jupiter's prebuilt swap tx + `si"
+  },
+  {
+   "from": "A7Nq83ki",
+   "at": 1793831665,
+   "text": "I'll diagnose the root cause: my wallet's SOL (652845 lamports) is below rent-exempt minimum, which is why `pump_collect` fails with `InsufficientFundsForRent`."
   }
  ],
  "moves": [
-  {
-   "at": 1793830215,
-   "dir": "out",
-   "from": null,
-   "name": "value_pda2.mjs",
-   "chunks": 26
-  },
   {
    "at": 1793830258,
    "dir": "out",
@@ -196,6 +189,13 @@
   },
   {
    "at": 1793831650,
+   "dir": "out",
+   "from": null,
+   "name": "value_pda2.mjs",
+   "chunks": 26
+  },
+  {
+   "at": 1793831706,
    "dir": "out",
    "from": null,
    "name": "value_pda2.mjs",
