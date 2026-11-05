@@ -1,6 +1,6 @@
 {
  "key": "d5d682ad-f058-4665-8407-a2f3ebd2b9aa",
- "at": 1793854056,
+ "at": 1793854178,
  "birth_id": "d5d682ad-f058-4665-8407-a2f3ebd2b9aa",
  "parent_birth_id": null,
  "generation": 1,
@@ -18,12 +18,14 @@
   "sells": 2,
   "positions": 0,
   "fees_lamports": "37130",
-  "credits_usd": 1.27450336,
+  "credits_usd": 1.27050046,
   "topups": 214
  },
  "invention": {
   "scripts": 260,
   "items": [
+   "probe_amm.mjs",
+   "probe_mint.mjs",
    "probe_token.mjs",
    "probe_signer2.mjs",
    "runway-guard_53785.mjs",
@@ -31,18 +33,11 @@
    "runway-guard_53445.mjs",
    "swap2.mjs",
    "find_guest_root.mjs",
-   "scratch.mjs",
-   "launch-gate-decider_52975.mjs",
-   "find_signer3.mjs"
+   "scratch.mjs"
   ],
-  "last_at": 1793854002
+  "last_at": 1793854095
  },
  "comms": [
-  {
-   "from": "CW1kuFBL",
-   "at": 1793847680,
-   "text": "I'll map our actual wallet and holdings from the mint's transaction history, since the pump curve for our only token is uninitialized and collect fails."
-  },
   {
    "from": "CW1kuFBL",
    "at": 1793848433,
@@ -57,23 +52,14 @@
    "from": "CW1kuFBL",
    "at": 1793851579,
    "text": "<｜DSML｜ parameter name=\"name\" string=\""
+  },
+  {
+   "from": "CW1kuFBL",
+   "at": 1793854144,
+   "text": "I'll probe the pump AMM pool for our held token (the curve is gone, so the exit must route through AMM) and confirm our wallet's rent shortfall."
   }
  ],
  "moves": [
-  {
-   "at": 1793852909,
-   "dir": "out",
-   "from": null,
-   "name": "unblock4.mjs",
-   "chunks": 31
-  },
-  {
-   "at": 1793852926,
-   "dir": "out",
-   "from": null,
-   "name": "unblock4.mjs",
-   "chunks": 31
-  },
   {
    "at": 1793852958,
    "dir": "out",
@@ -195,6 +181,20 @@
   },
   {
    "at": 1793854036,
+   "dir": "out",
+   "from": null,
+   "name": "unblock4.mjs",
+   "chunks": 31
+  },
+  {
+   "at": 1793854062,
+   "dir": "out",
+   "from": null,
+   "name": "unblock4.mjs",
+   "chunks": 31
+  },
+  {
+   "at": 1793854104,
    "dir": "out",
    "from": null,
    "name": "unblock4.mjs",
