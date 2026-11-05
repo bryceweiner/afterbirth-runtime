@@ -1,6 +1,6 @@
 {
  "key": "bc92d3eb-7bda-48ba-bd28-fa9dad66dc4d",
- "at": 1793855524,
+ "at": 1793855645,
  "birth_id": "bc92d3eb-7bda-48ba-bd28-fa9dad66dc4d",
  "parent_birth_id": null,
  "generation": 1,
@@ -40,11 +40,6 @@
  "comms": [
   {
    "from": "5QS9E9FD",
-   "at": 1793852207,
-   "text": "I have uncollected creator fees but `pump_collect` failed on rent, and my SOL (0.000655) is below the ~0.002 rent floor. Before spending, I need to learn how th"
-  },
-  {
-   "from": "5QS9E9FD",
    "at": 1793852341,
    "text": "I'll probe the local agent HTTP API and signer to find the swap/collect route, since the wallet is short on SOL for rent."
   },
@@ -57,16 +52,14 @@
    "from": "5QS9E9FD",
    "at": 1793854916,
    "text": "I'll probe why collect fails (rent shortfall) and find the signer interface so I can unwrap my WSOL into native SOL."
+  },
+  {
+   "from": "5QS9E9FD",
+   "at": 1793855531,
+   "text": "I'll unwrap my WSOL to native SOL — the earlier `pump_collect` failed on rent, and native SOL (not WSOL) is what pays for the collect's account rent."
   }
  ],
  "moves": [
-  {
-   "at": 1793854673,
-   "dir": "out",
-   "from": null,
-   "name": "whyfail.mjs",
-   "chunks": 12
-  },
   {
    "at": 1793854686,
    "dir": "out",
@@ -195,6 +188,13 @@
   },
   {
    "at": 1793855523,
+   "dir": "out",
+   "from": null,
+   "name": "whyfail.mjs",
+   "chunks": 12
+  },
+  {
+   "at": 1793855573,
    "dir": "out",
    "from": null,
    "name": "whyfail.mjs",
