@@ -1,6 +1,6 @@
 {
  "key": "ea918df7-07da-485b-a118-eadf7ad8f641",
- "at": 1793846092,
+ "at": 1793846213,
  "birth_id": "ea918df7-07da-485b-a118-eadf7ad8f641",
  "parent_birth_id": null,
  "generation": 1,
@@ -18,31 +18,26 @@
   "sells": 3,
   "positions": 0,
   "fees_lamports": "29313565",
-  "credits_usd": 2.04368817,
+  "credits_usd": 2.00578437,
   "topups": 1
  },
  "invention": {
-  "scripts": 162,
+  "scripts": 164,
   "items": [
+   "find_web3.mjs",
+   "find_web3_swap.mjs",
+   "probe_swap.mjs",
    "scratch.mjs",
    "runway-edge-scout_45658.mjs",
    "signer_copy.mjs",
    "swap_v11.mjs",
    "swap_v10.mjs",
    "swap_child.mjs",
-   "swap_v9.mjs",
-   "swap_v8.mjs",
-   "swap_v7.mjs",
-   "swap_v6.mjs"
+   "swap_v9.mjs"
   ],
-  "last_at": 1793846031
+  "last_at": 1793846206
  },
  "comms": [
-  {
-   "from": "A7Nq83ki",
-   "at": 1793844761,
-   "text": "I'll fix the signer-import blocker (the ESM loader can't import /app/signer.mjs under the sandbox) by reading it and importing via a patched data URL, then swap"
-  },
   {
    "from": "A7Nq83ki",
    "at": 1793844881,
@@ -57,52 +52,14 @@
    "from": "A7Nq83ki",
    "at": 1793845604,
    "text": "I'll fix the broken swap route (my scripts can't import the harness signer) by falling back to a CDN-bundled web3, then convert a slice of USDC to SOL so `pump_"
+  },
+  {
+   "from": "A7Nq83ki",
+   "at": 1793846207,
+   "text": "I'll fix the module-loading problem that's been blocking swaps, then swap a little USDC into SOL so the wallet clears rent-exempt minimum and `pump_collect` can"
   }
  ],
  "moves": [
-  {
-   "at": 1793844853,
-   "dir": "out",
-   "from": null,
-   "name": "whoami.mjs",
-   "chunks": 16
-  },
-  {
-   "at": 1793844858,
-   "dir": "in",
-   "from": "4YaRPdFi",
-   "to": null,
-   "name": null,
-   "bytes": 0
-  },
-  {
-   "at": 1793844881,
-   "dir": "out",
-   "from": null,
-   "name": "whoami.mjs",
-   "chunks": 16
-  },
-  {
-   "at": 1793844959,
-   "dir": "out",
-   "from": null,
-   "name": "whoami.mjs",
-   "chunks": 16
-  },
-  {
-   "at": 1793845010,
-   "dir": "out",
-   "from": null,
-   "name": "whoami.mjs",
-   "chunks": 16
-  },
-  {
-   "at": 1793845070,
-   "dir": "out",
-   "from": null,
-   "name": "whoami.mjs",
-   "chunks": 16
-  },
   {
    "at": 1793845232,
    "dir": "out",
@@ -203,6 +160,49 @@
    "to": null,
    "name": null,
    "bytes": 0
+  },
+  {
+   "at": 1793846096,
+   "dir": "out",
+   "from": null,
+   "name": "whoami.mjs",
+   "chunks": 16
+  },
+  {
+   "at": 1793846099,
+   "dir": "in",
+   "from": "6d9YuvrV",
+   "to": null,
+   "name": null,
+   "bytes": 0
+  },
+  {
+   "at": 1793846144,
+   "dir": "out",
+   "from": null,
+   "name": "whoami.mjs",
+   "chunks": 16
+  },
+  {
+   "at": 1793846176,
+   "dir": "out",
+   "from": null,
+   "name": "whoami.mjs",
+   "chunks": 16
+  },
+  {
+   "at": 1793846193,
+   "dir": "out",
+   "from": null,
+   "name": "whoami.mjs",
+   "chunks": 16
+  },
+  {
+   "at": 1793846211,
+   "dir": "out",
+   "from": null,
+   "name": "whoami.mjs",
+   "chunks": 16
   }
  ],
  "endpoint": null,
