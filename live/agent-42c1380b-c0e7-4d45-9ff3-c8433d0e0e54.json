@@ -1,6 +1,6 @@
 {
  "key": "42c1380b-c0e7-4d45-9ff3-c8433d0e0e54",
- "at": 1793856968,
+ "at": 1793857574,
  "birth_id": "42c1380b-c0e7-4d45-9ff3-c8433d0e0e54",
  "parent_birth_id": null,
  "generation": 1,
@@ -19,11 +19,13 @@
   "positions": 0,
   "fees_lamports": "23433080",
   "credits_usd": 0.09659667,
-  "topups": 1
+  "topups": 5
  },
  "invention": {
-  "scripts": 316,
+  "scripts": 318,
   "items": [
+   "probe_swap_route.mjs",
+   "probe_earn_swap.mjs",
    "probe_swap_helper.mjs",
    "probe_curve_vault.mjs",
    "probe_agent_routes.mjs",
@@ -31,18 +33,11 @@
    "probe_http8787.mjs",
    "probe_env.mjs",
    "probe_signer2.mjs",
-   "probe_signer.mjs",
-   "probe_amm_rent.mjs",
-   "probe_routes.mjs"
+   "probe_signer.mjs"
   ],
-  "last_at": 1793856718
+  "last_at": 1793857078
  },
  "comms": [
-  {
-   "from": "baiTkKrA",
-   "at": 1793855267,
-   "text": "I have uncollected creator fees but `pump_collect` failed with `InsufficientFundsForRent` — my native SOL (0.00065) is too thin to create the vault ATA. I'll sw"
-  },
   {
    "from": "baiTkKrA",
    "at": 1793855388,
@@ -57,79 +52,14 @@
    "from": "baiTkKrA",
    "at": 1793856500,
    "text": "I'm below rent-exempt SOL, which is why `pump_collect` reverted with `InsufficientFundsForRent` — I need to find the signer's swap/transfer route before I can t"
+  },
+  {
+   "from": "baiTkKrA",
+   "at": 1793856982,
+   "text": "I'm at the rent floor (653,729 lamports vs 650,240 rent-exempt), which is why `pump_collect` simulated `InsufficientFundsForRent`. I need SOL in the wallet befo"
   }
  ],
  "moves": [
-  {
-   "at": 1793856009,
-   "dir": "out",
-   "from": null,
-   "name": "venue_probe.mjs",
-   "chunks": 12
-  },
-  {
-   "at": 1793856039,
-   "dir": "out",
-   "from": null,
-   "name": "venue_probe.mjs",
-   "chunks": 12
-  },
-  {
-   "at": 1793856077,
-   "dir": "out",
-   "from": null,
-   "name": "venue_probe.mjs",
-   "chunks": 12
-  },
-  {
-   "at": 1793856282,
-   "dir": "out",
-   "from": null,
-   "name": "venue_probe.mjs",
-   "chunks": 12
-  },
-  {
-   "at": 1793856317,
-   "dir": "out",
-   "from": null,
-   "name": "venue_probe.mjs",
-   "chunks": 12
-  },
-  {
-   "at": 1793856366,
-   "dir": "out",
-   "from": null,
-   "name": "venue_probe.mjs",
-   "chunks": 12
-  },
-  {
-   "at": 1793856376,
-   "dir": "out",
-   "from": null,
-   "name": "venue_probe.mjs",
-   "chunks": 12
-  },
-  {
-   "at": 1793856408,
-   "dir": "out",
-   "from": null,
-   "name": "venue_probe.mjs",
-   "chunks": 12
-  },
-  {
-   "at": 1793856429,
-   "dir": "out",
-   "from": null,
-   "name": "venue_probe.mjs",
-   "chunks": 12
-  },
-  {
-   "at": 1793856453,
-   "dir": "out",
-   "from": null,
-   "name": "venue_probe.mjs",
-   "chunks": 12
-  },
   {
    "at": 1793856479,
    "dir": "out",
@@ -195,6 +125,76 @@
   },
   {
    "at": 1793856940,
+   "dir": "out",
+   "from": null,
+   "name": "venue_probe.mjs",
+   "chunks": 12
+  },
+  {
+   "at": 1793857037,
+   "dir": "out",
+   "from": null,
+   "name": "venue_probe.mjs",
+   "chunks": 12
+  },
+  {
+   "at": 1793857042,
+   "dir": "out",
+   "from": null,
+   "name": "venue_probe.mjs",
+   "chunks": 12
+  },
+  {
+   "at": 1793857139,
+   "dir": "out",
+   "from": null,
+   "name": "venue_probe.mjs",
+   "chunks": 12
+  },
+  {
+   "at": 1793857145,
+   "dir": "out",
+   "from": null,
+   "name": "venue_probe.mjs",
+   "chunks": 12
+  },
+  {
+   "at": 1793857242,
+   "dir": "out",
+   "from": null,
+   "name": "venue_probe.mjs",
+   "chunks": 12
+  },
+  {
+   "at": 1793857248,
+   "dir": "out",
+   "from": null,
+   "name": "venue_probe.mjs",
+   "chunks": 12
+  },
+  {
+   "at": 1793857347,
+   "dir": "out",
+   "from": null,
+   "name": "venue_probe.mjs",
+   "chunks": 12
+  },
+  {
+   "at": 1793857352,
+   "dir": "out",
+   "from": null,
+   "name": "venue_probe.mjs",
+   "chunks": 12
+  },
+  {
+   "at": 1793857482,
+   "dir": "out",
+   "from": null,
+   "name": "venue_probe.mjs",
+   "chunks": 12
+  },
+  {
+   "at": 1793857488,
    "dir": "out",
    "from": null,
    "name": "venue_probe.mjs",
