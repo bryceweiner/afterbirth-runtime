@@ -424,6 +424,10 @@ if(!window.REPAINT_TIMER){window.REPAINT_TIMER=setInterval(()=>{try{renderFleet(
 async function refresh(){try{await loadEndpoints();renderFleet();for(const f of ['renderEcon','renderInvention','renderComms','renderHero']){try{if(typeof eval(f)==='function')eval(f+'()');}catch{}}setTimeout(()=>{try{renderFleet();for(const f of ['renderEcon','renderInvention','renderComms','renderHero'])try{eval(f+'()')}catch{}}catch{}},2500);await loadMemos();try{const v=await getJson('valuation.json?ts='+Date.now(),9000);if(v&&v.totals)S.val=v.totals;}catch{}
   renderComms();renderEcon();renderInvention();}catch(e){document.getElementById("stamp").textContent="render error: "+e.message;}}
 refresh();setInterval(refresh,60000);
+// The chart needs the library *and* the history JSON; firing on parse alone can
+// miss both and leave an empty box. Repaint once the window is ready, then keep it fresh.
+window.addEventListener('load', () => { try { renderHero(); } catch {} });
+setInterval(() => { try { renderHero(); } catch {} }, 20000);
 </script>
 </body>
 </html>
