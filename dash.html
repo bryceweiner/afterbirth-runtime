@@ -217,7 +217,20 @@ async function loadEndpoints(){
           status:{birth_id:r.birth_id,parent_birth_id:r.parent_birth_id,generation:r.generation,phase:r.phase,t0:r.t0,
             solana:r.solana,evm:r.evm,image:r.image,identity_binding:r.identity_binding,children:Array(Number(r.children||0)).fill({}),
             economics:r.economics,invention:r.invention,comms:{items:r.comms||[]},statusd:true}}))},'push');
-        S.pushedAt=pj.at; S.pushed=true;
+        S.pushedAt=pj.at; S.pushed=true;        // The econ panel reads S.rows; those were only built from live endpoints, so a
+        // fleet with few reachable boxes showed zeros for launches/fees/sells it had.
+        try {
+          const lr = pj.agents.filter((r) => !r.stale);
+          S.rows = lr.map((r) => ({
+            a: { endpoint: r.endpoint, wallet: (r.solana || {}).public_key, gen: r.generation || 1, kids: Number(r.children || 0), first_seen: r.t0 || r.at },
+            st: { birth_id: r.birth_id, parent_birth_id: r.parent_birth_id, generation: r.generation, phase: r.phase, t0: r.t0,
+                  solana: r.solana, evm: r.evm, image: r.image, identity_binding: r.identity_binding, children: Array(Number(r.children || 0)).fill({}),
+                  economics: r.economics, positions: r.positions || [], inventions: r.inventions || [], exits: r.exits, sweeps: r.sweeps,
+                  invention: r.invention, comms: { items: r.comms || [] }, statusd: true },
+            live: true, push: true,
+          }));
+        } catch {}
+
       }
     }
   }catch{}
