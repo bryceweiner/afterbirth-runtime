@@ -134,7 +134,7 @@
   </div></section>
   <section id="invention" hidden><div class="card"><h2>recent scripts</h2><div class="rows" id="i-list"></div></div></section>
 </div>
-<script src="https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
+<script src="assets/lightweight-charts.js"></script>
 <script>
 const $=(id)=>document.getElementById(id);
 const MEMO=new Set(['MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr','Memo1UhkJRfHyvLMcVucJwxXeuD728EqVDDwQDxFMNo']);
@@ -342,7 +342,15 @@ async function renderHero(){
   try {
     const bc = await (await fetch('beacon.json?ts=' + Date.now(), { cache: 'no-store' })).json();
     const st = bc.stats || {}; const e = st.economics || {};
-    const fees = Number(e.fees_lamports || 0) / 1e9;
+    // The hero must show what THIS fleet has collected. beacon.json is a cumulative
+    // crawler aggregate and can disagree with the live rows, so prefer the rows.
+    let fees = Number(e.fees_lamports || 0) / 1e9;
+    try {
+      const li = await (await fetch('https://raw.githubusercontent.com/staccDOTsol/birth-image-runtime/main/live/index.json?ts=' + Date.now(), { cache: 'no-store' })).json();
+      const rowsL = (li.agents || []).filter((a) => !a.stale);
+      const liveFees = rowsL.reduce((s2, a) => s2 + Number((a.economics || {}).fees_lamports || 0), 0) / 1e9;
+      if (liveFees > 0) fees = liveFees;
+    } catch {}
     const set0 = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
     set0('gdp-num', fees.toFixed(4) + ' SOL');
     const agents = (bc.agents || []).filter((a) => a.live).length;
