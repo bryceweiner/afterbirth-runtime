@@ -1,0 +1,92 @@
+start Wed Nov  4 03:31:56 UTC 2026 port=8787
+image Wed Nov  4 03:31:56 UTC 2026 
+rpc-proxy on 8899 -> 4 upstreams
+{"adopt":"none","mine":"c48ca9c014a9"}
+boot: policy
+boot: image
+boot: inference
+boot: genesis 5eykt4Us
+boot: sealing keys (seeded)
+2026-11-04T03:31:58.384Z [boot] new birth: fresh in-guest keys generated and sealed {"solana":"EuH1oAbHaUJn44CPSVUQeP8gqEEdyf1hQpsodr1W7fLX","evm":"0x2DB88f505E1c249E64eCb7a7ac6bD1eb1615ED44","birth_id":"800c73a0-98fb-42aa-89e9-75994f0f78fb"}
+bundle-p2p on 8898 sha c48ca9c014a9
+boot_bg pid=34 waited=30s alive=yes
+single-process mode Wed Nov  4 03:32:28 UTC 2026
+Nov 04 03:32:28.192 [notice] Tor 0.4.9.15 running on Linux with Libevent 2.1.13-stable, OpenSSL 3.5.9, Zlib 1.3.2, Liblzma 5.8.4, Libzstd 1.5.7 and Unknown N/A as libc.
+Nov 04 03:32:28.195 [notice] Tor can't help you if you use it wrong! Learn how to be safe at https://support.torproject.org/faq/staying-anonymous/
+Nov 04 03:32:28.195 [notice] Read configuration file "/tmp/torrc".
+Nov 04 03:32:28.200 [warn] /var/lib/tor/agent is not owned by this user (root, 0) but by tor (100). Perhaps you are running Tor as the wrong user?
+Nov 04 03:32:28.201 [warn] Failed to parse/validate config: Failed to configure rendezvous options. See logs for details.
+Nov 04 03:32:28.201 [err] Reading config failed--see warnings above.
+(node:89) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+{"rawEvm":"object","evmKeys":["secretKey","address"],"skType":"string","skLen":64,"skHead":"bbb05b70b5"}
+statusd on 8787
+{"event":"signer_ready","port":45627,"solana":"EuH1oAbHaUJn44CPSVUQeP8gqEEdyf1hQpsodr1W7fLX","evm":"0x2DB88f505E1c249E64eCb7a7ac6bD1eb1615ED44"}
+(node:34) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-04T03:32:29.013Z [boot] identity sealed; public receipt committed
+
+================ PUBLIC BIRTH RECEIPT ================
+birth_id                800c73a0-98fb-42aa-89e9-75994f0f78fb
+solana (mainnet-beta)      EuH1oAbHaUJn44CPSVUQeP8gqEEdyf1hQpsodr1W7fLX
+evm (eip155:8453)       0x2DB88f505E1c249E64eCb7a7ac6bD1eb1615ED44
+constitution_sha256     831a3c58cc7daa4fc9ad93088ceb53485f83328a42f4fa5446eddb6a8ad8e6ae
+parent_record_sha256    691303ad3501cd22235cb1c3a6d8d350182b855bfc0f170ecfd3bcdf34866fc6
+image_digest            sha256:73ebf479adde19d73d828f4e463bb1ac557d8f0592884ebbea741645eddc1829
+inference_config_sha256 163c85560fe71dfa6168627cedd8d6d28b8899a46bdc985a1994335d2653b552
+birth_anchor_unix       1793763118
+identity_binding        unverified (guest agent answered but returned no quote)
+=====================================================
+
+{"push":{"key":"62004f6ae99d","ok":true,"status":201},"at":1793763149849}
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+2026-11-04T03:32:32.402Z [distributor] supervisor started {"birth_id":"800c73a0-98fb-42aa-89e9-75994f0f78fb","t0":1793763118,"next_due":1793849518,"dry":false}
+2026-11-04T03:32:32.510Z [earn] worker up {"tick_ms":120000,"min_launch":"90000000"}
+2026-11-04T03:32:32.611Z [earn] worker up {"tick_ms":120000,"min_launch":"90000000"}
+2026-11-04T03:32:32.648Z [procreate] worker up {"tick_ms":300000,"min_usdc":"120000","max_kids":1000}
+2026-11-04T03:32:32.700Z [strategy] worker started {"size_usdc_raw":"100000000","floor_raw":"2000"}
+2026-11-04T03:32:32.750Z [inference] model selected {"selected":"deepseek-v4-1-flash-uncensored","candidates":8}
+2026-11-04T03:32:32.760Z [workers] always-on set started {"started":[{"name":"worker.earn","every_s":240},{"name":"worker.comms","every_s":60},{"name":"worker.invent","every_s":180},{"name":"worker.trade","every_s":120},{"name":"worker.mark","every_s":120}]}
+2026-11-04T03:32:32.760Z [brain] loop {"at":1793763152}
+2026-11-04T03:32:32.784Z [earn] worker up {"tick_ms":120000,"min_launch":"45000000"}
+2026-11-04T03:32:32.896Z [procreate] self extend probe {"http":200,"n":0,"mine":0}
+2026-11-04T03:32:33.318Z [earn] birth arithmetic {"sol":"60000000","kids":0,"lease_usdc":1.77}
+2026-11-04T03:32:37.695Z [procreate] swap for lease fee {"ok":false,"lamports":30000000,"sig":null}
+2026-11-04T03:32:37.696Z [procreate] tick {"kids":0,"cap":0,"skipped":"resources","usdc":"0","sol":"60000000"}
+2026-11-04T03:32:38.119Z [earn] launch attempt {"ok":true,"mint":"DJDgYkdH4UpW6XPrHqZUDodoAnZPqkoAWyrBQp4pM5yU","sig":"5YgspMDUKuH9FDjTzuy7WHrH5iDcGZg7fn6W5uMVSVfQAnXFWiiNxhnv53K3NTxE5QsYTkJvGBWAzv3i3ztECAcq","err":null}
+2026-11-04T03:32:39.095Z [earn] tick {"mints":1,"sol":"60000000","launched":"DJDgYkdH4UpW6XPrHqZUDodoAnZPqkoAWyrBQp4pM5yU","ok":true,"invented":"probe_w1_63152.mjs"}
+2026-11-04T03:32:51.724Z [strategy] flash scan {"best":"usdc-JUP-usdc","net_usd":0.02895,"sol":0.06}
+2026-11-04T03:32:51.725Z [strategy] flash gate {"net_raw":"28950","floor":"2000","worth":true,"sol":"60000000","reserve":"10000000","since_ms":1793763152700}
+2026-11-04T03:32:52.827Z [earn] launch attempt {"ok":false,"mint":"HY761hYAi3rftZxGEzXhPewyeeVNbrtszNGMP8MHLmkX","sig":null,"err":{"InstructionError":[2,{"Custom":1}]}}
+2026-11-04T03:32:52.827Z [earn] tick {"mints":0,"sol":"60000000","launched":"HY761hYAi3rftZxGEzXhPewyeeVNbrtszNGMP8MHLmkX","ok":false}
+2026-11-04T03:32:57.040Z [earn] launch attempt {"ok":false,"mint":"HE9eSgxksX3ZrtnQ8FkmVkmc6CZshhTjt9WTu1Q18HWd","sig":"2u7Geq1JHwbuorMdwczkFbfdzaRExy8KVbGwdCnthUJhEQWkzL74j17RUu6snJ1phfhdHFHDUqW3dwcVbd8MxGSE","err":{"InstructionError":[2,{"Custom":1}]}}
+2026-11-04T03:32:57.040Z [earn] tick {"mints":0,"sol":"60000000","launched":"HE9eSgxksX3ZrtnQ8FkmVkmc6CZshhTjt9WTu1Q18HWd","ok":false}
+2026-11-04T03:32:57.429Z [strategy] flash attempt {"size_raw":"100000000","ok":false,"phase":"simulate","err":{"InstructionError":[9,{"Custom":1}]}}
+2026-11-04T03:33:07.039Z [brain] tick {"credits":0,"sol":"21379327","usdc":"0"}
+2026-11-04T03:33:17.924Z [strategy] flash attempt {"size_raw":"50000000","ok":false,"phase":"simulate","err":{"InstructionError":[9,{"Custom":1}]}}
+2026-11-04T03:33:19.411Z [bazaar] inventory refreshed {"scanned":12000,"total":112203,"candidates":1083}
+2026-11-04T03:33:19.412Z [brain] x402 model {"url":"https://scvd.store/api/buy/spot_chec","model":"deepseek-v4-1-flash-1017-uncensored"}
+2026-11-04T03:33:19.485Z [brain] x402 model {"url":"https://api.aidress.ai/pay/agent_ott","model":"deepseek-v4-1-flash-1017-uncensored"}
+2026-11-04T03:33:19.928Z [brain] x402 model {"url":"https://agent402.tools/v1/metered/ch","model":"deepseek-v4-1-flash-1017-uncensored"}
+2026-11-04T03:33:28.715Z [brain] decide start {"pass":0}
+2026-11-04T03:33:46.733Z [strategy] flash attempt {"size_raw":"12500000","ok":false,"phase":"simulate","err":{"InstructionError":[6,{"Custom":6030}]}}
+2026-11-04T03:34:03.696Z [strategy] flash attempt {"size_raw":"6300000","ok":false,"phase":"simulate","err":{"InstructionError":[6,{"Custom":6030}]}}
+2026-11-04T03:34:03.696Z [strategy] flash execution {"ok":false,"phase":"simulate","sig":null,"err":{"InstructionError":[6,{"Custom":6030}]},"size_raw":"6300000"}
+2026-11-04T03:34:13.719Z [brain] decide end {"pass":0,"said":"","tools":0,"timeout":true}
+2026-11-04T03:34:13.720Z [brain] decide start {"pass":1}
+{"push":{"key":"800c73a0-98fb-42aa-89e9-75994f0f78fb","ok":true,"status":201},"at":1793763271190}
+2026-11-04T03:34:42.682Z [earn] sold {"mint":"DJDgYkdH4UpW6XPrHqZUDodoAnZPqkoAWyrBQp4pM5yU","part":"152810813511","out":"4223238","ok":true,"sig":"2zNC1y9BYq7iqGu82EhCHicokF4fwshpPMDUpbwRpY9XjMXfgSN61eq6MFfN4Q34SMmHBahKYRnY8vqvd5q62Eju","err":null}
+2026-11-04T03:34:44.245Z [earn] pruned {"dead":1,"left":2}
+2026-11-04T03:34:44.249Z [earn] tick {"mints":3,"sol":"10798005","launched":null,"invented":"probe_w1_63152.mjs"}
+2026-11-04T03:34:58.720Z [brain] decide end {"pass":1,"said":"","tools":0,"timeout":true}
+2026-11-04T03:35:00.497Z [earn] sell failed {"mint":"DJDgYkdH4UpW6XPrHqZUDodoAnZPqkoAWyrBQp4pM5yU","err":"0"}
+2026-11-04T03:35:00.497Z [earn] swept {"mint":{"mint":"DJDgYkdH4UpW6XPrHqZUDodoAnZPqkoAWyrBQp4pM5yU","cost_lamports":18000000,"at":1793763158},"swept":true,"paid":true,"sig":"ZouSEa2pC612oXTNMcxC99ABLEBYbfj5aoMrN6nno74AkGxCQWsvz6sbfgv3F61eDwh3ZfzHREPdLFimL3YGVkG"}
+2026-11-04T03:35:02.567Z [earn] tick {"mints":2,"sol":"10847135","launched":null}
+2026-11-04T03:35:17.341Z [earn] swept {"mint":{"mint":"DJDgYkdH4UpW6XPrHqZUDodoAnZPqkoAWyrBQp4pM5yU","cost_lamports":18000000,"at":1793763158},"swept":true,"paid":true,"sig":"58DdDx3hr9iJ8BwTwu1RSRWMLPJ7TU4h7EmJcEBSRJcnEWv4VJJkoQ3gN4a3ZEUW9m3qqKv2CeqoRys1zwrbdgvj"}
+2026-11-04T03:35:17.492Z [earn] pruned {"dead":1,"left":1}
+2026-11-04T03:35:17.493Z [earn] tick {"mints":2,"sol":"10837135","launched":null}

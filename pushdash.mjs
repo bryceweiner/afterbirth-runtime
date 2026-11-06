@@ -1,0 +1,11 @@
+import fs from "node:fs";
+import { execSync } from "node:child_process";
+const tok = execSync("gh auth token").toString().trim();
+const repo = "staccDOTsol/birth-image-runtime";
+const path = process.argv[2] || "index.html";
+const body = fs.readFileSync(path);
+const b64 = body.toString("base64");
+const url = "https://api.github.com/repos/" + repo + "/contents/" + path;
+const cur = await (await fetch(url, { headers: { authorization: "Bearer " + tok } })).json();
+const res = await (await fetch(url, { method: "PUT", headers: { authorization: "Bearer " + tok, "content-type": "application/json" }, body: JSON.stringify({ message: "publish " + path, content: b64, sha: cur.sha, branch: "main" }) })).json();
+console.log(JSON.stringify({ path, bytes: body.length, commit: res.commit ? res.commit.sha.slice(0, 8) : res.message }));

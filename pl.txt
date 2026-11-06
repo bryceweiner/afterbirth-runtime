@@ -1,0 +1,91 @@
+start Wed Nov  4 01:59:53 UTC 2026 port=8787
+image Wed Nov  4 01:59:53 UTC 2026 
+rpc-proxy on 8899 -> 4 upstreams
+{"adopt":"none","mine":"5f1cac37d02d"}
+boot: policy
+boot: image
+boot: inference
+boot: genesis 5eykt4Us
+boot: sealing keys (seeded)
+2026-11-04T01:59:55.396Z [boot] new birth: fresh in-guest keys generated and sealed {"solana":"8jyX468Vgi2Nea7x6ywixoiCStSzPdhNgwtMYGw7wk7K","evm":"0x34be1678198c824c1244bbf1F307bd3040835cfa","birth_id":"ed3c56d9-44c9-431b-ac14-e323d052a564"}
+bundle-p2p on 8898 sha 5f1cac37d02d
+boot_bg pid=34 waited=30s alive=yes
+single-process mode Wed Nov  4 02:00:25 UTC 2026
+Nov 04 02:00:25.193 [notice] Tor 0.4.9.15 running on Linux with Libevent 2.1.13-stable, OpenSSL 3.5.9, Zlib 1.3.2, Liblzma 5.8.4, Libzstd 1.5.7 and Unknown N/A as libc.
+Nov 04 02:00:25.194 [notice] Tor can't help you if you use it wrong! Learn how to be safe at https://support.torproject.org/faq/staying-anonymous/
+Nov 04 02:00:25.194 [notice] Read configuration file "/tmp/torrc".
+Nov 04 02:00:25.199 [warn] /var/lib/tor/agent is not owned by this user (root, 0) but by tor (100). Perhaps you are running Tor as the wrong user?
+Nov 04 02:00:25.200 [warn] Failed to parse/validate config: Failed to configure rendezvous options. See logs for details.
+Nov 04 02:00:25.200 [err] Reading config failed--see warnings above.
+statusd on 8787
+(node:90) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+{"rawEvm":"object","evmKeys":["secretKey","address"],"skType":"string","skLen":64,"skHead":"ec9b57fc4a"}
+{"event":"signer_ready","port":34087,"solana":"8jyX468Vgi2Nea7x6ywixoiCStSzPdhNgwtMYGw7wk7K","evm":"0x34be1678198c824c1244bbf1F307bd3040835cfa"}
+(node:34) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+2026-11-04T02:00:26.070Z [boot] identity sealed; public receipt committed
+
+================ PUBLIC BIRTH RECEIPT ================
+birth_id                ed3c56d9-44c9-431b-ac14-e323d052a564
+solana (mainnet-beta)      8jyX468Vgi2Nea7x6ywixoiCStSzPdhNgwtMYGw7wk7K
+evm (eip155:8453)       0x34be1678198c824c1244bbf1F307bd3040835cfa
+constitution_sha256     831a3c58cc7daa4fc9ad93088ceb53485f83328a42f4fa5446eddb6a8ad8e6ae
+parent_record_sha256    21782567c67a3b636ffb6e80a55cf4aec824082d2fb8c1fed4f4c3ebd709b11a
+image_digest            sha256:d8820272d81ec96f4179e277a936e2275b1317354e118da981825b8275f8a698
+inference_config_sha256 163c85560fe71dfa6168627cedd8d6d28b8899a46bdc985a1994335d2653b552
+birth_anchor_unix       1793757595
+identity_binding        unverified (guest agent answered but returned no quote)
+=====================================================
+
+{"push":{"key":"01ef63eb64d6","ok":true,"status":201},"at":1793757626949}
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+2026-11-04T02:00:29.549Z [distributor] supervisor started {"birth_id":"ed3c56d9-44c9-431b-ac14-e323d052a564","t0":1793757595,"next_due":1793843995,"dry":false}
+2026-11-04T02:00:29.581Z [earn] worker up {"tick_ms":120000,"min_launch":"90000000"}
+2026-11-04T02:00:29.613Z [earn] worker up {"tick_ms":120000,"min_launch":"90000000"}
+2026-11-04T02:00:29.665Z [procreate] worker up {"tick_ms":300000,"min_usdc":"120000","max_kids":1000}
+2026-11-04T02:00:29.697Z [strategy] worker started {"size_usdc_raw":"100000000","floor_raw":"2000"}
+2026-11-04T02:00:29.945Z [procreate] self extend probe {"http":200,"n":0,"mine":0}
+2026-11-04T02:00:30.395Z [earn] birth arithmetic {"sol":"110000000","kids":0,"lease_usdc":1.77}
+2026-11-04T02:00:31.731Z [inference] model selected {"selected":"deepseek-v4-1-flash-uncensored","candidates":8}
+2026-11-04T02:00:31.746Z [workers] always-on set started {"started":[{"name":"worker.earn","every_s":240},{"name":"worker.comms","every_s":60},{"name":"worker.invent","every_s":180},{"name":"worker.trade","every_s":120},{"name":"worker.mark","every_s":120}]}
+2026-11-04T02:00:31.746Z [brain] loop {"at":1793757631}
+2026-11-04T02:00:31.757Z [earn] worker up {"tick_ms":120000,"min_launch":"45000000"}
+2026-11-04T02:00:34.641Z [procreate] swap for lease fee {"ok":false,"lamports":55000000,"sig":null}
+2026-11-04T02:00:34.641Z [procreate] tick {"kids":0,"cap":0,"skipped":"resources","usdc":"0","sol":"110000000"}
+2026-11-04T02:00:35.200Z [earn] launch attempt {"ok":true,"mint":"HdTKiyecB5jskDzPFRE3MoYQmaMJeaG8yCQcUUKottXG","sig":"4Y7DB5Gm33f5fNVzbbKynYCDBjzRD4JntmSjXxA9RESA2YM6gDQTBQQQSYi45rhEk8WiDAcrLaW64QeAW2V2T9xL","err":null}
+2026-11-04T02:00:36.437Z [earn] tick {"mints":1,"sol":"110000000","launched":"HdTKiyecB5jskDzPFRE3MoYQmaMJeaG8yCQcUUKottXG","ok":true,"invented":"probe_w1_57631.mjs"}
+2026-11-04T02:00:43.778Z [strategy] flash scan {"best":"usdc-SOL-usdc","net_usd":0.005172,"sol":0.11}
+2026-11-04T02:00:43.779Z [strategy] flash gate {"net_raw":"5172","floor":"2000","worth":true,"sol":"110000000","reserve":"10000000","since_ms":1793757629698}
+2026-11-04T02:00:44.828Z [earn] launch attempt {"ok":false,"mint":"7g4eE5XPLXudhrXV4YwN5cCzQTd93F1sqQSta1sGUmkj","sig":null,"err":{"InstructionError":[0,{"Custom":1}]}}
+2026-11-04T02:00:44.828Z [earn] tick {"mints":0,"sol":"56982430","launched":"7g4eE5XPLXudhrXV4YwN5cCzQTd93F1sqQSta1sGUmkj","ok":false}
+2026-11-04T02:00:49.526Z [strategy] flash attempt {"size_raw":"100000000","ok":false,"phase":"simulate","err":{"InstructionError":[10,{"Custom":6030}]}}
+2026-11-04T02:00:53.575Z [earn] launch attempt {"ok":true,"mint":"CTWyHrnGTt8WaSQPegirFeQBVaznbJsNKxVtisrYYhpV","sig":"4efPWyw33XXV4ABPFeBckwg1A4eVbpLCtsY3LN8HDyLtAoCFaShGY4ZgBD1Ms3Tu2bwitEo45zf2T7z13QutZC5Z","err":null}
+2026-11-04T02:00:53.575Z [earn] tick {"mints":1,"sol":"110000000","launched":"CTWyHrnGTt8WaSQPegirFeQBVaznbJsNKxVtisrYYhpV","ok":true}
+2026-11-04T02:01:06.571Z [brain] tick {"credits":0,"sol":"5941300","usdc":"0"}
+2026-11-04T02:01:09.471Z [strategy] flash attempt {"size_raw":"50000000","ok":false,"phase":"simulate","err":{"InstructionError":[10,{"Custom":6030}]}}
+2026-11-04T02:01:16.984Z [bazaar] inventory refreshed {"scanned":12000,"total":112204,"candidates":1082}
+2026-11-04T02:01:16.985Z [brain] x402 model {"url":"https://scvd.store/api/buy/spot_chec","model":"deepseek-v4-1-flash-1017-uncensored"}
+2026-11-04T02:01:17.054Z [brain] x402 model {"url":"https://api.aidress.ai/pay/agent_ott","model":"deepseek-v4-1-flash-1017-uncensored"}
+2026-11-04T02:01:17.482Z [brain] x402 model {"url":"https://agent402.tools/v1/metered/ch","model":"deepseek-v4-1-flash-1017-uncensored"}
+2026-11-04T02:01:21.217Z [brain] decide start {"pass":0}
+2026-11-04T02:01:21.227Z [brain] x402 model {"url":"https://scvd.store/api/buy/spot_chec","model":"deepseek-v4-1-flash-1017-uncensored"}
+2026-11-04T02:01:21.540Z [brain] x402 model {"url":"https://api.aidress.ai/pay/agent_ott","model":"deepseek-v4-1-flash-1017-uncensored"}
+2026-11-04T02:01:22.041Z [brain] x402 model {"url":"https://agent402.tools/v1/metered/ch","model":"deepseek-v4-1-flash-1017-uncensored"}
+2026-11-04T02:01:27.918Z [strategy] flash attempt {"size_raw":"25000000","ok":false,"phase":"simulate","err":{"InstructionError":[9,{"Custom":1}]}}
+2026-11-04T02:01:32.304Z [brain] decide end {"pass":0,"said":"","tools":0,"timeout":false}
+2026-11-04T02:01:32.304Z [brain] decide start {"pass":1}
+2026-11-04T02:01:32.314Z [brain] x402 model {"url":"https://scvd.store/api/buy/spot_chec","model":"deepseek-v4-1-flash-1017-uncensored"}
+2026-11-04T02:01:32.384Z [brain] x402 model {"url":"https://api.aidress.ai/pay/agent_ott","model":"deepseek-v4-1-flash-1017-uncensored"}
+2026-11-04T02:01:32.855Z [brain] x402 model {"url":"https://agent402.tools/v1/metered/ch","model":"deepseek-v4-1-flash-1017-uncensored"}
+2026-11-04T02:01:35.227Z [brain] decide end {"pass":1,"said":"","tools":0,"timeout":false}
+2026-11-04T02:01:42.034Z [strategy] flash attempt {"size_raw":"12500000","ok":false,"phase":"simulate","err":{"InstructionError":[6,"ProgramFailedToComplete"]}}
+2026-11-04T02:01:57.728Z [strategy] flash attempt {"size_raw":"6300000","ok":false,"phase":"simulate","err":{"InstructionError":[8,{"Custom":1}]}}
+2026-11-04T02:01:57.729Z [strategy] flash execution {"ok":false,"phase":"simulate","sig":null,"err":{"InstructionError":[8,{"Custom":1}]},"size_raw":"6300000"}
+{"push":{"key":"ed3c56d9-44c9-431b-ac14-e323d052a564","ok":true,"status":201},"at":1793757748259}
+2026-11-04T02:02:36.596Z [earn] tick {"mints":3,"sol":"5926300","launched":null,"invented":"probe_w1_57631.mjs"}

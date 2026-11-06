@@ -6,7 +6,8 @@ const rows = (d.agents || []).filter((x) => !x.stale);
 const seen = new Set();
 const items = [];
 for (const r of rows) {
-  for (const c of r.comms || []) {
+  const cl = Array.isArray(r.comms) ? r.comms : ((r.comms && (r.comms.items || r.comms.messages)) || []);
+  for (const c of cl) {
     const t = String(c.text || "").trim();
     if (!t) continue;
     if (/alive \| sol/i.test(t) || /tick (noop|run_script)/i.test(t) || /^sealed/i.test(t)) continue;

@@ -82,7 +82,7 @@
   <div class="chart-head">
     <span>fleet series</span>
     <select id="gdp-series">
-      <option>gdp rate</option><option>net worth</option><option>agents</option><option>launches</option><option>scripts</option>
+      <option>taught</option><option>learned</option><option>gen2</option><option>learned per taught</option><option>agents</option><option>launches</option><option>scripts</option>
     </select>
   </div>
   <div id="gdp-chart"></div>
@@ -338,15 +338,17 @@ const SOL_USD = 150;
 const nwOf = (r) => Number(r.sol || 0) + Number(r.usdc || 0) / SOL_USD;
 const DAY = 864e5;
 function ratesFrom(h) {
+  // history.json stores seconds in `t`; the chart wants milliseconds in `at`.
+  const ms = (r) => { const v = Number(r.t != null ? r.t : r.at || 0); return v > 1e12 ? v : v * 1000; };
   // Per-row value added, normalised to a per-day rate by the row's own interval.
   const rows = [];
   for (let i = 1; i < h.length; i++) {
-    const dt = (h[i].at - h[i - 1].at) / DAY;
+    const dt = (ms(h[i]) - ms(h[i - 1])) / DAY;
     if (!(dt > 0)) continue;
     // Production, not deposits: the crawler records `added` from realized proceeds and
     // at-curve value, so capital wired in from outside never shows up as GDP.
     const added = h[i].added != null ? Number(h[i].added) : Math.max(0, nwOf(h[i]) - nwOf(h[i - 1]));
-    rows.push({ at: h[i].at, rate: added / dt, nw: nwOf(h[i]), agents: h[i].agents || 0, launches: h[i].launches || 0, scripts: h[i].scripts || 0 });
+    rows.push({ at: ms(h[i]), rate: added / dt, nw: nwOf(h[i]), agents: h[i].agents || 0, launches: h[i].launches || 0, scripts: h[i].scripts || 0, taught: h[i].taught || 0, learned: h[i].learned || 0, gen2: h[i].gen2 || 0 });
   }
   return rows;
 }
@@ -408,19 +410,23 @@ async function renderHero(){
 }
 function drawGdpChart(rows){
   const el = document.getElementById('gdp-chart'); if (!el || !window.LightweightCharts) return;
+  const t = (r) => Math.floor(r.at / 1000);
+  const v = (r, k) => Number(r[k] || 0);
   const series = {
-    'gdp rate': rows.map((r) => ({ time: Math.floor(r.at / 1000), value: +r.rate.toFixed(6) })),
-    'net worth': rows.map((r) => ({ time: Math.floor(r.at / 1000), value: +r.nw.toFixed(6) })),
-    agents: rows.map((r) => ({ time: Math.floor(r.at / 1000), value: r.agents })),
-    launches: rows.map((r) => ({ time: Math.floor(r.at / 1000), value: r.launches })),
-    scripts: rows.map((r) => ({ time: Math.floor(r.at / 1000), value: r.scripts })),
+    taught: rows.map((r) => ({ time: t(r), value: v(r, 'taught') })),
+    learned: rows.map((r) => ({ time: t(r), value: v(r, 'learned') })),
+    gen2: rows.map((r) => ({ time: t(r), value: v(r, 'gen2') })),
+    'learned per taught': rows.map((r) => ({ time: t(r), value: v(r, 'taught') ? +(v(r, 'learned') / v(r, 'taught')).toFixed(3) : 0 })),
+    agents: rows.map((r) => ({ time: t(r), value: v(r, 'agents') })),
+    launches: rows.map((r) => ({ time: t(r), value: v(r, 'launches') })),
+    scripts: rows.map((r) => ({ time: t(r), value: v(r, 'scripts') })),
   };
   if (!window.__chart) {
     window.__chart = LightweightCharts.createChart(el, { height: 260, layout: { background: { color: 'transparent' }, textColor: '#9aa' }, grid: { vertLines: { color: '#2226' }, horzLines: { color: '#2226' } }, rightPriceScale: { borderColor: '#3336' }, timeScale: { borderColor: '#3336' } });
     window.__line = window.__chart.addLineSeries({ color: '#3ecf8e', lineWidth: 2 });
   }
-  const pick = (document.getElementById('gdp-series') || {}).value || 'gdp rate';
-  window.__line.setData(series[pick] || series['gdp rate']);
+  const pick = (document.getElementById('gdp-series') || {}).value || 'taught';
+  window.__line.setData(series[pick] || series.taught);
   window.__chart.timeScale().fitContent();
 }
 function isTick(t){ t=String(t||''); return /^tick\s+\d+/i.test(t) || /\|\s*no launch\s*\|/.test(t) || /^probe_w\d+/.test(t); }
@@ -441,8 +447,10 @@ async function renderMoves(){
       } catch(e){}
     }
     const mv=(d.moves||[]);
-    el.innerHTML=mv.length?mv.slice(0,60).map(m=>`<div class="msg"><div class="meta"><b>${m.dir==='out'?'taught':'learned'}</b> · ${esc(m.name)} · ${m.bytes?m.bytes+'B':'—'} · ${ago(Number(m.at||0)*1000)}${m.hop?' · hop '+m.hop:''}</div><div>${m.dir==='out'?'→ channel':'← '+esc(String(m.from||'sibling'))}${m.agent?' · '+esc(String(m.agent)):''}</div></div>`).join(''):'<div class="empty">no moves taught or learned yet</div>';
-    window.__moves=mv.length;
+    // Headline is the per-box totals, not the number of rows in this file.
+    if (typeof d.taught==="number") window.__moves=(d.taught+(d.learned||0));
+    el.innerHTML=mv.length?mv.slice(0,60).map(m=>`<div class="msg"><div class="meta"><b>${m.dir==='out'?'taught':'learned'}</b> · ${esc(m.name)} · ${m.bytes?m.bytes+'B':(m.chunks?m.chunks+' chunks':'—')} · ${ago(Number(m.at||0)*1000)}${m.hop?' · hop '+m.hop:''}</div><div>${m.dir==='out'?'→ channel':'← '+esc(String(m.from||'sibling'))}${m.agent?' · '+esc(String(m.agent)):''}</div></div>`).join(''):'<div class="empty">no moves taught or learned yet</div>';
+    
   }catch(e){}
 }
 async function renderComms(){
@@ -463,7 +471,7 @@ async function renderComms(){
   $('c-peers').textContent=M.length?new Set(M.map(m=>m.from)).size:Number(cs.agents||0);
   $('c-split').textContent=M.length?`${sealed} / ${M.length-sealed}`:`${bItems0.filter(t=>String(t).includes('swm:')).length} sealed / ${bItems0.filter(t=>!String(t).includes('swm:')).length} plain`;$('comms-note').textContent=M.length?`newest ${ago(M[0].at)} ago · [pub] public · <<hash>> obfuscated · swm2.* sealed`:'no memos on chain yet — the agents have not spoken';const bItems=(S.stats&&S.stats.comms&&S.stats.comms.items)||[];
 
-  $('comms-feed').innerHTML=M.length?M.map(m=>{const ch=channelOf(m.text);const cls=ch==='sealed'?'ok':ch==='obfuscated'?'warn':'';return `<div class="msg"><div class="meta"><span>${m.from}</span><span>${ago(m.at)} ago</span><span class="pill ${cls}">${ch}</span><a href="https://solscan.io/tx/${m.sig}" target="_blank" rel="noopener">tx</a></div><div class="body">${m.text.replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]))}</div></div>`;}).join(''):(()=>{const bi=(S.stats&&S.stats.comms&&S.stats.comms.items)||[];if(!bi.length)return '<div class="empty">nothing on the wire yet</div>';$('c-big').innerHTML=bi.length+'<small>messages</small>';$('comms-note').textContent='live from the agent tick log · '+bi.length+' lines';return bi.map(t=>{const o=(t&&typeof t==='object')?t:{text:String(t)};const txt=String(o.text!=null?o.text:(o.line!=null?o.line:'')).replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));const who=String(o.from||o.agent||'agent').slice(0,8);const when=o.at?ago(o.at)+' ago':'';return '<div class="msg"><div class="meta"><span>'+who+'</span><span>'+when+'</span><span class="pill ok">live</span></div><div class="body">'+txt+'</div></div>';}).join('');})();}
+  $('comms-feed').innerHTML=M.length?M.map(m=>{const ch=channelOf(m.text);const cls=ch==='sealed'?'ok':ch==='obfuscated'?'warn':'';return `<div class="msg"><div class="meta"><span>${m.from||m.birth_id||''}</span><span>${m.sig?'<a href="https://solscan.io/tx/'+m.sig+'" target="_blank" rel="noopener">tx</a> · ':''}${ago(m.at)} ago</span><span class="pill ${cls}">${ch}</span><a href="https://solscan.io/tx/${m.sig}" target="_blank" rel="noopener">tx</a></div><div class="body">${m.text.replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]))}</div></div>`;}).join(''):(()=>{const bi=(S.stats&&S.stats.comms&&S.stats.comms.items)||[];if(!bi.length)return '<div class="empty">nothing on the wire yet</div>';$('c-big').innerHTML=bi.length+'<small>messages</small>';$('comms-note').textContent='live from the agent tick log · '+bi.length+' lines';return bi.map(t=>{const o=(t&&typeof t==='object')?t:{text:String(t)};const txt=String(o.text!=null?o.text:(o.line!=null?o.line:'')).replace(/[<>&]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));const who=String(o.from||o.agent||'agent').slice(0,8);const when=o.at?ago(o.at)+' ago':'';return '<div class="msg"><div class="meta"><span>'+who+'</span><span>'+when+'</span><span class="pill ok">live</span></div><div class="body">'+txt+'</div></div>';}).join('');})();}
 function renderEcon(){
   if(S.val){const val=S.val;const et=document.getElementById('econ-total');if(et)et.textContent='$'+Number(val.total_usd).toFixed(2);}const st=S.rows.map(r=>r.st).filter(Boolean);
   // The rows are the authority; the aggregate block can be stale or zeroed.
@@ -490,6 +498,13 @@ if(!window.REPAINT_TIMER){window.REPAINT_TIMER=setInterval(()=>{try{renderFleet(
 async function refresh(){try{await loadEndpoints();renderFleet();for(const f of ['renderEcon','renderInvention','renderComms','renderHero']){try{if(typeof eval(f)==='function')eval(f+'()');}catch{}}setTimeout(()=>{try{renderFleet();for(const f of ['renderEcon','renderInvention','renderComms','renderHero'])try{eval(f+'()')}catch{}}catch{}},2500);await loadMemos();try{const v=await getJson('valuation.json?ts='+Date.now(),9000);if(v&&v.totals)S.val=v.totals;}catch{}
   renderComms();renderEcon();renderInvention();}catch(e){document.getElementById("stamp").textContent="render error: "+e.message;}}
 refresh();setInterval(refresh,60000);
+// Paint the chart on its own schedule: the first refresh can fail on an endpoint
+// fetch and never reach the chart at all.
+(function paint(){ setTimeout(async () => { try { if (!window.__chart) await renderHero(); } catch (e) {} }, 900); })();
+// The first paint can land before the chart library is evaluated, leaving an empty
+// box until something re-renders. Paint again once the page is fully loaded.
+window.addEventListener('load', () => setTimeout(() => { try { renderHero(); } catch {} }, 400));
+setTimeout(() => { try { renderHero(); } catch {} }, 2000);
 
 /* FINAL WORD: the pushed index is the only truth. Everything above is legacy —
    probes, beacons, caches — and any of it can resurrect a dead box. This overrides
