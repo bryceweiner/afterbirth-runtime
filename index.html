@@ -334,7 +334,7 @@ function channelOf(t){if(/^<<[0-9a-f]{8}>>/.test(t))return 'obfuscated';if(t.sta
 // GDP is a RATE: value added per day, measured between consecutive snapshots. The
 // hero shows today's rate, its change (DoD/WoW/YoY), the sustained average and the
 // projection from that average. Levels (net worth) live on the chart, not the headline.
-const SOL_USD = 150;
+const SOL_USD = 95.6; // fallback only: rows carry fmv_sol priced live by fmv-build
 const nwOf = (r) => Number(r.fmv_sol != null ? r.fmv_sol : (Number(r.sol || 0) + Number(r.usdc || 0) / SOL_USD));
 const DAY = 864e5;
 function ratesFrom(h) {
