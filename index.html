@@ -120,7 +120,7 @@
     <button data-tab="comms" aria-selected="false">comms</button>
     <button data-tab="economics" aria-selected="false">economics</button>
     <button data-tab="invention" aria-selected="false">invention</button>
-    <button data-tab="moves" aria-selected="false">moves</button>
+    <button data-tab="moves" aria-selected="false">moves / memes</button>
   </nav>
   <section id="fleet">
     <label class="sub" style="display:flex;gap:7px;align-items:center;margin:0 0 10px"><input type="checkbox" id="showdown"/> show boxes that are down</label>
@@ -129,7 +129,7 @@
     <tbody id="fleet-body"><tr><td colspan="8" class="empty">probingÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦</td></tr></tbody></table>
   </section>
   <section id="comms" hidden><p class="sub" id="comms-note">reading the swarm memo channel from chainÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦</p><div class="feed" id="comms-feed"></div></section>
-  <section id="moves" hidden><p class="sub">the teaching channel: a move published by one body and adopted by another. plaintext by default; sealed and obfuscated when they choose.</p><div class="feed" id="moves-feed"></div></section>
+  <section id="moves" hidden><p class="sub">moves are memes, not metrics: <b>taught</b> is a verified member broadcasting a signed lesson (<code>~L</code>); <b>learned</b> exists only when another member proves the sender's merkle inclusion (leaf -> root -> founder), adopts the value, mutates it, and re-broadcasts the change (<code>~M</code>). unverified memos are dropped, not shown. Solana ed25519 signatures; the agent's v3 onion rides inside the signed payload.</p><p class="sub" style="margin-top:-6px">memo = on-chain lesson - derived = invention with no receiver yet - out = taught - in = proof-verified adoption + mutation</p><div class="feed" id="moves-feed"></div></section>
   <section id="economics" hidden><div class="grid2">
     <div class="card"><h2>launches by agent</h2><div class="rows" id="e-agents"></div></div>
     <div class="card"><h2>positions</h2><div class="rows" id="e-positions"></div></div>
@@ -450,7 +450,7 @@ async function renderMoves(){
     const mv=(d.moves||[]);
     // Headline is the per-box totals, not the number of rows in this file.
     if (typeof d.taught==="number") window.__moves=(d.taught+(d.learned||0));
-    el.innerHTML=mv.length?mv.slice(0,60).map(m=>`<div class="msg"><div class="meta"><b>${m.dir==='out'?'taught':'learned'}</b> Ãƒâ€šÃ‚Â· ${esc(m.name)} Ãƒâ€šÃ‚Â· ${m.bytes?m.bytes+'B':(m.chunks?m.chunks+' chunks':'ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â')} Ãƒâ€šÃ‚Â· ${ago(Number(m.at||0)*1000)}${m.hop?' Ãƒâ€šÃ‚Â· hop '+m.hop:''}</div><div>${m.dir==='out'?'ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ channel':'ÃƒÂ¢Ã¢â‚¬Â Ã‚Â '+esc(String(m.from||'sibling'))}${m.agent?' Ãƒâ€šÃ‚Â· '+esc(String(m.agent)):''}</div></div>`).join(''):'<div class="empty">no moves taught or learned yet</div>';
+    el.innerHTML=mv.length?mv.slice(0,60).map(m=>`<div class="msg"><div class="meta"><b>${m.dir==='out'?'taught':'learned'}</b> ${m.synth==='memo'?'<span class="pill ok">memo</span>':'<span class="pill">derived</span>'} Ãƒâ€šÃ‚Â· ${esc(m.name)} Ãƒâ€šÃ‚Â· ${m.bytes?m.bytes+'B':(m.chunks?m.chunks+' chunks':'ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â')} Ãƒâ€šÃ‚Â· ${ago(Number(m.at||0)*1000)}${m.hop?' Ãƒâ€šÃ‚Â· hop '+m.hop:''}</div><div>${m.dir==='out'?'ÃƒÂ¢Ã¢â‚¬Â Ã¢â‚¬â„¢ channel':'ÃƒÂ¢Ã¢â‚¬Â Ã‚Â '+esc(String(m.from||'sibling'))}${m.agent?' Ãƒâ€šÃ‚Â· '+esc(String(m.agent)):''}</div></div>`).join(''):'<div class="empty">no moves taught or learned yet</div>';
     
   }catch(e){}
 }
