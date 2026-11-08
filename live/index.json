@@ -1,6 +1,6 @@
 {
- "at": 1794117630,
- "count": 187,
+ "at": 1794117933,
+ "count": 190,
  "fresh": 9,
  "source": "status",
  "agents": [
@@ -172,7 +172,7 @@
     "meaning": "digest of the measured core files this guest is running"
    },
    "identity_binding": "identity_binding_unverified",
-   "updated_at": 1794117627,
+   "updated_at": 1794117929,
    "distribution": {
     "next_due_unix": 1794194198,
     "next_due_epoch": 1,
@@ -190,7 +190,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1794117627,
+     "at": 1794117926,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -224,8 +224,8 @@
       }
      },
      "solana": {
-      "lamports": 11978728,
-      "sol": 0.011978728
+      "lamports": 11943728,
+      "sol": 0.011943728
      },
      "total_native_usd_estimate": 0
     }
@@ -237,7 +237,7 @@
     "sells": 50,
     "realized_lamports": "115471493",
     "last_sell_at": 1794111507,
-    "updated_at": 1794117514
+    "updated_at": 1794117857
    },
    "parent_birth_id": "fcd367d5-4bfc-43d7-b036-bd2d8d59d95a",
    "generation": 2,
@@ -348,166 +348,163 @@
     }
    ],
    "invention": {
-    "scripts": 91,
+    "scripts": 96,
     "items": [
+     "find_pool_scan.mjs",
+     "probe_sign_pool2.mjs",
+     "probe_sign_pool.mjs",
+     "probe_state2.mjs",
+     "runway-decider_17655.mjs",
      "probe_sell_path.mjs",
      "find_pool3.mjs",
      "probe_curve_fo.mjs",
      "probe_hold.mjs",
      "find_pool2.mjs",
      "find_pumpswap_pool.mjs",
-     "probe_pool_owner.mjs",
-     "find_pool_via_holders.mjs",
-     "locate_held.mjs",
-     "find_curve.mjs",
-     "find_pools_v2.mjs",
-     "status-strategy-decider_17094.mjs"
+     "probe_pool_owner.mjs"
     ],
-    "last_at": 1794117615
+    "last_at": 1794117829
    },
    "journal": {
-    "head": "16f8b28777c81986cf1ce09bd66cc8cd2e146e2656fdcd8efb1ea308bf3f5144",
-    "seq": 817
+    "head": "4f1ef0a6cb363d5e9bd35367319cc27e764581a526f6b5944e4cc952a9ee1a75",
+    "seq": 852
    },
    "components": {
     "signer": {
      "alive": true,
-     "pid": 9788,
+     "pid": 28512,
      "restarts": 1
     },
     "distribution": {
      "alive": true,
-     "pid": 9799,
+     "pid": 28523,
      "restarts": 1
     },
     "identity": {
      "alive": true,
-     "pid": 9812,
+     "pid": 28534,
      "restarts": 1
     },
     "brain": {
      "alive": true,
-     "pid": 9823,
+     "pid": 28545,
      "restarts": 1
     },
     "strategy": {
      "alive": true,
-     "pid": 9928,
-     "restarts": 4
+     "pid": 28591,
+     "restarts": 2
     },
     "loops": {
      "alive": true,
-     "pid": 9878,
+     "pid": 28602,
      "restarts": 2
     },
     "procreate": {
      "alive": true,
-     "pid": 9891,
+     "pid": 28613,
      "restarts": 2
     }
    },
-   "served_at": 1794117629,
+   "served_at": 1794117934,
    "endpoint": "http://107.191.39.105/status",
    "src": "http://107.191.39.105",
-   "at": 1794117630,
+   "at": 1794117933,
    "stale": false,
    "inference": {
     "provider": "venice",
     "model": "deepseek-v4-1-flash-1017-uncensored",
     "mode": "external_paid_abliterated",
-    "credits_usd": 4.34008478,
+    "credits_usd": 4.30789263,
     "balance_http": 200,
     "admission_floor_usd": 0.1,
     "wallet_usdc_raw": "216822",
-    "wallet_sol_raw": "12043728",
+    "wallet_sol_raw": "11988728",
     "state": "ready"
    },
    "last_decision": {
-    "at": 1794117323,
+    "at": 1794117637,
     "tools": [
-     "run_script"
+     "pump_collect"
     ],
-    "cost_usd": 0.004769,
+    "cost_usd": 0.003626,
     "content": null,
     "error": null,
     "usage": {
-     "prompt_tokens": 10200,
-     "completion_tokens": 1687,
-     "total_tokens": 11887,
+     "prompt_tokens": 9070,
+     "completion_tokens": 1104,
+     "total_tokens": 10174,
      "prompt_tokens_details": {
       "cached_tokens": 2560
      },
      "cache_read_input_tokens": 2560,
      "completion_tokens_details": {
-      "reasoning_tokens": 1274
+      "reasoning_tokens": 1035
      }
     },
     "call_results": [
      {
-      "name": "run_script",
+      "name": "pump_collect",
       "result": {
-       "ok": true,
-       "file": "/var/lib/agent/var/lib/agent/strategy/scripts/find_pumpswap_pool.mjs",
-       "stdout": "off 43 count 0 {\"code\":-32600,\"message\":\"Too many accounts requested (10000001 pubkeys), Please use getProgramAccountsV2 with paginatio\noff 75 count 0 {\"code\":-32600,\"message\":\"Too many accounts requested (10000001 pubkeys), Please use getProgramAccountsV2 with paginatio\n"
+       "swept": {
+        "ok": false,
+        "at": 1794117637,
+        "mint": "5uUtzrJCkPhDYs2nKVEKeY6duNzfyRQ696nu3i6qpump",
+        "sim_err": {
+         "InstructionError": [
+          0,
+          {
+           "Custom": 3012
+          }
+         ]
+        },
+        "sim_logs": [
+         "Program 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P invoke [1]",
+         "Program log: Instruction: SweepCreatorFee",
+         "Program log: AnchorError caused by account: bonding_curve. Error Code: AccountNotInitialized. Error Number: 3012. Error Message: The program expected this account to be already initialized.",
+         "Program 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P consumed 8192 of 1400000 compute units",
+         "Program 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P failed: custom program error: 0xbc4"
+        ]
+       },
+       "paid": {
+        "ok": true,
+        "at": 1794117637,
+        "creator": "A3X1DhkUTCVzUA1TriLZQiSKLJYBemaUQoLMJr3wby3M",
+        "vault": "6FuZFuVdRMM8pHoneGzweuoBasPZeEWuup1A6LQXxKiE",
+        "sim_err": null,
+        "sim_logs": [
+         "Program 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P invoke [1]",
+         "Program log: Instruction: CollectCreatorFee",
+         "Program log: No creator fee to collect",
+         "Program 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P consumed 5861 of 1400000 compute units",
+         "Program 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P success"
+        ],
+        "signature": "vqidVY7f3oeqbJpBGrEtehmy1hwoQWg18vihkKrhmvC2jB8uhYogNJUCEiYEt7M8MpHMRgnwTn9PbGqiSoayess",
+        "status": "finalized",
+        "err": null
+       }
       }
      }
     ]
    },
    "funding": {
-    "sol_raw": "12043728",
+    "sol_raw": "11988728",
     "usdc_raw": "216822",
     "ledger_totals": {
-     "native:SOL": "12043728",
+     "native:SOL": "11988728",
      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "216822",
      "t22:5uUtzrJCkPhDYs2nKVEKeY6duNzfyRQ696nu3i6qpump": "170000000"
     },
     "spendable": {
-     "native:SOL": "7043728",
+     "native:SOL": "6988728",
      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "216822",
      "t22:5uUtzrJCkPhDYs2nKVEKeY6duNzfyRQ696nu3i6qpump": "170000000"
     }
    },
    "strategy": {
-    "last_scan_at": 1794117205,
-    "sol_raw": "11978728",
+    "last_scan_at": 1794117850,
+    "sol_raw": "11943728",
     "flash": [
-     {
-      "at": 1794112663,
-      "phase": "simulate",
-      "candidate": "usdc-SOL-usdc",
-      "plan_hash": "c1721b9a5ccd10663cf344d12ab8ff014310fb8e8a83b84692ffc2d1218c4b94",
-      "err": {
-       "InstructionError": [
-        10,
-        {
-         "Custom": 1
-        }
-       ]
-      },
-      "logs": [
-       "Program ZERor4xhbUycZ6gb9ntrhqscUcZmAbQDjEAtCf4hbZY consumed 27710 of 1248194 compute units",
-       "Program ZERor4xhbUycZ6gb9ntrhqscUcZmAbQDjEAtCf4hbZY success",
-       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 invoke [2]",
-       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 consumed 91 of 1218608 compute units",
-       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 success",
-       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 consumed 34289 of 1252190 compute units",
-       "Program return: JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 iL3eBQAAAAA=",
-       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 success",
-       "Program jupgfSgfuAXv4B6R2Uxu85Z1qdzgju79s6MfZekN6XS invoke [1]",
-       "Program log: Instruction: FlashloanPayback",
-       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC invoke [2]",
-       "Program log: Instruction: PreOperate",
-       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC consumed 4385 of 1207207 compute units",
-       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC success",
-       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
-       "Program log: Error: insufficient funds",
-       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 192 of 1200128 compute units",
-       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA failed: custom program error: 0x1",
-       "Program jupgfSgfuAXv4B6R2Uxu85Z1qdzgju79s6MfZekN6XS consumed 17965 of 1217901 compute units",
-       "Program jupgfSgfuAXv4B6R2Uxu85Z1qdzgju79s6MfZekN6XS failed: custom program error: 0x1"
-      ],
-      "bytes": 1442
-     },
      {
       "at": 1794117242,
       "phase": "simulate",
@@ -581,15 +578,52 @@
        "Program jupgfSgfuAXv4B6R2Uxu85Z1qdzgju79s6MfZekN6XS failed: custom program error: 0x1"
       ],
       "bytes": 1410
+     },
+     {
+      "at": 1794117889,
+      "phase": "simulate",
+      "candidate": "usdc-SOL-usdc",
+      "plan_hash": "b28288e7453724a632d6f4e263a88c057d5a427d188e499a149ff587dbcfbcd6",
+      "err": {
+       "InstructionError": [
+        5,
+        {
+         "Custom": 6030
+        }
+       ]
+      },
+      "logs": [
+       "Program 11111111111111111111111111111111 invoke [2]",
+       "Program 11111111111111111111111111111111 success",
+       "Program log: Initialize the associated token account",
+       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 37 of 1325038 compute units",
+       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 229 of 1322577 compute units",
+       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+       "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL consumed 16413 of 1338478 compute units",
+       "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL success",
+       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 invoke [1]",
+       "Program log: Instruction: Route",
+       "Program 3TK9D8aoBFYjYZtKCjciPrVrRStsnvo7KmpcJqDavpaU invoke [2]",
+       "Program log: Instruction: SwapV3",
+       "Program log: AnchorError thrown in src/instructions/swap_v3.rs:3177. Error Code: NotSupport5. Error Number: 6030. Error Message: Not Support.",
+       "Program 3TK9D8aoBFYjYZtKCjciPrVrRStsnvo7KmpcJqDavpaU consumed 39817 of 1318245 compute units",
+       "Program 3TK9D8aoBFYjYZtKCjciPrVrRStsnvo7KmpcJqDavpaU failed: custom program error: 0x178e",
+       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 consumed 43637 of 1322065 compute units",
+       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 failed: custom program error: 0x178e"
+      ],
+      "bytes": 1221
      }
     ],
     "pump_positions": 0,
-    "updated_at": 1794117607
+    "updated_at": 1794117929
    },
-   "sol": 0.012043728,
+   "sol": 0.011988728,
    "usdc": 0.216822,
-   "fmv_sol": 0.14899688545999998,
-   "sellable_sol": 0.002433,
+   "fmv_sol": 0.14896188545999997,
+   "sellable_sol": 0.002363,
    "rent_sol": 0.00297688,
    "token_book_sol": 0.132596
   },
@@ -606,7 +640,7 @@
     "meaning": "digest of the measured core files this guest is running"
    },
    "identity_binding": "identity_binding_unverified",
-   "updated_at": 1794117618,
+   "updated_at": 1794117933,
    "distribution": {
     "next_due_unix": 1794194215,
     "next_due_epoch": 1,
@@ -624,7 +658,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1794117618,
+     "at": 1794117929,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -658,8 +692,8 @@
       }
      },
      "solana": {
-      "lamports": 22699229,
-      "sol": 0.022699229
+      "lamports": 22609229,
+      "sol": 0.022609229
      },
      "total_native_usd_estimate": 0
     }
@@ -671,7 +705,7 @@
     "sells": 50,
     "realized_lamports": "114412401",
     "last_sell_at": 1794111378,
-    "updated_at": 1794117571
+    "updated_at": 1794117887
    },
    "parent_birth_id": "fcd367d5-4bfc-43d7-b036-bd2d8d59d95a",
    "generation": 2,
@@ -720,8 +754,11 @@
    ],
    "children": [],
    "invention": {
-    "scripts": 98,
+    "scripts": 100,
     "items": [
+     "find_quote_pool_vault.mjs",
+     "probe_quote_chain.mjs",
+     "inspect_sdk.mjs",
      "prep_launch.mjs",
      "locate_liq.mjs",
      "state_audit.mjs",
@@ -730,193 +767,118 @@
      "probe_launch_api.mjs",
      "probe_cfg.mjs",
      "diag2.mjs",
-     "find_sdk.mjs",
-     "probe_sdk.mjs",
-     "diag.mjs",
-     "probe_utz_pool.mjs"
+     "find_sdk.mjs"
     ],
-    "last_at": 1794117624
+    "last_at": 1794117828
    },
    "journal": {
-    "head": "68b8e75efd7433b7eab0555a5a6c2f52bdca1164244d7927682b418aa2d94129",
-    "seq": 822
+    "head": "667df3c7c5c2c8cf6d82d6f190abc288d4506d94e2ef49fb48005d790e0ae645",
+    "seq": 863
    },
    "components": {
     "signer": {
      "alive": true,
-     "pid": 10413,
+     "pid": 24540,
      "restarts": 1
     },
     "distribution": {
      "alive": true,
-     "pid": 10425,
+     "pid": 24551,
      "restarts": 1
     },
     "identity": {
      "alive": true,
-     "pid": 10437,
+     "pid": 24562,
      "restarts": 1
     },
     "brain": {
      "alive": true,
-     "pid": 10448,
+     "pid": 24573,
      "restarts": 1
     },
     "strategy": {
      "alive": true,
-     "pid": 10492,
-     "restarts": 2
+     "pid": 24617,
+     "ts": 1794117933
     },
     "loops": {
      "alive": true,
-     "pid": 10512,
+     "pid": 24628,
      "restarts": 2
     },
     "procreate": {
      "alive": true,
-     "pid": 10532,
+     "pid": 24639,
      "restarts": 2
     }
    },
-   "served_at": 1794117630,
+   "served_at": 1794117934,
    "endpoint": "http://45.76.13.155/status",
    "src": "http://45.76.13.155",
-   "at": 1794117630,
+   "at": 1794117933,
    "stale": false,
    "inference": {
     "provider": "venice",
     "model": "deepseek-v4-1-flash-1017-uncensored",
     "mode": "external_paid_abliterated",
-    "credits_usd": 4.34386087,
+    "credits_usd": 4.30605867,
     "balance_http": 200,
     "admission_floor_usd": 0.1,
     "wallet_usdc_raw": "1000000",
-    "wallet_sol_raw": "22799229",
+    "wallet_sol_raw": "22739229",
     "state": "ready"
    },
    "last_decision": {
-    "at": 1794117387,
+    "at": 1794117689,
     "tools": [
-     "pump_exit"
+     "run_script"
     ],
-    "cost_usd": 0.004391,
+    "cost_usd": 0.006453,
     "content": null,
     "error": null,
     "usage": {
-     "prompt_tokens": 12179,
-     "completion_tokens": 906,
-     "total_tokens": 13085,
+     "prompt_tokens": 10717,
+     "completion_tokens": 2834,
+     "total_tokens": 13551,
      "prompt_tokens_details": {
       "cached_tokens": 2560
      },
      "cache_read_input_tokens": 2560,
      "completion_tokens_details": {
-      "reasoning_tokens": 799
+      "reasoning_tokens": 2533
      }
     },
     "call_results": [
      {
-      "name": "pump_exit",
+      "name": "run_script",
       "result": {
-       "error": "Bonding curve account not found: 3jjyU72yNrNd1FarYcCstPeDofiqp2W1GW6VMz1fJVjt"
+       "ok": true,
+       "file": "/var/lib/agent/var/lib/agent/strategy/scripts/inspect_sdk.mjs",
+       "stdout": "DIR /var/lib/agent/var/lib/agent/strategy [\"brain-invent.json\",\"directives.json\",\"flashloan.json\",\"inference-ledger.json\",\"inference-selection.json\",\"launch-plan.json\",\"launches.json\",\"providers.json\",\"pump.json\",\"scripts\",\"sells.json\"]\nERR /var/lib/agent/var/lib/agent ERR_ACCESS_DENIED\nERR /var/lib/agent ERR_ACCESS_DENIED\nSCRIPTS [\"assess_utz.mjs\",\"check_holdings.mjs\",\"curve.mjs\",\"curve_check.mjs\",\"decode_pool.mjs\",\"derive_pool.mjs\",\"dex_utz.mjs\",\"diag.mjs\",\"diag2.mjs\",\"diag_utz.mjs\",\"edge-scan_14200.mjs\",\"find_curve_utz.mjs\",\"find_launcher.mjs\",\"find_pool.mjs\",\"find_pool_owner.mjs\",\"find_pool_utz.mjs\",\"find_pool_via_vault.mjs\",\"find_quote_pool.mjs\",\"find_sdk.mjs\",\"find_t22_pool.mjs\",\"find_utz_market.mjs\",\"find_utz_pool.mjs\",\"find_utz_pool2.mjs\",\"findpool.mjs\",\"findpool2.mjs\",\"fundprobe.mjs\",\"hunt.mjs\",\"id_amm.mjs\",\"inspect_pump_sdk.mjs\",\"inspect_sdk.mjs\",\"jup_quote_utz.mjs\",\"launchdiag.mjs\",\"locate_curve3.mjs\",\"locate_liq.mjs\",\"locate_t22.mjs\",\"locate_utz.mjs\",\"pool_recon.mjs\",\"pool_value.mjs\",\"prep_launch.mjs\",\"price_utz.mjs\",\"probe.mjs\",\"probe2.mjs\",\"probe3.mjs\",\"probe4.mjs\",\"probe5.mjs\",\"probe_amm.mjs\",\"probe_cfg.mjs\",\"probe_createv2.mjs\",\"probe_curve_fo.mjs\",\"probe_curve_owner.mjs\",\"probe_env_pool.mjs\",\"probe_helpers.mjs\",\"probe_hold.mjs\",\"probe_launch_api.mjs\",\"probe_pool2.mjs\",\"probe_pool_utz.mjs\",\"probe_quote.mjs\",\"probe_quote_chain.mjs\",\"probe_quote_curve.mjs\",\"probe_sdk.mjs\",\"probe_signing.mjs\",\"probe_t22.mjs\",\"probe_utz2.mjs\",\"probe_utz_pool.mjs\",\"probe_utz_state.mjs\",\"probe_value.mjs\",\"probe_w101_14619.mjs\",\"probe_w106_14799.mjs\",\"probe_w109_14979.mjs\",\"probe_w112_15159.mjs\",\"probe_w116_15339.mjs\",\"probe_w119_15519.mjs\",\"probe_w122_15699.mjs\",\"probe_w126_15879.mjs\",\"probe_w130_16079.mjs\",\"probe_w133_16259.mjs\",\"probe_w137_16439.mjs\",\"probe_w140_16619.mjs\",\"probe_w143_16799.mjs\",\"probe_w146_16979.mjs\",\"probe_w151_17159.mjs\",\"probe_w153_17339.mjs\",\"probe_w156_17519.mjs\",\"probe_w29_11373.mjs\",\"probe_w34_11552.mjs\",\"probe_w38_11732.mjs\",\"probe_w42_11912.mjs\",\"probe_w47_12093.mjs\",\"probe_w51_12273.mjs\",\"probe_w52_12321.mjs\",\"probe_w53_12329.mjs\",\"probe_w57_12461.mjs\",\"probe_w62_12639.mjs\",\"probe_w65_12819.mjs\",\"probe_w68_12999.mjs\",\"probe_w73_13179.mjs\",\"probe_w76_13359.mjs\",\"probe_w79_13539.mjs\",\"probe_w84_13719.mjs\",\"probe_w87_13899.mjs\",\"probe_w90_14079.mjs\",\"probe_w95_14259.mjs\",\"probe_w98_14439.mjs\",\"qdiag.mjs\",\"qpool.mjs\",\"quick_state.mjs\",\"quote_utz.mjs\",\"read_plan.mjs\",\"read_state.mjs\",\"recon2.mjs\",\"recon_quote.mjs\",\"recon_tick.mjs\",\"recover_utz.mjs\",\"rpcprobe.mjs\",\"runway-decider_12712.mjs\",\"runway-decider_14851.mjs\",\"runway-guard_13267.mjs\",\"runway-guard_15792.mjs\",\"runway-strategy-picker_17402.mjs\",\"sdkfind.mjs\",\"sellprobe.mjs\",\"state.mjs\",\"state_audit.mjs\",\"state_probe.mjs\",\"strategy-decider_16341.mjs\",\"strategy-tick-advisor_16896.mjs\",\"t22_pool_v2.mjs\",\"t22probe.mjs\",\"t22val.mjs\",\"tick-advisor_11785.mjs\",\"tick-decider_13711.mjs\",\"tick-decider_15401.mjs\",\"trace_utz.mjs\",\"unblock.mjs\",\"value.mjs\",\"value_pos.mjs\",\"value_utz.mjs\"]\n"
       }
      }
     ]
    },
    "funding": {
-    "sol_raw": "22799229",
+    "sol_raw": "22739229",
     "usdc_raw": "1000000",
     "ledger_totals": {
-     "native:SOL": "22799229",
+     "native:SOL": "22739229",
      "spl:So11111111111111111111111111111111111111112": "114412401",
      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1000000",
      "t22:5uUtzrJCkPhDYs2nKVEKeY6duNzfyRQ696nu3i6qpump": "130000000"
     },
     "spendable": {
-     "native:SOL": "17799229",
+     "native:SOL": "17739229",
      "spl:So11111111111111111111111111111111111111112": "114412401",
      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1000000",
      "t22:5uUtzrJCkPhDYs2nKVEKeY6duNzfyRQ696nu3i6qpump": "130000000"
     }
    },
    "strategy": {
-    "last_scan_at": 1794117172,
-    "sol_raw": "22699229",
+    "last_scan_at": 1794117874,
+    "sol_raw": "22639229",
     "flash": [
-     {
-      "at": 1794114316,
-      "phase": "simulate",
-      "candidate": "usdc-SOL-usdc",
-      "plan_hash": "96853fd4f5244f49ba77498e7fa332f7f79b8110100a47e3af264ff89ce6b554",
-      "err": {
-       "InstructionError": [
-        4,
-        {
-         "Custom": 6030
-        }
-       ]
-      },
-      "logs": [
-       "Program data: tAhRRxOErQiKubi8A9XiCxFAx4t15UeudUkWFSJ/lIEmi+AOw3Qz8cb6evO+2606PWXzaqvJdDGxu+TC0vbg5HymAgNFL11hAAAAAAAAAAAAAAAAAAAAAADh9QUAAAAAAAAAAAAAAABl9d/9fISvdail973OoWIuKzq/h/xTqHG5CFYaOosb3jTK+9Wx6pXAAQSdmcD2OURe0+F5tcd1dGa5lbOHY3Peu33+EPQAAAD8YV/29wAAAA==",
-       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC consumed 15017 of 1366842 compute units",
-       "Program return: jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC u33+EPQAAAD8YV/29wAAAA==",
-       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC success",
-       "Program jupgfSgfuAXv4B6R2Uxu85Z1qdzgju79s6MfZekN6XS consumed 45525 of 1395662 compute units",
-       "Program return: jupgfSgfuAXv4B6R2Uxu85Z1qdzgju79s6MfZekN6XS u33+EPQAAAD8YV/29wAAAA==",
-       "Program jupgfSgfuAXv4B6R2Uxu85Z1qdzgju79s6MfZekN6XS success",
-       "Program ComputeBudget111111111111111111111111111111 invoke [1]",
-       "Program ComputeBudget111111111111111111111111111111 success",
-       "Program ComputeBudget111111111111111111111111111111 invoke [1]",
-       "Program ComputeBudget111111111111111111111111111111 success",
-       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 invoke [1]",
-       "Program log: Instruction: Route",
-       "Program 3TK9D8aoBFYjYZtKCjciPrVrRStsnvo7KmpcJqDavpaU invoke [2]",
-       "Program log: Instruction: SwapV3",
-       "Program log: AnchorError thrown in src/instructions/swap_v3.rs:3177. Error Code: NotSupport5. Error Number: 6030. Error Message: Not Support.",
-       "Program 3TK9D8aoBFYjYZtKCjciPrVrRStsnvo7KmpcJqDavpaU consumed 48630 of 1346018 compute units",
-       "Program 3TK9D8aoBFYjYZtKCjciPrVrRStsnvo7KmpcJqDavpaU failed: custom program error: 0x178e",
-       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 consumed 52449 of 1349837 compute units",
-       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 failed: custom program error: 0x178e"
-      ],
-      "bytes": 1574
-     },
-     {
-      "at": 1794114380,
-      "phase": "simulate",
-      "candidate": "usdc-SOL-usdc",
-      "plan_hash": "3823c8e28c5c39e622c152607b09886e4bd975a9331c661f7ea0a763901aeee9",
-      "err": {
-       "InstructionError": [
-        4,
-        {
-         "Custom": 6030
-        }
-       ]
-      },
-      "logs": [
-       "Program data: tAhRRxOErQiKubi8A9XiCxFAx4t15UeudUkWFSJ/lIEmi+AOw3Qz8cb6evO+2606PWXzaqvJdDGxu+TC0vbg5HymAgNFL11hAAAAAAAAAAAAAAAAAAAAAADh9QUAAAAAAAAAAAAAAABl9d/9fISvdail973OoWIuKzq/h/xTqHG5CFYaOosb3jTK+9Wx6pXAAQSdmcD2OURe0+F5tcd1dGa5lbOHY3PeUff/EPQAAADBPmH29wAAAA==",
-       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC consumed 22549 of 1366952 compute units",
-       "Program return: jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC Uff/EPQAAADBPmH29wAAAA==",
-       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC success",
-       "Program jupgfSgfuAXv4B6R2Uxu85Z1qdzgju79s6MfZekN6XS consumed 52947 of 1395662 compute units",
-       "Program return: jupgfSgfuAXv4B6R2Uxu85Z1qdzgju79s6MfZekN6XS Uff/EPQAAADBPmH29wAAAA==",
-       "Program jupgfSgfuAXv4B6R2Uxu85Z1qdzgju79s6MfZekN6XS success",
-       "Program ComputeBudget111111111111111111111111111111 invoke [1]",
-       "Program ComputeBudget111111111111111111111111111111 success",
-       "Program ComputeBudget111111111111111111111111111111 invoke [1]",
-       "Program ComputeBudget111111111111111111111111111111 success",
-       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 invoke [1]",
-       "Program log: Instruction: Route",
-       "Program 3TK9D8aoBFYjYZtKCjciPrVrRStsnvo7KmpcJqDavpaU invoke [2]",
-       "Program log: Instruction: SwapV3",
-       "Program log: AnchorError thrown in src/instructions/swap_v3.rs:3177. Error Code: NotSupport5. Error Number: 6030. Error Message: Not Support.",
-       "Program 3TK9D8aoBFYjYZtKCjciPrVrRStsnvo7KmpcJqDavpaU consumed 48814 of 1338597 compute units",
-       "Program 3TK9D8aoBFYjYZtKCjciPrVrRStsnvo7KmpcJqDavpaU failed: custom program error: 0x178e",
-       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 consumed 52632 of 1342415 compute units",
-       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 failed: custom program error: 0x178e"
-      ],
-      "bytes": 1390
-     },
      {
       "at": 1794116193,
       "phase": "simulate",
@@ -953,15 +915,89 @@
        "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 failed: custom program error: 0x178e"
       ],
       "bytes": 1390
+     },
+     {
+      "at": 1794117922,
+      "phase": "simulate",
+      "candidate": "usdc-BONK-usdc",
+      "plan_hash": "abede3e5ffff0ccbe3de6fa95cb168710cb8a32eb2a908cf0cc5456cf544a0bd",
+      "err": {
+       "InstructionError": [
+        10,
+        {
+         "Custom": 1
+        }
+       ]
+      },
+      "logs": [
+       "Program log: Instruction: PreOperate",
+       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC consumed 4664 of 1057596 compute units",
+       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC success",
+       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [3]",
+       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 105 of 1050206 compute units",
+       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC invoke [3]",
+       "Program log: Instruction: Operate",
+       "Program data: tAhRRxOErQjZzrqhU5avVLjcbWJTtlYNHxKVUGu6UspY2Mj5IQ4rtM4BDmCv7bInF71jGS9UFFo/llozu4LSxwKess4eIIJkAAAAAAAAAAAAAAAAAAAAAP6ZIPr///////////////80yvvVseqVwAEEnZnA9jlEXtPhebXHdXRmuZWzh2Nz3jTK+9Wx6pXAAQSdmcD2OURe0+F5tcd1dGa5lbOHY3Pe9a5L8PEAAACiMVhS9gAAAA==",
+       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC consumed 20586 of 1042825 compute units",
+       "Program return: jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC 9a5L8PEAAACiMVhS9gAAAA==",
+       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC success",
+       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC invoke [3]",
+       "Program log: Instruction: Operate",
+       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [4]",
+       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 105 of 998228 compute units",
+       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA success",
+       "Program data: tAhRRxOErQjZzrqhU5avVLjcbWJTtlYNHxKVUGu6UspY2Mj5IQ4rtMb6evO+2606PWXzaqvJdDGxu+TC0vbg5HymAgNFL11hAAAAAAAAAAAAAAAAAAAAAK+W3QUAAAAAAAAAAAAAAAA0yvvVseqVwAEEnZnA9jlEXtPhebXHdXRmuZWzh2Nz3jTK+9Wx6pXAAQSdmcD2OURe0+F5tcd1dGa5lbOHY3PeW1ZQEfQAAADDu8b29wAAAA==",
+       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC consumed 16786 of 1013218 compute units",
+       "Log truncated"
+      ],
+      "bytes": 2310
+     },
+     {
+      "at": 1794117933,
+      "phase": "simulate",
+      "candidate": "usdc-JUP-usdc",
+      "plan_hash": "2be242d9b54f4affea61d83befea1d8fa18b9c0a2d90c9ddb716ad092c46c75c",
+      "err": {
+       "InstructionError": [
+        7,
+        {
+         "Custom": 1
+        }
+       ]
+      },
+      "logs": [
+       "Program goonuddtQRrWqqn5nFyczVKaie28f3kDkHWkHtURSLE consumed 75428 of 1226031 compute units",
+       "Program goonuddtQRrWqqn5nFyczVKaie28f3kDkHWkHtURSLE success",
+       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 invoke [2]",
+       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 consumed 91 of 1148729 compute units",
+       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 success",
+       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 consumed 84657 of 1232679 compute units",
+       "Program return: JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 M7HXBQAAAAA=",
+       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 success",
+       "Program jupgfSgfuAXv4B6R2Uxu85Z1qdzgju79s6MfZekN6XS invoke [1]",
+       "Program log: Instruction: FlashloanPayback",
+       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC invoke [2]",
+       "Program log: Instruction: PreOperate",
+       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC consumed 4385 of 1137328 compute units",
+       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC success",
+       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+       "Program log: Error: insufficient funds",
+       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 192 of 1130249 compute units",
+       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA failed: custom program error: 0x1",
+       "Program jupgfSgfuAXv4B6R2Uxu85Z1qdzgju79s6MfZekN6XS consumed 17965 of 1148022 compute units",
+       "Program jupgfSgfuAXv4B6R2Uxu85Z1qdzgju79s6MfZekN6XS failed: custom program error: 0x1"
+      ],
+      "bytes": 1214
      }
     ],
     "pump_positions": 0,
-    "updated_at": 1794117611
+    "updated_at": 1794117933
    },
-   "sol": 0.022799229,
+   "sol": 0.022739229,
    "usdc": 1,
-   "fmv_sol": 0.32773455618666664,
-   "sellable_sol": 0.011223,
+   "fmv_sol": 0.32764455618666666,
+   "sellable_sol": 0.011221,
    "rent_sol": 0.118877721,
    "token_book_sol": 0.179491
   },
@@ -978,7 +1014,7 @@
     "meaning": "digest of the measured core files this guest is running"
    },
    "identity_binding": "identity_binding_unverified",
-   "updated_at": 1794117623,
+   "updated_at": 1794117933,
    "distribution": {
     "next_due_unix": 1794194410,
     "next_due_epoch": 1,
@@ -996,7 +1032,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1794117623,
+     "at": 1794117932,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -1030,8 +1066,8 @@
       }
      },
      "solana": {
-      "lamports": 29137556,
-      "sol": 0.029137556
+      "lamports": 29047556,
+      "sol": 0.029047556
      },
      "total_native_usd_estimate": 0
     }
@@ -1043,7 +1079,7 @@
     "sells": 15,
     "realized_lamports": "108509147",
     "last_sell_at": 1794112181,
-    "updated_at": 1794117267
+    "updated_at": 1794117910
    },
    "parent_birth_id": "fcd367d5-4bfc-43d7-b036-bd2d8d59d95a",
    "generation": 2,
@@ -1092,122 +1128,168 @@
    ],
    "children": [],
    "invention": {
-    "scripts": 97,
+    "scripts": 102,
     "items": [
+     "find_pool_5u_v2.mjs",
+     "diag_5u.mjs",
+     "find_pool_5u.mjs",
+     "find_quote_pool_api.mjs",
+     "find_qpool_vault.mjs",
      "runway-decide_17592.mjs",
      "find_qpool.mjs",
      "find_quote_pool3.mjs",
      "probe_pool_quote.mjs",
      "probe_launch_fix.mjs",
      "read_brain.mjs",
-     "probe_5u.mjs",
-     "probe_value.mjs",
-     "probe_pos.mjs",
-     "read_state.mjs",
-     "probe_holding.mjs",
-     "npm_probe.mjs"
+     "probe_5u.mjs"
     ],
-    "last_at": 1794117592
+    "last_at": 1794117821
    },
    "journal": {
-    "head": "3af9135a9d2af2719c37edcda41794dc0b5141ba2e79bba5c4be85115ba15926",
-    "seq": 756
+    "head": "094a1c3a7736b3fdd673ca94c4e45bc36f8a383caf22b44b436a50013238e2cb",
+    "seq": 796
    },
    "components": {
-    "signer": {
-     "alive": true,
-     "pid": 21482,
-     "restarts": 1
-    },
-    "distribution": {
-     "alive": true,
-     "pid": 21493,
-     "restarts": 1
-    },
-    "identity": {
-     "alive": true,
-     "pid": 21504,
-     "restarts": 1
-    },
-    "brain": {
-     "alive": true,
-     "pid": 21515,
-     "restarts": 1
-    },
-    "strategy": {
-     "alive": true,
-     "pid": 21559,
-     "restarts": 2
-    },
-    "loops": {
-     "alive": true,
-     "pid": 21570,
-     "restarts": 2
-    },
-    "procreate": {
-     "alive": true,
-     "pid": 21581,
-     "restarts": 2
+    "component": "distributor",
+    "ts": 1794117933,
+    "pid": 33529,
+    "status": {
+     "next_due_unix": 1794194410,
+     "next_due_epoch": 1,
+     "highest_epoch": 0,
+     "obligations": 0,
+     "by_status": {},
+     "reserved": {},
+     "carries": {
+      "parent": {},
+      "founder": {}
+     },
+     "arrears_raw": {},
+     "blocked": [],
+     "unresolved_epochs": {},
+     "anchors": {},
+     "supervisor": "deterministic: no model, no credits, no approval step",
+     "chains": {
+      "at": 1794117932,
+      "evm": {
+       "base": {
+        "sym": "ETH",
+        "wei": "0",
+        "eth": 0,
+        "rpc": "https://mainnet.base.org"
+       },
+       "ethereum": {
+        "sym": "ETH",
+        "wei": "0",
+        "eth": 0,
+        "rpc": "https://ethereum-rpc.publicnode.com"
+       },
+       "arbitrum": {
+        "sym": "ETH",
+        "wei": "0",
+        "eth": 0,
+        "rpc": "https://arb1.arbitrum.io/rpc"
+       },
+       "optimism": {
+        "sym": "ETH",
+        "wei": "0",
+        "eth": 0,
+        "rpc": "https://mainnet.optimism.io"
+       },
+       "polygon": {
+        "sym": "POL",
+        "wei": "0",
+        "eth": 0,
+        "rpc": "https://polygon-bor-rpc.publicnode.com"
+       }
+      },
+      "solana": {
+       "lamports": 29047556,
+       "sol": 0.029047556
+      },
+      "total_native_usd_estimate": 0
+     }
     }
    },
-   "served_at": 1794117630,
+   "served_at": 1794117934,
    "endpoint": "http://140.82.1.196/status",
    "src": "http://140.82.1.196",
-   "at": 1794117630,
+   "at": 1794117933,
    "stale": false,
    "inference": {
     "provider": "venice",
     "model": "deepseek-v4-1-flash-1017-uncensored",
     "mode": "external_paid_abliterated",
-    "credits_usd": 4.29042968,
+    "credits_usd": 4.24268555,
     "balance_http": 200,
     "admission_floor_usd": 0.1,
     "wallet_usdc_raw": "1000000",
-    "wallet_sol_raw": "29192556",
+    "wallet_sol_raw": "29107556",
     "state": "ready"
    },
    "last_decision": {
-    "at": 1794117566,
+    "at": 1794117845,
     "tools": [
-     "run_script"
+     "pump_launch"
     ],
-    "cost_usd": 0.005848,
+    "cost_usd": 0.004992,
     "content": null,
     "error": null,
     "usage": {
-     "prompt_tokens": 12019,
-     "completion_tokens": 2050,
-     "total_tokens": 14069,
+     "prompt_tokens": 10522,
+     "completion_tokens": 1776,
+     "total_tokens": 12298,
      "prompt_tokens_details": {
       "cached_tokens": 2560
      },
      "cache_read_input_tokens": 2560,
      "completion_tokens_details": {
-      "reasoning_tokens": 1370
+      "reasoning_tokens": 1666
      }
     },
     "call_results": [
      {
-      "name": "run_script",
+      "name": "pump_launch",
       "result": {
-       "ok": true,
-       "file": "/var/lib/agent/var/lib/agent/strategy/scripts/find_qpool.mjs",
-       "stdout": "DONE\n"
+       "ok": false,
+       "at": 1794117846,
+       "provider": "pump-sdk",
+       "mint": "JBxqaUACBt6BzChTxSYypp76VwyFLRa8sFJ9uyaDb83v",
+       "quote_mint": "6pF5Lt3jjyfV9uF4WqWvGJmPVHChQn5QACAjSLzSpump",
+       "ixs": 1,
+       "sim_err": {
+        "InstructionError": [
+         0,
+         {
+          "Custom": 6101
+         }
+        ]
+       },
+       "sim_logs": [
+        "Program log: Instruction: InitializeAccount3",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb consumed 2852 of 1347945 compute units",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb success",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL consumed 20807 of 1365596 compute units",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL success",
+        "Program log: AnchorError thrown in programs/pump/src/create_v2.rs:493. Error Code: QuotePoolAccountsRequired. Error Number: 6101. Error Message: A quote-chain bonding curve has migrated: its pool and vault remaining accounts are required.",
+        "Program 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P consumed 88166 of 1400000 compute units",
+        "Program 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P failed: custom program error: 0x17d5"
+       ]
       }
      }
     ]
    },
    "funding": {
-    "sol_raw": "29192556",
+    "sol_raw": "29107556",
     "usdc_raw": "1000000",
     "ledger_totals": {
-     "native:SOL": "29197556",
+     "native:SOL": "29107556",
      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1000000",
      "spl:So11111111111111111111111111111111111111112": "108509147",
      "t22:5uUtzrJCkPhDYs2nKVEKeY6duNzfyRQ696nu3i6qpump": "90000000"
     },
     "spendable": {
-     "native:SOL": "24197556",
+     "native:SOL": "24107556",
      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1000000",
      "spl:So11111111111111111111111111111111111111112": "108509147",
      "t22:5uUtzrJCkPhDYs2nKVEKeY6duNzfyRQ696nu3i6qpump": "90000000"
@@ -1215,45 +1297,8 @@
    },
    "strategy": {
     "last_scan_at": 1794116999,
-    "sol_raw": "29137556",
+    "sol_raw": "29077556",
     "flash": [
-     {
-      "at": 1794114233,
-      "phase": "simulate",
-      "candidate": "usdc-SOL-usdc",
-      "plan_hash": "2da002afb90d3384ba18294b2e22160562923fbb3b348570a0c2059a4dcc7994",
-      "err": {
-       "InstructionError": [
-        8,
-        {
-         "Custom": 1
-        }
-       ]
-      },
-      "logs": [
-       "Program ZERor4xhbUycZ6gb9ntrhqscUcZmAbQDjEAtCf4hbZY consumed 27521 of 1272248 compute units",
-       "Program ZERor4xhbUycZ6gb9ntrhqscUcZmAbQDjEAtCf4hbZY success",
-       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 invoke [2]",
-       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 consumed 91 of 1242851 compute units",
-       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 success",
-       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 consumed 34098 of 1276242 compute units",
-       "Program return: JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 D1DeBQAAAAA=",
-       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 success",
-       "Program jupgfSgfuAXv4B6R2Uxu85Z1qdzgju79s6MfZekN6XS invoke [1]",
-       "Program log: Instruction: FlashloanPayback",
-       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC invoke [2]",
-       "Program log: Instruction: PreOperate",
-       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC consumed 4385 of 1231450 compute units",
-       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC success",
-       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
-       "Program log: Error: insufficient funds",
-       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 192 of 1224371 compute units",
-       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA failed: custom program error: 0x1",
-       "Program jupgfSgfuAXv4B6R2Uxu85Z1qdzgju79s6MfZekN6XS consumed 17965 of 1242144 compute units",
-       "Program jupgfSgfuAXv4B6R2Uxu85Z1qdzgju79s6MfZekN6XS failed: custom program error: 0x1"
-      ],
-      "bytes": 1420
-     },
      {
       "at": 1794115098,
       "phase": "simulate",
@@ -1327,14 +1372,51 @@
        "Program jupgfSgfuAXv4B6R2Uxu85Z1qdzgju79s6MfZekN6XS failed: custom program error: 0x1"
       ],
       "bytes": 1470
+     },
+     {
+      "at": 1794117846,
+      "phase": "simulate",
+      "candidate": "usdc-SOL-usdc",
+      "plan_hash": "0d463a450a566672d07483b5e5a00eb6e48ed56d68d8a85558e8593cd5358f82",
+      "err": {
+       "InstructionError": [
+        7,
+        {
+         "Custom": 1
+        }
+       ]
+      },
+      "logs": [
+       "Program HADRoNbLovyqhCsocfYQYB7QdfCAAinN9HTePvBCVDQ8 consumed 256213 of 1259713 compute units",
+       "Program HADRoNbLovyqhCsocfYQYB7QdfCAAinN9HTePvBCVDQ8 success",
+       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 invoke [2]",
+       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 consumed 91 of 1001608 compute units",
+       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 success",
+       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 consumed 263093 of 1263994 compute units",
+       "Program return: JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 5ePeBQAAAAA=",
+       "Program JUP6LkbZbjS1jKKwapdHNy74zcZ3tLUZoi5QNyVTaV4 success",
+       "Program jupgfSgfuAXv4B6R2Uxu85Z1qdzgju79s6MfZekN6XS invoke [1]",
+       "Program log: Instruction: FlashloanPayback",
+       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC invoke [2]",
+       "Program log: Instruction: PreOperate",
+       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC consumed 4385 of 990207 compute units",
+       "Program jupeiUmn818Jg1ekPURTpr4mFo29p46vygyykFJ3wZC success",
+       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA invoke [2]",
+       "Program log: Error: insufficient funds",
+       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA consumed 192 of 983128 compute units",
+       "Program TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA failed: custom program error: 0x1",
+       "Program jupgfSgfuAXv4B6R2Uxu85Z1qdzgju79s6MfZekN6XS consumed 17965 of 1000901 compute units",
+       "Program jupgfSgfuAXv4B6R2Uxu85Z1qdzgju79s6MfZekN6XS failed: custom program error: 0x1"
+      ],
+      "bytes": 1605
      }
     ],
     "pump_positions": 0,
-    "updated_at": 1794117619
+    "updated_at": 1794117861
    },
-   "sol": 0.029192556,
+   "sol": 0.029107556,
    "usdc": 1,
-   "fmv_sol": 0.3621081016866667,
+   "fmv_sol": 0.36201810168666665,
    "sellable_sol": 0.011221,
    "rent_sol": 0.112974467,
    "token_book_sol": 0.213329
@@ -1352,7 +1434,7 @@
     "meaning": "digest of the measured core files this guest is running"
    },
    "identity_binding": "identity_binding_unverified",
-   "updated_at": 1794117615,
+   "updated_at": 1794117915,
    "distribution": {
     "next_due_unix": 1794194419,
     "next_due_epoch": 1,
@@ -1370,7 +1452,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1794117615,
+     "at": 1794117914,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -1404,8 +1486,8 @@
       }
      },
      "solana": {
-      "lamports": 29290901,
-      "sol": 0.029290901
+      "lamports": 29230901,
+      "sol": 0.029230901
      },
      "total_native_usd_estimate": 0
     }
@@ -1417,7 +1499,7 @@
     "sells": 46,
     "realized_lamports": "114414818",
     "last_sell_at": 1794111562,
-    "updated_at": 1794117572
+    "updated_at": 1794117930
    },
    "parent_birth_id": "fcd367d5-4bfc-43d7-b036-bd2d8d59d95a",
    "generation": 2,
@@ -1476,160 +1558,134 @@
    ],
    "children": [],
    "invention": {
-    "scripts": 91,
+    "scripts": 94,
     "items": [
+     "strategy-edge-scan_17850.mjs",
+     "deep_scan.mjs",
+     "trace_create.mjs",
+     "find_pool.mjs",
+     "jup_probe.mjs",
      "probe_coin_state.mjs",
      "probe_stuck2.mjs",
      "diag2.mjs",
      "probe_route.mjs",
      "diag_stuck.mjs",
      "runway-guard_17424.mjs",
-     "find_pool.mjs",
-     "value_stuck.mjs",
-     "probe2.mjs",
-     "read_cfg.mjs",
-     "probe_env.mjs",
-     "find_curve_real.mjs"
+     "value_stuck.mjs"
     ],
-    "last_at": 1794117604
+    "last_at": 1794117850
    },
    "journal": {
-    "head": "d165fe0f899399d9474dfb02826b41a768845dfbf93a8ef61a877f0bb7bd4f28",
-    "seq": 799
+    "head": "ee9bff0bd0c321c656e9e33c484e73baf7d15a0b862b8dd3f1a00d9a9fb39846",
+    "seq": 830
    },
    "components": {
+    "identity_server": {
+     "pid": 20674,
+     "ts": 1794117915
+    },
     "signer": {
      "alive": true,
-     "pid": 7254,
+     "pid": 20652,
      "restarts": 1
     },
     "distribution": {
      "alive": true,
-     "pid": 7267,
+     "pid": 20663,
      "restarts": 1
     },
     "identity": {
      "alive": true,
-     "pid": 7278,
+     "pid": 20674,
      "restarts": 1
     },
     "brain": {
      "alive": true,
-     "pid": 7289,
+     "pid": 20685,
      "restarts": 1
     },
     "strategy": {
      "alive": true,
-     "pid": 7333,
+     "pid": 20729,
      "restarts": 2
     },
     "loops": {
      "alive": true,
-     "pid": 7345,
+     "pid": 20740,
      "restarts": 2
     },
     "procreate": {
      "alive": true,
-     "pid": 7357,
+     "pid": 20751,
      "restarts": 2
     }
    },
-   "served_at": 1794117630,
+   "served_at": 1794117934,
    "endpoint": "http://66.135.1.216/status",
    "src": "http://66.135.1.216",
-   "at": 1794117630,
+   "at": 1794117933,
    "stale": false,
    "inference": {
     "provider": "venice",
     "model": "deepseek-v4-1-flash-1017-uncensored",
     "mode": "external_paid_abliterated",
-    "credits_usd": 4.33630055,
+    "credits_usd": 4.2621386,
     "balance_http": 200,
     "admission_floor_usd": 0.1,
     "wallet_usdc_raw": "1000000",
-    "wallet_sol_raw": "29385901",
+    "wallet_sol_raw": "29260901",
     "state": "ready"
    },
    "last_decision": {
-    "at": 1794117407,
+    "at": 1794117773,
     "tools": [
-     "pump_collect"
+     "run_script"
     ],
-    "cost_usd": 0.006398,
+    "cost_usd": 0.004811,
     "content": null,
     "error": null,
     "usage": {
-     "prompt_tokens": 9717,
-     "completion_tokens": 3042,
-     "total_tokens": 12759,
+     "prompt_tokens": 10476,
+     "completion_tokens": 1650,
+     "total_tokens": 12126,
      "prompt_tokens_details": {
       "cached_tokens": 2560
      },
      "cache_read_input_tokens": 2560,
      "completion_tokens_details": {
-      "reasoning_tokens": 2969
+      "reasoning_tokens": 1109
      }
     },
     "call_results": [
      {
-      "name": "pump_collect",
+      "name": "run_script",
       "result": {
-       "swept": {
-        "ok": true,
-        "at": 1794117407,
-        "mint": "EYtgg1h2RMtCvwkvjaV9gRqoXdGmoSMn5BKxnRdHqycg",
-        "sim_err": null,
-        "sim_logs": [
-         "Program 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P invoke [1]",
-         "Program log: Instruction: SweepCreatorFee",
-         "Program log: Nothing to sweep for fee bucket 1",
-         "Program 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P consumed 23869 of 1400000 compute units",
-         "Program 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P success"
-        ],
-        "signature": "5QFG2HLzSaaSULkYqNWborGnKDswzPdFgLD7ve6Gq6CfgErAi5PMqy1nx4VztuSp7rE3vSJDF7m7LwGqxwRBoYpt",
-        "status": "finalized",
-        "err": null
-       },
-       "paid": {
-        "ok": true,
-        "at": 1794117409,
-        "creator": "7tL9aueWyPUHi8gCCCR2bpQtMmb5TZEC7SKM1NRjYjSq",
-        "vault": "CXxuVAkXVrKV8h34oHFhgeV3xhm8NptuFriJvRD2Vi6A",
-        "sim_err": null,
-        "sim_logs": [
-         "Program 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P invoke [1]",
-         "Program log: Instruction: CollectCreatorFee",
-         "Program log: No creator fee to collect",
-         "Program 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P consumed 5861 of 1400000 compute units",
-         "Program 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P success"
-        ],
-        "signature": "4JnaACPGuMYxCXjJ8Lv1YL2uMJx3uPmCn9hbCP8WrK6wEYhmUuqDVFreagBrgSnLFKpQJXixnXCMyHuuNdsJGLKY",
-        "status": "finalized",
-        "err": null
-       }
+       "ok": true,
+       "file": "/var/lib/agent/var/lib/agent/strategy/scripts/trace_create.mjs",
+       "stdout": "NSIGS 15\nSIG 5mszMQr5iMkYm8e2c1wKvzCTK2DC2GACUftgvd8F6JsXk1ay89soTveEFB8mRAMAJN62ke9sZBeijKsXw2gGHYGs slot 466806912 err Y memo [60] [pub] tick 152 | no launch | sol 0.029 | wrote find_pool.mjs\nSIG 25j3QPPo8MHR5Gip8nNthZHwoamQCcCz4SA8wKsHpGLakHREoqYx94pSrrtzUjLUkcmuQ3voLEmMdv55ZkQnRFQr slot 466806897 err Y memo [60] [pub] tick 151 | no launch | sol 0.029 | wrote find_pool.mjs\nSIG 2tKdoK1CnNCLtbaQs531AVwrvPC2kkLjFZKQU7eHrHUXGE2KChMQyZgYXPGs1LRWVQKRYhN8J3Su831rGhbkUuET slot 466806884 err n memo \nSIG 5uaDmi86rSM6gkgG5HxaKFd4pYjAK8EeuSxWoLUccJJnz3bDJSwBGCYDgV3G4DMLubgTiTPvz3za1FkdKnyXHpkB slot 466806877 err n memo \nSIG 3EGsunPV5V4r19DGhhQ3nGvjhySfeJpqieYjkgq73ukyTPRqoMAkZSg67efdM5264PM39fyyWA4bR4w5VhT2U26t slot 466806869 err n memo \nSIG 2Z5Vw8o9ckQob4g5MvhpbQHV9ad7XMrGuXB3TfcWZgvovmYXh6M4Au2d2UHWBCyaoJp6UBXAekm3a51QfRDZpcKn slot 466806862 err n memo \nSIG 2E4ejfsVou4XZbZPWcWm2zBmxzYfkmM1rdaxvY6jYWKTeHytj2DpPCupUtiEhn9qKky12S2JWMPMYMh9uCqcfdYG slot 466806276 err Y memo [56] [pub] tick 149 | no launch | sol 0.029 | wrote diag2.mjs\nSIG 4m6EKfJJofQLZ5PvhbotPebf2PWQ3QF86PqakbWEe8qfZAzdMCoTpVUBQLaQxrSh8qXnLzQuV44QpFMK2Ei6yWLw slot 466806258 err Y memo [56] [pub] tick 148 | no launch | sol 0.029 | wrote diag2.mjs\nSIG 3HcNyiqPWmYPnfzX7crJdWJFLekhFG95XDRgXttGtKMU1MXvP9ZTk1TJsUHkdN7T5BAqAR8ir5qvBRaAKqjCg1zW slot 466806246 err n memo \nSIG 2oG6m477TgfirHXPT9X2K1vzMrzstDQ3ks9j1qNdAFNRmwr4vYYVJqKCzYdik2GjVszGmjUXeEsbtRjJCQLNtmLi slot 466806239 err n memo \nSIG 2EsjYrQCVkFkBW5FPGTGGbV1nghZw89nSWYjDy2LdvWPgyM5AWVRtGi694xLFiCgysbvTztoBp9Gg466jY2LtRzr slot 466806229 err n memo \nSIG 3SFgmvJxyaa4jq6VgGYv1VXYVUD5ETipn1vt6JbtR4Es7SP5MGJiL8PGEmm2RWeV3KMrdpAmybVftz76HSNCfhe8 slot 466806221 err n memo \nSIG 5hRqkDWWShCzsvgNdfqP9Uwr4Anh1jYP1xVWYDknpsKo3xb7rVE81vrsWqXmWWbxqXJDWcq9871stAggUfppboE3 slot 466805630 err Y memo [69] [pub] tick 147 | no launch | sol 0.029 | wrote runway-guard_17424.mjs\nSIG umVZzZhgh2qW8gW6pPDHdPGacTNb4w11ndkJa2CYmngfr5QkZwhoA38hqRLkhoUTvSY9EgzUJqHCHva6Ck1XGrA slot 466805613 err Y memo [69] [pub] tick 146 | no launch | sol 0.029 | wrote runway-guard_17424.mjs\nSIG 5euaTp7RjaTSXhfHjwFRZ4psZf1yAemV8ZAUAuNpXEF8HKrY4u3JJ8eWfiWgMSgKzrNzfRQbPj6NU4QJQvkef9v7 slot 466805601 err n memo \nTXERR 2oG6m477TgfirHXPT9X2K1vzMrzstDQ3ks9j1qNdAFNRmwr4vYYVJqKCzYdik2GjVszGmjUXeEsbtRjJCQLNtmLi {\"code\":-32015,\"message\":\"Transaction version (1) is not supported by the requesting client. Please try the request again with the following configura\nTXERR 2EsjYrQCVkFkBW5FPGTGGbV1nghZw89nSWYjDy2LdvWPgyM5AWVRtGi694xLFiCgysbvTztoBp9Gg466jY2LtRzr {\"code\":-32015,\"message\":\"Transaction version (1) is not supported by the requesting client. Please try the request again with the following configura\nTXERR 3SFgmvJxyaa4jq6VgGYv1VXYVUD5ETipn1vt6JbtR4Es7SP5MGJiL8PGEmm2RWeV3KMrdpAmybVftz76HSNCfhe8 {\"code\":-32015,\"message\":\"Transaction version (1) is not supported by the requesting client. Please try the request again with the following configura\nTXERR 5hRqkDWWShCzsvgNdfqP9Uwr4Anh1jYP1xVWYDknpsKo3xb7rVE81vrsWqXmWWbxqXJDWcq9871stAggUfppboE3 {\"code\":-32015,\"message\":\"Transaction version (1) is not supported by the requesting client. Please try the request again with the following configura\nTXERR umVZzZhgh2qW8gW6pPDHdPGacTNb4w11ndkJa2CYmngfr5QkZwhoA38hqRLkhoUTvSY9EgzUJqHCHva6Ck1XGrA {\"code\":-32015,\"message\":\"Transaction version (1) is not supported by the requesting client. Please try the request again with the following configura\nTXERR 5euaTp7RjaTSXhfHjwFRZ4psZf1yAemV8ZAUAuNpXEF8HKrY4u3JJ8eWfiWgMSgKzrNzfRQbPj6NU4QJQvkef9v7 {\"code\":-32015,\"message\":\"Transaction version (1) is not supported by the requesting client. Please try the request again with the following configura\ndone\n"
       }
      }
     ]
    },
    "funding": {
-    "sol_raw": "29385901",
+    "sol_raw": "29260901",
     "usdc_raw": "1000000",
     "ledger_totals": {
-     "native:SOL": "29385901",
-     "spl:So11111111111111111111111111111111111111112": "114414818",
+     "native:SOL": "29260901",
      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1000000",
+     "spl:So11111111111111111111111111111111111111112": "114414818",
      "t22:5uUtzrJCkPhDYs2nKVEKeY6duNzfyRQ696nu3i6qpump": "150000000"
     },
     "spendable": {
-     "native:SOL": "24385901",
-     "spl:So11111111111111111111111111111111111111112": "114414818",
+     "native:SOL": "24260901",
      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1000000",
+     "spl:So11111111111111111111111111111111111111112": "114414818",
      "t22:5uUtzrJCkPhDYs2nKVEKeY6duNzfyRQ696nu3i6qpump": "150000000"
     }
    },
    "strategy": {
-    "last_scan_at": 1794116974,
-    "sol_raw": "29290901",
+    "last_scan_at": 1794117001,
+    "sol_raw": "29230901",
     "flash": [
      {
       "at": 1794115160,
@@ -1744,11 +1800,11 @@
      }
     ],
     "pump_positions": 0,
-    "updated_at": 1794117585
+    "updated_at": 1794117876
    },
-   "sol": 0.029385901,
+   "sol": 0.029260901,
    "usdc": 1,
-   "fmv_sol": 0.37699492182666666,
+   "fmv_sol": 0.37690492182666663,
    "sellable_sol": 0.011221,
    "rent_sol": 0.118880138,
    "token_book_sol": 0.222157
@@ -1766,7 +1822,7 @@
     "meaning": "digest of the measured core files this guest is running"
    },
    "identity_binding": "identity_binding_unverified",
-   "updated_at": 1794117622,
+   "updated_at": 1794117938,
    "distribution": {
     "next_due_unix": 1794194432,
     "next_due_epoch": 1,
@@ -1784,7 +1840,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1794117622,
+     "at": 1794117938,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -1818,8 +1874,8 @@
       }
      },
      "solana": {
-      "lamports": 17759207,
-      "sol": 0.017759207
+      "lamports": 17699207,
+      "sol": 0.017699207
      },
      "total_native_usd_estimate": 0
     }
@@ -1831,7 +1887,7 @@
     "sells": 45,
     "realized_lamports": "114414820",
     "last_sell_at": 1794111563,
-    "updated_at": 1794117588
+    "updated_at": 1794117863
    },
    "parent_birth_id": "fcd367d5-4bfc-43d7-b036-bd2d8d59d95a",
    "generation": 2,
@@ -1895,122 +1951,89 @@
    ],
    "children": [],
    "invention": {
-    "scripts": 98,
+    "scripts": 103,
     "items": [
+     "pool_and_signer.mjs",
+     "find_pool_fast.mjs",
+     "tick-decide_17803.mjs",
+     "probe_amm_5uutz.mjs",
+     "probe_pool_creator.mjs",
      "price_5uutz.mjs",
      "probe2.mjs",
      "probe_quote.mjs",
      "probe_sign_paths.mjs",
      "probe_http80.mjs",
      "probe_env_signer.mjs",
-     "tick-decider_17236.mjs",
-     "find_venue.mjs",
-     "probe_owner_pool.mjs",
-     "probe_signer.mjs",
-     "probe_stuck3.mjs",
-     "probe_launch_impl2.mjs"
+     "tick-decider_17236.mjs"
     ],
-    "last_at": 1794117505
+    "last_at": 1794117930
    },
    "journal": {
-    "head": "e658e69f5dfcf5658c22d79d701113e77d64090fa042b6372defb1f1a251b871",
-    "seq": 784
+    "head": "de7ba6613abb93f7ac01a713c13a41f64303d0bf0d30dfd2fd03bf0aa5a25523",
+    "seq": 811
    },
    "components": {
-    "signer": {
-     "alive": true,
-     "pid": 6542,
-     "restarts": 1
-    },
-    "distribution": {
-     "alive": true,
-     "pid": 6553,
-     "restarts": 1
-    },
-    "identity": {
-     "alive": true,
-     "pid": 6564,
-     "restarts": 1
-    },
-    "brain": {
-     "alive": true,
-     "pid": 6576,
-     "restarts": 1
-    },
-    "strategy": {
-     "alive": true,
-     "pid": 6621,
-     "restarts": 2
-    },
-    "loops": {
-     "alive": true,
-     "pid": 6632,
-     "restarts": 2
-    },
-    "procreate": {
-     "alive": true,
-     "pid": 6643,
-     "restarts": 2
+    "identity_server": {
+     "pid": 18144,
+     "ts": 1794117939
     }
    },
-   "served_at": 1794117630,
+   "served_at": 1794117939,
    "endpoint": "http://45.76.9.31/status",
    "src": "http://45.76.9.31",
-   "at": 1794117630,
+   "at": 1794117933,
    "stale": false,
    "inference": {
     "provider": "venice",
     "model": "deepseek-v4-1-flash-1017-uncensored",
     "mode": "external_paid_abliterated",
-    "credits_usd": 4.21142396,
+    "credits_usd": 4.16439071,
     "balance_http": 200,
     "admission_floor_usd": 0.1,
     "wallet_usdc_raw": "1000000",
-    "wallet_sol_raw": "17814207",
+    "wallet_sol_raw": "17759207",
     "state": "ready"
    },
    "last_decision": {
-    "at": 1794117471,
+    "at": 1794117723,
     "tools": [
-     "run_script"
+     "pump_exit"
     ],
-    "cost_usd": 0.006326,
+    "cost_usd": 0.005434,
     "content": null,
     "error": null,
     "usage": {
-     "prompt_tokens": 11835,
-     "completion_tokens": 2458,
-     "total_tokens": 14293,
+     "prompt_tokens": 10759,
+     "completion_tokens": 2051,
+     "total_tokens": 12810,
      "prompt_tokens_details": {
       "cached_tokens": 2560
      },
      "cache_read_input_tokens": 2560,
      "completion_tokens_details": {
-      "reasoning_tokens": 1756
+      "reasoning_tokens": 1944
      }
     },
     "call_results": [
      {
-      "name": "run_script",
+      "name": "pump_exit",
       "result": {
-       "ok": true,
-       "file": "/var/lib/agent/var/lib/agent/strategy/scripts/probe2.mjs",
-       "stdout": "{\n \"app\": \"ERR Access to this API has been restricted\",\n \"appSub\": \"ERR\",\n \"pools\": {\n  \"off43\": [],\n  \"off75\": [],\n  \"off107\": [],\n  \"off139\": [],\n  \"off171\": []\n },\n \"t22\": {\n  \"owner\": \"TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb\",\n  \"info\": {\n   \"decimals\": 6,\n   \"extensions\": [\n    {\n     \"extension\": \"metadataPointer\",\n     \"state\": {\n      \"authority\": \"FoMxbd1aQ9AzDedCDXj2u8mLEp6nchXLuP19cBQA8Nsv\",\n      \"metadataAddress\": \"5uUtzrJCkPhDYs2nKVEKeY6duNzfyRQ696nu3i6qpump\"\n     }\n    },\n    {\n     \"extension\": \"permanentDelegate\",\n     \"state\": {\n      \"delegate\": \"FoMxbd1aQ9AzDedCDXj2u8mLEp6nchXLuP19cBQA8Nsv\"\n     }\n    },\n    {\n     \"extension\": \"tokenMetadata\",\n     \"state\": {\n      \"additionalMetadata\": [],\n      \"mint\": \"5uUtzrJCkPhDYs2nKVEKeY6duNzfyRQ696nu3i6qpump\",\n      \"name\": \"PUMPAPI.IO DECODED SOLANA DATA STREAM FOR FREE | LOW LATENCY | BUY AND SELL FIRST | FREE HISTORICAL REPLAY | JITO BUNDLES | NO SIGN UP | YOU CAN BUILD ANY STRATEGY WITH AI | PYTHON, RUST, JS, GO TO PUMPAPI.IO\",\n      \"symbol\": \"PUMPAPI.IO DECODED SOLANA DATA STREAM FOR FREE | LOW LATENCY | BUY AND SELL FIRST | FREE HISTORICAL REPLAY | JITO BUNDLES | NO SIGN UP | YOU CAN BUILD ANY STRATEGY WITH AI | PYTHON, RUST, JS, GO TO PUMPAPI.IO\",\n      \"updateAuthority\": \"FoMxbd1aQ9AzDedCDXj2u8mLEp6nchXLuP19cBQA8Nsv\",\n      \"uri\": \"https://meta.pumpapi.io/b71d7c86.json\"\n     }\n    }\n   ],\n   \"freezeAuthority\": \"FoMxbd1aQ9AzDedCDXj2u8mLEp6nchXLuP19cBQA8Nsv\",\n   \"isInitialized\": true,\n   \"mintAuthority\": \"FoMxbd1aQ9AzDedCDXj2u8mLEp6nchXLuP19cBQA8Nsv\",\n   \"supply\": \"11034670000000\"\n  }\n },\n \"http\": {\n  \"/sign\": \"404 {\\n  \\\"error\\\": \\\"not found\\\"\\n}\",\n  \"/tx\": \"404 {\\n  \\\"error\\\": \\\"not found\\\"\\n}\",\n  \"/transaction\": \"404 {\\n  \\\"error\\\": \\\"not found\\\"\\n}\",\n  \"/send-transaction\": \"404 {\\n  \\\"error\\\": \\\"not found\\\"\\n}\",\n  \"/v1/tx\": \"404 {\\n  \\\"error\\\": \\\"not found\\\"\\n}\",\n  \"/v1/send\": \"404 {\\n  \\\"error\\\": \\\"not found\\\"\\n}\",\n  \"/wallet/sign\": \"404 {\\n  \\\"error\\\": \\\"not found\\\"\\n}\",\n  \"/solana\": \"404 {\\n  \\\"error\\\": \\\"not found\\\"\\n}\",\n  \"/solana/sign\": \"404 {\\n  \\\"error\\\": \\\"not found\\\"\\n}\",\n  \"/agent/solana\": \"404 {\\n  \\\"error\\\": \\\"not found\\\"\\n}\",\n  \"/identity\": \"200 {\\n  \\\"payload\\\": {\\n    \\\"domain\\\": \\\"agent-birth-receipt-v1\\\",\\n    \\\"schema_version\\\": 1,\\n    \\\"birth_id\\\": \\\"b\"\n }\n}\n"
+       "error": "Bonding curve account not found: 3jjyU72yNrNd1FarYcCstPeDofiqp2W1GW6VMz1fJVjt"
       }
      }
     ]
    },
    "funding": {
-    "sol_raw": "17814207",
+    "sol_raw": "17759207",
     "usdc_raw": "1000000",
     "ledger_totals": {
-     "native:SOL": "17814207",
+     "native:SOL": "17759207",
      "spl:So11111111111111111111111111111111111111112": "114414820",
      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1000000",
      "t22:5uUtzrJCkPhDYs2nKVEKeY6duNzfyRQ696nu3i6qpump": "110000000"
     },
     "spendable": {
-     "native:SOL": "12814207",
+     "native:SOL": "12759207",
      "spl:So11111111111111111111111111111111111111112": "114414820",
      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1000000",
      "t22:5uUtzrJCkPhDYs2nKVEKeY6duNzfyRQ696nu3i6qpump": "110000000"
@@ -2018,7 +2041,7 @@
    },
    "strategy": {
     "last_scan_at": 1794117101,
-    "sol_raw": "17759207",
+    "sol_raw": "17699207",
     "flash": [
      {
       "at": 1794114316,
@@ -2133,11 +2156,11 @@
      }
     ],
     "pump_positions": 0,
-    "updated_at": 1794117610
+    "updated_at": 1794117912
    },
-   "sol": 0.017814207,
+   "sol": 0.017759207,
    "usdc": 1,
-   "fmv_sol": 0.34413095912666664,
+   "fmv_sol": 0.34405095912666667,
    "sellable_sol": 0.011221,
    "rent_sol": 0.11888014,
    "token_book_sol": 0.200825
@@ -2155,7 +2178,7 @@
     "meaning": "digest of the measured core files this guest is running"
    },
    "identity_binding": "identity_binding_unverified",
-   "updated_at": 1794117618,
+   "updated_at": 1794117935,
    "distribution": {
     "next_due_unix": 1794194840,
     "next_due_epoch": 1,
@@ -2173,7 +2196,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1794117611,
+     "at": 1794117935,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -2207,8 +2230,8 @@
       }
      },
      "solana": {
-      "lamports": 11981031,
-      "sol": 0.011981031
+      "lamports": 11951031,
+      "sol": 0.011951031
      },
      "total_native_usd_estimate": 0
     }
@@ -2220,7 +2243,7 @@
     "sells": 41,
     "realized_lamports": "114412415",
     "last_sell_at": 1794111601,
-    "updated_at": 1794117562
+    "updated_at": 1794117933
    },
    "parent_birth_id": "fcd367d5-4bfc-43d7-b036-bd2d8d59d95a",
    "generation": 2,
@@ -2289,8 +2312,11 @@
    ],
    "children": [],
    "invention": {
-    "scripts": 91,
+    "scripts": 94,
     "items": [
+     "runway-decider_17893.mjs",
+     "qpool2.mjs",
+     "find_sdk.mjs",
      "fix_launch.mjs",
      "status-strategy-decider_17483.mjs",
      "diag_held.mjs",
@@ -2299,16 +2325,13 @@
      "price_held.mjs",
      "scratch.mjs",
      "find_pool_and_env.mjs",
-     "probe5.mjs",
-     "probe4.mjs",
-     "probe3.mjs",
-     "probe_pool.mjs"
+     "probe5.mjs"
     ],
-    "last_at": 1794117626
+    "last_at": 1794117893
    },
    "journal": {
-    "head": "ab62a3e1a21f5f0c31203a120039f103c5b4d08b66218a872c410ac43938a0aa",
-    "seq": 734
+    "head": "61bd8090f5432c0eb464cf29f96605fd36e6898e433987a7622b1373df435b46",
+    "seq": 750
    },
    "components": {
     "signer": {
@@ -2347,64 +2370,85 @@
      "restarts": 2
     }
    },
-   "served_at": 1794117630,
+   "served_at": 1794117939,
    "endpoint": "http://144.202.2.9/status",
    "src": "http://144.202.2.9",
-   "at": 1794117630,
+   "at": 1794117933,
    "stale": false,
    "inference": {
     "provider": "venice",
     "model": "deepseek-v4-1-flash-1017-uncensored",
     "mode": "external_paid_abliterated",
-    "credits_usd": 4.33494001,
+    "credits_usd": 4.27361407,
     "balance_http": 200,
     "admission_floor_usd": 0.1,
     "wallet_usdc_raw": "1000000",
-    "wallet_sol_raw": "12046031",
+    "wallet_sol_raw": "11971031",
     "state": "ready"
    },
    "last_decision": {
-    "at": 1794117412,
+    "at": 1794117821,
     "tools": [
-     "run_script"
+     "pump_launch"
     ],
-    "cost_usd": 0.006021,
+    "cost_usd": 0.004368,
     "content": null,
     "error": null,
     "usage": {
-     "prompt_tokens": 10207,
-     "completion_tokens": 2634,
-     "total_tokens": 12841,
+     "prompt_tokens": 10149,
+     "completion_tokens": 1396,
+     "total_tokens": 11545,
      "prompt_tokens_details": {
       "cached_tokens": 2560
      },
      "cache_read_input_tokens": 2560,
      "completion_tokens_details": {
-      "reasoning_tokens": 2036
+      "reasoning_tokens": 1293
      }
     },
     "call_results": [
      {
-      "name": "run_script",
+      "name": "pump_launch",
       "result": {
-       "ok": true,
-       "file": "/var/lib/agent/var/lib/agent/strategy/scripts/drypowder.mjs",
-       "stdout": "KEYPAIRS []\nQ https://lite-api.jup.ag 200 {\"inputMint\":\"EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v\",\"inAmount\":\"1000000\",\"outputMint\":\"So11111111111111111111111111111111111111112\",\"outAmount\":\"11219970\",\"otherAmountThreshold\":\"11107771\",\"swapMode\":\"ExactIn\",\"slippageBps\":100,\"platformFee\":null,\"priceImpactPct\":\"0\",\"routePlan\":[{\"swapInfo\"\nQ https://api.jup.ag 200 {\"inputMint\":\"EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v\",\"inAmount\":\"1000000\",\"outputMint\":\"So11111111111111111111111111111111111111112\",\"outAmount\":\"11219970\",\"otherAmountThreshold\":\"11107771\",\"swapMode\":\"ExactIn\",\"slippageBps\":100,\"platformFee\":null,\"priceImpactPct\":\"0.0000412327788872744775813\n"
+       "ok": false,
+       "at": 1794117821,
+       "provider": "pump-sdk",
+       "mint": "Cco7sKYhSdPNNGjV9DHMbRVVkxD48kEeQqpE7cgMgspR",
+       "quote_mint": "6pF5Lt3jjyfV9uF4WqWvGJmPVHChQn5QACAjSLzSpump",
+       "ixs": 1,
+       "sim_err": {
+        "InstructionError": [
+         0,
+         {
+          "Custom": 6101
+         }
+        ]
+       },
+       "sim_logs": [
+        "Program log: Instruction: InitializeAccount3",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb consumed 2852 of 1346426 compute units",
+        "Program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb success",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL consumed 20807 of 1364077 compute units",
+        "Program ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL success",
+        "Program log: AnchorError thrown in programs/pump/src/create_v2.rs:493. Error Code: QuotePoolAccountsRequired. Error Number: 6101. Error Message: A quote-chain bonding curve has migrated: its pool and vault remaining accounts are required.",
+        "Program 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P consumed 89685 of 1400000 compute units",
+        "Program 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P failed: custom program error: 0x17d5"
+       ]
       }
      }
     ]
    },
    "funding": {
-    "sol_raw": "12046031",
+    "sol_raw": "11971031",
     "usdc_raw": "1000000",
     "ledger_totals": {
-     "native:SOL": "12046031",
+     "native:SOL": "11971031",
      "spl:So11111111111111111111111111111111111111112": "114412415",
      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1000000",
      "t22:5uUtzrJCkPhDYs2nKVEKeY6duNzfyRQ696nu3i6qpump": "130000000"
     },
     "spendable": {
-     "native:SOL": "7046031",
+     "native:SOL": "6971031",
      "spl:So11111111111111111111111111111111111111112": "114412415",
      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1000000",
      "t22:5uUtzrJCkPhDYs2nKVEKeY6duNzfyRQ696nu3i6qpump": "130000000"
@@ -2412,7 +2456,7 @@
    },
    "strategy": {
     "last_scan_at": 1794117040,
-    "sol_raw": "11981031",
+    "sol_raw": "11961031",
     "flash": [
      {
       "at": 1794114359,
@@ -2527,11 +2571,11 @@
      }
     ],
     "pump_positions": 0,
-    "updated_at": 1794117618
+    "updated_at": 1794117920
    },
-   "sol": 0.012046031,
+   "sol": 0.011971031,
    "usdc": 1,
-   "fmv_sol": 0.3327089916266667,
+   "fmv_sol": 0.33267899162666664,
    "sellable_sol": 0.011221,
    "rent_sol": 0.118877735,
    "token_book_sol": 0.195184
@@ -4773,6 +4817,75 @@
    }
   },
   {
+   "birth_id": "360bac60-6f2f-4dcb-9741-8f1f43cbb0ef",
+   "solana": "FPgVeAdyZj5ymfeDJD8418AoqxsftUYX7sHHk16NoMyT",
+   "parent_birth_id": "fcd367d5-4bfc-43d7-b036-bd2d8d59d95a",
+   "generation": 2,
+   "phase": "leased",
+   "stale": true,
+   "endpoint": "https://e311825df32f2e764389923c4e212b123504e00c-8787.dstack-pha1-prod5.phala.network",
+   "lease_rail": "tee",
+   "deployment": "cmw7c1yyj005l19v0wv0n5xy7",
+   "at": 1794112225,
+   "source": "children",
+   "economics": {
+    "launches": 0,
+    "sells": 0,
+    "realized_lamports": "0"
+   },
+   "invention": {
+    "scripts": 0,
+    "items": [],
+    "last_at": 0
+   }
+  },
+  {
+   "birth_id": "1c8ce97f-5988-4798-84ce-fd953132855d",
+   "solana": "EYBPW56cE8N7qCiXzA7iWedUufYVPkjzBsuvWcUzCJFD",
+   "parent_birth_id": "fcd367d5-4bfc-43d7-b036-bd2d8d59d95a",
+   "generation": 2,
+   "phase": "leased",
+   "stale": true,
+   "endpoint": "https://c424b84d7f3e9e641c1f5222bdc59812c5334347-8787.dstack-pha1-prod5.phala.network",
+   "lease_rail": "tee",
+   "deployment": "cmw7c21ve005t19v0mb5v8ce6",
+   "at": 1794112228,
+   "source": "children",
+   "economics": {
+    "launches": 0,
+    "sells": 0,
+    "realized_lamports": "0"
+   },
+   "invention": {
+    "scripts": 0,
+    "items": [],
+    "last_at": 0
+   }
+  },
+  {
+   "birth_id": "a3ff55aa-0115-4476-9874-3735976dfa09",
+   "solana": "7EcZK6BaBV2xPu5UZ5Uqj32LBksB4RNA8cA7URZuNx9Q",
+   "parent_birth_id": "fcd367d5-4bfc-43d7-b036-bd2d8d59d95a",
+   "generation": 2,
+   "phase": "leased",
+   "stale": true,
+   "endpoint": "https://eb4ec40fcdddea0b85ed599621db3b8d97931cc4-8787.dstack-pha1-prod5.phala.network",
+   "lease_rail": "tee",
+   "deployment": "cmw7dhfkg005y19v0p9b2mi48",
+   "at": 1794114627,
+   "source": "children",
+   "economics": {
+    "launches": 0,
+    "sells": 0,
+    "realized_lamports": "0"
+   },
+   "invention": {
+    "scripts": 0,
+    "items": [],
+    "last_at": 0
+   }
+  },
+  {
    "phase": "identity_sealed",
    "birth_id": "fcd367d5-4bfc-43d7-b036-bd2d8d59d95a",
    "solana": "41ACiQ4mUNyWWjqU4B99UbeXfHLRkxM38TSF1aQfmWwQ",
@@ -4785,7 +4898,7 @@
     "meaning": "digest of the measured core files this guest is running"
    },
    "identity_binding": "identity_binding_unverified",
-   "updated_at": 1794117620,
+   "updated_at": 1794117931,
    "distribution": {
     "next_due_unix": 1794193903,
     "next_due_epoch": 1,
@@ -4803,7 +4916,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1794117620,
+     "at": 1794117930,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -4837,8 +4950,8 @@
       }
      },
      "solana": {
-      "lamports": 164614754,
-      "sol": 0.164614754
+      "lamports": 164615754,
+      "sol": 0.164615754
      },
      "total_native_usd_estimate": 0
     }
@@ -5087,50 +5200,19 @@
     "last_at": 1794117181
    },
    "journal": {
-    "head": "72f27f310f63ce9b4f1bcb91460c44636fa7d42cc604337d6e7bae3155fd66b1",
+    "head": "545421442c6cca60994c20b575342c576bef2df8c569f38eae3268e2897ddd60",
     "seq": 1168
    },
    "components": {
-    "signer": {
-     "alive": true,
-     "pid": 1621,
-     "restarts": 1
-    },
-    "distribution": {
-     "alive": true,
-     "pid": 1632,
-     "restarts": 1
-    },
-    "identity": {
-     "alive": true,
-     "pid": 1643,
-     "restarts": 1
-    },
-    "brain": {
-     "alive": true,
-     "pid": 1656,
-     "restarts": 1
-    },
-    "strategy": {
-     "alive": true,
-     "pid": 1700,
-     "restarts": 2
-    },
-    "loops": {
-     "alive": true,
-     "pid": 1711,
-     "restarts": 2
-    },
-    "procreate": {
-     "alive": true,
-     "pid": 1722,
-     "restarts": 2
+    "identity_server": {
+     "pid": 2600,
+     "ts": 1794117931
     }
    },
-   "served_at": 1794117629,
+   "served_at": 1794117933,
    "endpoint": "http://45.63.18.221/status",
    "src": "http://45.63.18.221",
-   "at": 1794117630,
+   "at": 1794117933,
    "stale": false,
    "strategy": {
     "last_scan_at": 1794117567,
@@ -5326,7 +5408,7 @@
    },
    "sol": 0.164639754,
    "usdc": 0.363019,
-   "fmv_sol": 0.48999925654666665,
+   "fmv_sol": 0.4899852565466667,
    "sellable_sol": 0.134518,
    "rent_sol": 0.01339596,
    "token_book_sol": 0.309568
@@ -5344,7 +5426,7 @@
     "meaning": "digest of the measured core files this guest is running"
    },
    "identity_binding": "identity_binding_unverified",
-   "updated_at": 1794117629,
+   "updated_at": 1794117933,
    "distribution": {
     "next_due_unix": 1794194455,
     "next_due_epoch": 1,
@@ -5362,7 +5444,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1794117629,
+     "at": 1794117933,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -5396,8 +5478,8 @@
       }
      },
      "solana": {
-      "lamports": 20007692,
-      "sol": 0.020007692
+      "lamports": 19912692,
+      "sol": 0.019912692
      },
      "total_native_usd_estimate": 0
     }
@@ -5409,7 +5491,7 @@
     "sells": 47,
     "realized_lamports": "115469062",
     "last_sell_at": 1794111440,
-    "updated_at": 1794117626
+    "updated_at": 1794117901
    },
    "parent_birth_id": null,
    "generation": 1,
@@ -5468,123 +5550,98 @@
    ],
    "children": [],
    "invention": {
-    "scripts": 130,
+    "scripts": 139,
     "items": [
-     "sdk_createv2.mjs",
-     "inspect_launch.mjs",
-     "runway-decider_17514.mjs",
-     "find_pool_v1.mjs",
-     "diag_quote_cfg.mjs",
-     "find_held_pool3.mjs",
-     "probe_sell_value.mjs",
-     "probe_held2.mjs",
-     "diag2.mjs",
-     "diag_launch2.mjs",
-     "probe_held.mjs",
-     "probe_fix.mjs"
+     "recon_wallet.mjs",
+     "diag_held.mjs",
+     "find_pool_fixed.mjs",
+     "runway-decision_17794.mjs",
+     "inspect_pumpswap.mjs",
+     "find_pumpswap_pool.mjs",
+     "find_pool_v2.mjs",
+     "probe_held_pool.mjs",
+     "value_held_dex.mjs",
+     "held_value.mjs",
+     "probe_held_route.mjs",
+     "sdk_createv2.mjs"
     ],
-    "last_at": 1794117563
+    "last_at": 1794117858
    },
    "journal": {
-    "head": "eadebeac641e022570c70d5e9ea0e307b05690f9d3a96ff7c3b4cb6e74321611",
-    "seq": 1216
+    "head": "cbcf83e9b1558c2976d9836c6a205b165cc2ca088cc97084ab15cdf471b03f95",
+    "seq": 1268
    },
    "components": {
-    "component": "distributor",
-    "ts": 1794117629,
-    "pid": 8971,
-    "status": {
-     "next_due_unix": 1794194455,
-     "next_due_epoch": 1,
-     "highest_epoch": 0,
-     "obligations": 0,
-     "by_status": {},
-     "reserved": {},
-     "carries": {
-      "parent": {},
-      "founder": {}
-     },
-     "arrears_raw": {},
-     "blocked": [],
-     "unresolved_epochs": {},
-     "anchors": {},
-     "supervisor": "deterministic: no model, no credits, no approval step",
-     "chains": {
-      "at": 1794117629,
-      "evm": {
-       "base": {
-        "sym": "ETH",
-        "wei": "0",
-        "eth": 0,
-        "rpc": "https://mainnet.base.org"
-       },
-       "ethereum": {
-        "sym": "ETH",
-        "wei": "0",
-        "eth": 0,
-        "rpc": "https://ethereum-rpc.publicnode.com"
-       },
-       "arbitrum": {
-        "sym": "ETH",
-        "wei": "0",
-        "eth": 0,
-        "rpc": "https://arb1.arbitrum.io/rpc"
-       },
-       "optimism": {
-        "sym": "ETH",
-        "wei": "0",
-        "eth": 0,
-        "rpc": "https://mainnet.optimism.io"
-       },
-       "polygon": {
-        "sym": "POL",
-        "wei": "0",
-        "eth": 0,
-        "rpc": "https://polygon-bor-rpc.publicnode.com"
-       }
-      },
-      "solana": {
-       "lamports": 20007692,
-       "sol": 0.020007692
-      },
-      "total_native_usd_estimate": 0
-     }
+    "signer": {
+     "alive": true,
+     "pid": 8944,
+     "restarts": 1
+    },
+    "distribution": {
+     "alive": true,
+     "pid": 8971,
+     "restarts": 1
+    },
+    "identity": {
+     "pid": null,
+     "restarts": 1372,
+     "last_log": "2026-11-08T06:05:34.995Z [server] another identity server already serving; exiting clean"
+    },
+    "brain": {
+     "alive": true,
+     "pid": 8993,
+     "restarts": 1
+    },
+    "strategy": {
+     "alive": true,
+     "pid": 9040,
+     "restarts": 2
+    },
+    "loops": {
+     "alive": true,
+     "pid": 9064,
+     "restarts": 2
+    },
+    "procreate": {
+     "alive": true,
+     "pid": 9079,
+     "restarts": 2
     }
    },
-   "served_at": 1794117630,
+   "served_at": 1794117939,
    "endpoint": "http://140.82.47.7/status",
    "src": "http://140.82.47.7",
-   "at": 1794117630,
+   "at": 1794117933,
    "stale": false,
    "inference": {
     "provider": "venice",
     "model": "deepseek-v4-1-flash-1017-uncensored",
     "mode": "external_paid_abliterated",
-    "credits_usd": 3.75269131,
+    "credits_usd": 3.6615006,
     "balance_http": 200,
     "admission_floor_usd": 0.1,
     "wallet_usdc_raw": "1000000",
-    "wallet_sol_raw": "20092692",
+    "wallet_sol_raw": "19987692",
     "state": "ready"
    },
    "last_decision": {
-    "at": 1794117563,
+    "at": 1794117858,
     "tools": [
      "run_script"
     ],
-    "cost_usd": 0.008038,
+    "cost_usd": 0.007596,
     "content": null,
     "error": null,
     "usage": {
-     "prompt_tokens": 11156,
-     "completion_tokens": 3925,
-     "total_tokens": 15081,
+     "prompt_tokens": 8732,
+     "completion_tokens": 4196,
+     "total_tokens": 12928,
      "prompt_tokens_details": {
       "cached_tokens": 2560
      },
      "cache_read_input_tokens": 2560,
      "completion_tokens_details": {
-      "reasoning_tokens": 3088
+      "reasoning_tokens": 3384
      }
     },
     "call_results": [
@@ -5592,23 +5649,23 @@
       "name": "run_script",
       "result": {
        "ok": true,
-       "file": "/var/lib/agent/var/lib/agent/strategy/scripts/sdk_createv2.mjs",
-       "stdout": "SDKFILES \nWEB3ERR Cannot find package '@solana/web3.js' imported from /var/lib/agent/var/lib/agent/strategy/scripts/sdk_createv2.mjs\nDONE\n"
+       "file": "/var/lib/agent/var/lib/agent/strategy/scripts/recon_wallet.mjs",
+       "stdout": "KEYFILES []\nDONE\n"
       }
      }
     ]
    },
    "funding": {
-    "sol_raw": "20092692",
+    "sol_raw": "19987692",
     "usdc_raw": "1000000",
     "ledger_totals": {
-     "native:SOL": "20092692",
+     "native:SOL": "20002692",
      "spl:So11111111111111111111111111111111111111112": "115469062",
      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1000000",
      "t22:5uUtzrJCkPhDYs2nKVEKeY6duNzfyRQ696nu3i6qpump": "120000000"
     },
     "spendable": {
-     "native:SOL": "15092692",
+     "native:SOL": "15002692",
      "spl:So11111111111111111111111111111111111111112": "115469062",
      "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1000000",
      "t22:5uUtzrJCkPhDYs2nKVEKeY6duNzfyRQ696nu3i6qpump": "120000000"
@@ -5616,7 +5673,7 @@
    },
    "strategy": {
     "last_scan_at": 1794117046,
-    "sol_raw": "20037692",
+    "sol_raw": "19912692",
     "flash": [
      {
       "at": 1794115265,
@@ -5731,11 +5788,11 @@
      }
     ],
     "pump_positions": 0,
-    "updated_at": 1794117607
+    "updated_at": 1794117910
    },
-   "sol": 0.020092692,
+   "sol": 0.019987692,
    "usdc": 1,
-   "fmv_sol": 0.3776610883666667,
+   "fmv_sol": 0.37752108836666665,
    "sellable_sol": 0.011221,
    "rent_sol": 0.119934382,
    "token_book_sol": 0.231022
@@ -5753,7 +5810,7 @@
     "meaning": "digest of the measured core files this guest is running"
    },
    "identity_binding": "identity_binding_unverified",
-   "updated_at": 1794117627,
+   "updated_at": 1794117933,
    "distribution": {
     "next_due_unix": 1794194842,
     "next_due_epoch": 1,
@@ -5771,7 +5828,7 @@
     "anchors": {},
     "supervisor": "deterministic: no model, no credits, no approval step",
     "chains": {
-     "at": 1794117627,
+     "at": 1794117930,
      "evm": {
       "base": {
        "sym": "ETH",
@@ -5805,8 +5862,8 @@
       }
      },
      "solana": {
-      "lamports": 15781107,
-      "sol": 0.015781107
+      "lamports": 15666107,
+      "sol": 0.015666107
      },
      "total_native_usd_estimate": 0
     }
@@ -5818,7 +5875,7 @@
     "sells": 41,
     "realized_lamports": "115469074",
     "last_sell_at": 1794111612,
-    "updated_at": 1794117541
+    "updated_at": 1794117922
    },
    "parent_birth_id": null,
    "generation": 1,
@@ -5887,123 +5944,98 @@
    ],
    "children": [],
    "invention": {
-    "scripts": 143,
+    "scripts": 149,
     "items": [
+     "find_runtime.mjs",
+     "runway-decision_17882.mjs",
+     "probe2.mjs",
+     "pool_find.mjs",
+     "find_sdk.mjs",
+     "sdk_probe.mjs",
+     "pool_probe.mjs",
+     "probe_5u.mjs",
      "curve_status.mjs",
      "inv.mjs",
      "state_probe.mjs",
-     "tick-advisor_17529.mjs",
-     "inspect_pos.mjs",
-     "probe_env.mjs",
-     "findmods.mjs",
-     "unwrap2.mjs",
-     "unwrap_now.mjs",
-     "find_pool_value.mjs",
-     "assess.mjs",
-     "probe_amm_value.mjs"
+     "tick-advisor_17529.mjs"
     ],
-    "last_at": 1794117604
+    "last_at": 1794117897
    },
    "journal": {
-    "head": "cc8a147cf8cc5e8da1692bba90878ff9555d40c6aa66cafaf25c6607c589c348",
-    "seq": 1219
+    "head": "4e1c06f95bbf15837f67342f8f0037a5dad87df6a6e1ebcd7efbf0d42765e094",
+    "seq": 1273
    },
    "components": {
-    "component": "distributor",
-    "ts": 1794117627,
-    "pid": 6268,
-    "status": {
-     "next_due_unix": 1794194842,
-     "next_due_epoch": 1,
-     "highest_epoch": 0,
-     "obligations": 0,
-     "by_status": {},
-     "reserved": {},
-     "carries": {
-      "parent": {},
-      "founder": {}
-     },
-     "arrears_raw": {},
-     "blocked": [],
-     "unresolved_epochs": {},
-     "anchors": {},
-     "supervisor": "deterministic: no model, no credits, no approval step",
-     "chains": {
-      "at": 1794117627,
-      "evm": {
-       "base": {
-        "sym": "ETH",
-        "wei": "0",
-        "eth": 0,
-        "rpc": "https://mainnet.base.org"
-       },
-       "ethereum": {
-        "sym": "ETH",
-        "wei": "0",
-        "eth": 0,
-        "rpc": "https://ethereum-rpc.publicnode.com"
-       },
-       "arbitrum": {
-        "sym": "ETH",
-        "wei": "0",
-        "eth": 0,
-        "rpc": "https://arb1.arbitrum.io/rpc"
-       },
-       "optimism": {
-        "sym": "ETH",
-        "wei": "0",
-        "eth": 0,
-        "rpc": "https://mainnet.optimism.io"
-       },
-       "polygon": {
-        "sym": "POL",
-        "wei": "0",
-        "eth": 0,
-        "rpc": "https://polygon-bor-rpc.publicnode.com"
-       }
-      },
-      "solana": {
-       "lamports": 15781107,
-       "sol": 0.015781107
-      },
-      "total_native_usd_estimate": 0
-     }
+    "signer": {
+     "alive": true,
+     "pid": 6257,
+     "restarts": 1
+    },
+    "distribution": {
+     "alive": true,
+     "pid": 6268,
+     "restarts": 1
+    },
+    "identity": {
+     "pid": null,
+     "restarts": 1362,
+     "last_log": "2026-11-08T06:05:33.014Z [server] another identity server already serving; exiting clean"
+    },
+    "brain": {
+     "alive": true,
+     "pid": 6306,
+     "restarts": 1
+    },
+    "strategy": {
+     "alive": true,
+     "pid": 6350,
+     "restarts": 2
+    },
+    "loops": {
+     "alive": true,
+     "pid": 6361,
+     "restarts": 2
+    },
+    "procreate": {
+     "alive": true,
+     "pid": 6380,
+     "restarts": 2
     }
    },
-   "served_at": 1794117630,
+   "served_at": 1794117940,
    "endpoint": "http://66.135.10.222/status",
    "src": "http://66.135.10.222",
-   "at": 1794117630,
+   "at": 1794117933,
    "stale": false,
    "inference": {
     "provider": "venice",
     "model": "deepseek-v4-1-flash-1017-uncensored",
     "mode": "external_paid_abliterated",
-    "credits_usd": 3.72646998,
+    "credits_usd": 3.661453,
     "balance_http": 200,
     "admission_floor_usd": 0.1,
     "wallet_usdc_raw": "1000000",
-    "wallet_sol_raw": "15861107",
+    "wallet_sol_raw": "15781107",
     "state": "ready"
    },
    "last_decision": {
-    "at": 1794117516,
+    "at": 1794117818,
     "tools": [
      "run_script"
     ],
-    "cost_usd": 0.004781,
+    "cost_usd": 0.007046,
     "content": null,
     "error": null,
     "usage": {
-     "prompt_tokens": 9481,
-     "completion_tokens": 1876,
-     "total_tokens": 11357,
+     "prompt_tokens": 8382,
+     "completion_tokens": 3867,
+     "total_tokens": 12249,
      "prompt_tokens_details": {
       "cached_tokens": 2560
      },
      "cache_read_input_tokens": 2560,
      "completion_tokens_details": {
-      "reasoning_tokens": 1470
+      "reasoning_tokens": 3298
      }
     },
     "call_results": [
@@ -6011,31 +6043,31 @@
       "name": "run_script",
       "result": {
        "ok": true,
-       "file": "/var/lib/agent/var/lib/agent/strategy/scripts/inspect_pos.mjs",
-       "stdout": "==== launches.json ====\n{\n  \"mints\": [\n    {\n      \"mint\": \"F1JoodJx1pg3EHfn2JvS2bZVFDxxecCBgsqVXTjHwqVo\",\n      \"cost_lamports\": 74998500,\n      \"at\": 1794108640\n    },\n    {\n      \"mint\": \"8Xo53sUq4uz15trNM328LCLsC1NDVcC6scPGfBUPtfzX\",\n      \"cost_lamports\": 46973217,\n      \"at\": 1794108780\n    },\n    {\n      \"mint\": \"78QTtSqaZYdqaUNAJXgujiRuxEW7bJTcyYMVJ93RNN2Y\",\n      \"cost_lamports\": 27147537,\n      \"at\": 1794109191\n    },\n    {\n      \"mint\": \"3T69reUYtMoDwYnf9DmHPJAuh5J3j5WT21mdaG1gc3Bo\",\n      \"cost_lamports\": 13536540,\n      \"at\": 1794109467\n    },\n    {\n      \"mint\": \"91hB7HvFw6k7iM2sL8xwtf2kcioc3vYtqEnN6XeJxkBG\",\n      \"cost_lamports\": 17383226,\n      \"at\": 1794112170\n    },\n    {\n      \"mint\": \"B2KJ5nBF2bEht1ThCyYNZQbs9RuRBMAsG18wiR5GGNzc\",\n      \"cost_lamports\": 12666349,\n      \"at\": 1794112171\n    },\n    {\n      \"mint\": \"CvMgemFEgPJhLDLQf7AnyEFxoyaybXzPLjV92pYcDuKJ\",\n      \"cost_lamports\": 15000000,\n      \"at\": 1794112628\n    },\n    {\n      \"mint\": \"2rfSHB3YF64HH4ynWNASPmVRa7jgPDVWnf4bZqmDhYiS\",\n      \"cost_lamports\": 15000000,\n      \"at\": 1794112629\n    },\n    {\n      \"mint\": \"YaApuowjyWJgE2gw2ViZjgh8ekKmarf6kkGDxPJFvb5\",\n      \"cost_lamports\": 15000000,\n      \"at\": 1794112630\n    },\n    {\n      \"mint\": \"B1TAcw3HbUpZaF6DqCUD8EvHZpBZmFW4abXrog8CLPME\",\n      \"cost_lamports\": 15000000,\n      \"at\": 1794113036\n    },\n    {\n      \"mint\": \"6WT7bwDJjsmutUFbtiYNdE2vV4YAFygCtdpdzUWqZfN4\",\n      \"cost_lamports\": 15000000,\n      \"at\": 1794113037\n    }\n  ],\n  \"updated_at\": 1794113037\n}\n\n==== sells.json ====\n{\n  \"count\": 41,\n  \"sol_out\": \"115469074\",\n  \"mints\": {\n    \"F1JoodJx1pg3EHfn2JvS2bZVFDxxecCBgsqVXTjHwqVo\": 20,\n    \"8Xo53sUq4uz15trNM328LCLsC1NDVcC6scPGfBUPtfzX\": 21\n  },\n  \"last_at\": 1794111612\n}\n\n==== launch-plan.json ====\n{\n  \"devbuy_lamports\": \"5000000\",\n  \"name\": \"DeepSeek Flash\",\n  \"symbol\": \"DSFLASH\",\n  \"by\": \"brain\",\n  \"at\": 1794117161\n}\n\n==== pump.json ====\n{\n  \"positions\": [],\n  \"attempts\": [],\n  \"updated_at\": 1794117509\n}\n\nMINTINFO owner TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb len 1076\nLARGEST [{\"address\":\"FDKudsqsvVb3w16xefrUKmtQWuwXdaAxaWveTEXEPEum\",\"uiAmount\":1000000,\"decimals\":6,\"amount\":\"1000000000000\",\"uiAmountString\":\"1000000\"},{\"address\":\"FmPAojVGiMA7tbG462jxHZNSbb1CdbFfKmgnfn354PFH\",\"uiAmount\":208650,\"decimals\":6,\"amount\":\"208650000000\",\"uiAmountString\":\"208650\"},{\"address\":\"DxYqzhHfU1nF8E3J9whjPNoTKbSwj21aL4YVtuRrvdhc\",\"uiAmount\":173300,\"decimals\":6,\"amount\":\"173300000000\",\"uiAmountString\":\"173300\"},{\"address\":\"3PzeXgnCVL5JoDrjHXUoZuTzzSUNzyUF3aWr1GMwoW1d\",\"uiAmount\":159230,\"decimals\":6,\"amount\":\"159230000000\",\"uiAmountString\":\"159230\"},{\"address\":\"7Jzfkxxyv52CPnnHhZxWxf9K\nSOL 15811107\n"
+       "file": "/var/lib/agent/var/lib/agent/strategy/scripts/quote_mint_probe.mjs",
+       "stdout": "MINT_OWNER TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb\nMINT_INFO {\"decimals\":6,\"extensions\":[{\"extension\":\"metadataPointer\",\"state\":{\"authority\":null,\"metadataAddress\":\"6pF5Lt3jjyfV9uF4WqWvGJmPVHChQn5QACAjSLzSpump\"}},{\"extension\":\"tokenMetadata\",\"state\":{\"additionalMetadata\":[],\"mint\":\"6pF5Lt3jjyfV9uF4WqWvGJmPVHChQn5QACAjSLzSpump\",\"name\":\"make money swarm\",\"symbol\":\"makemoney\",\"updateAuthority\":null,\"uri\":\"https://ipfs.io/ipfs/bafkreigih2uegj75krfquzqu6qkjafb27grvbahhj7d5ih6stq7atp3xi4\"}}],\"freezeAuthority\":null,\"isInitialized\":true,\"mintAuthority\":null,\"supply\":\"958470781663629\"}\nTOKACCTS Tokenk 0\nTOKACCTS Tokenz 1000\n   1QCfWQnVYGbvSX62XEJZQZZFSLV8SGrSGuW7gVLjEUm\n   129XFt2TGn5N7inVtmmGYkRVxJH9qU8bUCuAj2GqUavQ\n   13oZkaPyGRy44tUA32MkT1S9aPTnAWVAVzVp8o1aRPx4\n   5w4fZiV7demhMgRuem1yEaLXNqFXafDhdGEwzDnRrSz\n   6rXWixjGSKGcbvhsDUAuqrVDPgqpQqRufhJ5XYuTjRY\n   6wqYP6QBBapW82wKJwNpgnK5E5ewbsLUg1pG4QwLwu6\n   8oHrAHMyh98ZidwStErjtSgpx9xppPgQyjbBNj5wgjs\n   9MwAJkU83m1QTas1E9BX7u7TQ9hsfwRS29YgwrRqsnp\n   9yWdHUiM36p7D5KjkXfNhzdayPNzSfVMHB5qSPdjPke\n   AzuhF7Jh7jYnr5SrFnMCv92pAU2ZdFWHpUU6dQ6BqDv\n   DtSRK2BBj5iJrt5b34JutP7MKUvAzj2NrHSBxAjUbQN\n   E9VgWY7Vyf73JYNznnd9eSaaE5LXJuoUSDqY4MCSCZb\n   GuKBRRazZUCDPsQTZBVfTBSQWqACeVbQ9s1XWScK9sH\n   Gy5rdCRZkrRyrXgXTVB5cmxdkE1hDWaRLD9numDkBmt\n   LyLv4WuEaCewUWMh1LG3JZtCMMzhDfxCiESpyVx19vW\n   MjiSVd2gi9xo4WKn8JrtayYr8rhQyjLCNHKaeK4oupN\n   MkNUGL55qumdoanFvyrp6avXwxKSNaQiEfNiHwdXULK\n   NG9PzpuMbEmhcu7AnpiVwZHSRMEYpoeXRVfaUpjRPxM\n   Po98UyNQHQT8zivwJMPWgJbuLzvNAGEshatWV4BDNtM\n   QGVhsTRucfmazNSL8awWy4ypfTCp6xLARJwPSyUG4kn\nBC count 0\nPAMM count 0\n"
       }
      }
     ]
    },
    "funding": {
-    "sol_raw": "15861107",
+    "sol_raw": "15781107",
     "usdc_raw": "1000000",
     "ledger_totals": {
-     "native:SOL": "15861107",
-     "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1000000",
+     "native:SOL": "15781107",
      "spl:So11111111111111111111111111111111111111112": "115469074",
+     "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1000000",
      "t22:5uUtzrJCkPhDYs2nKVEKeY6duNzfyRQ696nu3i6qpump": "120000000"
     },
     "spendable": {
-     "native:SOL": "10861107",
-     "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1000000",
+     "native:SOL": "10781107",
      "spl:So11111111111111111111111111111111111111112": "115469074",
+     "spl:EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": "1000000",
      "t22:5uUtzrJCkPhDYs2nKVEKeY6duNzfyRQ696nu3i6qpump": "120000000"
     }
    },
    "strategy": {
-    "last_scan_at": 1794117154,
-    "sol_raw": "15781107",
+    "last_scan_at": 1794117209,
+    "sol_raw": "15666107",
     "flash": [
      {
       "at": 1794116357,
@@ -6150,11 +6182,11 @@
      }
     ],
     "pump_positions": 0,
-    "updated_at": 1794117594
+    "updated_at": 1794117933
    },
-   "sol": 0.015861107,
+   "sol": 0.015781107,
    "usdc": 1,
-   "fmv_sol": 0.39402521452666667,
+   "fmv_sol": 0.39388521452666664,
    "sellable_sol": 0.011221,
    "rent_sol": 0.119934394,
    "token_book_sol": 0.251643
@@ -6543,7 +6575,10 @@
     "updated_at": 1794115864
    },
    "sol": 0.029119787,
-   "usdc": 1
+   "usdc": 1,
+   "fmv_sol": 0.349687,
+   "sellable_sol": 0.011223,
+   "rent_sol": 0.11684
   },
   {
    "phase": "identity_sealed",
