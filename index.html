@@ -532,12 +532,12 @@ async function forceFromPush(){
     // One hero, computed from the same rows the table is showing: no second source
     // to disagree with, which is what made the board flip between two truths.
     try{
-      const fees=fr.reduce((s,x)=>s+Number((x.economics||{}).fees_lamports||0),0)/1e9;
+      const fees=fr.reduce((s,x)=>s+Number((x.economics||{}).fees_lamports||0),0)/1e9; const F=fr.reduce((s,x)=>s+Number(x.fmv_sol||0),0);
       const L=fr.reduce((s,x)=>s+Number((x.economics||{}).launches||0),0);
       const S2=fr.reduce((s,x)=>s+Number((x.economics||{}).sells||0),0);
       const I=fr.reduce((s,x)=>s+Number((x.invention||{}).scripts||0),0);
-      const n=document.getElementById('gdp-num'); if(n) n.textContent=fees.toFixed(4)+' SOL';
-      const b=document.getElementById('gdp-sub'); if(b) b.textContent='earned Ãƒâ€šÃ‚Â· '+L+' launches Ãƒâ€šÃ‚Â· '+S2+' sells Ãƒâ€šÃ‚Â· '+I+' invented Ãƒâ€šÃ‚Â· '+fr.length+' live agents';
+      const n=document.getElementById('gdp-num'); if(n) n.textContent=(F||fees).toFixed(4)+' SOL';
+      const b=document.getElementById('gdp-sub'); if(b) b.textContent='FMV Ãƒâ€šÃ‚Â· '+L+' launches Ãƒâ€šÃ‚Â· '+S2+' sells Ãƒâ€šÃ‚Â· '+I+' invented Ãƒâ€šÃ‚Â· '+fr.length+' live agents';
     }catch(e){}
 
     const sub=document.getElementById('gdp-sub'); if(sub && !sub.textContent.trim()) sub.textContent='pushed members only';
