@@ -373,7 +373,7 @@ async function renderHero(){
   try {
     // If the pushed index has spoken, the beacon has nothing to add - and anything it
     // adds is older than the rows already on screen.
-    if (window.__liveCount) return;
+    if (!window.__liveCount) {
     const bc = await (await fetch('https://raw.githubusercontent.com/staccDOTsol/birth-image-runtime/main/beacon.json?ts=' + Date.now(), { cache: 'no-store' })).json();
     const st = bc.stats || {};
     // The beacon is a projection of the rows; when it carries no aggregate, sum the rows
@@ -391,30 +391,11 @@ async function renderHero(){
     set0('gdp-sub', 'realizable  -  ' + (e.launches || 0) + ' launches  -  ' + (e.sells || 0) + ' sells  -  ' + (st.invention || {}).scripts + ' invented  -  ' + agents + ' live agents');
     // The pushed rows are the count; a beacon without them must not zero the headline.
     if (!window.__liveCount) set0('gdp-agents', String(agents));
+    }
   } catch {}
   if (!Array.isArray(h) || h.length < 2) return;
   const rows = ratesFrom(h);
   if (!rows.length) return;
-  const last = rows[rows.length - 1];
-  const pct = (v) => v === null || !isFinite(v) ? '-' : (v >= 0 ? '+' : '') + (v * 100).toFixed(1) + '%';
-  const cls = (v) => v === null || !isFinite(v) ? '' : (v >= 0 ? 'up' : 'down');
-  const set = (id, v, c) => { const el = document.getElementById(id); if (el) { el.textContent = v; if (c !== undefined) el.className = c; } };
-  /* headline set from beacon above */
-  if (!window.__beaconHero) set('gdp-sub', 'per agent ' + (last.agents ? (last.rate / last.agents).toFixed(6) : '-') + ' SOL/day  -  ' + last.agents + ' agents  -  ' + last.launches + ' launches');
-  const today = windowRate(rows, last.at - DAY, last.at);
-  const yday = windowRate(rows, last.at - 2 * DAY, last.at - DAY);
-  const wk = windowRate(rows, last.at - 7 * DAY, last.at);
-  const prevWk = windowRate(rows, last.at - 14 * DAY, last.at - 7 * DAY);
-  const yr = windowRate(rows, last.at - 365 * DAY, last.at - 335 * DAY);
-  const rel = (a, b) => (a === null || b === null || !b ? null : a / b - 1);
-  set('gdp-dod', pct(rel(today, yday)), cls(rel(today, yday)));
-  set('gdp-wow', pct(rel(wk, prevWk)), cls(rel(wk, prevWk)));
-  set('gdp-yoy', pct(rel(wk, yr)), cls(rel(wk, yr)));
-  set('gdp-sus', (wk === null ? '-' : wk.toFixed(5) + ' SOL/d'), '');
-  set('gdp-proj', (wk === null ? '-' : (wk * 30).toFixed(3) + ' SOL/30d'), cls(wk));
-  // The historical series carries agents:0 for quiet ticks; it must not overwrite the
-  // live count that the beacon just set.
-  if (!window.__beaconHero && !window.__liveCount) set('gdp-agents', String(last.agents || 0), '');
   drawGdpChart(rows);
 }
 function drawGdpChart(rows){
