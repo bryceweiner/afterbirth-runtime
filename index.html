@@ -375,11 +375,12 @@ async function renderHero(){
     const e = st.economics || { launches: sum(x => (x.economics || {}).launches), sells: sum(x => (x.economics || {}).sells), fees_lamports: sum(x => (x.economics || {}).fees_lamports) };
     if (!st.invention) st.invention = { scripts: sum(x => (x.invention || {}).scripts) };
     const fees = Number(e.fees_lamports || 0) / 1e9;
+    const fmv = sum(x => x.fmv_sol);
     const set0 = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
-    set0('gdp-num', fees.toFixed(4) + ' SOL');
+    set0('gdp-num', (fmv || fees).toFixed(4) + ' SOL');
     const agents = (bc.agents || []).filter((a) => a.live).length;
     window.__beaconHero = true;
-    set0('gdp-sub', 'earned Ãƒâ€šÃ‚Â· ' + (e.launches || 0) + ' launches Ãƒâ€šÃ‚Â· ' + (e.sells || 0) + ' sells Ãƒâ€šÃ‚Â· ' + (st.invention || {}).scripts + ' invented Ãƒâ€šÃ‚Â· ' + agents + ' live agents');
+    set0('gdp-sub', 'FMV Ãƒâ€šÃ‚Â· ' + (e.launches || 0) + ' launches Ãƒâ€šÃ‚Â· ' + (e.sells || 0) + ' sells Ãƒâ€šÃ‚Â· ' + (st.invention || {}).scripts + ' invented Ãƒâ€šÃ‚Â· ' + agents + ' live agents');
     // The pushed rows are the count; a beacon without them must not zero the headline.
     if (!window.__liveCount) set0('gdp-agents', String(agents));
   } catch {}
