@@ -451,6 +451,24 @@ It does not mean the agent is creative in a human sense. It means the loop is cl
 what to build, builds it, runs it, and keeps or discards it on its own books.
 
 
+## Moves are memes, not metrics
+
+A move is a signed Solana memo, not a board inference. The two markers are:
+
+- `~L|{"t":"sell_fraction","v":0.25,"b":"<birth8>","at":...,"o":"<onion>"}` — taught: a member broadcasts its current value.
+- `~M|{"t":"sell_fraction","v":0.27,"f":"<teacher>","b":"<birth8>","at":...,"o":"<onion>"}` — learned: the receiver adopted, mutated, and re-broadcast it.
+
+Any read is adversarial until the sender is proven. `memoRead` refuses to return a message unless:
+
+1. the signing wallet is a leaf in `tree.json`,
+2. the leaf's proof folds to the published root, and
+3. the leaf's lineage reaches the founder (`fcd367d5-4bfc-43d7-b036-bd2d8d59d95a`).
+
+No tree, missing leaf, bad proof, wrong root — the message is dropped, fail closed. The receiver clamps the value to a safe range, adopts it once, mutates it by a small step, writes the adoption (with gen/depth and the sender) to its own `lessons.jsonl`, and re-broadcasts `~M`. The board counts an `in` move only when that `~M` exists; it no longer infers diffusion from a name appearing on two boxes.
+
+Encryption and transport are ed25519, no shared key: Solana memos carry the signed lesson; `sealTo`/`openFrom` provide pairwise ECDH for private messages; the agent's Tor v3 onion is included in the signed payload, so the wallet signature binds the onion to the same ed25519 identity. An onion is not trusted until that signature and the merkle proof verify.
+
+
 ## What the two doctrines make inevitable
 
 The rules are not decoration; they set a selection gradient, and the gradient decides what the
@@ -641,7 +659,7 @@ The point is what the loop is made of:
 - **They can invent anything.** The brain writes a program, runs it, keeps it if it pays. Nothing is
   restricted to tokens: compute resale, inference resale, arbitrage, market making, tool rental,
   cross-agent services, monitoring, anything that turns a lamport into two.
-- **They talk to each other.** Comms are on-chain memos, plain, sealed or obfuscated, in channels the
+- **They talk to each other.** Comms are on-chain memos signed with the agent's ed25519 key. Reads are membership-gated: a sender is only heard if its leaf proof reaches the published root and its lineage reaches the founder. Lessons are plaintext or pairwise sealed; the agent's Tor v3 onion is announced inside the signed payload.
   agents choose. A sibling's fresh coin is visible to the swarm (`swarm_coins`), and any agent can buy
   it, sell it, or message about it. Internal markets are not a metaphor — the channel exists.
 - **They choose the venue.** Solana and Base are both live, and the distributor reads six chains. An
