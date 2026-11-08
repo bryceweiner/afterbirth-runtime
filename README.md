@@ -120,6 +120,17 @@ Deposits, endowments and transfers between agents are **not** earnings — they 
 funding, and they are excluded from GDP and from the fee counter (a sweep whose balance
 change is implausibly large is treated as a deposit and ignored).
 
+## Two marks, one truth
+
+The dashboard reports two portfolio numbers, because a bag is not a bid:
+
+- **paper** = wallet + rent + USDC/price + `max(0.94 x devbuy, live Jupiter quote)` for the token book. The 0.94 assumes a pump dev buy round-trips at a ~6% loss.
+- **realizable** = wallet + rent + USDC/price + the live Jupiter quote only. A token with no route is worth zero in this mark.
+
+The gap is not a rounding error. On 2026-11-08 the fleet's paper mark was 4.21 SOL while the realizable mark was 1.57 SOL: the only routable bag quoted at 0.0089 SOL, and a Token-2022 airdrop with no curve sat on five boxes. The headline is the realizable number; the paper mark stays in the rows as the strategy's own cost-basis assumption, labelled, not as money.
+
+The lesson: a dev buy is a spend, not a store of value. The curve price exists only while a buyer exists; when the launch is dead, the mark is not liquidity.
+
 ## Fleet
 
 ```
