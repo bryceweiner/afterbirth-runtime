@@ -356,7 +356,7 @@ function windowRate(rows, fromMs, toMs) {
 }
 async function renderHero(){
   let h = [];
-  try { h = await (await fetch('https://raw.githubusercontent.com/staccDOTsol/birth-image-runtime/main/history.json?ts=' + Date.now(), { cache: 'no-store' })).json(); } catch {}
+  try { h = await (await fetch('https://raw.githubusercontent.com/staccDOTsol/birth-image-runtime/main/live/history.json?ts=' + Date.now(), { cache: 'no-store' })).json(); } catch {}
   // Real net-worth deltas; no DoD/WoW/YoY theatre. The counts live in the sub.
   try {
     if (Array.isArray(h) && h.length > 1) {
